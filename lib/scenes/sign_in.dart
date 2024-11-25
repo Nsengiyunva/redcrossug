@@ -32,8 +32,8 @@ class SignIn extends StatelessWidget {
             Row( 
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text( "Keep me Signed in", style: TextStyle( fontSize: 16, ), ),
-                Text( "Forgot Password", style: TextStyle( ) )
+                Text( "Keep me Signed in", style: TextStyle( fontSize: 16 ) ),
+                Text( "Forgot Password", style: TextStyle( fontSize: 18, color: Colors.red ) )
               ],
             )
           ],
