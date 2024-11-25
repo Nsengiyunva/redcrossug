@@ -7,9 +7,9 @@ class AccountSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-       child: const Column(
+       child: Column(
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
           GreenBadge(),
@@ -40,6 +40,6 @@ class AccountSuccess extends StatelessWidget {
          ],
        ),
       ),
-    );;
+    );
   }
 }

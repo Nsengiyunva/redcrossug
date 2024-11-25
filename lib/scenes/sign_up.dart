@@ -12,27 +12,27 @@ class SignUp extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: double.maxFinite,
-          margin: EdgeInsets.symmetric(vertical: 30.0),
-          padding: EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
+          margin: const EdgeInsets.symmetric(vertical: 30.0),
+          padding: const EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
           child: Column(
           children: [
-            Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
-             SizedBox( height: 10 ),
+            const Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
+             const SizedBox( height: 10 ),
             TextFieldInput( question: 'Name'),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
             TextFieldInput( question: 'Email Address'),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
             TextFieldInput( question: 'Date of Birth'),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
              TextFieldInput( question: 'Country'),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
             TextFieldInput( question: 'NIN/Passport Number'),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
             TextFieldInput( question: 'Password'),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
             TextFieldInput( question: 'Confirm Password'),
-            SizedBox( height: 10 ),
-            RedBtn()
+            const SizedBox( height: 10 ),
+            const RedBtn()
           ],
         ),
         )

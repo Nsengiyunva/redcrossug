@@ -4,7 +4,7 @@ class TextFieldInput extends StatelessWidget {
   final String question;
   // final String placeholder;
 
- TextFieldInput({ required this.question } );
+ const TextFieldInput({super.key,  required this.question } );
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,11 @@ class TextFieldInput extends StatelessWidget {
         children: [
           // Text( question, style: TextStyle( fontSize: 24 ), ),
           TextField(
-            style: TextStyle(color: Colors.black, fontSize: 24 ),
+            style: const TextStyle(color: Colors.black, fontSize: 24 ),
             decoration: InputDecoration(
             labelText: question,
-            labelStyle: TextStyle(color: Colors.black),
-            border: OutlineInputBorder(),
+            labelStyle: const TextStyle(color: Colors.black),
+            border: const OutlineInputBorder(),
             )
           )
           ],

@@ -11,16 +11,16 @@ class VerifyOtp extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: double.maxFinite,
-          margin: EdgeInsets.symmetric(vertical: 30.0),
-          padding: EdgeInsets.symmetric(vertical: 100.0, horizontal: 25.0),
+          margin: const EdgeInsets.symmetric(vertical: 30.0),
+          padding: const EdgeInsets.symmetric(vertical: 100.0, horizontal: 25.0),
           child: Column(
           children: [
-            Text( "Confirm Your Number", style: TextStyle( fontSize: 32, color: Colors.black ) ),
-            Text( "A verification code consisting of six digits has been dispatched. Please input this code to confirm your phone number." ),
-             SizedBox( height: 25 ),
+            const Text( "Confirm Your Number", style: TextStyle( fontSize: 32, color: Colors.black ) ),
+            const Text( "A verification code consisting of six digits has been dispatched. Please input this code to confirm your phone number." ),
+             const SizedBox( height: 25 ),
             OtpTextField(
                 numberOfFields: 5,
-                borderColor: Color(0xFF512DA8),
+                borderColor: const Color(0xFF512DA8),
                 //set to true to show as box or false to show as dash
                 showFieldAsBox: true, 
                 //runs when a code is typed in
@@ -33,15 +33,15 @@ class VerifyOtp extends StatelessWidget {
                         context: context,
                         builder: (context){
                         return AlertDialog(
-                            title: Text("Verification Code"),
+                            title: const Text("Verification Code"),
                             content: Text('Code entered is $verificationCode'),
                         );
                         }
                     );
                 }, // end onSubmit
             ),
-            SizedBox( height: 25 ),
-            RedBtn()
+            const SizedBox( height: 25 ),
+            const RedBtn()
           ],
         ),
         )

@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
     return  Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          child: Column(
+          child: const Column(
              children: [
               Text( 'Home' )
              ],
