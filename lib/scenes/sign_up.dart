@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:redcross/scenes/red_btn.dart';
+import 'package:redcross/scenes/text_field.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -16,7 +17,22 @@ class SignUp extends StatelessWidget {
           child: Column(
           children: [
             Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
-            // RedBtn()
+             SizedBox( height: 10 ),
+            TextFieldInput( question: 'Name'),
+            SizedBox( height: 10 ),
+            TextFieldInput( question: 'Email Address'),
+            SizedBox( height: 10 ),
+            TextFieldInput( question: 'Date of Birth'),
+            SizedBox( height: 10 ),
+             TextFieldInput( question: 'Country'),
+            SizedBox( height: 10 ),
+            TextFieldInput( question: 'NIN/Passport Number'),
+            SizedBox( height: 10 ),
+            TextFieldInput( question: 'Password'),
+            SizedBox( height: 10 ),
+            TextFieldInput( question: 'Confirm Password'),
+            SizedBox( height: 10 ),
+            RedBtn()
           ],
         ),
         )
