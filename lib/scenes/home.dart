@@ -5,6 +5,16 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return  Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+             children: [
+              Text( 'Home' )
+             ],
+          ),
+          ),
+        )
+      );
   }
 } 

@@ -18,9 +18,8 @@ class SignIn extends StatelessWidget {
           children: [
             Text( "Welcome Back", style: TextStyle( fontSize: 30, color: Colors.black ) ),
             Center(
-              child: Text( "Good to see you again! Ready to make an impact? Let’s get started.", 
-                // TextAlign.center, 
-                style: TextStyle( fontSize: 18, color: Colors.black ) ),
+              child: Text( "Good to see you again! Ready to make an impact? Let’s get started.",
+                style: TextStyle( fontSize: 18, color: Colors.black ) )  ,
             ),
             SizedBox( height: 25 ),
             TextFieldInput(question: 'Phone Number'),
@@ -32,12 +31,21 @@ class SignIn extends StatelessWidget {
             Row( 
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text( "Keep me Signed in", style: TextStyle( fontSize: 16 ) ),
-                Text( "Forgot Password", style: TextStyle( fontSize: 18, color: Colors.red ) )
+                Text( "Keep me Signed In", style: TextStyle( fontSize: 20 ) ),
+                Text( "Forgot Password", style: TextStyle( fontSize: 20, color: Colors.red ) )
               ],
+            ),
+            SizedBox( height: 25 ),
+            Center(
+              child: Column(
+                children: [
+                  Text( "Don't have an account?", style: TextStyle( fontSize:20 ), ),
+                  Text( "Register", style: TextStyle( fontSize:20 ) )
+                ],
+              )
             )
           ],
-        ),
+         ),
         )
       )
     );
