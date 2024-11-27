@@ -14,25 +14,25 @@ class SignUp extends StatelessWidget {
           width: double.maxFinite,
           margin: const EdgeInsets.symmetric(vertical: 30.0),
           padding: const EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
-          child: Column(
+          child: const Column(
           children: [
-            const Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
-             const SizedBox( height: 10 ),
+            Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
+             SizedBox( height: 10 ),
             TextFieldInput( question: 'Name'),
-            const SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
             TextFieldInput( question: 'Email Address'),
-            const SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
             TextFieldInput( question: 'Date of Birth'),
-            const SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
              TextFieldInput( question: 'Country'),
-            const SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
             TextFieldInput( question: 'NIN/Passport Number'),
-            const SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
             TextFieldInput( question: 'Password'),
-            const SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
             TextFieldInput( question: 'Confirm Password'),
-            const SizedBox( height: 10 ),
-            const RedBtn()
+            SizedBox( height: 10 ),
+            RedBtn()
           ],
         ),
         )
