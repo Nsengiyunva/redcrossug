@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:redcross/scenes/red_btn.dart';
 import 'package:redcross/scenes/text_field.dart';
 
