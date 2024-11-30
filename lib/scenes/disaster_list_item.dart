@@ -1,20 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/red_btn.dart';
-import 'package:redcross/scenes/text_field.dart';
 
 class DisasterListItem extends StatelessWidget {
-  const DisasterListItem({super.key});
+  final String title;
+  final String subtitle;
+  final String date;
+  final String location;
+
+  const DisasterListItem({super.key, required this.title, required this.subtitle, required this.date, required this.location });
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text( 'Test 1' )
-          ],
-        )
-        )
+    return Container(
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+            Container(
+              width: 120,
+              height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: ExactAssetImage("assets/images/kasese_floods.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+           Expanded(child: Container(
+            height: 120,
+            padding: EdgeInsets.symmetric( horizontal: 10, vertical: 10 ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Padding( 
+                      padding: EdgeInsets.only( right: 2 ), 
+                      child:Text( title, style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ) 
+                    ),
+                    Text( "|", style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ),
+                    Padding(
+                      padding: EdgeInsets.symmetric( horizontal: 2 ), 
+                      child: Text( location, style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ),
+                    ),
+                  ],
+                ),
+                Text( '$subtitle', style: TextStyle( fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black) ),
+                SizedBox( height: 5 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(padding: EdgeInsets.only( right: 5.0 ), 
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.bloodtype_rounded,
+                          color: Colors.red,
+                          size: 10.0,
+                        ),
+                        Text( 'Reported:', style: TextStyle( fontSize: 10, fontWeight: FontWeight.normal, color: Colors.red) )
+                      ],
+                    )
+                    ),
+                    Text( '$date', style: TextStyle( fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black) )
+                  ],
+                )
+              ],
+            ),
+           ))
+        ]
+      )
     );
   }
 }

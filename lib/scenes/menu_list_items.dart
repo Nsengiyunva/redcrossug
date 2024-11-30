@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
 class MenuListItems extends StatelessWidget {
-  const MenuListItems({super.key});
+  final String first_title;
+  final String second_title;
+
+  const MenuListItems({super.key, required this.first_title, required this.second_title });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric( horizontal: 10.0, vertical: 5.0 ),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-          width: 2.0
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.red,
+            width: 2.0
+          )
         )
       ),
-      child: const Row(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Active Disasters')
+          Text( first_title, style: TextStyle( fontSize: 16, color: Colors.red, ) ),
+           Text( second_title, style: TextStyle( fontSize: 16, color: Colors.grey, ) )
         ],
       ),
     );

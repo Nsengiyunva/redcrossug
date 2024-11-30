@@ -16,8 +16,13 @@ class DisasterList extends StatelessWidget {
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text( 'Disasters', style: TextStyle( fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold ), ),
-            MenuListItems()
+            Text( 'Disasters', style: TextStyle( fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold ), ),
+            SizedBox( height: 10 ),
+            MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
+            SizedBox( height: 10 ),
+            DisasterListItem(title: 'Floods', location: "Kasese", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '15th Nov 2024' ),
+            SizedBox(height: 10),
+            DisasterListItem(title: 'Chorela', location: "Masindi", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '16th Nov 2024')
           ],
         ),
     ),
