@@ -21,31 +21,26 @@ class HomeBadge extends StatelessWidget {
             width: 180,
             height: 100,
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2 ),
             margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0 ),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 239, 213, 211),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric( vertical: 10.0 ),
+              padding: EdgeInsets.symmetric( vertical: 10.0, horizontal: 10 ),
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  children: [
-                    Text( 'Annual Red' ),
-                    Text( 'Cross Gala' ),
-                    Text( 'and Fundraiser' )
-                  ],
-                ),
-                Center(
-                  child: Icon(
-                    iconData,
-                    color: Colors.red,
-                    size: 60.0,
-                  ),
-                )
+               Container(
+                width: 100,
+                child:  Text( title ),
+               ),
+               Icon(
+                iconData,
+                color: Colors.red,
+                size: 50.0,
+              ),
               ],
              ),
             )

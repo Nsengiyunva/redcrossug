@@ -74,10 +74,10 @@ class Home extends StatelessWidget {
                )
                ),
                Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  HomeBadge(title: 'Annual', icon_name: "blood_icon" ),
-                  HomeBadge(title: 'Gala', icon_name: "gala" )
+                  HomeBadge(title: 'Annual Red Cross Gala',  icon_name: "blood_icon" ),
+                  HomeBadge(title: 'World Blood Donor Day', icon_name: "gala" )
                 ],
                )
              ],
