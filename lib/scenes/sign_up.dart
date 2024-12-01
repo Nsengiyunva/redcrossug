@@ -16,7 +16,7 @@ class SignUp extends StatelessWidget {
           child: const Column(
           children: [
             Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
-             SizedBox( height: 10 ),
+            SizedBox( height: 10 ),
             TextFieldInput( question: 'Name'),
             SizedBox( height: 10 ),
             TextFieldInput( question: 'Email Address'),
@@ -31,7 +31,7 @@ class SignUp extends StatelessWidget {
             SizedBox( height: 10 ),
             TextFieldInput( question: 'Confirm Password'),
             SizedBox( height: 10 ),
-            RedBtn()
+            RedBtn( label: 'Continue' )
           ],
         ),
         )

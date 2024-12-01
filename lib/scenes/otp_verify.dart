@@ -41,7 +41,7 @@ class VerifyOtp extends StatelessWidget {
                 }, // end onSubmit
             ),
             const SizedBox( height: 25 ),
-            const RedBtn()
+            const RedBtn( label: 'Continue' )
           ],
         ),
         )

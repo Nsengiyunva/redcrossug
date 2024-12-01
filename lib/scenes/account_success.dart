@@ -35,7 +35,7 @@ class AccountSuccess extends StatelessWidget {
             SizedBox( height: 10 ),
             Padding(
               padding: EdgeInsets.symmetric( horizontal: 28 ),
-              child: RedBtn(),
+              child: RedBtn( label: 'Continue' ),
             )
          ],
        ),

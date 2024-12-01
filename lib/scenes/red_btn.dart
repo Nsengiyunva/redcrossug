@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RedBtn extends StatelessWidget {
-  const RedBtn({super.key});
+  final String label;
+
+  const RedBtn({super.key, required this.label });
 
   @override
   Widget build(BuildContext context) {
@@ -9,17 +11,17 @@ class RedBtn extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ElevatedButton(
-               onPressed: () {},
-               style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular( 5 )
               ),
               backgroundColor: Colors.red,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10 ),
             ),
-            child: const Text('Continue', style: TextStyle( fontSize: 20, color: Colors.white ) ),
-        )
-              ]
-      );
-  }
+            child: Text( '$label' , style: TextStyle( fontSize: 20, color: Colors.white ) ),
+          )
+          ]
+        );
+    }
 }

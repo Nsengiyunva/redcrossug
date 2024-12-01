@@ -25,7 +25,7 @@ class SignIn extends StatelessWidget {
             SizedBox( height: 25 ),
             TextFieldInput(question: 'Password'),
             SizedBox( height: 10 ),
-            RedBtn(),
+            RedBtn( label: 'Continue' ),
             SizedBox( height: 50 ),
             Row( 
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

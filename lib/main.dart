@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/disaster_list.dart';
-import 'package:redcross/scenes/home.dart';
+import 'package:redcross/scenes/disaster_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const DisasterList()
+      home: const DisasterDetails()
     );
   }
 }
