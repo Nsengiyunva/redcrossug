@@ -20,7 +20,7 @@ class DisasterListItem extends StatelessWidget {
               height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: ExactAssetImage("assets/images/kasese_floods.jpg"),
                   fit: BoxFit.cover,
                 ),
@@ -28,29 +28,29 @@ class DisasterListItem extends StatelessWidget {
             ),
            Expanded(child: Container(
             height: 120,
-            padding: EdgeInsets.symmetric( horizontal: 10, vertical: 10 ),
+            padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 10 ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Padding( 
-                      padding: EdgeInsets.only( right: 2 ), 
-                      child:Text( title, style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ) 
+                      padding: const EdgeInsets.only( right: 2 ), 
+                      child:Text( title, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ) 
                     ),
-                    Text( "|", style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ),
+                    const Text( "|", style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ),
                     Padding(
-                      padding: EdgeInsets.symmetric( horizontal: 2 ), 
-                      child: Text( location, style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ),
+                      padding: const EdgeInsets.symmetric( horizontal: 2 ), 
+                      child: Text( location, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black) ),
                     ),
                   ],
                 ),
-                Text( '$subtitle', style: TextStyle( fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black) ),
-                SizedBox( height: 5 ),
+                Text( subtitle, style: const TextStyle( fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black) ),
+                const SizedBox( height: 5 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(padding: EdgeInsets.only( right: 5.0 ), 
+                    const Padding(padding: EdgeInsets.only( right: 5.0 ), 
                     child: Row(
                       children: [
                         Icon(
@@ -62,7 +62,7 @@ class DisasterListItem extends StatelessWidget {
                       ],
                     )
                     ),
-                    Text( '$date', style: TextStyle( fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black) )
+                    Text( date, style: const TextStyle( fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black) )
                   ],
                 )
               ],

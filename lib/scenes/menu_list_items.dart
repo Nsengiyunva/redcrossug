@@ -9,8 +9,8 @@ class MenuListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric( horizontal: 10.0, vertical: 5.0 ),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric( horizontal: 10.0, vertical: 5.0 ),
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Colors.red,
@@ -21,8 +21,8 @@ class MenuListItems extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text( first_title, style: TextStyle( fontSize: 16, color: Colors.red, ) ),
-           Text( second_title, style: TextStyle( fontSize: 16, color: Colors.grey, ) )
+          Text( first_title, style: const TextStyle( fontSize: 16, color: Colors.red, ) ),
+           Text( second_title, style: const TextStyle( fontSize: 16, color: Colors.grey, ) )
         ],
       ),
     );

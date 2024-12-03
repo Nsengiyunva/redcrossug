@@ -10,7 +10,7 @@ class DonationProgress extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text( "Donation raised", style: TextStyle( fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[900] ) ),
-          SizedBox( height: 10 ),
+          const SizedBox( height: 10 ),
           Container(
             // margin: EdgeInsets.all(20),
             child: LinearProgressIndicator(
@@ -20,10 +20,10 @@ class DonationProgress extends StatelessWidget {
               minHeight: 8, // Height of the progress bar
             ),
           ),
-          SizedBox( height: 10 ),
+          const SizedBox( height: 10 ),
           Row(
             children: [
-               Text( "UGX 50,000", style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold ), ),
+               const Text( "UGX 50,000", style: TextStyle( fontSize: 16, fontWeight: FontWeight.bold ), ),
                Text( "/", style: TextStyle( fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[800] ) ),
                Text( "UGX 2,500,000", style: TextStyle( fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[800] ), ),
             ],

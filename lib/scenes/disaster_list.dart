@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/disaster_list_item.dart';
-import 'package:redcross/scenes/list_tabs_container.dart';
 import 'package:redcross/scenes/menu_list_items.dart';
 
 class DisasterList extends StatelessWidget {

@@ -19,7 +19,7 @@ class RedBtn extends StatelessWidget {
               backgroundColor: Colors.red,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10 ),
             ),
-            child: Text( '$label' , style: TextStyle( fontSize: 20, color: Colors.white ) ),
+            child: Text( label , style: const TextStyle( fontSize: 20, color: Colors.white ) ),
           )
           ]
         );

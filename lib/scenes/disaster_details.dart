@@ -20,7 +20,7 @@ class DisasterDetails extends StatelessWidget {
               children: [
                 Container(
                   height: 250,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(
                       image: ExactAssetImage("assets/images/kasese_floods.jpg"),
                       fit: BoxFit.cover,
@@ -29,26 +29,59 @@ class DisasterDetails extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox( height: 5 ),
-            Padding(
+            const SizedBox( height: 5 ),
+            const Padding(
               padding: EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
               child: Text( "Kasese Floods", style: TextStyle( fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black ), ),
             ),
-            SizedBox( height: 10 ),
-            Padding(
+            const SizedBox( height: 10 ),
+            const Padding(
               padding: EdgeInsets.symmetric( horizontal: 20 ),
               child: Text( "Heavy rainfall has caused severe flooding, resulting in widespread destruction. Homes, bridges, and roads have been damaged, and many families have been displaced. Emergency teams are on the ground providing aid, but additional support is urgently needed.",
               style: TextStyle( fontSize: 14, color: Colors.black ), ),
             ),
-            SizedBox( height: 25 ),
-            Padding(
+            const SizedBox( height: 25 ),
+            const Padding(
               padding: EdgeInsets.symmetric( horizontal: 20.0 ),
               child: DonationProgress(),
             ),
-            SizedBox( height: 25 ),
+            const SizedBox( height: 25 ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10, vertical: 20 ),
-              child: RedBtn( label: 'Donate to Emergency' )
+              padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 20 ),
+              child: ElevatedButton(
+                child: const Text("Tap on this"),
+                onPressed: () {
+                 showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    ),
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        height: 500, // Adjust height if needed
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Bottom Sheet Modal', style: TextStyle(fontSize: 18)),
+                            const SizedBox(height: 10),
+                            const Text('This modal slides up from the bottom.'),
+                            const Spacer(),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Close the modal
+                              },
+                              child: const Text('Close'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+
+                },
+              ),
             )
             ],
           ),
