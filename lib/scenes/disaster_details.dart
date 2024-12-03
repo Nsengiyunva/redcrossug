@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/donation_progress.dart';
+import 'package:redcross/scenes/price_tag.dart';
 import 'package:redcross/scenes/red_btn.dart';
 
 class DisasterDetails extends StatelessWidget {
@@ -51,6 +52,7 @@ class DisasterDetails extends StatelessWidget {
               child: ElevatedButton(
                 child: const Text("Tap on this"),
                 onPressed: () {
+
                  showModalBottomSheet(
                     context: context,
                     shape: const RoundedRectangleBorder(
@@ -64,10 +66,30 @@ class DisasterDetails extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Bottom Sheet Modal', style: TextStyle(fontSize: 18)),
-                            const SizedBox(height: 10),
-                            const Text('This modal slides up from the bottom.'),
+                            Center(
+                              child: Text( "Donation Amount", style: TextStyle( fontSize: 20, color: Colors.black, fontWeight: FontWeight.w500 ), ),
+                            ),
+                            SizedBox(height: 20 ),
+                            Center(
+                              child: Text( "Enter Price Manually", style: TextStyle( fontSize: 16, color: Colors.grey )  ),
+                            ),
+                            Row(
+                              children: [
+                                PriceTag( label: '100K', active: false ),
+                                PriceTag( label: '250K', active: true ),
+                                PriceTag( label: '350K', active: false),
+                              ],
+                            ),
+                            SizedBox(height: 10 ),
+                            Row(
+                              children: [
+                                PriceTag( label: '500K', active: false ),
+                                PriceTag( label: '750K', active: false),
+                                PriceTag( label: '1 million', active: false),
+                              ],
+                            ),
                             const Spacer(),
+                            // RedBtn(label: "Continue to Payment"),
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).pop(); // Close the modal
@@ -79,6 +101,7 @@ class DisasterDetails extends StatelessWidget {
                       );
                     },
                   );
+
 
                 },
               ),
