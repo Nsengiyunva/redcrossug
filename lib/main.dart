@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/account_success.dart';
 import 'package:redcross/scenes/payment.dart';
 
 void main() {
@@ -18,8 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Payment()
-    );
-  }
+      home: const AccountSuccess(title: 'Welcome Aboard', success_message: 'Your account has been created successfully, Check on your email for confirmation.', button_label: 'Continue' ,)
+    );}
 }
 

@@ -3,39 +3,44 @@ import 'package:redcross/scenes/green_badge.dart';
 import 'package:redcross/scenes/red_btn.dart';
 
 class AccountSuccess extends StatelessWidget {
-  const AccountSuccess({super.key});
+  final String button_label;
+  final String title;
+  final String success_message;
+
+  const AccountSuccess({super.key, required this.button_label, required this.title, required this.success_message });
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
        child: Column(
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
           GreenBadge(),
-          SizedBox( height: 5 ),
+          SizedBox( height: 20 ),
           Center(
               child: Text(
-                'Welcome Aboard',
+                "$title",
                 textAlign: TextAlign.center,
-                style: TextStyle( fontSize: 36, )
+                style: TextStyle( fontSize: 36, color: Colors.black, fontWeight: FontWeight.bold ),
+                
               ),
             ),
-            SizedBox( height: 10 ),
+            SizedBox( height: 15 ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0), // Uniform padding of 16 pixels on all sides
               child: Center(
               child: Text(
-                'Your account has been created successfully, check your email for confirmation',
+                "$success_message",
                 textAlign: TextAlign.center,
                 style: TextStyle( fontSize: 24, )
               ),
             ),
             ),
-            SizedBox( height: 10 ),
+            SizedBox( height: 30 ),
             Padding(
               padding: EdgeInsets.symmetric( horizontal: 28 ),
-              child: RedBtn( label: 'Continue' ),
+              child: RedBtn( label: '$button_label' ),
             )
          ],
        ),
