@@ -2,22 +2,26 @@ import 'package:flutter/material.dart';
 
 class TextFieldInput extends StatelessWidget {
   final String question;
-  // final String placeholder;
+  final TextEditingController textEditingController;
 
- const TextFieldInput({super.key,  required this.question } );
+ const TextFieldInput({super.key,  required this.question, required this.textEditingController } );
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          // Text( question, style: TextStyle( fontSize: 24 ), ),
           TextField(
+            controller: textEditingController,
             style: const TextStyle(color: Colors.black, fontSize: 24 ),
             decoration: InputDecoration(
-            labelText: question,
-            labelStyle: const TextStyle(color: Colors.black),
-            border: const OutlineInputBorder(),
+              alignLabelWithHint: true,
+              fillColor: Colors.white54,
+              labelText: question,
+              labelStyle: const TextStyle(color: Colors.black),
+              border: const OutlineInputBorder(),
+              contentPadding: const EdgeInsets.only(bottom: 15),
+              focusColor: Colors.white60
             )
           )
           ],

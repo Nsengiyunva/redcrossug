@@ -1,5 +1,5 @@
 name: redcross
-description: "A new Flutter project."
+description: "Uganda Red Cross Society Uganda"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -34,8 +34,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  intl_phone_field: ^3.2.0
   flutter_otp_text_field: ^1.2.0
+  csc_picker: ^0.2.7
+  get: ^4.6.6
+  dio: ^5.7.0
+  shared_preferences: ^2.3.3
+  intl_phone_number_field: ^0.2.1
+  http: ^1.2.2
 
 
 dev_dependencies:

@@ -19,7 +19,7 @@ class _TextBoxAreaState extends State<TextBoxArea> {
         child: TextField(
           controller: _controller,
           maxLines: 3, // Allows up to 5 lines
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Write your messages...',
             hintText: 'Type something...',

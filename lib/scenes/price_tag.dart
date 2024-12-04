@@ -11,8 +11,8 @@ class PriceTag extends StatelessWidget {
     return Container(
       width: 100,
       height: 60,
-      margin: EdgeInsets.symmetric( vertical: 15, horizontal: 10 ),
-      padding: EdgeInsets.all( 10 ),
+      margin: const EdgeInsets.symmetric( vertical: 15, horizontal: 10 ),
+      padding: const EdgeInsets.all( 10 ),
       decoration: BoxDecoration(
         color: active ? const Color.fromARGB(255, 238, 222, 199) : Colors.white70,
         border: Border.all( 
@@ -22,7 +22,7 @@ class PriceTag extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
-        child: Text( '$label', style: TextStyle( fontSize: 18, fontWeight: FontWeight.w500, color: active ? Colors.red : Colors.black ) ),
+        child: Text( label, style: TextStyle( fontSize: 18, fontWeight: FontWeight.w500, color: active ? Colors.red : Colors.black ) ),
       ),
     );
   }

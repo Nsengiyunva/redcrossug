@@ -17,7 +17,7 @@ class PaymentMethodItem extends StatelessWidget {
     final iconData = iconMap[icon_name] ?? Icons.error;
 
     return Container(
-      margin: EdgeInsets.symmetric( vertical: 10 ),
+      margin: const EdgeInsets.symmetric( vertical: 10 ),
       child: Row(
             children: [
             Container(
@@ -34,8 +34,8 @@ class PaymentMethodItem extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10 ),
-              child: Text( text_label, style: TextStyle( fontSize: 16 ),),
+              padding: const EdgeInsets.symmetric( horizontal: 10 ),
+              child: Text( text_label, style: const TextStyle( fontSize: 16 ),),
             ) 
           ],
           ),

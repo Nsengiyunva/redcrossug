@@ -32,7 +32,7 @@ class GreenBadge extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular( 30 )
           ),
-          child: Icon(
+          child: const Icon(
                 Icons.check,
                 color: Colors.green,
                 size: 30.0,

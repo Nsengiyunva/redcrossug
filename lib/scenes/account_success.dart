@@ -16,31 +16,31 @@ class AccountSuccess extends StatelessWidget {
        child: Column(
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
-          GreenBadge(),
-          SizedBox( height: 20 ),
+          const GreenBadge(),
+          const SizedBox( height: 20 ),
           Center(
               child: Text(
-                "$title",
+                title,
                 textAlign: TextAlign.center,
-                style: TextStyle( fontSize: 36, color: Colors.black, fontWeight: FontWeight.bold ),
+                style: const TextStyle( fontSize: 36, color: Colors.black, fontWeight: FontWeight.bold ),
                 
               ),
             ),
-            SizedBox( height: 15 ),
+            const SizedBox( height: 15 ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0), // Uniform padding of 16 pixels on all sides
+              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Uniform padding of 16 pixels on all sides
               child: Center(
               child: Text(
-                "$success_message",
+                success_message,
                 textAlign: TextAlign.center,
-                style: TextStyle( fontSize: 24, )
+                style: const TextStyle( fontSize: 24, )
               ),
             ),
             ),
-            SizedBox( height: 30 ),
+            const SizedBox( height: 30 ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 28 ),
-              child: RedBtn( label: '$button_label' ),
+              padding: const EdgeInsets.symmetric( horizontal: 28 ),
+              child: RedBtn( label: button_label, onPressed: () {  }, ),
             )
          ],
        ),

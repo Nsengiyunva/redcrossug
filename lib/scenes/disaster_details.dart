@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/donation_progress.dart';
 import 'package:redcross/scenes/price_tag.dart';
-import 'package:redcross/scenes/red_btn.dart';
 
 class DisasterDetails extends StatelessWidget {
   const DisasterDetails({super.key});
@@ -66,22 +65,22 @@ class DisasterDetails extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Center(
+                            const Center(
                               child: Text( "Donation Amount", style: TextStyle( fontSize: 20, color: Colors.black, fontWeight: FontWeight.w500 ), ),
                             ),
-                            SizedBox(height: 20 ),
-                            Center(
+                            const SizedBox(height: 20 ),
+                            const Center(
                               child: Text( "Enter Price Manually", style: TextStyle( fontSize: 16, color: Colors.grey )  ),
                             ),
-                            Row(
+                            const Row(
                               children: [
                                 PriceTag( label: '100K', active: false ),
                                 PriceTag( label: '250K', active: true ),
                                 PriceTag( label: '350K', active: false),
                               ],
                             ),
-                            SizedBox(height: 10 ),
-                            Row(
+                            const SizedBox(height: 10 ),
+                            const Row(
                               children: [
                                 PriceTag( label: '500K', active: false ),
                                 PriceTag( label: '750K', active: false),

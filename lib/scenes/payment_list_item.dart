@@ -7,21 +7,21 @@ class PaymentListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric( vertical: 25 ),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric( vertical: 25 ),
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           bottom: BorderSide(
-            color: const Color.fromARGB(153, 227, 226, 226), // Border color
+            color: Color.fromARGB(153, 227, 226, 226), // Border color
             width: 2.0,         // Border width
           ),
            top: BorderSide(
-            color: const Color.fromARGB(153, 227, 226, 226), // Border color
+            color: Color.fromARGB(153, 227, 226, 226), // Border color
             width: 2.0,         // Border width
           ),
         ),
       ),
-      child: Column(
+      child: const Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,0 +1,10 @@
+class ApiEndpoints {
+  static const String baseUrl = 'https://urcs-api.taufeeq.dev/api';
+  static _AuthEndPoints authEndpoints = _AuthEndPoints();
+}
+
+class _AuthEndPoints {
+  final String register = '/auth/register';
+  final String login = '/auth/login';
+  final String disasters = '/disasters';
+}

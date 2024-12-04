@@ -17,25 +17,25 @@ class Payment extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center( 
+            const Center( 
               child: Text( "Payment", style: TextStyle( fontSize: 18 ), ),
             ),
-            SizedBox( height: 25 ),
-            Text( "Select Payment Method", style: TextStyle( fontSize: 16 ) ),
-            PaymentListItem(),
-            SizedBox( height: 25 ),
-            Text( "Select Payment Method", style: TextStyle( fontSize: 16 ) ),
-            SizedBox( height: 10 ),
-            PaymentSummaryItem(text_label: "Service Fee", price_label: "UGX 300"),
-            SizedBox( height: 10 ),
-            PaymentSummaryItem(text_label: "Donation Amount", price_label: "UGX 450,000"),
-             SizedBox( height: 25 ),
-            PaymentSummaryItem(text_label: "Total", price_label: "UGX 500,000"),
-            SizedBox( height: 30 ),
-            Text( "Messages and Support", style: TextStyle( fontSize: 16 ) ),
-            TextBoxArea(),
-            SizedBox( height: 25 ),
-            RedBtn(label: "Confirm Donation")
+            const SizedBox( height: 25 ),
+            const Text( "Select Payment Method", style: TextStyle( fontSize: 16 ) ),
+            const PaymentListItem(),
+            const SizedBox( height: 25 ),
+            const Text( "Select Payment Method", style: TextStyle( fontSize: 16 ) ),
+            const SizedBox( height: 10 ),
+            const PaymentSummaryItem(text_label: "Service Fee", price_label: "UGX 300"),
+            const SizedBox( height: 10 ),
+            const PaymentSummaryItem(text_label: "Donation Amount", price_label: "UGX 450,000"),
+             const SizedBox( height: 25 ),
+            const PaymentSummaryItem(text_label: "Total", price_label: "UGX 500,000"),
+            const SizedBox( height: 30 ),
+            const Text( "Messages and Support", style: TextStyle( fontSize: 16 ) ),
+            const TextBoxArea(),
+            const SizedBox( height: 25 ),
+            RedBtn(label: "Confirm Donation", onPressed: () {  },)
           ],
         )
         ),

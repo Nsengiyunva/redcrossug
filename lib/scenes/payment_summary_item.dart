@@ -10,17 +10,17 @@ class PaymentSummaryItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      margin: EdgeInsets.symmetric( vertical: 10 ),
+      margin: const EdgeInsets.symmetric( vertical: 10 ),
       child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10 ),
-              child: Text( text_label, style: TextStyle( fontSize: 16 ),),
+              padding: const EdgeInsets.symmetric( horizontal: 10 ),
+              child: Text( text_label, style: const TextStyle( fontSize: 16 ),),
             ), 
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10 ),
-              child: Text( price_label, style: TextStyle( fontSize: 18, fontWeight: FontWeight.bold ),),
+              padding: const EdgeInsets.symmetric( horizontal: 10 ),
+              child: Text( price_label, style: const TextStyle( fontSize: 18, fontWeight: FontWeight.bold ),),
             ) 
           ],
           ),
