@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/sign_in.dart';
-import 'package:redcross/scenes/sign_phone_in.dart';
 // import 'package:get';
 
 void main() {
