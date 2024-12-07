@@ -17,26 +17,31 @@ class DisasterList extends StatelessWidget {
       Obx((){
         if( disasterController.isLoading.value ) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(), 
           );
         }
-
-        print( "here ${disasterController.disasters}" );
+ 
+        // print( "here ${disasterController.disasters.length}" );
 
         return SingleChildScrollView(
           child: Container( 
             padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text( 'Disasters', style: TextStyle( fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold ), ),
-                SizedBox( height: 10 ),
-                MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
-                
-                SizedBox( height: 10 ),
-                DisasterListItem(title: 'Floods', location: "Kasese", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '15th Nov 2024' ),
-                SizedBox(height: 10),
-                DisasterListItem(title: 'Chorela', location: "Masindi", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '16th Nov 2024')
+                const Text( 'Disasters', style: TextStyle( fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold ), ),
+                const SizedBox( height: 10 ),
+                const MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
+                 ListView.builder( 
+                  itemCount: disasterController.disasters.length,
+                  itemBuilder: ( context, index ) {
+                    return Text( "Testing..." );
+                  },
+                 ),
+                // SizedBox( height: 10 ),
+                // DisasterListItem(title: 'Floods', location: "Kasese", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '15th Nov 2024' ),
+                // SizedBox(height: 10),
+                // DisasterListItem(title: 'Chorela', location: "Masindi", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '16th Nov 2024')
               ],
             ),
           ),
