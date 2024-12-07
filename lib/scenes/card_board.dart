@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CardBoard extends StatelessWidget {
   final String title;
   final String icon_name;
+  final VoidCallback onPressed;
 
-  const CardBoard({ super.key, required this.title, required this.icon_name });
+  const CardBoard({ super.key, required this.title, required this.icon_name, required this.onPressed });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,11 @@ class CardBoard extends StatelessWidget {
 
     final iconData = iconMap[icon_name] ?? Icons.error;
 
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        onPressed();
+      },
+      child: Container(
             width: 180,
             height: 120,
             alignment: Alignment.center,
@@ -54,6 +59,8 @@ class CardBoard extends StatelessWidget {
                 )
                   ],
             ),
-          );
+          ),
+    );
+    
   }
 }

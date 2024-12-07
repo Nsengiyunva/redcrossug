@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/home": ( context ) => Home(),
         "/login": ( context ) => SignIn(),
-        "/disasters": ( context ) => const DisasterList()
+        "/disasters": ( context ) => DisasterList()
       },
       initialRoute: "/login",
     );

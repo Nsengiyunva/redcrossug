@@ -15,7 +15,7 @@ class PriceTag extends StatelessWidget {
       padding: const EdgeInsets.all( 10 ),
       decoration: BoxDecoration(
         color: active ? const Color.fromARGB(255, 238, 222, 199) : Colors.white70,
-        border: Border.all( 
+        border: Border.all(   
           color: Colors.black12,
           width: 2
         ),

@@ -31,7 +31,7 @@ class LoginController {
 
       // Check the response status
       if (response.statusCode == 200) {
-        print("Success: ${response.body}");
+        // print("Success: ${response.body}");
         final json = jsonDecode(response.body);
         var token = json['token'];
         // var user = json['user'];
@@ -42,10 +42,10 @@ class LoginController {
         
         Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
       } else {
-        // print("Failed: ${response.statusCode}");
+        print("Failed: ${response.statusCode}");
       }
     } catch (e) {
-      // print("Error: $e");
+      print("Error message: $e");
     }
   }
 }
