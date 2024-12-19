@@ -27,7 +27,7 @@ class DefaultHome extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text( "Good afternoon",  style: TextStyle( fontSize: 20, color: Colors.black ) ),
-                      Text( "Garvin John Wick", style: TextStyle( fontSize: 24, color: Colors.black ) )
+                      Text( "Anthony Blinked", style: TextStyle( fontSize: 24, color: Colors.black ) )
                     ],
                   ),
                   ),

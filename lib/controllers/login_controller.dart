@@ -26,18 +26,19 @@ class LoginController {
         body: jsonEncode(requestBody),
       );
 
-      // print( "response: ${response}" );
+      print( "response: $response" );
 
       // if (response.statusCode == 201) {
         // Success
-        final responseData = jsonDecode(response.body);
-        var responseMessage = 'Success: ${responseData['message']}';
-        // print( responseMessage );
-        final SharedPreferences? prefs = await _prefs;
-        await prefs?.setString('token', responseData['token']);
-        // await prefs?.setString('user', user );
+        // final responseData = jsonDecode(response.body);
+        // var responseMessage = 'Success: ${responseData['message']}';
+        // // print( responseMessage );
+        // final SharedPreferences? prefs = await _prefs;
+        // await prefs?.setString('token', responseData['token']);
+        // // await prefs?.setString('user', user );
         
-        Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
+        // Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
+
         // setState(() {
         //   responseMessage = 'Success: ${responseData['id']}';
         // });
