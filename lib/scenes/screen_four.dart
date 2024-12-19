@@ -5,7 +5,7 @@ class ScreenFour extends StatelessWidget {
 
   @override
  Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text("Profile", style: TextStyle(fontSize: 24)),
     );
   }

@@ -11,9 +11,6 @@ URCS Mobile App
 -Andrew-passport, stories.
 
 ---------------------------
--Godanah
--Adu-cash request
--Go to Gillians
--Send to CJohn
+flutter run -d web-server
 ----------------------------
 

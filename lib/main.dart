@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/sign_in.dart';
-// import 'package:get';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        "/home": ( context ) => Home(),
+        "/home": ( context ) => const Home(),
         "/login": ( context ) => SignIn(),
         "/disasters": ( context ) => DisasterList()
       },
@@ -31,5 +30,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//home: const SignPhoneIn()
 

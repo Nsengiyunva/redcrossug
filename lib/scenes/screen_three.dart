@@ -5,7 +5,7 @@ class ScreenThree extends StatelessWidget {
 
   @override
  Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text("First Aid", style: TextStyle(fontSize: 24)),
     );
   }

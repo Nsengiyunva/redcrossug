@@ -27,7 +27,7 @@ class DisastersListController extends GetxController {
       isLoading(true);
       http.Response response = await http.get(Uri.tryParse(
           'https://urcs-api.taufeeq.dev/api/disasters')!, headers: {
-          'Authorization': "Bearer ${token}",
+          'Authorization': "Bearer $token",
           'X-Requested-With': 'XMLHttpRequest'
           } );
       if (response.statusCode == 200) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/disasters_list_controller.dart';
-import 'package:redcross/scenes/disaster_list_item.dart';
 import 'package:redcross/scenes/menu_list_items.dart';
 
 class DisasterList extends StatelessWidget {
@@ -12,11 +11,11 @@ class DisasterList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("")),
+      appBar: AppBar(title: const Text("")),
       body: 
       Obx((){
         if( disasterController.isLoading.value ) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(), 
           );
         }
@@ -35,7 +34,7 @@ class DisasterList extends StatelessWidget {
                  ListView.builder( 
                   itemCount: disasterController.disasters.length,
                   itemBuilder: ( context, index ) {
-                    return Text( "Testing..." );
+                    return const Text( "Test 1 2 3..." );
                   },
                  ),
                 // SizedBox( height: 10 ),

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:redcross/scenes/card_board.dart';
-import 'package:redcross/scenes/home_badge.dart';
 import 'package:redcross/scenes/screen_four.dart';
 
 import 'package:redcross/scenes/default_home.dart';
@@ -10,6 +7,8 @@ import 'package:redcross/scenes/screen_two.dart';
 
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   _BottomNavigationBarExampleState createState() => _BottomNavigationBarExampleState();
 }
@@ -19,9 +18,9 @@ class _BottomNavigationBarExampleState extends State<Home> {
 
   final List<Widget> _pages = [
     DefaultHome(),
-    ScreenTwo(),
-    ScreenThree(),
-    ScreenFour()
+    const ScreenTwo(),
+    const ScreenThree(),
+    const ScreenFour()
   ];
 
   @override
@@ -38,7 +37,7 @@ class _BottomNavigationBarExampleState extends State<Home> {
             _currentIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: 'Home',
