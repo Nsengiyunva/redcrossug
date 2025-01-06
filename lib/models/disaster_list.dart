@@ -1,5 +1,8 @@
-ired this.name, required this.age});
+class DisasterList {
+  var name;
+  var age;
 
+  DisasterList( { required this.name, required this.age } );
   // Convert object to JSON
   Map<String, dynamic> toJson() {
     return {
@@ -10,7 +13,7 @@ ired this.name, required this.age});
 
   // Create object from JSON
   DisasterList.fromJson(Map<String, dynamic> json) {
-    return DisasterList(
+    DisasterList(
       name: json['name'],
       age: json['age'],
     );

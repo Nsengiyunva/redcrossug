@@ -1,4 +1,8 @@
-this.age});
+class User{
+  var name;
+  var age;
+ 
+  User( { required this.name, required this.age } );
 
   // Convert object to JSON
   Map<String, dynamic> toJson() {
@@ -10,10 +14,10 @@ this.age});
 
   // Create object from JSON
   User.fromJson(Map<String, dynamic> json) {
-    return User(
-      name: json['name'],
-      age: json['age'],
-    );
+    // return User(
+    //   name: json['name'],
+    //   age: json['age'],
+    // );
   }
 }
 
