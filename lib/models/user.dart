@@ -1,9 +1,4 @@
-
-class User {
-  final String name;
-  final int age;
-
-  User({required this.name, required this.age});
+this.age});
 
   // Convert object to JSON
   Map<String, dynamic> toJson() {
@@ -14,7 +9,7 @@ class User {
   }
 
   // Create object from JSON
-  factory User.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     return User(
       name: json['name'],
       age: json['age'],
