@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/ambulance_form.dart';
 import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/sign_in.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/home": ( context ) => const Home(),
         "/login": ( context ) => SignIn(),
-        "/disasters": ( context ) => DisasterList()
+        "/disasters": ( context ) => DisasterList(),
+        "/ambulance-request-form": ( context ) => AmbulanceForm()
       },
       initialRoute: "/login",
     );

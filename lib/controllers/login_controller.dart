@@ -1,12 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class LoginController {
   TextEditingController telephoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  TextEditingController noPeopleController = TextEditingController();
+  TextEditingController noAmbulancesController = TextEditingController();
+  TextEditingController noPatientsController = TextEditingController();
 
   final Future _prefs = SharedPreferences.getInstance();
 
@@ -17,7 +22,6 @@ class LoginController {
       "phone_no": "+256775625741",
       "password": "#Satan2023#"
     };
-
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -25,27 +29,27 @@ class LoginController {
         body: jsonEncode(requestBody),
       );
 
-      print( "response: $response" );
+      // print( "response: $response.statusCode" );
 
       // if (response.statusCode == 201) {
         // Success
-        // final responseData = jsonDecode(response.body);
-        // var responseMessage = 'Success: ${responseData['message']}';
-        // // print( responseMessage );
-        // final SharedPreferences? prefs = await _prefs;
-        // await prefs?.setString('token', responseData['token']);
-        // // await prefs?.setString('user', user );
+        final responseData = jsonDecode(response.body);
+        var responseMessage = 'Success: ${responseData['message']}';
+        // print( responseMessage );
+        final SharedPreferences? prefs = await _prefs;
+        await prefs?.setString('token', responseData['token']);
+        // await prefs?.setString('user', user );
         
-        // Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
+        Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
 
         // setState(() {
         //   responseMessage = 'Success: ${responseData['id']}';
         // });
       // } else {
-        // Error response
-        // setState(() {
-        //   responseMessage = 'Error: ${response.statusCode}';
-        // });
+      //   // Error response
+      //   // setState(() {
+      //   //   responseMessage = 'Error: ${response.statusCode}';
+      //   // });
       // }
     } catch (e) {
       print( "Error: $e" );
