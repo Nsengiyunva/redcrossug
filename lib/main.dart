@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/account_success.dart';
 import 'package:redcross/scenes/ambulance_form.dart';
+import 'package:redcross/scenes/ambulance_success.dart';
 import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/sign_in.dart';
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
         "/home": ( context ) => const Home(),
         "/login": ( context ) => SignIn(),
         "/disasters": ( context ) => DisasterList(),
-        "/ambulance-request-form": ( context ) => AmbulanceForm()
+        "/ambulance-request-form": ( context ) => AmbulanceForm(),
+        "/ambulance-success-request": ( context ) => AmbulanceSuccess(),
+        "/account-creation-success": ( context ) => AccountSuccess(button_label: 'Test', title: 'Tester', success_message: 'Testing',),
       },
       initialRoute: "/login",
     );

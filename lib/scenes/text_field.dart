@@ -20,7 +20,7 @@ class TextFieldInput extends StatelessWidget {
               labelText: question,
               labelStyle: const TextStyle(color: Colors.black),
               border: const OutlineInputBorder(),
-              contentPadding: const EdgeInsets.only(bottom: 15),
+              contentPadding: const EdgeInsets.symmetric( vertical: 15, horizontal: 10 ),
               focusColor: Colors.white60
             )
           )

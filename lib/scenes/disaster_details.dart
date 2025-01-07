@@ -88,7 +88,6 @@ class DisasterDetails extends StatelessWidget {
                               ],
                             ),
                             const Spacer(),
-                            // RedBtn(label: "Continue to Payment"),
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).pop(); // Close the modal
