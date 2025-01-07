@@ -18,11 +18,12 @@ class SignIn extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 30.0),
           padding: const EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
           child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text( "Welcome Back", style: TextStyle( fontSize: 30, color: Colors.black ) ),
+            const Text( "Welcome Back", style: TextStyle( fontSize: 23.12, fontFamily: "Manrope", fontWeight: FontWeight.w700, color: Color(0xFF545454) ) ),
             const Center(
               child: Text( "Good to see you again! Ready to make an impact? Let’s get started.",
-                style: TextStyle( fontSize: 18, color: Colors.black ) )  ,
+                style: TextStyle( fontFamily: "Inter", fontSize: 16.99, color: Color(0xFF7D8FAB) ) )  ,
             ),
             const SizedBox( height: 25 ),
             TextFieldInput(question: 'Phone Number', textEditingController: _loginController.telephoneController,),

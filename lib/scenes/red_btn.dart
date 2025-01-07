@@ -9,18 +9,18 @@ class RedBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ElevatedButton(
-                onPressed: onPressed,
-                style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular( 5 )
-              ),
-              backgroundColor: Colors.red,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15 ),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ElevatedButton(
+              onPressed: onPressed,
+              style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular( 15 )
             ),
-            child: Text( label , style: const TextStyle( fontSize: 20, color: Colors.white ) ),
+            backgroundColor: Color(0xFFED1C24),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15 ),
+          ),
+            child: Text( label , style: const TextStyle( fontSize: 18, color: Colors.white ) ),
           )
           ]
         );
