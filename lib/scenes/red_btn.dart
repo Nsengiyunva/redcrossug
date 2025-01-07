@@ -15,12 +15,12 @@ class RedBtn extends StatelessWidget {
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular( 15 )
+              borderRadius: BorderRadius.circular( 18 )
             ),
             backgroundColor: Color(0xFFED1C24),
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15 ),
           ),
-            child: Text( label , style: const TextStyle( fontSize: 18, color: Colors.white ) ),
+            child: Text( label, style: TextStyle( fontWeight: FontWeight.w600, fontFamily: "Inter", fontSize: 14, color: Colors.white ) ),
           )
           ]
         );

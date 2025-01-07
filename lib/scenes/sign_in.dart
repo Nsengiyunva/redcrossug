@@ -34,18 +34,38 @@ class SignIn extends StatelessWidget {
               _loginController.loginPhoneNumber()
             } ),
             const SizedBox( height: 50 ),
-            const Row( 
+            Row( 
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text( "Keep me Signed In", style: TextStyle( fontSize: 20 ) ),
-                Text( "Forgot Password", style: TextStyle( fontSize: 20, color: Colors.red ) )
+                const Row(
+                  children: [
+                    Icon(
+                      Icons.check_box_rounded,
+                      color: Color(0xFFED1C24),
+                      size: 24.0,
+                    ),
+                    Text( "Keep me Signed In", style: TextStyle( fontWeight: FontWeight.w400, fontFamily: "Inter", fontSize: 13.04, color: Color(0xFF293041) ) ),
+                  ],
+                ),
+                TextButton(
+                  onPressed: () {
+                  //  Get.toNamed( "/register-account" );
+                  },
+                  style: TextButton.styleFrom(
+                    // foregroundColor: Color(0xFFED1C24),    
+                    backgroundColor: Colors.white,
+                    // padding: const EdgeInsets.all(15),
+                    // textStyle: const TextStyle( fontSize: 20 ),
+                  ),
+                  child: Text( "Forgot Password", style: TextStyle( fontWeight: FontWeight.w400, fontFamily: "Inter", fontSize: 12.8, color: Color(0xFFED1C24), decoration: TextDecoration.underline, decorationColor: Color(0xFFED1C24) ) ),
+                )
               ],
             ),
             const SizedBox( height: 25 ),
             Center(
               child: Column(
                 children: [
-                  const Text( "Don't have an account?", style: TextStyle( fontSize:20 ), ),
+                  const Text( "Don't have an account?", style: TextStyle( fontSize: 15.98, fontFamily: "Inter", fontWeight: FontWeight.w400, color: Color(0xFF7D8FAB) ), ),
                   // Text( "Register", style: TextStyle( fontSize:20 ) )
                   TextButton(
                     onPressed: () {
@@ -57,7 +77,7 @@ class SignIn extends StatelessWidget {
                       padding: const EdgeInsets.all(15),           // Padding inside the button
                       textStyle: const TextStyle( fontSize: 20 ),    // Text style
                     ),
-                    child: const Text( "Register here" ),
+                    child: Text( "Register", style: TextStyle( decoration: TextDecoration.underline, decorationColor: Color(0xFF545454), fontFamily: "Inter", fontSize: 17, color: Color(0xFF7D8FAB) ) ),
                   )
                 ],
               )
