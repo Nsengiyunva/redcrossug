@@ -7,8 +7,8 @@ class AmbulanceProgressField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      margin: EdgeInsets.symmetric( vertical: 5 ),
-      padding: EdgeInsets.symmetric( horizontal: 5, vertical: 2 ),
+      margin: const EdgeInsets.symmetric( vertical: 5 ),
+      padding: const EdgeInsets.symmetric( horizontal: 5, vertical: 2 ),
       decoration: BoxDecoration(
         color: Colors.green.shade200,
          borderRadius: BorderRadius.circular(10)
@@ -20,7 +20,7 @@ class AmbulanceProgressField extends StatelessWidget {
             color: Colors.green.shade600,
             size: 15.0,
           ),
-          Padding(padding: EdgeInsets.symmetric( horizontal: 5 ),
+          Padding(padding: const EdgeInsets.symmetric( horizontal: 5 ),
             child: Text( "Confirmed", style: TextStyle( fontSize: 20, color: Colors.green.shade700 )
            ),
           )

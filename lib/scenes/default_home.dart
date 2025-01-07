@@ -56,7 +56,7 @@ class DefaultHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CardBoard( title: "Ambulance", icon_name: "ambulance", onPressed: () {
-                    Get.toNamed('/ambulance-request-form');
+                    Get.toNamed('/ambulances-home');
                   }, ),
                   CardBoard( title: "Disasters", icon_name: "disasters", onPressed: () { 
                     Get.toNamed('/disasters');

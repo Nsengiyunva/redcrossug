@@ -26,7 +26,7 @@ class AmbulanceStatusItem extends StatelessWidget {
               )
             ),
           ),
-          noComponent ? AmbulanceProgressField() : Text( value, style: const TextStyle( fontSize: 24 ) ),
+          noComponent ? const AmbulanceProgressField() : Text( value, style: const TextStyle( fontSize: 24 ) ),
         ],
       ),
     );
