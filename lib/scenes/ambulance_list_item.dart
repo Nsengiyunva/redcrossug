@@ -11,10 +11,9 @@ class AmbulanceListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 70, 
       decoration: BoxDecoration(
         color: Colors.white,
-        // border: Border.all(color: Colors.red, width: 1),
         borderRadius: BorderRadius.circular(10), 
       ),
       child: Row(

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         "/check-ambulance_status": ( context ) => AmbulanceStatus(),
         "/ambulance-home": ( context ) => AmbulanceHome(),
       },
-      initialRoute: "/ambulance-home",
+      initialRoute: "/login",
     );
   }
 }

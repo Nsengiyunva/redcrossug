@@ -15,6 +15,10 @@ class AmbulanceHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
+      appBar: AppBar(
+        title: Text(""),
+        leading: const BackButton() // Back button added here
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -25,7 +29,9 @@ class AmbulanceHome extends StatelessWidget {
             children: [
               const Text( "Ambulance", style: TextStyle( fontSize: 24, fontWeight: FontWeight.w500 ), ),
               const SizedBox( height: 15 ),
-              RedBtnIcon(noColor: false,label: 'Request for Ambulance', onPressed: () {}, icon_name: "local_police", ),
+              RedBtnIcon(noColor: false,label: 'Request for Ambulance', onPressed: () {
+                Get.toNamed( "/ambulance-request-form" );
+              }, icon_name: "local_police", ),
               const SizedBox( height: 15 ),
               RedBtnIcon(noColor: true, label: 'Ambulance Status', onPressed: () {}, icon_name: "fire_truck", ),
               const SizedBox( height: 15 ),
