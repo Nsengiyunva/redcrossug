@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         "/splash-screen": ( context ) => SplashScreen(),
         "/enter-otp": ( context ) => VerifyOtp(),
       },
-      initialRoute: "/login",
+      initialRoute: "/splash-screen",
     );
   }
 }

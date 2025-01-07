@@ -8,21 +8,24 @@ class RedBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SizedBox(
+      height: 48,
+      child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular( 18 )
+              borderRadius: BorderRadius.circular( 15 )
             ),
             backgroundColor: Color(0xFFED1C24),
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15 ),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12 ),
           ),
             child: Text( label, style: TextStyle( fontWeight: FontWeight.w600, fontFamily: "Inter", fontSize: 14, color: Colors.white ) ),
           )
           ]
-        );
+        ),
+    );
     }
 }
