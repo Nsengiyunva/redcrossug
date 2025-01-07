@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redcross/scenes/donation_progress.dart';
 import 'package:redcross/scenes/price_tag.dart';
 
@@ -8,11 +9,16 @@ class DisasterDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
+      appBar: AppBar(
+        title: Text(""),
+        leading: const BackButton() // Back button added here
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          margin: const EdgeInsets.symmetric(vertical: 30.0),
-          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 0),
+          margin: const EdgeInsets.symmetric(vertical: 15.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,7 +55,7 @@ class DisasterDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 20 ),
               child: ElevatedButton(
-                child: const Text("Tap on this"),
+                child: const Text("Donate"),
                 onPressed: () {
 
                  showModalBottomSheet(
@@ -90,9 +96,10 @@ class DisasterDetails extends StatelessWidget {
                             const Spacer(),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context).pop(); // Close the modal
+                                Navigator.of(context).pop();
+                                Get.toNamed( "/initiate-payment" ); // Close the modal
                               },
-                              child: const Text('Close'),
+                              child: const Text('Pay'),
                             ),
                           ],
                         ),

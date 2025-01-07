@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redcross/scenes/payment_list_item.dart';
 import 'package:redcross/scenes/payment_summary_item.dart';
 import 'package:redcross/scenes/red_btn.dart';
@@ -10,6 +11,11 @@ class Payment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
+      appBar: AppBar(
+        title: Text(""),
+        leading: const BackButton() // Back button added here
+      ),
       body: SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 30.0),
@@ -35,7 +41,9 @@ class Payment extends StatelessWidget {
             const Text( "Messages and Support", style: TextStyle( fontSize: 16 ) ),
             const TextBoxArea(),
             const SizedBox( height: 25 ),
-            RedBtn(label: "Confirm Donation", onPressed: () {  },)
+            RedBtn(label: "Confirm Donation", onPressed: () {  
+              Get.toNamed( "/payment-successful" );
+            },)
           ],
         )
         ),

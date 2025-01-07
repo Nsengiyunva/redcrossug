@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DisasterListItem extends StatelessWidget {
   final String title;
@@ -10,8 +11,11 @@ class DisasterListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed( "/disaster-details" );
+      },
+      child: Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -70,6 +74,7 @@ class DisasterListItem extends StatelessWidget {
            ))
         ]
       )
+     ),
     );
   }
 }

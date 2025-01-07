@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GreenBadge extends StatelessWidget {
-  const GreenBadge({super.key});
+  bool changeColor;
+
+  GreenBadge({super.key, required this.changeColor });
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +11,7 @@ class GreenBadge extends StatelessWidget {
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        color: Colors.green,
+        color: changeColor ? Colors.red : Colors.green,
         borderRadius: BorderRadius.circular( 80 )
       ),
       child: Center(
@@ -20,9 +22,9 @@ class GreenBadge extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular( 30 )
           ),
-          child: const Icon(
+          child: Icon(
                 Icons.check,
-                color: Colors.green,
+                color: changeColor ? Colors.red : Colors.green.shade800,
                 size: 30.0,
               ),
         )

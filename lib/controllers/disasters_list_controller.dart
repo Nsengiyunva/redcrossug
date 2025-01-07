@@ -33,7 +33,7 @@ class DisastersListController extends GetxController {
       if (response.statusCode == 200) {
         ///data successfully
         var result = jsonDecode(response.body);
-        print( result );
+        // print( result );
         disasters.value = result["data"];
         // openseaModel = OpenseaModel.fromJson(result);
       } else {
