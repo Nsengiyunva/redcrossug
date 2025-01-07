@@ -12,8 +12,8 @@ class RedBadge extends StatelessWidget {
         color: Colors.red,
         borderRadius: BorderRadius.circular( 80 )
       ),
-      child: Center(
-        child: const Icon(
+      child: const Center(
+        child: Icon(
           Icons.fire_truck_outlined,
           color: Colors.white,
           size: 40.0,
