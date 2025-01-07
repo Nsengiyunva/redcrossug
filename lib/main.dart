@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
         "/ambulance-success-request": ( context ) => const AmbulanceSuccess(),
         "/account-creation-success": ( context ) => const AccountSuccess(button_label: 'Test', title: 'Tester', success_message: 'Testing',),
         "/check-ambulance_status": ( context ) => AmbulanceStatus(),
-        "/ambulances-home": ( context ) => AmbulanceHome(),
+        "/ambulance-home": ( context ) => AmbulanceHome(),
       },
-      initialRoute: "/login",
+      initialRoute: "/ambulance-home",
     );
   }
 }

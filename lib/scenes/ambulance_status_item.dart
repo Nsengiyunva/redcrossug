@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:redcross/scenes/ambulance_progress_field.dart';
 
 class AmbulanceStatusItem extends StatelessWidget {
