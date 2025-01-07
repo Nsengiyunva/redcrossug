@@ -14,6 +14,7 @@ class AmbulanceHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -29,7 +30,12 @@ class AmbulanceHome extends StatelessWidget {
               RedBtnIcon(noColor: true, label: 'Ambulance Status', onPressed: () {}, icon_name: "fire_truck", ),
               const SizedBox( height: 15 ),
               const Text( "Ambulances near me", style: TextStyle( fontSize: 20, fontWeight: FontWeight.w600 ), ),
-              const AmbulanceListItem()
+              const SizedBox( height: 15 ),
+              AmbulanceListItem(place: 'Life Link', location: 'Hospital, Naalya', time: '23 mins'),
+              const SizedBox( height: 15 ),
+              AmbulanceListItem(place: 'Frost Medical', location: 'Center, Wakiso', time: '11 mins'),
+              const SizedBox( height: 15 ),
+              AmbulanceListItem(place: 'Children', location: 'Clinic, Naalya', time: '30 mins'),
             ],
           ),
         ),
