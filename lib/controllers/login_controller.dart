@@ -13,6 +13,14 @@ class LoginController {
   TextEditingController noAmbulancesController = TextEditingController();
   TextEditingController noPatientsController = TextEditingController();
 
+  TextEditingController registerName = TextEditingController();
+  TextEditingController registerEmail = TextEditingController();
+  TextEditingController registerDOB = TextEditingController();
+  TextEditingController registerCountry = TextEditingController();
+  TextEditingController registerNIN = TextEditingController();
+  TextEditingController registerPassword = TextEditingController();
+  TextEditingController registerConfirmPassword = TextEditingController();
+
   final Future _prefs = SharedPreferences.getInstance();
 
   Future<void> loginPhoneNumber() async {

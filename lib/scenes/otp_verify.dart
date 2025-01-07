@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
 import 'package:redcross/scenes/red_btn.dart';
 
 class VerifyOtp extends StatelessWidget {
@@ -41,7 +42,9 @@ class VerifyOtp extends StatelessWidget {
                 }, // end onSubmit
             ),
             const SizedBox( height: 25 ),
-            RedBtn( label: 'Continue', onPressed: () {  }, )
+            RedBtn( label: 'Continue', onPressed: () {  
+              Get.toNamed( "/register-account" );
+            }, )
           ],
         ),
         )

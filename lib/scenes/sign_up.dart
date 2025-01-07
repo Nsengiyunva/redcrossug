@@ -21,22 +21,22 @@ class SignUp extends StatelessWidget {
           children: [
             const Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Name', textEditingController: _loginController.telephoneController,),
+            TextFieldInput( question: 'Name', textEditingController: _loginController.registerName,),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Email Address', textEditingController: _loginController.telephoneController),
+            TextFieldInput( question: 'Email Address', textEditingController: _loginController.registerEmail),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Date of Birth', textEditingController: _loginController.telephoneController),
+            TextFieldInput( question: 'Date of Birth', textEditingController: _loginController.registerDOB),
             const SizedBox( height: 10 ),
-             TextFieldInput( question: 'Country', textEditingController: _loginController.telephoneController),
+             TextFieldInput( question: 'Country', textEditingController: _loginController.registerCountry),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'NIN/Passport Number', textEditingController: _loginController.telephoneController),
+            TextFieldInput( question: 'NIN/Passport Number', textEditingController: _loginController.registerNIN ),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Password', textEditingController: _loginController.telephoneController),
+            TextFieldInput( question: 'Password', textEditingController: _loginController.registerPassword ),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Confirm Password', textEditingController: _loginController.telephoneController),
+            TextFieldInput( question: 'Confirm Password', textEditingController: _loginController.registerConfirmPassword ),
             const SizedBox( height: 10 ),
             RedBtn( label: 'Continue', onPressed: () { 
-              
+              Get.toNamed( "/account-creation-success" );
             }, )
           ],
         ),

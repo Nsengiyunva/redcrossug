@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redcross/scenes/country_picker.dart';
 import 'package:redcross/scenes/red_btn.dart';
 
@@ -21,7 +22,9 @@ class SignPhoneIn extends StatelessWidget {
               const SizedBox( height: 15 ),
               const CountryPicker(title: 'Test',),
               const SizedBox( height: 15 ),
-              RedBtn(label: "Continue", onPressed: () {  },)
+              RedBtn(label: "Continue", onPressed: () {  
+                Get.toNamed( "/enter-otp" );
+              },)
             ],
          ),
         )

@@ -8,6 +8,7 @@ import 'package:redcross/scenes/ambulance_success.dart';
 import 'package:redcross/scenes/disaster_details.dart';
 import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/home.dart';
+import 'package:redcross/scenes/otp_verify.dart';
 import 'package:redcross/scenes/payment.dart';
 import 'package:redcross/scenes/sign_in.dart';
 import 'package:redcross/scenes/sign_up.dart';
@@ -36,16 +37,17 @@ class MyApp extends StatelessWidget {
         "/disasters": ( context ) => DisasterList(),
         "/ambulance-request-form": ( context ) => AmbulanceForm(),
         "/ambulance-success-request": ( context ) => const AmbulanceSuccess(),
-        "/account-creation-success": ( context ) => AccountSuccess(button_label: 'Test', title: 'Tester', success_message: 'Testing', changeColor: false ),
+        "/account-creation-success": ( context ) => AccountSuccess(button_label: 'Continue', title: 'Welcome aboard', success_message: 'Your Account has been created successfully. Check your email for confirmation.', changeColor: false ),
         "/check-ambulance_status": ( context ) => AmbulanceStatus(),
         "/ambulance-home": ( context ) => AmbulanceHome(),
         "/disaster-details": ( context ) => const DisasterDetails(),
         "/initiate-payment": ( context ) => const Payment(),
         "/payment-successful": ( context ) => AccountSuccess(button_label: 'Close', title: 'Thank you', success_message: 'Your Donation Payment was Successful', changeColor: true ),
         "/register-account": ( context ) => SignUp(),
-        "/splash-screen": ( context ) => const SplashScreen(),
+        "/splash-screen": ( context ) => SplashScreen(),
+        "/enter-otp": ( context ) => VerifyOtp(),
       },
-      initialRoute: "/splash-screen",
+      initialRoute: "/login",
     );
   }
 }

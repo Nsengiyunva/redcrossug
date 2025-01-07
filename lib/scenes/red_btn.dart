@@ -18,7 +18,7 @@ class RedBtn extends StatelessWidget {
                 borderRadius: BorderRadius.circular( 5 )
               ),
               backgroundColor: Colors.red,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10 ),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15 ),
             ),
             child: Text( label , style: const TextStyle( fontSize: 20, color: Colors.white ) ),
           )
