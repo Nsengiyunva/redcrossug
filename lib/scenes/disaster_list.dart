@@ -14,7 +14,7 @@ class DisasterList extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title: Text(""),
+        title: const Text(""),
         leading: const BackButton() // Back button added here
       ),
       body: 
@@ -30,12 +30,12 @@ class DisasterList extends StatelessWidget {
         return SingleChildScrollView(
           child: Container( 
             padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text( 'Disasters', style: TextStyle( fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold ), ),
-                const SizedBox( height: 10 ),
-                const MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
+                Text( 'Disasters', style: TextStyle( fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold ), ),
+                SizedBox( height: 10 ),
+                MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
                 //  ListView.builder( 
                 //   itemCount: disasterController.disasters.length,
                 //   itemBuilder: ( context, index ) {

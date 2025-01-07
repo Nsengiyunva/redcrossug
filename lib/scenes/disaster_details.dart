@@ -11,7 +11,7 @@ class DisasterDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title: Text(""),
+        title: const Text(""),
         leading: const BackButton() // Back button added here
       ),
       body: SingleChildScrollView(

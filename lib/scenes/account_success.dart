@@ -9,7 +9,7 @@ class AccountSuccess extends StatelessWidget {
   final String success_message;
   final bool changeColor;
 
-  AccountSuccess({super.key, required this.button_label, required this.title, required this.success_message, required this.changeColor });
+  const AccountSuccess({super.key, required this.button_label, required this.title, required this.success_message, required this.changeColor });
 
   @override
   Widget build(BuildContext context) {

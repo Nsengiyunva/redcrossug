@@ -10,6 +10,8 @@ import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/payment.dart';
 import 'package:redcross/scenes/sign_in.dart';
+import 'package:redcross/scenes/sign_up.dart';
+import 'package:redcross/scenes/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,11 +39,13 @@ class MyApp extends StatelessWidget {
         "/account-creation-success": ( context ) => AccountSuccess(button_label: 'Test', title: 'Tester', success_message: 'Testing', changeColor: false ),
         "/check-ambulance_status": ( context ) => AmbulanceStatus(),
         "/ambulance-home": ( context ) => AmbulanceHome(),
-        "/disaster-details": ( context ) => DisasterDetails(),
-        "/initiate-payment": ( context ) => Payment(),
+        "/disaster-details": ( context ) => const DisasterDetails(),
+        "/initiate-payment": ( context ) => const Payment(),
         "/payment-successful": ( context ) => AccountSuccess(button_label: 'Close', title: 'Thank you', success_message: 'Your Donation Payment was Successful', changeColor: true ),
+        "/register-account": ( context ) => SignUp(),
+        "/splash-screen": ( context ) => const SplashScreen(),
       },
-      initialRoute: "/login",
+      initialRoute: "/splash-screen",
     );
   }
 }

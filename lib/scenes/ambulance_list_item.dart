@@ -6,7 +6,7 @@ class AmbulanceListItem extends StatelessWidget {
   final String location;
   final String time;
 
-  AmbulanceListItem({super.key, required this.place, required this.location, required this.time });
+  const AmbulanceListItem({super.key, required this.place, required this.location, required this.time });
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +39,12 @@ class AmbulanceListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding( 
-                    padding: EdgeInsets.symmetric( horizontal: 5 ),
-                    child: Text( place, style: TextStyle( fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black )) 
+                    padding: const EdgeInsets.symmetric( horizontal: 5 ),
+                    child: Text( place, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black )) 
                   ) ,
                   Padding(
-                    padding: EdgeInsets.symmetric( horizontal: 5 ), 
-                    child: Text( '$location', style: TextStyle( fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black ) ),
+                    padding: const EdgeInsets.symmetric( horizontal: 5 ), 
+                    child: Text( location, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black ) ),
                   )
                 ],
               ),
@@ -52,13 +52,13 @@ class AmbulanceListItem extends StatelessWidget {
           ),
           Row(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric( horizontal: 2 ), 
                 child: Text( 'Est:', style: TextStyle( fontSize: 16, fontWeight: FontWeight.w200, color: Colors.black ) ) 
               ),
                Padding(
-                padding: EdgeInsets.symmetric( horizontal: 2 ), 
-                child: Text( '$time', style: TextStyle( fontSize: 16, fontWeight: FontWeight.w900, color: Colors.black ) ) 
+                padding: const EdgeInsets.symmetric( horizontal: 2 ), 
+                child: Text( time, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w900, color: Colors.black ) ) 
               )
             ],
           )

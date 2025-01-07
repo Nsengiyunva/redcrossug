@@ -41,11 +41,23 @@ class SignIn extends StatelessWidget {
               ],
             ),
             const SizedBox( height: 25 ),
-            const Center(
+            Center(
               child: Column(
                 children: [
-                  Text( "Don't have an account?", style: TextStyle( fontSize:20 ), ),
-                  Text( "Register", style: TextStyle( fontSize:20 ) )
+                  const Text( "Don't have an account?", style: TextStyle( fontSize:20 ), ),
+                  // Text( "Register", style: TextStyle( fontSize:20 ) )
+                  TextButton(
+                    onPressed: () {
+                     Get.toNamed( "/register-account" );
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,         // Text color
+                      backgroundColor: Colors.white,          // Button background color
+                      padding: const EdgeInsets.all(15),           // Padding inside the button
+                      textStyle: const TextStyle( fontSize: 20 ),    // Text style
+                    ),
+                    child: const Text( "Register here" ),
+                  )
                 ],
               )
             )
