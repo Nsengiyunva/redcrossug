@@ -9,7 +9,7 @@ class FirstAidHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF6F8FC),
+      backgroundColor: const Color(0xFFF6F8FC),
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton() // Back button added here
@@ -22,8 +22,8 @@ class FirstAidHome extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text( "First Aid", style: TextStyle( fontFamily: "Inter", fontSize: 26.33, fontWeight: FontWeight.w700 ), ),
-              SizedBox( height: 30 ),
+              const Text( "First Aid", style: TextStyle( fontFamily: "Inter", fontSize: 26.33, fontWeight: FontWeight.w700 ), ),
+              const SizedBox( height: 30 ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -31,7 +31,7 @@ class FirstAidHome extends StatelessWidget {
                   IconCard(icon_name: 'hospital', label: "Request Training")
                 ],
               ),
-              SizedBox( height: 5 ),
+              const SizedBox( height: 5 ),
               RedBtn( label: 'Call for Emergency Services', onPressed: () {
                 Get.toNamed( "/first-aid-emergency-services" );
               } )

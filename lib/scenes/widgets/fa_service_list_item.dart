@@ -5,7 +5,7 @@ class FaServiceListItem extends StatelessWidget {
   final String icon_name;
   final String label;
 
-  FaServiceListItem({super.key, required this.icon_name, required this.label });
+  const FaServiceListItem({super.key, required this.icon_name, required this.label });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class FaServiceListItem extends StatelessWidget {
       },
       child: Container(
       height: 61,
-      padding: EdgeInsets.symmetric( horizontal: 10 ),
+      padding: const EdgeInsets.symmetric( horizontal: 10 ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20)
@@ -38,20 +38,20 @@ class FaServiceListItem extends StatelessWidget {
             height: 42,
             width: 42,
             decoration: BoxDecoration(
-              color: Color(0xFFFFE3E1),
+              color: const Color(0xFFFFE3E1),
               borderRadius: BorderRadius.circular( 10 )
             ),
             child: Center(
               child: Icon(
                 iconData,
-                color: Color(0xFFED1C24),
+                color: const Color(0xFFED1C24),
                 size: 32.39,
               )
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric( horizontal: 15 ),
-            child: Text( "$label", style: TextStyle( fontSize: 17.74, fontFamily: "Inter", fontWeight: FontWeight.w500 ) )
+            padding: const EdgeInsets.symmetric( horizontal: 15 ),
+            child: Text( label, style: const TextStyle( fontSize: 17.74, fontFamily: "Inter", fontWeight: FontWeight.w500 ) )
           )
         ],
       ),

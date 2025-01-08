@@ -4,15 +4,39 @@ import 'package:redcross/controllers/disasters_list_controller.dart';
 import 'package:redcross/scenes/disaster_list_item.dart';
 import 'package:redcross/scenes/menu_list_items.dart';
 
+class Item {
+  final String name;
+  final double price;
+  final String description;
+
+  Item({required this.name, required this.price, required this.description});
+}
+
 class DisasterList extends StatelessWidget {
   DisasterList({super.key});
 
   final DisastersListController disasterController = Get.put( DisastersListController() );
 
+  final List<Item> items = [
+    Item(name: 'Apple', price: 1.99, description: 'A red fruit'),
+    Item(name: 'Banana', price: 0.99, description: 'A yellow fruit'),
+    Item(name: 'Cherry', price: 2.49, description: 'A small red fruit'),
+    Item(name: 'Mango', price: 1.49, description: 'A tropical fruit'),
+    Item(name: 'Orange', price: 1.29, description: 'A citrus fruit'),
+  ];
+
+  String truncateString(String text, int maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    } else {
+      return '${text.substring(0, maxLength)}...';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Color(0xFFF6F8FC),
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton() // Back button added here
@@ -24,33 +48,71 @@ class DisasterList extends StatelessWidget {
             child: CircularProgressIndicator(), 
           );
         }
- 
-        // print( "here ${disasterController.disasters.length}" );
 
-        return SingleChildScrollView(
-          child: Container( 
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text( 'Disasters', style: TextStyle( fontSize: 28, color: Colors.black, fontWeight: FontWeight.bold ), ),
-                SizedBox( height: 10 ),
-                MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
-                //  ListView.builder( 
-                //   itemCount: disasterController.disasters.length,
-                //   itemBuilder: ( context, index ) {
-                //     return const Text( "Test 1 2 3..." );
-                //   },
-                //  ),
-                SizedBox( height: 10 ),
-                DisasterListItem(title: 'Floods', location: "Kasese", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '15th Nov 2024' ),
-                SizedBox(height: 10),
-                DisasterListItem(title: 'Chorela', location: "Masindi", subtitle: 'Heavy rainfall has caused severe flooding resulting, in widespread destruction', date: '16th Nov 2024')
-              ],
-            ),
+        if( disasterController.disasters.length == 0 ) {
+          return const Center(
+            child: Center(child: Text('No Disasters were found.') ) 
+          );
+        }
+
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(padding: EdgeInsets.symmetric( horizontal: 15 ),
+                child: Text( 'Disasters', style: TextStyle( fontFamily: "Inter", fontSize: 26.33, color: Color(0xFF000000), fontWeight: FontWeight.w700 ), )
+              ),
+              SizedBox( height: 10 ),
+              MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
+              SizedBox( height: 10 ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric( horizontal: 10 ),
+                  child: ListView.builder(
+                  itemCount: disasterController.disasters.length,
+                  itemBuilder: (context, index) {
+                    var item = disasterController.disasters![index];
+                    return DisasterListItem(
+                      title: truncateString( item['name'], 20 ), 
+                      subtitle: truncateString( item['summary'], 80 ), 
+                      date: item['reported_date'], 
+                      location: item['district'],
+                      photo: item['banner_photo']
+                    );
+                  },
+                ) )
+              )
+            ],
           ),
         );
       })
+    );
+  }
+}
+
+
+class CustomListItem extends StatelessWidget {
+  final Item item;
+
+  const CustomListItem({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(10),
+      elevation: 4,
+      child: ListTile(
+        leading: const Icon(Icons.shopping_cart, color: Colors.green),
+        title: Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text('Price: \$${item.price.toStringAsFixed(2)}\n${item.description}'),
+        trailing: const Icon(Icons.arrow_forward_ios),
+        onTap: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Selected: ${item.name}')),
+          );
+        },
+      ),
     );
   }
 }

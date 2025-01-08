@@ -20,7 +20,7 @@ class RedBtn extends StatelessWidget {
               shape: RoundedRectangleBorder(
               borderRadius: squared != null ? BorderRadius.circular( 8 ) :  BorderRadius.circular( 15 )
             ),
-            backgroundColor:  Color(0xFFED1C24),
+            backgroundColor:  const Color(0xFFED1C24),
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12 ),
           ),
             child: Text( label, style: const TextStyle( fontWeight: FontWeight.w600, fontFamily: "Inter", fontSize: 14, color: Colors.white ) ),

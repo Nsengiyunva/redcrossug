@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SignPhoneIn()),
+        MaterialPageRoute(builder: (context) => const SignPhoneIn()),
       );
     });
   }

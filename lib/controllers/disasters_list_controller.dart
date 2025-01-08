@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-// import 'package:getx_tutorials/models/opensea_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,9 +32,8 @@ class DisastersListController extends GetxController {
       if (response.statusCode == 200) {
         ///data successfully
         var result = jsonDecode(response.body);
-        // print( result );
+        // print( result["data"] );
         disasters.value = result["data"];
-        // openseaModel = OpenseaModel.fromJson(result);
       } else {
         print('error fetching data');
       }
