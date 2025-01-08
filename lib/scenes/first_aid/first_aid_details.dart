@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/red_btn.dart';
 
 class FirstAidDetails extends StatelessWidget {
   const FirstAidDetails({super.key});
@@ -8,8 +9,8 @@ class FirstAidDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFF6F8FC),
       appBar: AppBar(
-        title: const Text("Bleeding / Cut", style: TextStyle( fontSize: 16, fontFamily: "Inter", fontWeight: FontWeight.w600, color: Color(0xFF000000) )),
-        leading: const BackButton() // Back button added here
+        title: Text("Bleeding / Cut", style: TextStyle( fontSize: 16, fontFamily: "Inter", fontWeight: FontWeight.w600, color: Color(0xFF000000) )),
+        leading: BackButton() // Back button added here
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -24,10 +25,27 @@ class FirstAidDetails extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Padding(padding: EdgeInsets.symmetric( vertical: 10 ),
-                child: Image.asset( 'assets/images/fa_kit.png', width: 168, height: 130 )
-               ),
-
+                SizedBox( height: 15 ),
+                Image.asset( 'assets/images/fa_kit.png', width: 168, height: 130 ),
+                SizedBox( height: 30 ),
+                Column(
+                  children: [
+                    Text( "Find the First Aid Kit:", style: TextStyle(
+                      fontSize: 11.37,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.bold
+                    ) ),
+                    Text( "Locate the kit and make sure it contains the essentials.",style: TextStyle(
+                      fontSize: 11.37,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.w700
+                    ), ),
+                  ],
+                ),
+               SizedBox( height: 30 ),
+               Image.asset( 'assets/images/fa_frame.png', width: 255, height: 113.99 ),
+               SizedBox( height: 15 ),
+               RedBtn(label: 'Next', onPressed: () {}, squared: true, )
               ],
             ),
           )
