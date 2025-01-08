@@ -25,7 +25,7 @@ class _MyWidgetState extends State<PickerCountry> {
           title: const Text(""),
           leading: const BackButton() // Back button added here
         ),
-        body:  SingleChildScrollView(
+        body:  const SingleChildScrollView(
           child: Text( "Sira" ),
         ) 
       );

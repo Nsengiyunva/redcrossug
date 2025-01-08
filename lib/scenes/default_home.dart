@@ -49,7 +49,9 @@ class DefaultHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CardBoard( title: "Blood Donation", icon_name: "blood_icon", onPressed: () {}  ),
-                  CardBoard( title: "First Aid", icon_name: "hospital", onPressed: () {} ),
+                  CardBoard( title: "First Aid", icon_name: "hospital", onPressed: () {
+                    Get.toNamed( "/first-aid-home" );
+                  } ),
                 ],
                ),
                Row(

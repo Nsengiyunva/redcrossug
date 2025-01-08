@@ -7,6 +7,9 @@ import 'package:redcross/scenes/ambulance_status.dart';
 import 'package:redcross/scenes/ambulance_success.dart';
 import 'package:redcross/scenes/disaster_details.dart';
 import 'package:redcross/scenes/disaster_list.dart';
+import 'package:redcross/scenes/first_aid/first_aid_details.dart';
+import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
+import 'package:redcross/scenes/first_aid/first_aid_home.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/otp_verify.dart';
 import 'package:redcross/scenes/payment.dart';
@@ -44,10 +47,13 @@ class MyApp extends StatelessWidget {
         "/initiate-payment": ( context ) => const Payment(),
         "/payment-successful": ( context ) => const AccountSuccess(button_label: 'Close', title: 'Thank you', success_message: 'Your Donation Payment was Successful', changeColor: true ),
         "/register-account": ( context ) => SignUp(),
-        "/splash-screen": ( context ) => SplashScreen(),
+        "/splash-screen": ( context ) => const SplashScreen(),
         "/enter-otp": ( context ) => const VerifyOtp(),
+        "/first-aid-home": ( context ) => const FirstAidHome(),
+        "/first-aid-emergency-services": ( context ) => const FirstAidEmergencies(),
+        "/first-aid-emergency-details": ( context ) => const FirstAidDetails(),
       },
-      initialRoute: "/splash-screen",
+      initialRoute: "/login",
     );
   }
 }

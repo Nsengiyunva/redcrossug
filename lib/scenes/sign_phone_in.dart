@@ -34,6 +34,8 @@ import 'package:flutter/material.dart';
 // }
 
 class SignPhoneIn extends StatefulWidget {
+  const SignPhoneIn({super.key});
+
   @override
   _CustomFlagTextFieldState createState() => _CustomFlagTextFieldState();
 }
@@ -50,17 +52,17 @@ class _CustomFlagTextFieldState extends State<SignPhoneIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Custom TextField with Flags')),
+      appBar: AppBar(title: const Text('Custom TextField with Flags')),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Enter phone number',
               prefixIcon: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: _selectedCountry,
-                  icon: Icon(Icons.arrow_drop_down),
+                  icon: const Icon(Icons.arrow_drop_down),
                   items: countryFlags.entries.map((entry) {
                     return DropdownMenuItem<String>(
                       value: entry.key,

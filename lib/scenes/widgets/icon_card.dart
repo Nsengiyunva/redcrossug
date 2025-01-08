@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+
+class IconCard extends StatelessWidget {
+  final String icon_name;
+  final String label;
+
+  IconCard({super.key, required this.icon_name, required this.label });
+
+  @override
+  Widget build(BuildContext context) {
+    final iconMap = <String, IconData>{
+      'add': Icons.add_a_photo_sharp,
+      'hospital': Icons.location_city,
+    };
+
+    final iconData = iconMap[icon_name] ?? Icons.error;
+
+    return Container(
+      width: 180,
+      height: 83,
+      decoration: BoxDecoration(
+        color: Color(0xFFFFDCDC),
+        borderRadius: BorderRadius.circular( 15 )
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              iconData,
+              color: Color(0xFFED1C24),
+              size: 32.39,
+            ),
+            Padding(padding: EdgeInsets.symmetric( vertical: 5 ),
+            child: Text( "$label", style: TextStyle( fontSize: 12, fontWeight: FontWeight.w700, fontFamily: "Inter", color: Color(0xFFED1C24)  ) )
+            )
+          ],
+        ),
+      )
+    );
+  }
+}
