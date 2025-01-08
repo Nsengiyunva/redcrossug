@@ -10,7 +10,7 @@ class MenuListItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric( horizontal: 15.0, vertical: 5.0 ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Color(0xFFED1C24),
@@ -21,7 +21,18 @@ class MenuListItems extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text( first_title, style: const TextStyle( fontSize: 13.27, color: Color(0xFFE30000), fontFamily: "Inter", fontWeight: FontWeight.w600 ) ),
+          Container(
+            width: 150,
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Color(0xFFED1C24,),
+                  width: 2.0
+                )
+              )
+            ),
+            child: Text( first_title, style: const TextStyle( fontSize: 13.27, color: Color(0xFFE30000), fontFamily: "Inter", fontWeight: FontWeight.w600 ) ),
+          ),
           Text( second_title, style: const TextStyle( fontSize: 13.27, color: Color(0xFF7E848A), fontFamily: "Inter", fontWeight: FontWeight.w600 ))
         ],
       ),

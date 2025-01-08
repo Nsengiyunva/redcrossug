@@ -14,7 +14,7 @@ class DisasterListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed( "/disaster-details" );
+        Get.toNamed( "/disaster-details", arguments: {'name': 'John Doe'} );
       },
       child: Container(
         height: 97,
