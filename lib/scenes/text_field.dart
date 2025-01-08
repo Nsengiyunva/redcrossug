@@ -4,7 +4,7 @@ class TextFieldInput extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
 
-  TextFieldInput({super.key,  required this.question, required this.textEditingController } );
+  const TextFieldInput({super.key,  required this.question, required this.textEditingController } );
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +26,15 @@ class TextFieldInput extends StatelessWidget {
 
               enabledBorder: OutlineInputBorder(  // Border when not focused
                 borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(color: Color(0xFFD2D9DE), width: 2),
+                borderSide: const BorderSide(color: Color(0xFFD2D9DE), width: 2),
               ),
               focusedBorder: OutlineInputBorder(  // Border when focused
                 borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(color: Color(0xFFED1C24), width: 2),
+                borderSide: const BorderSide(color: Color(0xFFED1C24), width: 2),
               ),
               errorBorder: OutlineInputBorder(   // Border when error occurs
                 borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(color: Color(0xFFED1C24), width: 2),
+                borderSide: const BorderSide(color: Color(0xFFED1C24), width: 2),
               ),
             )
            )

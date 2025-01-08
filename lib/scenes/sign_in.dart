@@ -57,7 +57,7 @@ class SignIn extends StatelessWidget {
                     // padding: const EdgeInsets.all(15),
                     // textStyle: const TextStyle( fontSize: 20 ),
                   ),
-                  child: Text( "Forgot Password", style: TextStyle( fontWeight: FontWeight.w400, fontFamily: "Inter", fontSize: 12.8, color: Color(0xFFED1C24), decoration: TextDecoration.underline, decorationColor: Color(0xFFED1C24) ) ),
+                  child: const Text( "Forgot Password", style: TextStyle( fontWeight: FontWeight.w400, fontFamily: "Inter", fontSize: 12.8, color: Color(0xFFED1C24), decoration: TextDecoration.underline, decorationColor: Color(0xFFED1C24) ) ),
                 )
               ],
             ),
@@ -77,7 +77,7 @@ class SignIn extends StatelessWidget {
                       padding: const EdgeInsets.all(15),           // Padding inside the button
                       textStyle: const TextStyle( fontSize: 20 ),    // Text style
                     ),
-                    child: Text( "Register", style: TextStyle( decoration: TextDecoration.underline, decorationColor: Color(0xFF545454), fontFamily: "Inter", fontSize: 17, color: Color(0xFF7D8FAB) ) ),
+                    child: const Text( "Register", style: TextStyle( decoration: TextDecoration.underline, decorationColor: Color(0xFF545454), fontFamily: "Inter", fontSize: 17, color: Color(0xFF7D8FAB) ) ),
                   )
                 ],
               )

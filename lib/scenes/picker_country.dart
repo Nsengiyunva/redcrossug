@@ -9,7 +9,7 @@ class PickerCountry extends StatefulWidget {
 
 class _MyWidgetState extends State<PickerCountry> {
 
-  String _selectedCountry = 'US'; // Default country code
+  final String _selectedCountry = 'US'; // Default country code
   final Map<String, String> countryFlags = {
     'US': '🇺🇸',
     'FR': '🇫🇷',
@@ -20,10 +20,14 @@ class _MyWidgetState extends State<PickerCountry> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(16),
-          child: Text( "Testing" ),
-      ),
-    );
+        backgroundColor: Colors.grey.shade200,
+        appBar: AppBar(
+          title: const Text(""),
+          leading: const BackButton() // Back button added here
+        ),
+        body:  SingleChildScrollView(
+          child: Text( "Sira" ),
+        ) 
+      );
   }
 }

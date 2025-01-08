@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:redcross/scenes/sign_phone_in.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -14,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Delay for 3 seconds before navigating to the next screen
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SignPhoneIn()),
