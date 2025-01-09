@@ -36,7 +36,7 @@ class DisasterList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF6F8FC),
+      backgroundColor: const Color(0xFFF6F8FC),
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton() // Back button added here
@@ -49,31 +49,32 @@ class DisasterList extends StatelessWidget {
           );
         }
 
-        if( disasterController.disasters.length == 0 ) {
+        if( disasterController.disasters.isEmpty ) {
           return const Center(
             child: Center(child: Text('No Disasters were found.') ) 
           );
         }
 
         return Container(
-          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20  ),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20  ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.symmetric( horizontal: 15 ),
+              const Padding(padding: EdgeInsets.symmetric( horizontal: 15 ),
                 child: Text( 'Disasters', style: TextStyle( fontFamily: "Inter", fontSize: 26.33, color: Color(0xFF000000), fontWeight: FontWeight.w700 ), )
               ),
-              SizedBox( height: 10 ),
-              MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
-              SizedBox( height: 10 ),
+              const SizedBox( height: 10 ),
+              const MenuListItems( first_title: "Active Disasters", second_title: "Preparedness", ),
+              const SizedBox( height: 10 ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric( horizontal: 10 ),
+                  padding: const EdgeInsets.symmetric( horizontal: 10 ),
                   child: ListView.builder(
                   itemCount: disasterController.disasters.length,
                   itemBuilder: (context, index) {
-                    var item = disasterController.disasters![index];
+                    var item = disasterController.disasters[index];
                     return DisasterListItem(
+                      id: item['id'],
                       title: truncateString( item['name'], 20 ), 
                       subtitle: truncateString( item['summary'], 80 ), 
                       date: item['reported_date'], 

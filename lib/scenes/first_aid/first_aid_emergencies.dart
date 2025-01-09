@@ -17,22 +17,22 @@ class FirstAidEmergencies extends StatelessWidget {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(vertical: 30.0),
           padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20 ),
-          child: Column(
+          child: const Column(
             children: [
               FaServiceListItem(icon_name: 'alarm', label: 'Emergency',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'chest', label: 'Chest Discomfort',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'choking', label: 'Choking',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'radioactive', label: 'Poisoning',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'radioactive', label: 'Stroke',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'accident', label: 'General Accident',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'radioactive', label: 'Unconsciousness',),
-              const SizedBox( height: 15 ),
+              SizedBox( height: 15 ),
               FaServiceListItem(icon_name: 'bleeding', label: 'Bleeding/Cut',)
             ],
           )

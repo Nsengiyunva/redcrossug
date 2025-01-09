@@ -24,7 +24,7 @@ class FirstAidHome extends StatelessWidget {
             children: [
               const Text( "First Aid", style: TextStyle( fontFamily: "Inter", fontSize: 26.33, fontWeight: FontWeight.w700 ), ),
               const SizedBox( height: 30 ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconCard(icon_name: 'add', label: "First Aid Guide" ),

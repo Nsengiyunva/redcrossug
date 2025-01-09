@@ -9,7 +9,7 @@ class MenuListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric( horizontal: 15.0, vertical: 5.0 ),
+      margin: const EdgeInsets.symmetric( horizontal: 15.0, vertical: 5.0 ),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
