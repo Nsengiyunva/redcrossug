@@ -144,6 +144,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   Map<String, dynamic>? disaster_details;
   bool isLoading = true;
 
+  @override
   void initState() {
     super.initState();
     _fetchDisasterDetails();
@@ -182,21 +183,21 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   Widget build(BuildContext context) {
     if( isLoading ) {
       return Container(
-        child: Center(child: CircularProgressIndicator()),
+        child: const Center(child: CircularProgressIndicator()),
       );
     }
 
     if( disaster_details == null ) {
       return Container(
-        child: Center(child: Text('No Data Found About this Disaster!')),
+        child: const Center(child: Text('No Data Found About this Disaster!')),
       );
     }
 
     return Scaffold(
-      backgroundColor:Color(0xFFF6F8FC),
+      backgroundColor:const Color(0xFFF6F8FC),
       appBar: AppBar(
-        title: Text(""),
-        leading: BackButton() // Back button added here
+        title: const Text(""),
+        leading: const BackButton() // Back button added here
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -221,14 +222,14 @@ class _DisasterDetailsState extends State<DisasterDetails> {
             ),
             const SizedBox( height: 5 ),
             Padding(
-              padding: EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
-              child: Text( "${disaster_details!['name']}", style: TextStyle( fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black ), ),
+              padding: const EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
+              child: Text( "${disaster_details!['name']}", style: const TextStyle( fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black ), ),
             ),
             const SizedBox( height: 10 ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 20 ),
+              padding: const EdgeInsets.symmetric( horizontal: 20 ),
               child: Text( "${disaster_details!['summary']}",
-              style: TextStyle( fontSize: 14, color: Colors.black ), ),
+              style: const TextStyle( fontSize: 14, color: Colors.black ), ),
             ),
             const SizedBox( height: 25 ),
             const Padding(
