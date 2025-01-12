@@ -182,16 +182,27 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   @override
   Widget build(BuildContext context) {
     if( isLoading ) {
-      return Container(
-        child: const Center(child: CircularProgressIndicator()),
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            child: const Center(child: CircularProgressIndicator()),
+          ),
+        ),
       );
     }
 
     if( disaster_details == null ) {
-      return Container(
-        child: const Center(child: Text('No Data Found About this Disaster!')),
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            child: const Center(child: Text('No Data Found About this Disaster!')),
+          ),
+        ),
       );
     }
+
+
+    print( disaster_details );
 
     return Scaffold(
       backgroundColor:const Color(0xFFF6F8FC),
@@ -218,18 +229,48 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                     ),
                   ),
                 ),
+                Container(
+                  width: 300,
+                  height: 250,
+                  alignment: Alignment.bottomLeft,
+                  child: Container(
+                    width: 80,
+                    height: 30,
+                    padding: EdgeInsets.symmetric( horizontal: 1, vertical: 1 ),
+                    margin: EdgeInsets.symmetric( horizontal: 10, vertical: 25 ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFED1C24),
+                      borderRadius: BorderRadius.circular( 5 )
+
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.circle_rounded,
+                          color: Color(0xFFFFFFFF),
+                          size: 6,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only( left: 5 ),
+                          child: Text( 'Disaster', style: TextStyle( fontSize: 11.54, fontFamily: "Inter", fontWeight: FontWeight.w600, color: Color(0xFFFFFFFF) ) ),
+                        )
+                      ],
+                    )
+                  ),
+                ),
               ],
             ),
             const SizedBox( height: 5 ),
             Padding(
               padding: const EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
-              child: Text( "${disaster_details!['name']}", style: const TextStyle( fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black ), ),
+              child: Text( "${disaster_details!['name']}", style: const TextStyle( fontSize: 26.33, fontWeight: FontWeight.w700, color: Color(0xFF000000) ), ),
             ),
             const SizedBox( height: 10 ),
             Padding(
               padding: const EdgeInsets.symmetric( horizontal: 20 ),
               child: Text( "${disaster_details!['summary']}",
-              style: const TextStyle( fontSize: 14, color: Colors.black ), ),
+              style: const TextStyle( fontFamily: "Inter", fontSize: 11.37, fontWeight: FontWeight.w400, color: Color(0xFF000000) ), ),
             ),
             const SizedBox( height: 25 ),
             const Padding(
@@ -240,19 +281,18 @@ class _DisasterDetailsState extends State<DisasterDetails> {
             Padding(
               padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 20 ),
               child: ElevatedButton(
-                child: const Text("Donate"),
+                child: Text( "Donate" ),
                 onPressed: () {
-
                  showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                     ),
                     builder: (BuildContext context) {
                       return Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(20),
-                        height: 500, // Adjust height if needed
+                        padding: EdgeInsets.all(20),
+                        height: 500,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

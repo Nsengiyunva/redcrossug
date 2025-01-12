@@ -22,14 +22,18 @@ class LoginController {
   TextEditingController registerConfirmPassword = TextEditingController();
 
   final Future _prefs = SharedPreferences.getInstance();
+  var isLoading = false.obs;
 
   Future<void> loginPhoneNumber() async {
     const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
+
+    isLoading.value = true;
     
     final Map<String, dynamic> requestBody = {
       "phone_no": "+256775625741",
       "password": "#Satan2023#"
     };
+    
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -66,46 +70,5 @@ class LoginController {
       //   responseMessage = 'Exception: $e';
       // });
     }
-  }
-
-
-  Future loginPhoneNumber2() async {
-     final url = Uri.parse("https://urcs-api.taufeeq.dev/api/auth/login");
-
-    Map<String, String> requestBody = {
-      "phone_no": "+256775625741",
-      "password": "#Satan2023#"
-    };
-
-    print( 'logging...' );
-
-    // try {
-    //   final response = await http.post(
-    //     url,
-    //     headers: {
-    //       "Content-Type": "application/json", 
-    //       "X-Requested-With": "XMLHttpRequest"
-    //     },
-    //     body: jsonEncode(requestBody), // Encoding the body
-    //   );
-      
-    //   print( response.body );
-    //   // Check the response status
-    //   if (response.statusCode == 200) {
-    //     // print("Success: ${response.body}");
-    //     final json = jsonDecode(response.body);
-    //     var token = json['token'];
-
-    //     final SharedPreferences? prefs = await _prefs;
-    //     await prefs?.setString('token', token);
-    //     // await prefs?.setString('user', user );
-        
-    //     Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
-    //   } else {
-    //     print("Failed: ${response.statusCode}");
-    //   }
-    // } catch (e) {
-    //   print("Error message: $e");
-    // }
   }
 }
