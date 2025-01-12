@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/scenes/password_field.dart';
 import 'package:redcross/scenes/red_btn.dart';
 import 'package:redcross/scenes/text_field.dart';
 
@@ -26,9 +27,15 @@ class SignIn extends StatelessWidget {
                 style: TextStyle( fontFamily: "Inter", fontSize: 16.99, color: Color(0xFF7D8FAB) ) )  ,
             ),
             const SizedBox( height: 25 ),
-            TextFieldInput(question: 'Phone Number', textEditingController: _loginController.telephoneController,),
+            TextFieldInput(
+              question: 'Phone Number', 
+              textEditingController: _loginController.telephoneController,
+            ),
             const SizedBox( height: 25 ),
-            TextFieldInput(question: 'Password', textEditingController: _loginController.passwordController ),
+            PasswordField( 
+              question: 'Password', 
+              textEditingController: _loginController.passwordController 
+            ),
             const SizedBox( height: 10 ),
             RedBtn( label: 'Continue', onPressed: () => {
               _loginController.loginPhoneNumber()

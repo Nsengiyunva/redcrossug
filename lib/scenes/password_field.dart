@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TextFieldInput extends StatelessWidget {
+class PasswordField extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
 
-  TextFieldInput({ 
+  PasswordField({ 
     super.key, 
     required this.question, 
     required this.textEditingController
@@ -18,9 +18,13 @@ class TextFieldInput extends StatelessWidget {
           SizedBox(
             height: 49,
             child: TextField(
+            obscureText: true,
             controller: textEditingController,
             style: TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
             decoration: InputDecoration(
+              suffixIcon: Icon(
+                Icons.visibility_off
+              ),
               alignLabelWithHint: true,
               fillColor: Colors.white54,
               labelText: question,
