@@ -14,15 +14,21 @@ class PriceTag extends StatelessWidget {
       margin: const EdgeInsets.symmetric( vertical: 15, horizontal: 10 ),
       padding: const EdgeInsets.all( 10 ),
       decoration: BoxDecoration(
-        color: active ? const Color.fromARGB(255, 238, 222, 199) : Colors.white70,
-        border: Border.all(   
-          color: Colors.black12,
+        color: active ? Color(0xFFFFE9D9) : Color(0xFFFFFFFF),
+        border: Border.all(  
+          color: Color(0xFFEAEAEA),
           width: 2
         ),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
-        child: Text( label, style: TextStyle( fontSize: 18, fontWeight: FontWeight.w500, color: active ? Colors.red : Colors.black ) ),
+        child: Text( label, 
+        style: TextStyle( 
+          fontFamily: "Inter",
+          fontSize: 16.85, 
+          fontWeight: FontWeight.w600, 
+          color: active ? Color(0xFFED1C24) : Color(0xFF807B77) 
+          ) ),
       ),
     );
   }

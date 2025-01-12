@@ -1,131 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:redcross/scenes/donation_progress.dart';
-// import 'package:redcross/scenes/price_tag.dart';
-
-// class DisasterDetails extends StatelessWidget {
-//   DisasterDetails({super.key});
-
-//   final data = Get.arguments;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     print( data );
-    
-//     return Scaffold(
-//       backgroundColor:Color(0xFFF6F8FC),
-//       appBar: AppBar(
-//         title: Text(""),
-//         leading: BackButton() // Back button added here
-//       ),
-//       body: SingleChildScrollView(
-//         child: Container(
-//           width: double.infinity,
-//           margin: const EdgeInsets.symmetric(vertical: 15.0),
-//           padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//              Stack(
-//               children: [
-//                 Container(
-//                   height: 250,
-//                   decoration: const BoxDecoration(
-//                       image: DecorationImage(
-//                       image: ExactAssetImage("assets/images/kasese_floods.jpg"),
-//                       fit: BoxFit.cover,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox( height: 5 ),
-//             const Padding(
-//               padding: EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
-//               child: Text( "Kasese Floods", style: TextStyle( fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black ), ),
-//             ),
-//             const SizedBox( height: 10 ),
-//             const Padding(
-//               padding: EdgeInsets.symmetric( horizontal: 20 ),
-//               child: Text( "Heavy rainfall has caused severe flooding, resulting in widespread destruction. Homes, bridges, and roads have been damaged, and many families have been displaced. Emergency teams are on the ground providing aid, but additional support is urgently needed.",
-//               style: TextStyle( fontSize: 14, color: Colors.black ), ),
-//             ),
-//             const SizedBox( height: 25 ),
-//             const Padding(
-//               padding: EdgeInsets.symmetric( horizontal: 20.0 ),
-//               child: DonationProgress(),
-//             ),
-//             const SizedBox( height: 25 ),
-//             Padding(
-//               padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 20 ),
-//               child: ElevatedButton(
-//                 child: const Text("Donate"),
-//                 onPressed: () {
-
-//                  showModalBottomSheet(
-//                     context: context,
-//                     shape: const RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-//                     ),
-//                     builder: (BuildContext context) {
-//                       return Container(
-//                         width: double.infinity,
-//                         padding: const EdgeInsets.all(20),
-//                         height: 500, // Adjust height if needed
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             const Center(
-//                               child: Text( "Donation Amount", style: TextStyle( fontSize: 20, color: Colors.black, fontWeight: FontWeight.w500 ), ),
-//                             ),
-//                             const SizedBox(height: 20 ),
-//                             const Center(
-//                               child: Text( "Enter Price Manually", style: TextStyle( fontSize: 16, color: Colors.grey )  ),
-//                             ),
-//                             const Row(
-//                               children: [
-//                                 PriceTag( label: '100K', active: false ),
-//                                 PriceTag( label: '250K', active: true ),
-//                                 PriceTag( label: '350K', active: false),
-//                               ],
-//                             ),
-//                             const SizedBox(height: 10 ),
-//                             const Row(
-//                               children: [
-//                                 PriceTag( label: '500K', active: false ),
-//                                 PriceTag( label: '750K', active: false),
-//                                 PriceTag( label: '1 million', active: false),
-//                               ],
-//                             ),
-//                             const Spacer(),
-//                             ElevatedButton(
-//                               onPressed: () {
-//                                 Navigator.of(context).pop();
-//                                 Get.toNamed( "/initiate-payment" ); // Close the modal
-//                               },
-//                               child: const Text('Pay'),
-//                             ),
-//                           ],
-//                         ),
-//                       );
-//                     },
-//                   );
-
-
-//                 },
-//               ),
-//             )
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:redcross/scenes/price_tag.dart';
+import 'package:redcross/scenes/red_btn.dart';
+import 'package:redcross/scenes/widgets/link_field.dart';
+import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -166,7 +45,6 @@ class _DisasterDetailsState extends State<DisasterDetails> {
           } );
 
     if (response.statusCode == 200) {
-      // print( response.body );
       setState(() {
         disaster_details = json.decode(response.body);
         isLoading = false;
@@ -202,7 +80,8 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     }
 
 
-    print( disaster_details );
+    // print( disaster_details );
+    var disaster_image = disaster_details!['banner_photo'];
 
     return Scaffold(
       backgroundColor:const Color(0xFFF6F8FC),
@@ -220,89 +99,132 @@ class _DisasterDetailsState extends State<DisasterDetails> {
             children: [
              Stack(
               children: [
-                Container(
-                  height: 250,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                      image: ExactAssetImage("assets/images/kasese_floods.jpg"),
-                      fit: BoxFit.cover,
+                  Container(
+                    height: 250,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                        image: ExactAssetImage("assets/images/kasese_floods.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                      // image: DecorationImage(
+                      //   image: NetworkImage( "https://urcs-api.taufeeq.dev/storage/disasters/0SRTnGIQ1MEUhGJSn9JrVzFDzQFqjv0gsQwfBKdB.jpg" ),
+                      //   fit: BoxFit.cover,
+                      // ),
                     ),
                   ),
-                ),
-                Container(
-                  width: 300,
-                  height: 250,
-                  alignment: Alignment.bottomLeft,
-                  child: Container(
-                    width: 80,
-                    height: 30,
-                    padding: EdgeInsets.symmetric( horizontal: 1, vertical: 1 ),
-                    margin: EdgeInsets.symmetric( horizontal: 10, vertical: 25 ),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFED1C24),
-                      borderRadius: BorderRadius.circular( 5 )
+                  Container(
+                    width: 300,
+                    height: 250,
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                      width: 80,
+                      height: 30,
+                      padding: const EdgeInsets.symmetric( horizontal: 1, vertical: 1 ),
+                      margin: const EdgeInsets.symmetric( horizontal: 10, vertical: 25 ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFED1C24),
+                        borderRadius: BorderRadius.circular( 5 )
 
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.circle_rounded,
+                            color: Color(0xFFFFFFFF),
+                            size: 6,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only( left: 5 ),
+                            child: Text( 'Disaster', style: TextStyle( fontSize: 11.54, fontFamily: "Inter", fontWeight: FontWeight.w600, color: Color(0xFFFFFFFF) ) ),
+                          )
+                        ],
+                      )
                     ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.circle_rounded,
-                          color: Color(0xFFFFFFFF),
-                          size: 6,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only( left: 5 ),
-                          child: Text( 'Disaster', style: TextStyle( fontSize: 11.54, fontFamily: "Inter", fontWeight: FontWeight.w600, color: Color(0xFFFFFFFF) ) ),
-                        )
-                      ],
-                    )
                   ),
-                ),
-              ],
-            ),
-            const SizedBox( height: 5 ),
-            Padding(
-              padding: const EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
-              child: Text( "${disaster_details!['name']}", style: const TextStyle( fontSize: 26.33, fontWeight: FontWeight.w700, color: Color(0xFF000000) ), ),
-            ),
-            const SizedBox( height: 10 ),
-            Padding(
-              padding: const EdgeInsets.symmetric( horizontal: 20 ),
-              child: Text( "${disaster_details!['summary']}",
-              style: const TextStyle( fontFamily: "Inter", fontSize: 11.37, fontWeight: FontWeight.w400, color: Color(0xFF000000) ), ),
-            ),
-            const SizedBox( height: 25 ),
-            const Padding(
+                ],
+              ),
+              SizedBox( height: 5 ),
+              Padding(
+                padding: const EdgeInsets.symmetric( vertical: 5, horizontal: 10 ),
+                child: Text( "${disaster_details!['name']}", style: TextStyle( fontFamily: "Inter", fontSize: 26.33, fontWeight: FontWeight.w700, color: Color(0xFF000000) ), ),
+              ),
+              SizedBox( height: 10 ),
+              Padding(
+                padding: const EdgeInsets.symmetric( horizontal: 10 ),
+                child: Text( "${disaster_details!['summary']}",
+                style: TextStyle( fontFamily: "Inter", fontSize: 11.37, fontWeight: FontWeight.w400, color: Color(0xFF000000) ), ),
+              ),
+              SizedBox( height: 10 ),
+              TagItem( label: "Emergency Support" ),
+              SizedBox( height: 10 ),
+              LinkField(label: 'Nearby Hospitals'),
+              SizedBox( height: 10 ),
+              LinkField(label: 'Local Shelters'),
+              SizedBox( height: 10 ),
+              LinkField(label: 'Food & Clothing Distribution Points'),
+              SizedBox( height: 20 ),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric( horizontal: 15 ), 
+                    child: Text( "Fatalities:" )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric( horizontal: 5 ),
+                    child: Text( disaster_details!['fatalities'].toString() ?? "0" )
+                  )
+                ],
+              ),
+              SizedBox( height: 10 ),
+              Padding(
               padding: EdgeInsets.symmetric( horizontal: 20.0 ),
-              child: DonationProgress(),
+              child: DonationProgress(
+                amount: disaster_details!['funds_raised'] ?? "500,000", 
+                target: disaster_details!['funding_target'] ?? "2,000,000",
+                currency: disaster_details!['currency'] ?? "UGX"
+              ),
             ),
             const SizedBox( height: 25 ),
             Padding(
-              padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 20 ),
-              child: ElevatedButton(
-                child: Text( "Donate" ),
-                onPressed: () {
-                 showModalBottomSheet(
+              padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 10 ),
+              child: RedBtn(squared: true, label: 'Donate to Emergency', onPressed: () {
+                showModalBottomSheet(
                     context: context,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular( 0 )),
                     ),
                     builder: (BuildContext context) {
                       return Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: 500,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Center(
-                              child: Text( "Donation Amount", style: TextStyle( fontSize: 20, color: Colors.black, fontWeight: FontWeight.w500 ), ),
+                              child: Text( 
+                                "Donation Amount", 
+                                style: TextStyle( 
+                                  fontSize: 16.85, 
+                                  fontFamily: "Inter",
+                                  color: Color(0xFF221105), 
+                                  fontWeight: FontWeight.w500 
+                                ), 
+                              ),
                             ),
-                            const SizedBox(height: 20 ),
-                            const Center(
-                              child: Text( "Enter Price Manually", style: TextStyle( fontSize: 16, color: Colors.grey )  ),
+                            SizedBox(height: 25 ),
+                            Center(
+                              child: Text( 
+                                "Enter Price Manually", 
+                                style: TextStyle( 
+                                  fontSize: 14.75, 
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFFC1C0BF),
+                                  fontFamily: "Inter"
+                                )  ),
                             ),
+                            SizedBox(height: 25 ),
                             const Row(
                               children: [
                                 PriceTag( label: '100K', active: false ),
@@ -319,23 +241,18 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                               ],
                             ),
                             const Spacer(),
-                            ElevatedButton(
-                              onPressed: () {
+                            RedBtn( squared: true, label: 'Continue to Payment', onPressed: () {
                                 Navigator.of(context).pop();
-                                Get.toNamed( "/initiate-payment" ); // Close the modal
-                              },
-                              child: const Text('Pay'),
-                            ),
+                                Get.toNamed( "/initiate-payment" ); 
+                            } )
                           ],
                         ),
                       );
                     },
                   );
-
-
-                },
-              ),
+              } ),
             )
+
             ],
           ),
         ),
