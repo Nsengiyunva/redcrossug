@@ -15,14 +15,17 @@ class _TextBoxAreaState extends State<TextBoxArea> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        // padding: const EdgeInsets.all( 5.0),
         child: TextField(
+          style: TextStyle(fontSize: 12, color: Colors.black, fontFamily: "Inter" ),
+          // cursorColor: Colors.orange,  // Change cursor color
+          cursorWidth: 3, 
           controller: _controller,
           maxLines: 3, // Allows up to 5 lines
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText: 'Write your messages...',
+            labelText: 'Write your message...',
             hintText: 'Type something...',
+            labelStyle: TextStyle(color: Color(0xFF969492) ),
           ),
         ),
       ),
