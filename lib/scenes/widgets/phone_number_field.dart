@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:redcross/scenes/widgets/flag_code.dart';
 
 class PhoneNumberField extends StatefulWidget {
-  final Function(String) handleTelephoneChange;
+  final VoidCallback handleTelephoneChange;
 
   const PhoneNumberField( { super.key, required this.handleTelephoneChange } );
 
@@ -11,7 +11,7 @@ class PhoneNumberField extends StatefulWidget {
 }
 
 class _PhoneNumberField extends State<PhoneNumberField> {
-  String _selectedCountry = '256';
+  final String _selectedCountry = '256';
 
   final List<Map<String, dynamic>> nations = [
     {
@@ -35,9 +35,9 @@ class _PhoneNumberField extends State<PhoneNumberField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-            padding: EdgeInsets.symmetric( horizontal: 15 ),
+            padding: const EdgeInsets.symmetric( horizontal: 15 ),
             child: TextField(
-            style: TextStyle( 
+            style: const TextStyle( 
               fontSize: 16, 
               fontWeight: FontWeight.w600, 
               fontFamily: "Manrope", 
@@ -45,11 +45,11 @@ class _PhoneNumberField extends State<PhoneNumberField> {
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular( 10 ),
-                borderSide: BorderSide(color: Color(0xFFED1C24), width: 1.0),
+                borderSide: const BorderSide(color: Color(0xFFED1C24), width: 1.0),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular( 10 ),
-                borderSide: BorderSide(color: Color(0xFF545454), width: 1.0),
+                borderSide: const BorderSide(color: Color(0xFF545454), width: 1.0),
               ),
               hintText: '',
               hintStyle: const TextStyle( 
@@ -61,7 +61,7 @@ class _PhoneNumberField extends State<PhoneNumberField> {
               prefixIcon: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: _selectedCountry,
-                  icon: Icon(Icons.arrow_drop_down),
+                  icon: const Icon(Icons.arrow_drop_down),
                   items: nations.map((entry) {
                     // print( entry["code"] );
                     // return DropdownMenuItem<String>( 
@@ -79,6 +79,7 @@ class _PhoneNumberField extends State<PhoneNumberField> {
                     );
                   }).toList(),
                   onChanged: (value) {
+                    widget.handleTelephoneChange;
                     // setState(() {
                     //   _selectedCountry = value!;
                     // });

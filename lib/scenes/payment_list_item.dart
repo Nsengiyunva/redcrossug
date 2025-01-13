@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/payment_method_item.dart';
 
 class PaymentListItem extends StatelessWidget {
 

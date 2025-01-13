@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/widgets/flag_code.dart';
 import 'package:get/get.dart';
-import 'package:redcross/scenes/country_picker.dart';
-import 'package:redcross/scenes/picker_country.dart';
 import 'package:redcross/scenes/red_btn.dart';
 import 'package:redcross/scenes/widgets/phone_number_field.dart';
 
@@ -15,6 +12,13 @@ class SignPhoneIn extends StatefulWidget {
 }
 
 class _SignInPhoneState extends State<SignPhoneIn> {
+  String message = "Hello, Flutter!";
+
+  void updateMessage() {
+    setState(() {
+      message = "Button Clicked!";
+    });
+  }
 
   void _handleTelephoneChange(String val) {
     print( "Telephone is: $val" );
@@ -22,16 +26,18 @@ class _SignInPhoneState extends State<SignPhoneIn> {
 
   @override
   Widget build( BuildContext context ) {
+    print( message );
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric( vertical: 20.0),
-          padding: EdgeInsets.symmetric( vertical: 25.0, horizontal: 15.0),
+          margin: const EdgeInsets.symmetric( vertical: 20.0),
+          padding: const EdgeInsets.symmetric( vertical: 25.0, horizontal: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox( height: 50 ),
+              const SizedBox( height: 50 ),
               const Padding(
                 padding: EdgeInsets.symmetric( horizontal: 15 ),
                 child: Text( "Enter your Number", 
@@ -42,13 +48,11 @@ class _SignInPhoneState extends State<SignPhoneIn> {
                   fontFamily: "Manrope"
                 ) ),
               ),
-              SizedBox( height: 10 ),
-              PhoneNumberField(handleTelephoneChange: ( String telephone ) { 
-                _handleTelephoneChange( telephone!  );
-              },),
-              SizedBox( height: 15 ),
+              const SizedBox( height: 10 ),
+              PhoneNumberField(handleTelephoneChange: updateMessage,),
+              const SizedBox( height: 15 ),
               Padding(
-                padding: EdgeInsets.symmetric( horizontal: 10 ),
+                padding: const EdgeInsets.symmetric( horizontal: 10 ),
                 child: RedBtn(label: "Continue", onPressed: () {  
                   Get.toNamed( "/enter-otp" );
                 },),
