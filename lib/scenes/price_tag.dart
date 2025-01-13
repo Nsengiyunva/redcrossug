@@ -14,9 +14,9 @@ class PriceTag extends StatelessWidget {
       margin: const EdgeInsets.symmetric( vertical: 15, horizontal: 10 ),
       padding: const EdgeInsets.all( 10 ),
       decoration: BoxDecoration(
-        color: active ? Color(0xFFFFE9D9) : Color(0xFFFFFFFF),
+        color: active ? const Color(0xFFFFE9D9) : const Color(0xFFFFFFFF),
         border: Border.all(  
-          color: Color(0xFFEAEAEA),
+          color: const Color(0xFFEAEAEA),
           width: 2
         ),
         borderRadius: BorderRadius.circular(8),
@@ -27,7 +27,7 @@ class PriceTag extends StatelessWidget {
           fontFamily: "Inter",
           fontSize: 16.85, 
           fontWeight: FontWeight.w600, 
-          color: active ? Color(0xFFED1C24) : Color(0xFF807B77) 
+          color: active ? const Color(0xFFED1C24) : const Color(0xFF807B77) 
           ) ),
       ),
     );

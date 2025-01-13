@@ -17,8 +17,8 @@ class PaymentMethodItem extends StatelessWidget {
     final iconData = iconMap[icon_name] ?? Icons.error;
 
     return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFF),
+      decoration: const BoxDecoration(
+        color: Color(0x000000ff),
         border: Border(
           top: BorderSide(
             color: Color(0xFFEAEAEA), 
@@ -30,26 +30,26 @@ class PaymentMethodItem extends StatelessWidget {
           ),
         ),
       ),
-      margin: EdgeInsets.symmetric( vertical: 10 ),
+      margin: const EdgeInsets.symmetric( vertical: 10 ),
       child: Row(
             children: [
             Container(
               // width: 35,
               height: 72,
               decoration: BoxDecoration(
-                color: Color(0xFFFFE3E1),
+                color: const Color(0xFFFFE3E1),
                 borderRadius: BorderRadius.circular(30)
               ),
               child: Icon(
                 iconData,
-                color: Color(0xFFED1C24),
+                color: const Color(0xFFED1C24),
                 size: 20.0,
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10 ),
+              padding: const EdgeInsets.symmetric( horizontal: 10 ),
               child: Text( text_label, style: 
-              TextStyle( 
+              const TextStyle( 
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF969492),

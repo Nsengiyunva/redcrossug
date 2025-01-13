@@ -10,23 +10,23 @@ class FlagCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric( horizontal: 10 ),
+      padding: const EdgeInsets.symmetric( horizontal: 10 ),
       child: Row(
         children: [
          Center(
           child: SvgPicture.network(
             flagUrl,
             placeholderBuilder: (context) =>
-                CircularProgressIndicator(), // Loading indicator
+                const CircularProgressIndicator(), // Loading indicator
             width: 25,
             height: 30,
           ),
         ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 5 ),
+              padding: const EdgeInsets.symmetric( horizontal: 5 ),
               child: Text( 
                 "+$country_code", 
-                style: TextStyle( 
+                style: const TextStyle( 
                   fontSize: 12, 
                   fontWeight: FontWeight.w600, 
                   fontFamily: "Manrope", 

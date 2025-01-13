@@ -9,13 +9,13 @@ class LinkField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric( horizontal: 10 ),
-      padding: EdgeInsets.symmetric( horizontal: 5 ),
+      margin: const EdgeInsets.symmetric( horizontal: 10 ),
+      padding: const EdgeInsets.symmetric( horizontal: 5 ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text( "$label", style: TextStyle(  
+          Text( label, style: const TextStyle(  
             decoration: TextDecoration.underline, 
             decorationColor: Color(0xFF0080FF),
             color: Color(0xFF0080FF), 
@@ -29,7 +29,7 @@ class LinkField extends StatelessWidget {
           //   size: 12, 
           //   color: Color(0xFF0080FF)
           // )
-          Icon(
+          const Icon(
             Icons.abc_sharp,
             size: 12,
             color: Colors.red

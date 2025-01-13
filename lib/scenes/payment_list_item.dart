@@ -23,16 +23,16 @@ class PaymentListItem extends StatelessWidget {
 
     return Container(
       height: 72,
-      padding: EdgeInsets.symmetric( vertical: 5 ),
+      padding: const EdgeInsets.symmetric( vertical: 5 ),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
             width: outline! ? 2.0 : 0,
-            color: Color(0xFFEAEAEA)
+            color: const Color(0xFFEAEAEA)
           ),
           bottom: BorderSide(
             width: outline! ? 2.0 : 0,
-            color: Color(0xFFEAEAEA)
+            color: const Color(0xFFEAEAEA)
           )
         )
       ),
@@ -47,20 +47,20 @@ class PaymentListItem extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular( 20 ),
-                  color: Color(0xFFFFE3E1)
+                  color: const Color(0xFFFFE3E1)
                 ),
                 child: Center(
                   child: Icon(
                   iconData,
-                  color: Color(0xFFED1C24),
+                  color: const Color(0xFFED1C24),
                   size: 20.0,
                 )
               )
             ),
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10 ),
-              child: Text( "$text_label", style: 
-              TextStyle( 
+              padding: const EdgeInsets.symmetric( horizontal: 10 ),
+              child: Text( text_label, style: 
+              const TextStyle( 
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF969492),

@@ -4,7 +4,7 @@ class TextFieldInput extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
 
-  TextFieldInput({ 
+  const TextFieldInput({ 
     super.key, 
     required this.question, 
     required this.textEditingController
@@ -19,7 +19,7 @@ class TextFieldInput extends StatelessWidget {
             height: 49,
             child: TextField(
             controller: textEditingController,
-            style: TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
+            style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
             decoration: InputDecoration(
               alignLabelWithHint: true,
               fillColor: Colors.white54,

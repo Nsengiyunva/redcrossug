@@ -19,9 +19,9 @@ class PaymentSummaryItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
         Padding(
-          padding: EdgeInsets.symmetric( horizontal: 10 ),
+          padding: const EdgeInsets.symmetric( horizontal: 10 ),
           child: Text( text_label, 
-          style: TextStyle( 
+          style: const TextStyle( 
             fontSize: 12,
             fontWeight: FontWeight.w400,
             color: Color(0xFF969492),
@@ -29,9 +29,9 @@ class PaymentSummaryItem extends StatelessWidget {
           ) ),
         ), 
         Padding(
-          padding: EdgeInsets.symmetric( horizontal: 10 ),
+          padding: const EdgeInsets.symmetric( horizontal: 10 ),
           child: Text( price_label, 
-          style: TextStyle( 
+          style: const TextStyle( 
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: Color(0xFF000000),

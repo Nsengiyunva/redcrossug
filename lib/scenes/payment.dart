@@ -11,7 +11,7 @@ class Payment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton() // Back button added here
@@ -39,7 +39,7 @@ class Payment extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF221105)
               ) ),
-            SizedBox( height: 10 ),
+            const SizedBox( height: 10 ),
             PaymentListItem(outline: true, text_label: 'Credit Card', icon_name: 'credit_card_rounded',),
             PaymentListItem(outline: false, text_label: 'Mobile Money', icon_name: 'phone_iphone_rounded',),
             const SizedBox( height: 25 ),
@@ -67,7 +67,7 @@ class Payment extends StatelessWidget {
             const SizedBox( height: 10 ),
             const TextBoxArea(),
             const SizedBox( height: 25 ),
-            Row(
+            const Row(
               children: [
                 Icon(
                   Icons.check_box_outline_blank,

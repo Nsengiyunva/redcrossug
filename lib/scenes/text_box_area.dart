@@ -16,12 +16,12 @@ class _TextBoxAreaState extends State<TextBoxArea> {
     return Container(
       child: Center(
         child: TextField(
-          style: TextStyle(fontSize: 12, color: Colors.black, fontFamily: "Inter" ),
+          style: const TextStyle(fontSize: 12, color: Colors.black, fontFamily: "Inter" ),
           // cursorColor: Colors.orange,  // Change cursor color
           cursorWidth: 3, 
           controller: _controller,
           maxLines: 3, // Allows up to 5 lines
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Write your message...',
             hintText: 'Type something...',

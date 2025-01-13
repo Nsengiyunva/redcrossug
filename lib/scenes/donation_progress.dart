@@ -17,15 +17,15 @@ class DonationProgress extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFFFFFFF),
+        color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular( 10 )
       ),
-      padding: EdgeInsets.symmetric( horizontal: 15, vertical: 15 ),
+      padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 15 ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox( height: 25 ),
-          Text( "Donation raised", style: TextStyle( fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: Color(0xFF969492) )),
+          const SizedBox( height: 25 ),
+          const Text( "Donation raised", style: TextStyle( fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: Color(0xFF969492) )),
           const SizedBox( height: 10 ),
           Container(
             child: ClipRRect(
@@ -33,7 +33,7 @@ class DonationProgress extends StatelessWidget {
               child: LinearProgressIndicator(
               value: 0.6, 
               backgroundColor: Colors.grey[500],
-              color: Color(0xFFED1C24), 
+              color: const Color(0xFFED1C24), 
               minHeight: 8,
             ),
             )
@@ -41,16 +41,16 @@ class DonationProgress extends StatelessWidget {
           const SizedBox( height: 20 ),
           Row(
             children: [
-              Text( "$currency $amount", style: TextStyle( fontSize: 16, fontWeight: FontWeight.w600, fontFamily: "Inter" ), ),
-               Padding(
+              Text( "$currency $amount", style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w600, fontFamily: "Inter" ), ),
+               const Padding(
                 padding: EdgeInsets.symmetric( horizontal: 2 ),
                 child: Text( 
                   "/", 
                   style: TextStyle( color:Color(0xFF969492), fontSize: 12, fontWeight: FontWeight.w700, fontFamily: "Inter" ) 
                 ),),
                Padding(
-                padding: EdgeInsets.symmetric( horizontal: 2 ),
-                child: Text( "$currency $target", style: TextStyle( color: Color(0xFF969492), fontSize: 12, fontWeight: FontWeight.w700, fontFamily: "Inter" ), 
+                padding: const EdgeInsets.symmetric( horizontal: 2 ),
+                child: Text( "$currency $target", style: const TextStyle( color: Color(0xFF969492), fontSize: 12, fontWeight: FontWeight.w700, fontFamily: "Inter" ), 
                 ),
               ),
             ],

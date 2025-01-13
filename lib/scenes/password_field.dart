@@ -4,7 +4,7 @@ class PasswordField extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
 
-  PasswordField({ 
+  const PasswordField({ 
     super.key, 
     required this.question, 
     required this.textEditingController
@@ -20,9 +20,9 @@ class PasswordField extends StatelessWidget {
             child: TextField(
             obscureText: true,
             controller: textEditingController,
-            style: TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
+            style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
             decoration: InputDecoration(
-              suffixIcon: Icon(
+              suffixIcon: const Icon(
                 Icons.visibility_off
               ),
               alignLabelWithHint: true,

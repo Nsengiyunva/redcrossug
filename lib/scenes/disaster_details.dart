@@ -81,7 +81,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
 
 
     // print( disaster_details );
-    var disaster_image = disaster_details!['banner_photo'];
+    var disasterImage = disaster_details!['banner_photo'];
 
     return Scaffold(
       backgroundColor:const Color(0xFFF6F8FC),
@@ -144,41 +144,41 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                   ),
                 ],
               ),
-              SizedBox( height: 5 ),
+              const SizedBox( height: 5 ),
               Padding(
                 padding: const EdgeInsets.symmetric( vertical: 5, horizontal: 10 ),
-                child: Text( "${disaster_details!['name']}", style: TextStyle( fontFamily: "Inter", fontSize: 26.33, fontWeight: FontWeight.w700, color: Color(0xFF000000) ), ),
+                child: Text( "${disaster_details!['name']}", style: const TextStyle( fontFamily: "Inter", fontSize: 26.33, fontWeight: FontWeight.w700, color: Color(0xFF000000) ), ),
               ),
-              SizedBox( height: 10 ),
+              const SizedBox( height: 10 ),
               Padding(
                 padding: const EdgeInsets.symmetric( horizontal: 10 ),
                 child: Text( "${disaster_details!['summary']}",
-                style: TextStyle( fontFamily: "Inter", fontSize: 11.37, fontWeight: FontWeight.w400, color: Color(0xFF000000) ), ),
+                style: const TextStyle( fontFamily: "Inter", fontSize: 11.37, fontWeight: FontWeight.w400, color: Color(0xFF000000) ), ),
               ),
-              SizedBox( height: 10 ),
-              TagItem( label: "Emergency Support" ),
-              SizedBox( height: 10 ),
-              LinkField(label: 'Nearby Hospitals'),
-              SizedBox( height: 10 ),
-              LinkField(label: 'Local Shelters'),
-              SizedBox( height: 10 ),
-              LinkField(label: 'Food & Clothing Distribution Points'),
-              SizedBox( height: 20 ),
+              const SizedBox( height: 10 ),
+              const TagItem( label: "Emergency Support" ),
+              const SizedBox( height: 10 ),
+              const LinkField(label: 'Nearby Hospitals'),
+              const SizedBox( height: 10 ),
+              const LinkField(label: 'Local Shelters'),
+              const SizedBox( height: 10 ),
+              const LinkField(label: 'Food & Clothing Distribution Points'),
+              const SizedBox( height: 20 ),
               Row(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.symmetric( horizontal: 15 ), 
                     child: Text( "Fatalities:" )
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric( horizontal: 5 ),
+                    padding: const EdgeInsets.symmetric( horizontal: 5 ),
                     child: Text( disaster_details!['fatalities'].toString() ?? "0" )
                   )
                 ],
               ),
-              SizedBox( height: 10 ),
+              const SizedBox( height: 10 ),
               Padding(
-              padding: EdgeInsets.symmetric( horizontal: 20.0 ),
+              padding: const EdgeInsets.symmetric( horizontal: 20.0 ),
               child: DonationProgress(
                 amount: disaster_details!['funds_raised'] ?? "500,000", 
                 target: disaster_details!['funding_target'] ?? "2,000,000",
@@ -213,8 +213,8 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                 ), 
                               ),
                             ),
-                            SizedBox(height: 25 ),
-                            Center(
+                            const SizedBox(height: 25 ),
+                            const Center(
                               child: Text( 
                                 "Enter Price Manually", 
                                 style: TextStyle( 
@@ -224,7 +224,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                   fontFamily: "Inter"
                                 )  ),
                             ),
-                            SizedBox(height: 25 ),
+                            const SizedBox(height: 25 ),
                             const Row(
                               children: [
                                 PriceTag( label: '100K', active: false ),

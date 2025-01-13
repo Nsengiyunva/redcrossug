@@ -18,7 +18,7 @@ class RedBtn extends StatelessWidget {
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-              borderRadius: squared != null ? BorderRadius.circular( 8 ) :  BorderRadius.circular( 15 )
+              borderRadius: squared != null ? BorderRadius.circular( 8 ) :  BorderRadius.circular( 10 )
             ),
             backgroundColor:  const Color(0xFFED1C24),
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12 ),
