@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:redcross/scenes/widgets/flag_code.dart';
 
 class PhoneNumberField extends StatefulWidget {
-  final VoidCallback handleTelephoneChange;
+  // final VoidCallback handleTelephoneChange;
 
-  const PhoneNumberField( { super.key, required this.handleTelephoneChange } );
+  const PhoneNumberField( { super.key} );
 
   @override
   _PhoneNumberField createState() => _PhoneNumberField();
@@ -79,12 +79,11 @@ class _PhoneNumberField extends State<PhoneNumberField> {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    widget.handleTelephoneChange;
                     // setState(() {
                     //   _selectedCountry = value!;
                     // });
                     // widget.handleTelephoneChange( value! );
-                    print( value );
+                    // print( value );
                   },
                 ),
               ),

@@ -12,21 +12,16 @@ class SignPhoneIn extends StatefulWidget {
 }
 
 class _SignInPhoneState extends State<SignPhoneIn> {
-  String message = "Hello, Flutter!";
-
-  void updateMessage() {
-    setState(() {
-      message = "Button Clicked!";
-    });
-  }
+  String phone_number = "Hello, Flutter!";
 
   void _handleTelephoneChange(String val) {
-    print( "Telephone is: $val" );
+    setState(() {
+      phone_number = val;
+    });
   }
 
   @override
   Widget build( BuildContext context ) {
-    print( message );
     
     return Scaffold(
       body: SingleChildScrollView(
@@ -49,7 +44,7 @@ class _SignInPhoneState extends State<SignPhoneIn> {
                 ) ),
               ),
               const SizedBox( height: 10 ),
-              PhoneNumberField(handleTelephoneChange: updateMessage,),
+              PhoneNumberField(),
               const SizedBox( height: 15 ),
               Padding(
                 padding: const EdgeInsets.symmetric( horizontal: 10 ),
