@@ -21,6 +21,8 @@ class LoginController {
   TextEditingController registerPassword = TextEditingController();
   TextEditingController registerConfirmPassword = TextEditingController();
 
+  TextEditingController newPhoneNumber = TextEditingController();
+
   final Future _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
 
@@ -65,10 +67,20 @@ class LoginController {
       // }
     } catch (e) {
       print( "Error: $e" );
+      Get.snackbar('Error', 'An error occurred while signing the form');
       // Handle exceptions like network errors
       // setState(() {
       //   responseMessage = 'Exception: $e';
       // });
     }
+  }
+
+  Future<void> submitForm() async {
+    Get.toNamed(
+      "/enter-otp",
+      arguments: {
+        'phone_number': newPhoneNumber.text
+      },
+    );
   }
 }

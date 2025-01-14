@@ -3,15 +3,16 @@ import 'package:redcross/scenes/widgets/flag_code.dart';
 
 class PhoneNumberField extends StatefulWidget {
   // final VoidCallback handleTelephoneChange;
+   final TextEditingController textEditingController;
 
-  const PhoneNumberField( { super.key} );
+  const PhoneNumberField( { super.key, required this.textEditingController} );
 
   @override
   _PhoneNumberField createState() => _PhoneNumberField();
 }
 
 class _PhoneNumberField extends State<PhoneNumberField> {
-  final String _selectedCountry = '256';
+  String _selectedCountry = '256';
 
   final List<Map<String, dynamic>> nations = [
     {
@@ -37,6 +38,7 @@ class _PhoneNumberField extends State<PhoneNumberField> {
     return Container(
             padding: const EdgeInsets.symmetric( horizontal: 15 ),
             child: TextField(
+            controller: widget.textEditingController,
             style: const TextStyle( 
               fontSize: 16, 
               fontWeight: FontWeight.w600, 
@@ -79,9 +81,9 @@ class _PhoneNumberField extends State<PhoneNumberField> {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    // setState(() {
-                    //   _selectedCountry = value!;
-                    // });
+                    setState(() {
+                      _selectedCountry = value!;
+                    } );
                     // widget.handleTelephoneChange( value! );
                     // print( value );
                   },

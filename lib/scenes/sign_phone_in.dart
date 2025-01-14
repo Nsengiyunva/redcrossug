@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/red_btn.dart';
 import 'package:redcross/scenes/widgets/phone_number_field.dart';
 
 
 class SignPhoneIn extends StatefulWidget {
-  const SignPhoneIn({super.key});
+  SignPhoneIn({super.key});
+
+  final LoginController _phoneController = Get.put( LoginController());
 
   @override
   _SignInPhoneState createState() => _SignInPhoneState();
 }
 
 class _SignInPhoneState extends State<SignPhoneIn> {
-  String phone_number = "Hello, Flutter!";
-
-  void _handleTelephoneChange(String val) {
-    setState(() {
-      phone_number = val;
-    });
-  }
 
   @override
   Widget build( BuildContext context ) {
+
+    print( widget._phoneController.newPhoneNumber.value );
     
     return Scaffold(
       body: SingleChildScrollView(
@@ -44,12 +42,15 @@ class _SignInPhoneState extends State<SignPhoneIn> {
                 ) ),
               ),
               const SizedBox( height: 10 ),
-              PhoneNumberField(),
+              PhoneNumberField(textEditingController: widget._phoneController.newPhoneNumber,),
               const SizedBox( height: 15 ),
               Padding(
                 padding: const EdgeInsets.symmetric( horizontal: 10 ),
                 child: RedBtn(label: "Continue", onPressed: () {  
-                  Get.toNamed( "/enter-otp" );
+                  widget._phoneController.submitForm();
+                  // Get.toNamed( "/enter-otp", arguments: { 
+                  //   "phone_number":  widget._phoneController.newPhoneNumber.text 
+                  // } );
                 },),
               )
             ],
