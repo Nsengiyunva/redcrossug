@@ -46,7 +46,7 @@ class OtpVerify extends StatelessWidget {
                     fontFamily: "Inter"
                   ) 
               ),
-              SizedBox( height: 25 ),
+              const SizedBox( height: 25 ),
               Center(
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -92,20 +92,24 @@ class OtpVerify extends StatelessWidget {
                 Get.toNamed( "/register-account" );
               }, ),
               const SizedBox( height: 25 ),
-              TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text('Submit'),
-            ),
-          ],
-        ),
+                Row(
+                  children: [
+                    Text( "Dont receive your code ?" ),
+                    TextButton(
+                    onPressed: () {
+                      print('Transparent Button Pressed');
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.blue, // Text color
+                      backgroundColor: Colors.white, // Transparent background
+                      padding: EdgeInsets.all(16),
+                    ),
+                    child: Text('Transparent Button'),
+                  )
+                ],
+              )
+            ],
+          ),
         )
       ),
     );
