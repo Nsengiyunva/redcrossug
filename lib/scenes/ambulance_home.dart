@@ -27,7 +27,8 @@ class AmbulanceHome extends StatelessWidget {
             children: [
               const Text( "Ambulance", style: TextStyle( fontSize: 24, fontWeight: FontWeight.w500 ), ),
               const SizedBox( height: 15 ),
-              RedBtnIcon(noColor: false,label: 'Request for Ambulance', onPressed: () {
+              RedBtnIcon( noColor: false, label: 'Request for Ambulance', 
+              onPressed: () {
                 Get.toNamed( "/ambulance-request-form" );
               }, icon_name: "local_police", ),
               const SizedBox( height: 15 ),

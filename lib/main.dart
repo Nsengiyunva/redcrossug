@@ -30,10 +30,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       // title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       routes: {
         "/home": ( context ) => const Home(),
         "/login": ( context ) => SignIn(),

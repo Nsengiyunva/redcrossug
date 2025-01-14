@@ -23,6 +23,9 @@ class LoginController {
 
   TextEditingController newPhoneNumber = TextEditingController();
 
+  final fieldControllers = List.generate(5, (index) => TextEditingController());
+   final fieldFocusNode = List.generate(5, (index) => FocusNode());
+
   final Future _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
 
@@ -82,5 +85,15 @@ class LoginController {
         'phone_number': newPhoneNumber.text
       },
     );
+  }
+
+  void clearOTP() {
+    for (var controller in fieldControllers) {
+      controller.clear();
+    }
+  }
+
+  String getOtp() {
+    return fieldControllers.map((c) => c.text).join();
   }
 }
