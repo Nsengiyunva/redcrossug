@@ -27,39 +27,36 @@ class CardBoard extends StatelessWidget {
         onPressed();
       },
       child: Container(
-            width: 180,
-            height: 120,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10.0),
-            margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0 ),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
+        width: 170,
+        height: 115.84,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0 ),
+        decoration: BoxDecoration(
+          color: const Color(0xFFED1C24),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          children: [
+            const SizedBox( height: 20 ),
+              Icon(
+                iconData,
+                color: Colors.white,
+                size: 22.6,
+              ),
+            const SizedBox( height: 10 ),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16.55,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w600,
+                color: Color(0xFFFFFFFF)
+              ),
+            )
               ],
-            ),
-            child: Column(
-              children: [
-                const SizedBox( height: 20 ),
-                  Icon(
-                    iconData,
-                    color: Colors.white,
-                    size: 36.0,
-                  ),
-                const SizedBox( height: 10 ),
-                Text(
-                 title,
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
-                )
-                  ],
-            ),
-          ),
+        ),
+      ),
     );
     
   }

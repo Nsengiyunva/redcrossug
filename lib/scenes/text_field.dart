@@ -19,14 +19,14 @@ class TextFieldInput extends StatelessWidget {
             height: 49,
             child: TextField(
             controller: textEditingController,
-            style: TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
+            style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
             decoration: InputDecoration(
               alignLabelWithHint: true,
               fillColor: Colors.white,
               labelText: question,
-              labelStyle: TextStyle(color: Colors.black),
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric( vertical: 5, horizontal: 10 ),
+              labelStyle: const TextStyle(color: Colors.black),
+              border: const OutlineInputBorder(),
+              contentPadding: const EdgeInsets.symmetric( vertical: 5, horizontal: 10 ),
 
               enabledBorder: OutlineInputBorder(  // Border when not focused
                 borderRadius: BorderRadius.circular(18),

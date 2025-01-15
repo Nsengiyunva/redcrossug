@@ -24,8 +24,8 @@ class HomeBadge extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2 ),
             margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0 ),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 239, 213, 211),
-              borderRadius: BorderRadius.circular(20),
+              color: const Color(0xFFFFE5E5),
+              borderRadius: BorderRadius.circular(25),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric( vertical: 10.0, horizontal: 10 ),
@@ -34,12 +34,17 @@ class HomeBadge extends StatelessWidget {
               children: [
                SizedBox(
                 width: 100,
-                child:  Text( title ),
+                child:  Text( title, style: const TextStyle( 
+                  fontSize: 12.36, 
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "Manrope",
+                  color: Color(0xFF000000)
+                )  ),
                ),
                Icon(
                 iconData,
-                color: Colors.red,
-                size: 50.0,
+                color: const Color(0xFFED1C24),
+                size: 53.74,
               ),
               ],
              ),

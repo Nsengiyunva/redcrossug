@@ -14,11 +14,11 @@ class DefaultHome extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: double.maxFinite,
+          // padding: EdgeInsets.symmetric( horizontal: 8 ),
           margin: const EdgeInsets.symmetric(vertical: 30.0),
-          // padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 30.0),
           child: Column(
              children: [
-               const Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                  Padding(
@@ -26,18 +26,24 @@ class DefaultHome extends StatelessWidget {
                   child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text( "Good afternoon",  style: TextStyle( fontSize: 20, color: Colors.black ) ),
-                      Text( "Anthony Blinked", style: TextStyle( fontSize: 24, color: Colors.black ) )
+                     Padding(
+                      padding: EdgeInsets.symmetric( horizontal: 10 ),
+                      child:  Text( "Good afternoon",  style: TextStyle( fontSize: 16.46, color: Color(0xFF545454), fontFamily: "Inter", fontWeight: FontWeight.w400,  ) 
+                     ) ),
+                      Padding(
+                      padding: EdgeInsets.symmetric( horizontal: 10 ),
+                      child:  Text( "Anthony Blinked", style: TextStyle( fontSize: 20.97, color: Color(0xFF545454), fontFamily: "Inter", fontWeight: FontWeight.w600, ) 
+                     ) ),
                     ],
                   ),
                   ),
-                  Padding(padding: EdgeInsets.symmetric( horizontal: 15 ),
+                  Padding(padding: EdgeInsets.only( right: 20 ),
                   child: Column(
                     children: [
                       Icon(
                         Icons.notifications,
-                        color: Colors.black,
-                        size: 36.0,
+                        color: Color(0xFF1C274C),
+                        size: 25.24,
                       )
                     ],
                   ),
@@ -65,20 +71,41 @@ class DefaultHome extends StatelessWidget {
                   },  ),
                 ],
                ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+               Padding( 
+                padding: const EdgeInsets.symmetric( horizontal: 10 ),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CardBoard( title: "Memberships", icon_name: "membership", onPressed: () {} ),
+                  // CardBoard( title: "Memberships", icon_name: "membership", onPressed: () {} ),
                   CardBoard( title: "Donations", icon_name: "cash", onPressed: () {} ),
                 ],
-               ),
+               ) ),
                const SizedBox( height: 15 ),
                const Padding(padding: EdgeInsets.symmetric( horizontal: 20.0 ),
                child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Upcoming Events', style: TextStyle( fontSize: 16 )),
-                  Text('See All', style: TextStyle( fontSize: 16 ) )
+                  Text('Upcoming Events', style: TextStyle( 
+                    fontSize: 12.79,
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF1C274C)
+                   )),
+                  Row(
+                    children: [
+                      Text('See All', style: TextStyle( 
+                        fontSize: 8.83,
+                        fontFamily: "Inter",
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF1C274C)
+                      ) ),
+                      Icon(
+                        Icons.audiotrack,
+                        color: Color(0xFF1C274C),
+                        size: 7.52,
+                      )
+                    ]
+                  )
                 ],
                )
                ),

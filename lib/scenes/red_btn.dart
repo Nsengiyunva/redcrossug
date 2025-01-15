@@ -10,7 +10,7 @@ class RedBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 52,
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

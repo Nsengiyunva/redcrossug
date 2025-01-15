@@ -38,7 +38,7 @@ class OtpVerify extends StatelessWidget {
                   fontFamily: "Inter"
                 ) ),
                 const SizedBox( height: 10 ),
-                const Text( "The code has been sent to", 
+                const Text( "The code has been sent to 256772555123", 
                   style: TextStyle( 
                     fontSize: 13.18, 
                     fontWeight: FontWeight.w600,
