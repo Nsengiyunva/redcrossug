@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:redcross/scenes/price_tag.dart';
-import 'package:redcross/scenes/red_btn.dart';
+import 'package:redcross/scenes/widgets/donation_progress.dart';
 import 'package:redcross/scenes/widgets/link_field.dart';
+import 'package:redcross/scenes/widgets/price_tag.dart';
+import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'donation_progress.dart';
 
 class DisasterDetails extends StatefulWidget {
   const DisasterDetails({super.key});

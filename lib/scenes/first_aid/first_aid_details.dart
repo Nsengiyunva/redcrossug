@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/red_btn.dart';
+import 'package:redcross/scenes/widgets/red_btn.dart';
 
 class FirstAidDetails extends StatelessWidget {
   const FirstAidDetails({super.key});

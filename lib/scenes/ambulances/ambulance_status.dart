@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
-import 'package:redcross/scenes/ambulance_status_item.dart';
+import 'package:redcross/scenes/widgets/ambulance_status_item.dart';
 
 class AmbulanceStatus extends StatelessWidget {
   AmbulanceStatus({super.key});
@@ -27,7 +27,7 @@ class AmbulanceStatus extends StatelessWidget {
                 child: Image.asset( 'assets/images/ambulance.png', width: 300, height: 300 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric( vertical: 15, horizontal: 15),
+                padding: const EdgeInsets.symmetric( vertical: 15, horizontal: 15),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF5F3F3),
                   borderRadius: BorderRadius.circular( 10 )

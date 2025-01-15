@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/scenes/red_badge.dart';
-import 'package:redcross/scenes/red_btn.dart';
+import 'package:redcross/scenes/widgets/red_badge.dart';
+import 'package:redcross/scenes/widgets/red_btn.dart';
 
 class AmbulanceSuccess extends StatelessWidget {
   // final String button_label;

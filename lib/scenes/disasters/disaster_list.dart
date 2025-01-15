@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/disasters_list_controller.dart';
-import 'package:redcross/scenes/disaster_list_item.dart';
-import 'package:redcross/scenes/menu_list_items.dart';
+import 'package:redcross/scenes/widgets/disaster_list_item.dart';
+import 'package:redcross/scenes/widgets/menu_list_items.dart';
 
 class Item {
   final String name;

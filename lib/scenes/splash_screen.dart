@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/auth/sign_phone_in.dart';
 import 'dart:async';
-
-import 'package:redcross/scenes/sign_phone_in.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

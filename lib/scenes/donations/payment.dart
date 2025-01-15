@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/scenes/payment_list_item.dart';
-import 'package:redcross/scenes/payment_summary_item.dart';
-import 'package:redcross/scenes/red_btn.dart';
-import 'package:redcross/scenes/text_box_area.dart';
+import 'package:redcross/scenes/widgets/payment_list_item.dart';
+import 'package:redcross/scenes/widgets/payment_summary_item.dart';
+import 'package:redcross/scenes/widgets/red_btn.dart';
+import 'package:redcross/scenes/widgets/text_box_area.dart';
 
 class Payment extends StatelessWidget {
   const Payment({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
-import 'package:redcross/scenes/password_field.dart';
-import 'package:redcross/scenes/red_btn.dart';
-import 'package:redcross/scenes/text_field.dart';
+import 'package:redcross/scenes/widgets/password_field.dart';
+import 'package:redcross/scenes/widgets/red_btn.dart';
+import 'package:redcross/scenes/widgets/text_field.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({super.key});
@@ -58,11 +58,8 @@ class SignIn extends StatelessWidget {
                   onPressed: () {
                   //  Get.toNamed( "/register-account" );
                   },
-                  style: TextButton.styleFrom(
-                    // foregroundColor: Color(0xFFED1C24),    
-                    backgroundColor: Colors.white,
-                    // padding: const EdgeInsets.all(15),
-                    // textStyle: const TextStyle( fontSize: 20 ),
+                  style: TextButton.styleFrom(   
+                    backgroundColor: Color(0xFFFFFFFF),
                   ),
                   child: const Text( "Forgot Password", style: TextStyle( fontWeight: FontWeight.w400, fontFamily: "Inter", fontSize: 12.8, color: Color(0xFFED1C24), decoration: TextDecoration.underline, decorationColor: Color(0xFFED1C24) ) ),
                 )

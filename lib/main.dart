@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/scenes/account_success.dart';
-import 'package:redcross/scenes/ambulance_form.dart';
-import 'package:redcross/scenes/ambulance_home.dart';
-import 'package:redcross/scenes/ambulance_status.dart';
-import 'package:redcross/scenes/ambulance_success.dart';
+// import 'package:redcross/models/disaster_list.dart';
+import 'package:redcross/scenes/ambulances/ambulance_form.dart';
+import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/ambulances/ambulance_map.dart';
-import 'package:redcross/scenes/disaster_details.dart';
-import 'package:redcross/scenes/disaster_list.dart';
+import 'package:redcross/scenes/ambulances/ambulance_status.dart';
+import 'package:redcross/scenes/ambulances/ambulance_success.dart';
+
+import 'package:redcross/scenes/auth/account_success.dart';
+import 'package:redcross/scenes/auth/otp_verify.dart';
+import 'package:redcross/scenes/auth/sign_in.dart';
+import 'package:redcross/scenes/auth/sign_up.dart';
+
+import 'package:redcross/scenes/disasters/disaster_list.dart';
+import 'package:redcross/scenes/disasters/disaster_details.dart';
+import 'package:redcross/scenes/donations/payment.dart';
+
 import 'package:redcross/scenes/first_aid/first_aid_details.dart';
 import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
+
 import 'package:redcross/scenes/home.dart';
-import 'package:redcross/scenes/otp_verify.dart';
-import 'package:redcross/scenes/payment.dart';
-import 'package:redcross/scenes/sign_in.dart';
-import 'package:redcross/scenes/sign_up.dart';
 import 'package:redcross/scenes/splash_screen.dart';
 
 void main() {

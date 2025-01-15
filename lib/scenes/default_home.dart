@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/scenes/card_board.dart';
 import 'package:redcross/scenes/home_badge.dart';
+import 'package:redcross/scenes/widgets/card_board.dart';
 
 class DefaultHome extends StatelessWidget {
   DefaultHome({super.key});
