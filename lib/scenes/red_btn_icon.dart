@@ -15,7 +15,7 @@ class RedBtnIcon extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final iconMap = <String, IconData>{
-      'local_police': Icons.local_police,
+      'local_police': Icons.lightbulb_outline,
       'fire_truck': Icons.fire_truck,
     };
     
@@ -27,7 +27,7 @@ class RedBtnIcon extends StatelessWidget {
                 ElevatedButton(
                 onPressed: onPressed,
                 style: noColor ? ElevatedButton.styleFrom(
-                  side: const BorderSide(color: Colors.red, width: 2), // Border color and width
+                  side: const BorderSide(color: Color(0xFFED1C24), width: 2), // Border color and width
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular( 5 ), // Optional: Rounded corners
                   ),
@@ -37,26 +37,67 @@ class RedBtnIcon extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular( 5 )
               ),
-              backgroundColor: Colors.red,
+              backgroundColor: const Color(0xFFED1C24),
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15 ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  iconData,
-                  color: noColor ? Colors.red : Colors.white,
-                  size: 24.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric( horizontal: 8 ),
-                  child: noColor ? Text( label , style: const TextStyle( fontSize: 20, color: Colors.red ) ) : Text( label , style: const TextStyle( fontSize: 20, color: Colors.white ) 
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    iconData,
+                    color: noColor ? const Color(0xFFED1C24) : Colors.white,
+                    size: 24.0,
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.only( left: 10 ),
+                    child: SizedBox(
+                      child: noColor ? Text( label , style: const TextStyle( 
+                      fontSize: 12, 
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "Inter",
+                      color: Color(0xFFED1C24)
+                    ) ) : 
+                    Text( label , style: const TextStyle( 
+                      fontSize: 12, 
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "Inter",
+                      color: Color(0xFFFFFFFF),
+                     )
+                    )
+                    ) ,
+                    )
+              ],)
             ),
           )
           ]
         );
     }
+
+
+    // Row(
+    //           children: [
+    //             Icon(
+    //               iconData,
+    //               color: noColor ? const Color(0xFFED1C24) : Colors.white,
+    //               size: 24.0,
+    //             ),
+    //             Padding(
+    //               padding: const EdgeInsets.symmetric( horizontal: 8 ),
+    //               child: noColor ? Text( label , style: const TextStyle( 
+    //                   fontSize: 12, 
+    //                   fontWeight: FontWeight.w700,
+    //                   fontFamily: "Inter",
+    //                   color: Color(0xFFED1C24)
+    //                 ) ) : Text( label , style: const TextStyle( 
+    //                   fontSize: 12, 
+    //                   fontWeight: FontWeight.w700,
+    //                   fontFamily: "Inter",
+    //                   color: Color(0xFFFFFFFF),
+
+    //                 ) 
+    //               ),
+    //             )
+    //           ],
+    //         )
 }

@@ -12,7 +12,7 @@ class AmbulanceHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Color(0xFFF6F8FC),
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton() // Back button added here
@@ -25,16 +25,26 @@ class AmbulanceHome extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text( "Ambulance", style: TextStyle( fontSize: 24, fontWeight: FontWeight.w500 ), ),
+              const Text( "Ambulance", style: TextStyle( 
+                fontSize: 26.33, 
+                fontWeight: FontWeight.w700,
+                fontFamily: "Inter",
+                color: Color(0xFF000000)
+                ), ),
               const SizedBox( height: 15 ),
               RedBtnIcon( noColor: false, label: 'Request for Ambulance', 
               onPressed: () {
                 Get.toNamed( "/ambulance-request-form" );
               }, icon_name: "local_police", ),
               const SizedBox( height: 15 ),
-              RedBtnIcon(noColor: true, label: "Ambulance Status", onPressed: () {}, icon_name: "fire_truck", ),
+              RedBtnIcon(noColor: true, label: "Ambulance for Status", onPressed: () {}, icon_name: "fire_truck", ),
               const SizedBox( height: 15 ),
-              const Text( "Ambulances near me", style: TextStyle( fontSize: 20, fontWeight: FontWeight.w600 ), ),
+              const Text( "Ambulances Near Me", style: TextStyle( 
+                fontSize: 17.94,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF000000)
+               ), ),
               const SizedBox( height: 15 ),
               const AmbulanceListItem(place: "Life Link", location: 'Hospital, Naalya', time: '23 mins'),
               const SizedBox( height: 15 ),

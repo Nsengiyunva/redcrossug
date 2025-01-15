@@ -23,14 +23,15 @@ class AmbulanceListItem extends StatelessWidget {
             children: [
                 Container(
                   padding: const EdgeInsets.all( 10 ),
+                  margin: EdgeInsets.only( left: 10, right: 5  ),
                   decoration: BoxDecoration(
-                    color: Colors.red.shade200,
+                    color: Color(0xFFFFE3E1),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Icon(
                   Icons.fire_truck_sharp,
-                  color:Colors.red.shade800,
-                  size: 45.0,
+                  color:Color(0xFFED1C24),
+                  size: 15,
                 ),
               ),
               Column(
@@ -39,11 +40,23 @@ class AmbulanceListItem extends StatelessWidget {
                 children: [
                   Padding( 
                     padding: const EdgeInsets.symmetric( horizontal: 5 ),
-                    child: Text( place, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black )) 
+                    child: Text( place, style: const TextStyle( 
+                      fontSize: 12, 
+                      fontWeight: FontWeight.w600, 
+                      color: Color(0xFF000000),
+                      fontFamily: "Inter"
+                      )
+                    ) 
                   ) ,
                   Padding(
                     padding: const EdgeInsets.symmetric( horizontal: 5 ), 
-                    child: Text( location, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black ) ),
+                    child: Text( location, style: const TextStyle( 
+                      fontSize: 12, 
+                      fontWeight: FontWeight.w600, 
+                      color: Color(0xFF000000),
+                      fontFamily: "Inter"
+                      ) 
+                    ),
                   )
                 ],
               ),
@@ -53,11 +66,21 @@ class AmbulanceListItem extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.symmetric( horizontal: 2 ), 
-                child: Text( 'Est:', style: TextStyle( fontSize: 16, fontWeight: FontWeight.w200, color: Colors.black ) ) 
+                child: Text( 'Est:', style: TextStyle( 
+                  fontSize: 13.66, 
+                  fontWeight: FontWeight.w400, 
+                  color: Color(0xFF000000),
+                  fontFamily: "Inter"
+                 ) ) 
               ),
                Padding(
                 padding: const EdgeInsets.symmetric( horizontal: 2 ), 
-                child: Text( time, style: const TextStyle( fontSize: 16, fontWeight: FontWeight.w900, color: Colors.black ) ) 
+                child: Text( time, style: const TextStyle( 
+                  fontSize: 13.66, 
+                  fontWeight: FontWeight.w600, 
+                  color: Color(0xFF000000),
+                  fontFamily: "Inter"
+                ) ) 
               )
             ],
           )

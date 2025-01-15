@@ -23,30 +23,30 @@ class OtpVerify extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox( height: 50 ),
-              const Text( "Confirm Your Number", 
-              style: TextStyle( 
-                fontSize: 20.14, 
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF545454),
-                fontFamily: "Manrope"
-              ) ),
-              const Text( "A verification code consisting of six digits has been dispatched. Please input this code to confirm your phone number.", 
-                style: TextStyle( 
-                  fontSize: 13.18, 
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF393939),
-                  fontFamily: "Inter"
-                ) ),
-                const SizedBox( height: 10 ),
-                const Text( "The code has been sent to 256772555123", 
+                  const Text( "Confirm Your Number", 
                   style: TextStyle( 
-                    fontSize: 13.18, 
+                    fontSize: 20.14, 
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF545454),
-                    fontFamily: "Inter"
-                  ) 
-              ),
-              const SizedBox( height: 25 ),
+                    fontFamily: "Manrope"
+                  ) ),
+                  const Text( "A verification code consisting of six digits has been dispatched. Please input this code to confirm your phone number.", 
+                    style: TextStyle( 
+                      fontSize: 13.18, 
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF393939),
+                      fontFamily: "Inter"
+                  ) ),
+                  const SizedBox( height: 10 ),
+                  const Text( "The code has been sent to 256772555123", 
+                    style: TextStyle( 
+                      fontSize: 13.18, 
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF545454),
+                      fontFamily: "Inter"
+                    ) 
+                  ),
+                  const SizedBox( height: 25 ),
               Center(
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
