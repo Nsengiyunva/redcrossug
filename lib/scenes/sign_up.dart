@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/scenes/form_textfield.dart';
+import 'package:redcross/scenes/password_field.dart';
 import 'package:redcross/scenes/red_btn.dart';
 import 'package:redcross/scenes/text_field.dart';
 
@@ -19,22 +21,33 @@ class SignUp extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
           child: Column(
           children: [
-            const Text( "Lets get to know you", style: TextStyle( fontSize: 24, color: Colors.black ) ),
+            const Text( "Lets get to know you", style: TextStyle( fontSize: 20.14, color: Color(0xFF545454), fontFamily: "Manrope", fontWeight: FontWeight.w600 ) ),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Name', textEditingController: _loginController.registerName,),
+            FormTextfield( question: 'Name', textEditingController: _loginController.registerName,),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Email Address', textEditingController: _loginController.registerEmail),
+            FormTextfield( question: 'Email Address', textEditingController: _loginController.registerEmail),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Date of Birth', textEditingController: _loginController.registerDOB),
+            FormTextfield( question: 'Date of Birth', textEditingController: _loginController.registerDOB),
             const SizedBox( height: 10 ),
-             TextFieldInput( question: 'Country', textEditingController: _loginController.registerCountry),
+            FormTextfield( question: 'Country', textEditingController: _loginController.registerCountry),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'NIN/Passport Number', textEditingController: _loginController.registerNIN ),
+            FormTextfield( question: 'NIN/Passport Number', textEditingController: _loginController.registerNIN ),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Password', textEditingController: _loginController.registerPassword ),
+            PasswordField( question: 'Password', textEditingController: _loginController.registerPassword ),
             const SizedBox( height: 10 ),
-            TextFieldInput( question: 'Confirm Password', textEditingController: _loginController.registerConfirmPassword ),
+            PasswordField( question: 'Confirm Password', textEditingController: _loginController.registerConfirmPassword ),
             const SizedBox( height: 10 ),
+            const Row(
+              children: [
+                Icon(
+                  Icons.check_box_outline_blank,
+                  color: Color(0xFFE8E8E8),
+                  size: 24.0,
+                ),
+                Text( "By continuing, you accept our privacy policy", style: TextStyle( fontWeight: FontWeight.w500, fontFamily: "Inter", fontSize: 10, color: Color(0xFF848484) ) ),
+              ],
+            ),
+            const SizedBox( height: 5 ),
             RedBtn( label: 'Continue', onPressed: () { 
               Get.toNamed( "/account-creation-success" );
             }, )

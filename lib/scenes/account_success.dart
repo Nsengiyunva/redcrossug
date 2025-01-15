@@ -24,8 +24,12 @@ class AccountSuccess extends StatelessWidget {
               child: Text(
                 title,
                 textAlign: TextAlign.center,
-                style: const TextStyle( fontSize: 36, color: Colors.black, fontWeight: FontWeight.bold ),
-                
+                style: const TextStyle( 
+                  fontSize: 23.12, 
+                  fontFamily: "Manrope",
+                  color: Color(0xFF545454), 
+                  fontWeight: FontWeight.w700 
+                ),
               ),
             ),
             const SizedBox( height: 15 ),
@@ -35,7 +39,12 @@ class AccountSuccess extends StatelessWidget {
               child: Text(
                 success_message,
                 textAlign: TextAlign.center,
-                style: const TextStyle( fontSize: 24, )
+                style: const TextStyle( 
+                  fontSize: 13.18, 
+                  color: Color(0xFF393939),
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Inter"
+                )
               ),
             ),
             ),

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         "/disasters": ( context ) => DisasterList(),
         "/ambulance-request-form": ( context ) => AmbulanceForm(),
         "/ambulance-success-request": ( context ) => const AmbulanceSuccess(),
-        "/account-creation-success": ( context ) => const AccountSuccess(button_label: 'Continue', title: 'Welcome aboard', success_message: 'Your Account has been created successfully. Check your email for confirmation.', changeColor: false ),
+        "/account-creation-success": ( context ) => const AccountSuccess(button_label: 'Continue', title: 'Welcome aboard', success_message: 'Your Account has been created successfully.', changeColor: false ),
         "/check-ambulance_status": ( context ) => AmbulanceStatus(),
         "/ambulance-home": ( context ) => AmbulanceHome(),
         "/disaster-details": ( context ) => const DisasterDetails(),
