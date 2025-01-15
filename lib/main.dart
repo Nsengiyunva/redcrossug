@@ -5,6 +5,7 @@ import 'package:redcross/scenes/ambulance_form.dart';
 import 'package:redcross/scenes/ambulance_home.dart';
 import 'package:redcross/scenes/ambulance_status.dart';
 import 'package:redcross/scenes/ambulance_success.dart';
+import 'package:redcross/scenes/ambulances/ambulance_map.dart';
 import 'package:redcross/scenes/disaster_details.dart';
 import 'package:redcross/scenes/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_details.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         "/first-aid-home": ( context ) => const FirstAidHome(),
         "/first-aid-emergency-services": ( context ) => const FirstAidEmergencies(),
         "/first-aid-emergency-details": ( context ) => const FirstAidDetails(),
+        "/ambulance-map-locations": ( context ) =>  const AmbulanceMap(),
       },
       initialRoute: "/login",
     );

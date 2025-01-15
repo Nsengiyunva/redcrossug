@@ -17,11 +17,11 @@ class AmbulanceStatusItem extends StatelessWidget {
           Text( label.toUpperCase(), style: const TextStyle( 
             fontSize: 11.11,
             fontFamily: "Inter",
-            color: Color(0xFF1A3C),
+            color: Color(0x00ff1a3c),
             fontWeight: FontWeight.w400
           ) ),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   color: Color(0xFFD9D9D9),
@@ -31,7 +31,7 @@ class AmbulanceStatusItem extends StatelessWidget {
             ),
           ),
           noComponent ? const AmbulanceProgressField() : 
-          Text( value, style: TextStyle( 
+          Text( value, style: const TextStyle( 
             fontSize: 16.89,
             fontFamily: "Inter",
             fontWeight: FontWeight.w500,

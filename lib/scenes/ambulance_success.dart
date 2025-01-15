@@ -13,7 +13,7 @@ class AmbulanceSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         title: const Text("Request Ambulance", style: TextStyle(
           fontSize: 16,
