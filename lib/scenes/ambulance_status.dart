@@ -27,6 +27,7 @@ class AmbulanceStatus extends StatelessWidget {
                 child: Image.asset( 'assets/images/ambulance.png', width: 300, height: 300 ),
               ),
               Container(
+                padding: EdgeInsets.symmetric( vertical: 15, horizontal: 15),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF5F3F3),
                   borderRadius: BorderRadius.circular( 10 )
