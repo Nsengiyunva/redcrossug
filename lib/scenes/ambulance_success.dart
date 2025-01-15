@@ -13,8 +13,14 @@ class AmbulanceSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
-        title: const Text("Request Ambulance"),
+        title: const Text("Request Ambulance", style: TextStyle(
+          fontSize: 16,
+          fontFamily: "Inter",
+          fontWeight: FontWeight.w600,
+          color: Color(0xFF000000)
+        ) ),
         leading: const BackButton() // Back button added here
       ),
       body: Container(
@@ -29,8 +35,12 @@ class AmbulanceSuccess extends StatelessWidget {
               child: Text(
                 "Request Successful",
                 textAlign: TextAlign.center,
-                style: TextStyle( fontSize: 24, color: Colors.red, fontWeight: FontWeight.bold ),
-                
+                style: TextStyle( 
+                  fontFamily: "Inter",
+                  fontSize: 27.37, 
+                  color: Color(0xFFED1C24), 
+                  fontWeight: FontWeight.w700 
+                ),
               ),
             ),
             const SizedBox( height: 15 ),
@@ -40,7 +50,12 @@ class AmbulanceSuccess extends StatelessWidget {
               child: Text(
                 "Your Ambulance Request was successful",
                 textAlign: TextAlign.center,
-                style: TextStyle( fontSize: 24, )
+                style: TextStyle( 
+                  fontSize: 19.07,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF000000),
+                  fontFamily: "Inter"
+                )
               ),
             ),
             ),

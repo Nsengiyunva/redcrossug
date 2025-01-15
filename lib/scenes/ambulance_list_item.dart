@@ -23,12 +23,12 @@ class AmbulanceListItem extends StatelessWidget {
             children: [
                 Container(
                   padding: const EdgeInsets.all( 10 ),
-                  margin: EdgeInsets.only( left: 10, right: 5  ),
+                  margin: const EdgeInsets.only( left: 10, right: 5  ),
                   decoration: BoxDecoration(
-                    color: Color(0xFFFFE3E1),
+                    color: const Color(0xFFFFE3E1),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Icon(
+                  child: const Icon(
                   Icons.fire_truck_sharp,
                   color:Color(0xFFED1C24),
                   size: 15,

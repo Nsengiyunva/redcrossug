@@ -14,18 +14,29 @@ class AmbulanceStatusItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text( label.toUpperCase(), style: const TextStyle( fontSize: 20 ) ),
+          Text( label.toUpperCase(), style: const TextStyle( 
+            fontSize: 11.11,
+            fontFamily: "Inter",
+            color: Color(0xFF1A3C),
+            fontWeight: FontWeight.w400
+          ) ),
           Container(
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Colors.grey.shade500,
+                  color: Color(0xFFD9D9D9),
                   width: 2.0
                 )
               )
             ),
           ),
-          noComponent ? const AmbulanceProgressField() : Text( value, style: const TextStyle( fontSize: 24 ) ),
+          noComponent ? const AmbulanceProgressField() : 
+          Text( value, style: TextStyle( 
+            fontSize: 16.89,
+            fontFamily: "Inter",
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF1A3C40)
+          ) ),
         ],
       ),
     );

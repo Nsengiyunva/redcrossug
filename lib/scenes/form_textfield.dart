@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class FormTextfield extends StatelessWidget {
   final String question;
+  // bool grey;
   final TextEditingController textEditingController;
 
   const FormTextfield({ 
@@ -9,6 +10,8 @@ class FormTextfield extends StatelessWidget {
     required this.question, 
     required this.textEditingController
   } );
+
+  // grey ? Color(0xFF848484) : 
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class FormTextfield extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(question, style: const TextStyle( fontSize: 12.74, fontFamily: "Inter", fontWeight: FontWeight.w500, color: Color(0xFF848484) )),
+              Text(question, style: const TextStyle( fontSize: 12.74, fontFamily: "Inter", fontWeight: FontWeight.w500, color: Color(0xFF000000) )),
               const SizedBox( height: 2 ),
               TextField(
                 controller: textEditingController,

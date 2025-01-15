@@ -50,7 +50,7 @@ class RedBtnIcon extends StatelessWidget {
                     size: 24.0,
                   ),
                   Padding(
-                    padding: EdgeInsets.only( left: 10 ),
+                    padding: const EdgeInsets.only( left: 10 ),
                     child: SizedBox(
                       child: noColor ? Text( label , style: const TextStyle( 
                       fontSize: 12, 

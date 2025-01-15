@@ -12,7 +12,7 @@ class AmbulanceHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF6F8FC),
+      backgroundColor: const Color(0xFFF6F8FC),
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton() // Back button added here

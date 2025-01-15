@@ -21,7 +21,8 @@ class AmbulanceProgressField extends StatelessWidget {
             size: 15.0,
           ),
           Padding(padding: const EdgeInsets.symmetric( horizontal: 5 ),
-            child: Text( "Confirmed", style: TextStyle( fontSize: 20, color: Colors.green.shade700 )
+            child: Text( "Confirmed", style: TextStyle( 
+              fontSize: 20, color: Colors.green.shade700 )
            ),
           )
         ],
