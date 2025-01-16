@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         "/disaster-details": ( context ) => const DisasterDetails(),
         "/initiate-payment": ( context ) => const Payment(),
         "/payment-successful": ( context ) => const AccountSuccess(button_label: 'Close', title: 'Thank you', success_message: 'Your Donation Payment was Successful', changeColor: true ),
-        "/register-account": ( context ) => SignUp(),
+        "/register-account": ( context ) => const SignUp(),
         "/splash-screen": ( context ) => const SplashScreen(),
         "/enter-otp": ( context ) => OtpVerify(),
         "/first-aid-home": ( context ) => const FirstAidHome(),

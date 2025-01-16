@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class AmbulanceListItem extends StatelessWidget {
   final String place;
@@ -30,7 +31,7 @@ class AmbulanceListItem extends StatelessWidget {
                   ),
                   child: const Icon(
                   Icons.fire_truck_sharp,
-                  color:Color(0xFFED1C24),
+                  color:AppColors.primaryRedColor,
                   size: 15,
                 ),
               ),

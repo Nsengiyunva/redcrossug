@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class RedBtn extends StatelessWidget {
   final String label;
@@ -9,8 +10,11 @@ class RedBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
-      height: 50,
+      height: ( screenWidth * 0.25 ) / 2,
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -20,10 +24,15 @@ class RedBtn extends StatelessWidget {
               shape: RoundedRectangleBorder(
               borderRadius: squared != null ? BorderRadius.circular( 8 ) :  BorderRadius.circular( 10 )
             ),
-            backgroundColor:  const Color(0xFFED1C24),
+            backgroundColor:  AppColors.primaryRedColor,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12 ),
           ),
-            child: Text( label, style: const TextStyle( fontWeight: FontWeight.w600, fontFamily: "Inter", fontSize: 14, color: Colors.white ) ),
+            child: Text( label, style: const TextStyle( 
+              fontWeight: FontWeight.w600, 
+              fontFamily: "Inter", 
+              fontSize: 14, 
+              color: Colors.white 
+            ) ),
           )
           ]
         ),

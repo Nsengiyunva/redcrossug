@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 class TextFieldDatePickerDemo1 extends StatefulWidget {
   static const routeName = '/textFieldDatePickerDemo';
-  const TextFieldDatePickerDemo1({Key? key}) : super(key: key);
+  const TextFieldDatePickerDemo1({super.key});
 
   @override
   _TextFieldDatePickerDemo1State createState() =>

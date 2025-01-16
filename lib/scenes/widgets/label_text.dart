@@ -5,7 +5,7 @@ import 'package:redcross/scenes/mediaQuery/size_helpers.dart';
 class LabelText extends StatelessWidget {
   final String labelValue;
 
-  const LabelText({Key? key, required this.labelValue}) : super(key: key);
+  const LabelText({super.key, required this.labelValue});
 
   @override
   Widget build(BuildContext context) {

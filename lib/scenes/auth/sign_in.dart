@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/password_field.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
-import 'package:redcross/scenes/widgets/text_field.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({super.key});
@@ -12,6 +12,10 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // double screenWidth = MediaQuery.of(context).size.width;
+
+    // print( screenWidth );
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -27,7 +31,7 @@ class SignIn extends StatelessWidget {
                 style: TextStyle( fontFamily: "Inter", fontSize: 16.99, color: Color(0xFF7D8FAB) ) )  ,
             ),
             const SizedBox( height: 25 ),
-            TextFieldInput(
+            FormTextfield(
               question: 'Phone Number', 
               textEditingController: _loginController.telephoneController,
             ),
@@ -59,7 +63,7 @@ class SignIn extends StatelessWidget {
                   //  Get.toNamed( "/register-account" );
                   },
                   style: TextButton.styleFrom(   
-                    backgroundColor: Color(0xFFFFFFFF),
+                    backgroundColor: const Color(0xFFFFFFFF),
                   ),
                   child: const Text( "Forgot Password", style: TextStyle( fontWeight: FontWeight.w400, fontFamily: "Inter", fontSize: 12.8, color: Color(0xFFED1C24), decoration: TextDecoration.underline, decorationColor: Color(0xFFED1C24) ) ),
                 )

@@ -12,11 +12,14 @@ class TextFieldInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    
     return Container(
       child: Column(
         children: [
           SizedBox(
-            height: 49,
+            height: ( screenWidth * 0.25 ) / 2,
             child: TextField(
             controller: textEditingController,
             style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),

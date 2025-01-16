@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class FormTextfield extends StatelessWidget {
   final String question;
-  // bool grey;
   final TextEditingController textEditingController;
 
   const FormTextfield({ 
@@ -10,8 +9,6 @@ class FormTextfield extends StatelessWidget {
     required this.question, 
     required this.textEditingController
   } );
-
-  // grey ? Color(0xFF848484) : 
 
   @override
   Widget build(BuildContext context) {
