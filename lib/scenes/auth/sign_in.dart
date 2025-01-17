@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
-import 'package:redcross/scenes/widgets/password_field.dart';
+import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 
 class SignIn extends StatelessWidget {
@@ -30,13 +31,14 @@ class SignIn extends StatelessWidget {
               child: Text( "Good to see you again! Ready to make an impact? Let’s get started.",
                 style: TextStyle( fontFamily: "Inter", fontSize: 16.99, color: Color(0xFF7D8FAB) ) )  ,
             ),
+            const SizedBox( height: 15 ),
+            PhoneNumberField(textEditingController: _loginController.telephoneController,),
+            // FormTextfield(
+            //   question: 'Phone Number', 
+            //   textEditingController: _loginController.telephoneController,
+            // ),
             const SizedBox( height: 25 ),
-            FormTextfield(
-              question: 'Phone Number', 
-              textEditingController: _loginController.telephoneController,
-            ),
-            const SizedBox( height: 25 ),
-            PasswordField( 
+            FormPassword( 
               question: 'Password', 
               textEditingController: _loginController.passwordController 
             ),

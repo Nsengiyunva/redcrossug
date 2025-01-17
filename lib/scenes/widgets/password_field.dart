@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class PasswordField extends StatelessWidget {
   final String question;
@@ -20,29 +21,33 @@ class PasswordField extends StatelessWidget {
             child: TextField(
             obscureText: true,
             controller: textEditingController,
-            style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
+            style: const TextStyle( 
+              fontFamily: "Inter", 
+              fontSize: 14, 
+              color: Color(0xFF293041) 
+            ),
             decoration: InputDecoration(
               suffixIcon: const Icon(
                 Icons.visibility_off
               ),
               alignLabelWithHint: true,
-              fillColor: Colors.white54,
+              fillColor: AppColors.whiteColor,
               labelText: question,
-              labelStyle: const TextStyle(color: Colors.black),
+              labelStyle: const TextStyle(color: AppColors.blackColor),
               border: const OutlineInputBorder(),
               contentPadding: const EdgeInsets.symmetric( vertical: 5, horizontal: 10 ),
 
               enabledBorder: OutlineInputBorder(  // Border when not focused
-                borderRadius: BorderRadius.circular(18),
-                borderSide: const BorderSide(color: Color(0xFFD2D9DE), width: 2),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.borderColorGrey, width: 2),
               ),
               focusedBorder: OutlineInputBorder(  // Border when focused
-                borderRadius: BorderRadius.circular(18),
-                borderSide: const BorderSide(color: Color(0xFFED1C24), width: 2),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.primaryRedColor, width: 2),
               ),
               errorBorder: OutlineInputBorder(   // Border when error occurs
-                borderRadius: BorderRadius.circular(18),
-                borderSide: const BorderSide(color: Color(0xFFED1C24), width: 2),
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: AppColors.primaryRedColor, width: 2),
               ),
             )
            )

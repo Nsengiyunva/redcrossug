@@ -36,14 +36,15 @@ class _PhoneNumberField extends State<PhoneNumberField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-            padding: const EdgeInsets.symmetric( horizontal: 15 ),
+            padding: const EdgeInsets.symmetric( horizontal: 5 ),
             child: TextField(
             controller: widget.textEditingController,
             style: const TextStyle( 
               fontSize: 16, 
               fontWeight: FontWeight.w600, 
               fontFamily: "Manrope", 
-              color: Color(0xFF000000)  ),
+              color: Color(0xFF000000)  
+            ),
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular( 10 ),
