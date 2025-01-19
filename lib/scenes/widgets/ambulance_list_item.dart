@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
 
 class AmbulanceListItem extends StatelessWidget {
@@ -63,28 +64,29 @@ class AmbulanceListItem extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric( horizontal: 2 ), 
-                child: Text( 'Est:', style: TextStyle( 
-                  fontSize: 13.66, 
-                  fontWeight: FontWeight.w400, 
-                  color: Color(0xFF000000),
-                  fontFamily: "Inter"
-                 ) ) 
-              ),
-               Padding(
-                padding: const EdgeInsets.symmetric( horizontal: 2 ), 
-                child: Text( time, style: const TextStyle( 
-                  fontSize: 13.66, 
-                  fontWeight: FontWeight.w600, 
-                  color: Color(0xFF000000),
-                  fontFamily: "Inter"
-                ) ) 
-              )
-            ],
-          )
+          const TagItem(label: 'Contact', height: 25.58, width: 64.15 )
+          // Row(
+          //   children: [
+          //     const Padding(
+          //       padding: EdgeInsets.symmetric( horizontal: 2 ), 
+          //       child: Text( 'Est:', style: TextStyle( 
+          //         fontSize: 13.66, 
+          //         fontWeight: FontWeight.w400, 
+          //         color: Color(0xFF000000),
+          //         fontFamily: "Inter"
+          //        ) ) 
+          //     ),
+          //      Padding(
+          //       padding: const EdgeInsets.symmetric( horizontal: 2 ), 
+          //       child: Text( time, style: const TextStyle( 
+          //         fontSize: 13.66, 
+          //         fontWeight: FontWeight.w600, 
+          //         color: Color(0xFF000000),
+          //         fontFamily: "Inter"
+          //       ) ) 
+          //     )
+          //   ],
+          // )
         ],
       ),
     );

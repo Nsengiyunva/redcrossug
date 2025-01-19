@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/scenes/ambulances/ambulance_progress_box.dart';
 import 'package:redcross/scenes/widgets/ambulance_list_item.dart';
 import 'package:redcross/scenes/widgets/red_btn_icon.dart';
+import 'package:redcross/utils/colors.dart';
 
 class AmbulanceHome extends StatelessWidget {
   AmbulanceHome({super.key});
@@ -12,11 +14,7 @@ class AmbulanceHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F8FC),
-      appBar: AppBar(
-        title: const Text(""),
-        leading: const BackButton() // Back button added here
-      ),
+      backgroundColor: AppColors.bgColor,
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -36,14 +34,14 @@ class AmbulanceHome extends StatelessWidget {
               onPressed: () {
                 Get.toNamed( "/ambulance-request-form" );
               }, icon_name: "local_police", ),
+              // RedBtnIcon(noColor: true, label: "Ambulance for Status", onPressed: () {}, icon_name: "fire_truck", ),
               const SizedBox( height: 15 ),
-              RedBtnIcon(noColor: true, label: "Ambulance for Status", onPressed: () {}, icon_name: "fire_truck", ),
-              const SizedBox( height: 15 ),
-              const Text( "Ambulances Near Me", style: TextStyle( 
+              const AmbulanceProgressBox(),
+              const Text( "Private Service Providers", style: TextStyle( 
                 fontSize: 17.94,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF000000)
+                color: AppColors.blackColor
                ), ),
               const SizedBox( height: 15 ),
               const AmbulanceListItem(place: "Life Link", location: 'Hospital, Naalya', time: '23 mins'),

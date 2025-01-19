@@ -155,7 +155,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                 style: const TextStyle( fontFamily: "Inter", fontSize: 11.37, fontWeight: FontWeight.w400, color: Color(0xFF000000) ), ),
               ),
               const SizedBox( height: 10 ),
-              const TagItem( label: "Emergency Support" ),
+              const TagItem( label: "Emergency Support", height: 23.35, width: 132 ),
               const SizedBox( height: 10 ),
               const LinkField(label: 'Nearby Hospitals'),
               const SizedBox( height: 10 ),

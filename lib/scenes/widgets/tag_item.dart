@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 class TagItem extends StatelessWidget {
   final String label;
+  final double height;
+  final double width;
 
-  const TagItem({super.key, required this.label });
+  const TagItem({super.key, required this.label, required this.height, required this.width });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric( horizontal: 10 ),
       padding: const EdgeInsets.symmetric( horizontal: 5 ),
-      height: 23.35,
-      width: 132,
+      height: height,
+      width: width,
       decoration: BoxDecoration(
         color: const Color(0xFFFFDBDB),
         borderRadius: BorderRadius.circular( 5 )
