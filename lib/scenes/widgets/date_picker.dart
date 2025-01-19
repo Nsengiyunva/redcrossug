@@ -46,11 +46,16 @@ class _DatePickerState extends State<DatePicker> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text( widget.question, style: const TextStyle( fontSize: 12.74, fontFamily: "Inter", fontWeight: FontWeight.w500, color: Color(0xFF000000) )),
+              Text( widget.question, style: const TextStyle( fontSize: 12.74, fontFamily: "Inter", fontWeight: FontWeight.w500, color: AppColors.greyColorC )),
               const SizedBox( height: 2 ),
               TextField(
                 controller: _dateController,
-                style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
+                style: const TextStyle( 
+                  fontFamily: "Inter", 
+                  fontSize: 12.74, 
+                  color: AppColors.greyColorC,
+                  fontWeight: FontWeight.w500
+                ),
                 readOnly: true,
                 onTap: () => _pickDate(context),
                 decoration: InputDecoration(
@@ -61,15 +66,15 @@ class _DatePickerState extends State<DatePicker> {
                   border: const OutlineInputBorder(),
 
                   enabledBorder: OutlineInputBorder(  // Border when not focused
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(color: AppColors.greyColorD, width: 1 ),
                   ),
                   focusedBorder: OutlineInputBorder(  // Border when focused
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(color: Color(0xFFED1C24), width:  1 ),
                   ),
                   errorBorder: OutlineInputBorder(   // Border when error occurs
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(color: Color(0xFFED1C24), width:  1 ),
                   )
                 ),

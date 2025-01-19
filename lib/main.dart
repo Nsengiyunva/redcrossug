@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         "/first-aid-emergency-details": ( context ) => const FirstAidDetails(),
         "/ambulance-map-locations": ( context ) =>  const AmbulanceMap(),
       },
-      initialRoute: "/login",
+      initialRoute: "/splash-screen",
     );
   }
 }

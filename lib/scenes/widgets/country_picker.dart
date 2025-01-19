@@ -63,12 +63,12 @@ class _PhoneNumberField extends State<CountryPicker> {
                   ),
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular( 18 ),
-                      borderSide: const BorderSide(color: Color(0xFFED1C24), width: 1.0),
+                      borderRadius: BorderRadius.circular( 12 ),
+                      borderSide: const BorderSide(color: AppColors.primaryRedColor, width: 1.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular( 18 ),
-                      borderSide: const BorderSide(color: Color(0xFF545454), width: 1.0),
+                      borderRadius: BorderRadius.circular( 12 ),
+                      borderSide: const BorderSide(color: AppColors.greyColorD, width: 1.0),
                     ),
                     hintText: '',
                     hintStyle: const TextStyle( 

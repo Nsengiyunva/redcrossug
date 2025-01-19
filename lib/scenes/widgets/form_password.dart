@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class FormPassword extends StatelessWidget {
   final String question;
@@ -25,13 +26,14 @@ class FormPassword extends StatelessWidget {
                 obscureText: true, 
                 style: const TextStyle( 
                   fontFamily: "Inter", 
-                  fontSize: 14, 
-                  color: Color(0xFF293041) 
+                  fontSize: 12.74, 
+                  color: AppColors.greyColorC,
+                  fontWeight: FontWeight.w500
                 ),
                 decoration: InputDecoration(
                   suffixIcon: Icon(
                     Icons.remove_red_eye,
-                    color: Colors.black
+                    color: AppColors.greyColorC
                   ),
 
                   border: const OutlineInputBorder(),

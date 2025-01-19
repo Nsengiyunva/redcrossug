@@ -52,7 +52,7 @@ class AccountSuccess extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric( horizontal: 28 ),
               child: RedBtn( label: button_label, onPressed: () {  
-                Get.toNamed( "/home" );
+                Get.toNamed( "/login" );
               }, ),
             )
          ],
