@@ -29,6 +29,11 @@ class FormPassword extends StatelessWidget {
                   color: Color(0xFF293041) 
                 ),
                 decoration: InputDecoration(
+                  suffixIcon: Icon(
+                    Icons.remove_red_eye,
+                    color: Colors.black
+                  ),
+
                   border: const OutlineInputBorder(),
                   enabledBorder: OutlineInputBorder(  // Border when not focused
                     borderRadius: BorderRadius.circular(12),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class FormTextfield extends StatelessWidget {
   final String question;
@@ -18,24 +19,39 @@ class FormTextfield extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(question, style: const TextStyle( fontSize: 12.74, fontFamily: "Inter", fontWeight: FontWeight.w500, color: Color(0xFF000000) )),
+              Padding(
+                padding: EdgeInsets.symmetric( horizontal: 10 ),
+                child: Text( question, style: const TextStyle( 
+                  fontSize: 12.74, 
+                  fontFamily: "Inter", 
+                  fontWeight: FontWeight.w500, 
+                  color: AppColors.greyColorC 
+                  )
+                ) 
+              ),
               const SizedBox( height: 2 ),
               TextField(
                 controller: textEditingController,
-                style: const TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
+                style: const TextStyle( 
+                  fontFamily: "Inter", fontSize: 14, 
+                  color: Color(0xFF293041) 
+                ),
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.greyColorD, width: 1 )
+                  ),
 
                   enabledBorder: OutlineInputBorder(  // Border when not focused
-                    borderRadius: BorderRadius.circular(18),
-                    borderSide: const BorderSide(color: Color(0xFF545454), width: 1 ),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.greyColorD, width: 1 ),
                   ),
                   focusedBorder: OutlineInputBorder(  // Border when focused
-                    borderRadius: BorderRadius.circular(18),
-                    borderSide: const BorderSide(color: Color(0xFFED1C24), width:  1 ),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.primaryRedColor, width:  1 ),
                   ),
                   errorBorder: OutlineInputBorder(   // Border when error occurs
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(color: Color(0xFFED1C24), width:  1 ),
                   )
                 ),
