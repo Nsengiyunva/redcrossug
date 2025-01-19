@@ -20,7 +20,7 @@ class FormTextfield extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric( horizontal: 10 ),
+                padding: const EdgeInsets.symmetric( horizontal: 10 ),
                 child: Text( question, style: const TextStyle( 
                   fontSize: 12.74, 
                   fontFamily: "Inter", 

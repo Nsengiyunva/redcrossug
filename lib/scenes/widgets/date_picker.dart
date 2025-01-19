@@ -59,7 +59,7 @@ class _DatePickerState extends State<DatePicker> {
                 readOnly: true,
                 onTap: () => _pickDate(context),
                 decoration: InputDecoration(
-                  suffixIcon: Icon(
+                  suffixIcon: const Icon(
                     Icons.calendar_month,
                     color: Colors.grey
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class LinkField extends StatelessWidget {
   final String label;
@@ -8,7 +9,7 @@ class LinkField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric( horizontal: 10 ),
+      margin: const EdgeInsets.symmetric( horizontal: 5 ),
       padding: const EdgeInsets.symmetric( horizontal: 5 ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -16,22 +17,17 @@ class LinkField extends StatelessWidget {
         children: [
           Text( label, style: const TextStyle(  
             decoration: TextDecoration.underline, 
-            decorationColor: Color(0xFF0080FF),
-            color: Color(0xFF0080FF), 
+            decorationColor: AppColors.blueColorA,
+            color: AppColors.blueColorA, 
             fontFamily: "Inter", 
             fontSize: 11.37, 
             fontWeight: FontWeight.w400 
             )
           ),
-          // Icon(
-          //   Icons, 
-          //   size: 12, 
-          //   color: Color(0xFF0080FF)
-          // )
           const Icon(
-            Icons.abc_sharp,
+            Icons.arrow_outward_sharp,
             size: 12,
-            color: Colors.red
+            color: AppColors.blueColorA
           )
         ],
       ),

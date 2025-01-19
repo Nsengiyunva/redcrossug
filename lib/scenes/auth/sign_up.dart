@@ -31,7 +31,7 @@ class SignUp extends StatelessWidget {
             const SizedBox( height: 10 ),
             FormTextfield( question: 'Email Address', textEditingController: _loginController.registerEmail),
             const SizedBox( height: 10 ),
-            DatePicker( question: 'Date of Birth' ),
+            const DatePicker( question: 'Date of Birth' ),
             const SizedBox( height: 10 ),
             CountryPicker( question: 'Country', textEditingController: _loginController.registerCountry),
             // FormTextfield( question: 'Country', textEditingController: _loginController.registerCountry),

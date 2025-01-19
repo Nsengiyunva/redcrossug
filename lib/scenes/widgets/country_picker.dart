@@ -47,7 +47,7 @@ class _PhoneNumberField extends State<CountryPicker> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric( horizontal: 10 ),
+              padding: const EdgeInsets.symmetric( horizontal: 10 ),
               child: Text( widget.question, style: const TextStyle( 
                 fontSize: 12.74, 
                 fontFamily: "Inter", 

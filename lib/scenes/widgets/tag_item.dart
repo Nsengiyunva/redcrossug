@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class TagItem extends StatelessWidget {
   final String label;
@@ -10,17 +11,21 @@ class TagItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric( horizontal: 10 ),
-      padding: const EdgeInsets.symmetric( horizontal: 5 ),
+      // margin: const EdgeInsets.symmetric( horizontal: 10 ),
+      padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 5 ),
       height: height,
       width: width,
       decoration: BoxDecoration(
         color: const Color(0xFFFFDBDB),
         borderRadius: BorderRadius.circular( 5 )
       ),
-      child: Center(
-        child: Text( label, style: const TextStyle( fontSize: 11.54, fontFamily: "Inter", fontWeight: FontWeight.w600, color: Color(0xFFE30000) ) ),
-      )
+      child: Text( label, style: const TextStyle( 
+          fontSize: 11.54, 
+          fontFamily: "Inter", 
+          fontWeight: FontWeight.w600, 
+          color:  AppColors.redColorA 
+        )
+      ) 
     );
   }
 }

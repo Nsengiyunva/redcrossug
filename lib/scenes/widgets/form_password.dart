@@ -31,7 +31,7 @@ class FormPassword extends StatelessWidget {
                   fontWeight: FontWeight.w500
                 ),
                 decoration: InputDecoration(
-                  suffixIcon: Icon(
+                  suffixIcon: const Icon(
                     Icons.remove_red_eye,
                     color: AppColors.greyColorC
                   ),
