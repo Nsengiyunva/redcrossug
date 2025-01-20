@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/ambulance_status_item.dart';
+import 'package:redcross/utils/colors.dart';
 
 class AmbulanceStatus extends StatelessWidget {
   AmbulanceStatus({super.key});
@@ -11,9 +12,14 @@ class AmbulanceStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F8FC),
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-        title: const Text("Ambulance Status", style: TextStyle( fontSize: 16, fontFamily: "Inter", color: Color(0xFF000000), fontWeight: FontWeight.w600 ) ),
+        title: const Text("Ambulance Status", style: TextStyle( 
+          fontSize: 16, 
+          fontFamily: "Inter", 
+          color: AppColors.blackColor, 
+          fontWeight: FontWeight.w600 ) 
+        ),
         leading: const BackButton() // Back button added here
       ),
       body: SingleChildScrollView(
@@ -24,20 +30,24 @@ class AmbulanceStatus extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: Image.asset( 'assets/images/ambulance.png', width: 300, height: 300 ),
+                child: Image.asset( 
+                  'assets/images/ambulance.png', 
+                  width: 300, 
+                  height: 300 
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric( vertical: 15, horizontal: 15),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5F3F3),
+                  color: AppColors.whiteColorC,
                   borderRadius: BorderRadius.circular( 10 )
                 ),
                 child: Column(
                   children: [
                     AmbulanceStatusItem(label: 'Status', noComponent: true, value: ""),
-                    const SizedBox( height: 25 ),
+                    SizedBox( height: 25 ),
                     AmbulanceStatusItem(label: 'Number of Ambulances', noComponent: false, value: "01"),
-                    const SizedBox( height: 25 ),
+                    SizedBox( height: 25 ),
                     AmbulanceStatusItem(label: 'Ambulances', noComponent: false, value: "Red Cross Nakasero" )
                   ]
                 )

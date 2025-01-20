@@ -14,10 +14,11 @@ class AmbulanceStatusItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //0xFFFF1A3C
           Text( label.toUpperCase(), style: const TextStyle( 
             fontSize: 11.11,
             fontFamily: "Inter",
-            color: Color(0x00ff1a3c),
+            color: Colors.black,
             fontWeight: FontWeight.w400
           ) ),
           Container(

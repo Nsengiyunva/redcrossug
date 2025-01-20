@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
+import 'package:redcross/utils/colors.dart';
 
 class AmbulanceForm extends StatelessWidget {
   AmbulanceForm({super.key});
@@ -12,12 +13,13 @@ class AmbulanceForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         title: const Text("Request Ambulance", style: TextStyle(
           fontSize: 16,
           fontFamily: "Inter",
           fontWeight: FontWeight.w600,
-          color: Color(0xFF000000)
+          color: AppColors.blackColor
         ) ),
         leading: const BackButton() // Back button added here
       ),
@@ -46,16 +48,21 @@ class AmbulanceForm extends StatelessWidget {
               children: [
                 Icon(
                   Icons.check_box_outline_blank,
-                  color: Color(0xFFE8E8E8),
+                  color: AppColors.whiteColorB,
                   size: 24.0,
                 ),
-                Text( "By continuing, you accept our privacy policy", style: TextStyle( fontWeight: FontWeight.w500, fontFamily: "Inter", fontSize: 10, color: Color(0xFF848484) ) ),
+                Text( "By continuing, you accept our privacy policy", style: TextStyle( 
+                  fontWeight: FontWeight.w500, 
+                  fontFamily: "Inter", 
+                  fontSize: 10, 
+                  color: AppColors.greyColorC 
+                ) ),
               ],
             ),
             const SizedBox( height: 15 ),
             RedBtn(label: "Continue", onPressed: () {
-                Get.toNamed('/ambulance-success-request');
-                // Get.toNamed( '/ambulance-map-locations' );
+                // Get.toNamed('/ambulance-success-request');
+                Get.toNamed( '/ambulance-map' );
             } )
             ],
           ),

@@ -62,7 +62,8 @@ class MyApp extends StatelessWidget {
         "/first-aid-item-details": ( context ) => const FaDetailsHome(),
         "/training-home": ( context ) => const TrainingHome(),
         "/training-list-items": ( context ) => const TrainingList(),
-        "/basic-training": ( context ) => const BasicTrainingDetails()
+        "/basic-training": ( context ) => const BasicTrainingDetails(),
+         "/ambulance-map": ( context ) => const AmbulanceMap()
       },
       initialRoute: "/login",
     );
