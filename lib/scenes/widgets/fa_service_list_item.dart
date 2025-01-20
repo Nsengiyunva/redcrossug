@@ -23,7 +23,7 @@ class FaServiceListItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-        Get.toNamed( "/first-aid-emergency-details" );
+        Get.toNamed( "/first-aid-item-details" );
       },
       child: Container(
       height: 61,

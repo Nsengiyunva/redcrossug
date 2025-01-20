@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/country_picker.dart';
 import 'package:redcross/scenes/widgets/date_picker.dart';
-import 'package:redcross/scenes/widgets/dobpicker.dart';
 import 'package:redcross/scenes/widgets/form_password.dart';
-import 'package:redcross/scenes/widgets/phone_number_field.dart';
 
 import '../widgets/form_textfield.dart';
 import '../widgets/red_btn.dart';

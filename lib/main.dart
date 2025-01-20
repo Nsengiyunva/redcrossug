@@ -19,6 +19,7 @@ import 'package:redcross/scenes/donations/payment.dart';
 import 'package:redcross/scenes/first_aid/first_aid_details.dart';
 import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
+import 'package:redcross/scenes/first_aid/screens/fa_details_home.dart';
 
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/splash_screen.dart';
@@ -51,10 +52,11 @@ class MyApp extends StatelessWidget {
         "/register-account": ( context ) => SignUp(),
         "/splash-screen": ( context ) => const SplashScreen(),
         "/enter-otp": ( context ) => OtpVerify(),
-        "/first-aid-home": ( context ) => const FirstAidHome(),
+        "/first-aid-home": ( context ) => FirstAidHome(),
         "/first-aid-emergency-services": ( context ) => const FirstAidEmergencies(),
         "/first-aid-emergency-details": ( context ) => const FirstAidDetails(),
         "/ambulance-map-locations": ( context ) =>  const AmbulanceMap(),
+        "/first-aid-item-details": ( context ) => const FaDetailsHome()
       },
       initialRoute: "/splash-screen",
     );

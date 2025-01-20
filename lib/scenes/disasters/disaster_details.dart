@@ -91,7 +91,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     // print( disaster_details );
     var disasterImage = disaster_details!['banner_photo'];
     var fatalities = disaster_details!['fatalities'].toString() ?? "0";
-    var amount_needed = disaster_details!['funding_target'].toString() ?? "0";
+    var amountNeeded = disaster_details!['funding_target'].toString() ?? "0";
     var currency = disaster_details!['currency'].toString() ?? "UGX";
 
     return Scaffold(
@@ -178,9 +178,9 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container( 
-                      padding: EdgeInsets.symmetric( vertical: 5 ),
-                      margin: EdgeInsets.symmetric( vertical: 5 ),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.symmetric( vertical: 5 ),
+                      margin: const EdgeInsets.symmetric( vertical: 5 ),
+                      decoration: const BoxDecoration(
                         border: Border(
                           top: BorderSide(
                             color: AppColors.primaryRedColor,
@@ -191,9 +191,9 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                       child: Row(
                         children: [
                          Padding(
-                          padding: EdgeInsets.only( right: 10 ),
+                          padding: const EdgeInsets.only( right: 10 ),
                           child:  Text( "$fatalities lives lost", 
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13.64,
                             fontWeight: FontWeight.w600,
                             fontFamily: "Inter",
@@ -201,8 +201,8 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                           ) )
                           ),
                           Container(
-                            padding: EdgeInsets.only( left: 10 ),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.only( left: 10 ),
+                            decoration: const BoxDecoration(
                               border: Border(
                                 left: BorderSide(
                                   color: AppColors.primaryRedColor,
@@ -210,8 +210,8 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                 )
                               )
                             ),
-                            child: Text( "$currency $amount_needed Needed", 
-                            style: TextStyle(
+                            child: Text( "$currency $amountNeeded Needed", 
+                            style: const TextStyle(
                             fontSize: 13.64,
                             fontWeight: FontWeight.w600,
                             fontFamily: "Inter",

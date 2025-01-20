@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/widgets/flag.dart';
-import 'package:redcross/scenes/widgets/flag_code.dart';
 import 'package:redcross/utils/colors.dart';
 
 class CountryPicker extends StatefulWidget {
