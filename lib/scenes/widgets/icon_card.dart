@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class IconCard extends StatelessWidget {
   final String icon_name;
@@ -17,7 +18,7 @@ class IconCard extends StatelessWidget {
 
     return Container(
       width: 180,
-      height: 83,
+      height: 93,
       decoration: BoxDecoration(
         color: const Color(0xFFFFDCDC),
         borderRadius: BorderRadius.circular( 15 )
@@ -31,8 +32,13 @@ class IconCard extends StatelessWidget {
               color: const Color(0xFFED1C24),
               size: 32.39,
             ),
-            Padding(padding: const EdgeInsets.symmetric( vertical: 5 ),
-            child: Text( label, style: const TextStyle( fontSize: 12, fontWeight: FontWeight.w700, fontFamily: "Inter", color: Color(0xFFED1C24)  ) )
+            Padding(padding: const EdgeInsets.symmetric( vertical: 2 ),
+            child: TextButton(
+              onPressed: () {
+                Get.toNamed( "/training-home" );
+              },
+              child: Text( label, style: const TextStyle( fontSize: 12, fontWeight: FontWeight.w700, fontFamily: "Inter", color: Color(0xFFED1C24)  ) ),
+              )
             )
           ],
         ),

@@ -20,6 +20,9 @@ import 'package:redcross/scenes/first_aid/first_aid_details.dart';
 import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
 import 'package:redcross/scenes/first_aid/screens/fa_details_home.dart';
+import 'package:redcross/scenes/first_aid/training/basic_training_details.dart';
+import 'package:redcross/scenes/first_aid/training/training_home.dart';
+import 'package:redcross/scenes/first_aid/training/training_list.dart';
 
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/splash_screen.dart';
@@ -56,9 +59,12 @@ class MyApp extends StatelessWidget {
         "/first-aid-emergency-services": ( context ) => const FirstAidEmergencies(),
         "/first-aid-emergency-details": ( context ) => const FirstAidDetails(),
         "/ambulance-map-locations": ( context ) =>  const AmbulanceMap(),
-        "/first-aid-item-details": ( context ) => const FaDetailsHome()
+        "/first-aid-item-details": ( context ) => const FaDetailsHome(),
+        "/training-home": ( context ) => const TrainingHome(),
+        "/training-list-items": ( context ) => const TrainingList(),
+        "/basic-training": ( context ) => const BasicTrainingDetails()
       },
-      initialRoute: "/splash-screen",
+      initialRoute: "/login",
     );
   }
 }
