@@ -15,9 +15,9 @@ class _SliderWithDotsState extends State<FaDetailsHome> {
   int _currentPage = 0;
 
   final List<Widget> _pages = [
-    BleedingCut(),
-    BleedingCutPage2(),
-    BleedingCutPage3()
+    const BleedingCut(),
+    const BleedingCutPage2(),
+    const BleedingCutPage3()
     // Container(color: Colors.red, child: const Center(child: Text('Page 1'))),
     // Container(color: Colors.green, child: const Center(child: Text('Page 2'))),
     // Container(color: Colors.blue, child: const Center(child: Text('Page 3'))),

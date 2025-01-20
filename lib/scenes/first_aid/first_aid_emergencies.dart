@@ -17,23 +17,23 @@ class FirstAidEmergencies extends StatelessWidget {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(vertical: 30.0),
           padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20 ),
-          child: const Column(
+          child: Column(
             children: [
-            FaServiceListItem(icon_name: 'alarm', label: 'Emergency',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'chest', label: 'Chest Discomfort',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'choking', label: 'Choking',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'radioactive', label: 'Poisoning',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'radioactive', label: 'Stroke',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'accident', label: 'General Accident',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'radioactive', label: 'Unconsciousness',),
-            SizedBox( height: 15 ),
-            FaServiceListItem(icon_name: 'bleeding', label: 'Bleeding/Cut',)
+            FaServiceListItem(icon_name: 'alarm', label: 'Emergency', forTraining: false,),
+            const SizedBox( height: 15 ),
+             FaServiceListItem(icon_name: 'chest', label: 'Chest Discomfort', forTraining: false,),
+            const SizedBox( height: 15 ),
+             FaServiceListItem(icon_name: 'choking', label: 'Choking', forTraining: false),
+            const SizedBox( height: 15 ), 
+             FaServiceListItem(icon_name: 'radioactive', label: 'Poisoning', forTraining: false),
+            const SizedBox( height: 15 ),
+             FaServiceListItem(icon_name: 'radioactive', label: 'Stroke', forTraining: false),
+            const SizedBox( height: 15 ),
+             FaServiceListItem(icon_name: 'accident', label: 'General Accident', forTraining: false),
+            const SizedBox( height: 15 ),
+             FaServiceListItem(icon_name: 'radioactive', label: 'Unconsciousness', forTraining: false),
+            const SizedBox( height: 15 ),
+             FaServiceListItem(icon_name: 'bleeding', label: 'Bleeding/Cut', forTraining: false)
            ],
           )
           )

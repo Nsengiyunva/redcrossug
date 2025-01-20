@@ -19,7 +19,7 @@ class BleedingCutPage3 extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox( height: 15 ),
-                Image.asset( 'assets/images/fa_kit.png', width: 168, height: 130 ),
+                Image.asset( 'assets/images/fa_rc_3.png', width: 168, height: 130 ),
                 const SizedBox( height: 30 ),
                 const Column(
                   children: [
@@ -36,7 +36,7 @@ class BleedingCutPage3 extends StatelessWidget {
                   ],
                 ),
                const SizedBox( height: 30 ),
-               Image.asset( 'assets/images/fa_frame.png', width: 255, height: 113.99 ),
+               Image.asset( 'assets/images/fa_rc_2.png', width: 255, height: 113.99 ),
                const SizedBox( height: 15 ),
                RedBtn(label: 'Next', onPressed: () {}, squared: true, )
               ],

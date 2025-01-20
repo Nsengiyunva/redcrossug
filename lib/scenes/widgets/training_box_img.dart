@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redcross/utils/colors.dart';
 
 class TrainingBoxImg extends StatelessWidget {
-  const TrainingBoxImg({super.key});
+  final String label;
+  final String img;
+
+  const TrainingBoxImg({super.key, required this.label, required this.img });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed( "/training-list-items" );
+      },
+      child: Container(
       child: Column(
         children: [
           Container(
@@ -18,13 +27,22 @@ class TrainingBoxImg extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15), // Ensure image follows corners
               child:  Image.asset( 
-                'assets/images/training_1.png', 
+                '$img', 
                 width: 154, height: 122 
               ),
             ),
           ),
-          Text( "Here we are" )
+          Padding(
+            padding: EdgeInsets.symmetric( vertical: 5,),
+            child: Text( label, style: TextStyle( 
+            fontSize: 11.54,
+            fontFamily: "Inter",
+            fontWeight: FontWeight.w600,
+            color: AppColors.redColorA
+          ) ),
+          )
         ],
+      ),
       ),
     );
   }

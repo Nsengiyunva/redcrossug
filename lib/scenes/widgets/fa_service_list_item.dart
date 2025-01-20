@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 class FaServiceListItem extends StatelessWidget {
   final String icon_name;
   final String label;
+  bool? forTraining;
 
-  const FaServiceListItem({super.key, required this.icon_name, required this.label });
+  FaServiceListItem({super.key, required this.icon_name, required this.label, this.forTraining });
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +18,15 @@ class FaServiceListItem extends StatelessWidget {
       'radioactive': Icons.replay_circle_filled_outlined,
       'bleeding': Icons.bloodtype,
       'accident': Icons.car_crash,
+      'training': Icons.card_giftcard_sharp
     };
 
     final iconData = iconMap[icon_name] ?? Icons.error;
 
     return GestureDetector(
       onTap: (){
-        Get.toNamed( "/first-aid-item-details" );
+        // Get.toNamed( "/first-aid-item-details" );
+        forTraining! ? Get.toNamed( "/basic-training" ) : Get.toNamed( "/first-aid-item-details" );
       },
       child: Container(
       height: 61,

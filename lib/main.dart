@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         "/register-account": ( context ) => SignUp(),
         "/splash-screen": ( context ) => const SplashScreen(),
         "/enter-otp": ( context ) => OtpVerify(),
-        "/first-aid-home": ( context ) => FirstAidHome(),
+        "/first-aid-home": ( context ) => const FirstAidHome(),
         "/first-aid-emergency-services": ( context ) => const FirstAidEmergencies(),
         "/first-aid-emergency-details": ( context ) => const FirstAidDetails(),
         "/ambulance-map-locations": ( context ) =>  const AmbulanceMap(),
