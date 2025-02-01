@@ -34,16 +34,9 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:redcross/scenes/widgets/donation_progress.dart';
-import 'package:redcross/scenes/widgets/link_field.dart';
-import 'package:redcross/scenes/widgets/price_tag.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
-import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
-import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AmbulanceMap extends StatefulWidget {
   const AmbulanceMap({super.key});
@@ -76,13 +69,13 @@ class _DisasterDetailsState extends State<AmbulanceMap> {
                   height: 500 
                 ),
               ),
-              SizedBox( height: 25 ),
+              const SizedBox( height: 25 ),
               Container(
                 child: Column(
                   children: [
                     // Text( "Set Pickup Location" ),
                     Padding(
-                      padding: EdgeInsets.symmetric( horizontal: 25 ),
+                      padding: const EdgeInsets.symmetric( horizontal: 25 ),
                       child: RedBtn(label: 'Continue', onPressed: () {
                         Get.toNamed('/ambulance-success-request');
                       } )

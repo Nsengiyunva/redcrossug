@@ -45,9 +45,9 @@ class AmbulanceStatus extends StatelessWidget {
                 child: Column(
                   children: [
                     AmbulanceStatusItem(label: 'Status', noComponent: true, value: ""),
-                    SizedBox( height: 25 ),
+                    const SizedBox( height: 25 ),
                     AmbulanceStatusItem(label: 'Number of Ambulances', noComponent: false, value: "01"),
-                    SizedBox( height: 25 ),
+                    const SizedBox( height: 25 ),
                     AmbulanceStatusItem(label: 'Ambulances', noComponent: false, value: "Red Cross Nakasero" )
                   ]
                 )

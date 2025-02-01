@@ -27,14 +27,14 @@ class TrainingBoxImg extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15), // Ensure image follows corners
               child:  Image.asset( 
-                '$img', 
+                img, 
                 width: 154, height: 122 
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric( vertical: 5,),
-            child: Text( label, style: TextStyle( 
+            padding: const EdgeInsets.symmetric( vertical: 5,),
+            child: Text( label, style: const TextStyle( 
             fontSize: 11.54,
             fontFamily: "Inter",
             fontWeight: FontWeight.w600,

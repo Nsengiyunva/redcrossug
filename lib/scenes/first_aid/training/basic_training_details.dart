@@ -36,8 +36,8 @@ class BasicTrainingDetails extends StatelessWidget {
                   ),
                 ),
             ),
-            SizedBox( height: 10 ),
-            Center(
+            const SizedBox( height: 10 ),
+            const Center(
               child: Text( "Duration: 2 Days", style: TextStyle(
               fontFamily: "Inter",
               fontSize: 12,
@@ -45,8 +45,8 @@ class BasicTrainingDetails extends StatelessWidget {
               color: AppColors.blackColorB
             ) )
             ),
-            SizedBox( height: 10 ),
-            Center(
+            const SizedBox( height: 10 ),
+            const Center(
               child: Padding(padding: EdgeInsets.symmetric( horizontal: 5, vertical: 5 ),
               child: Text( "URCS first aid training classes give you the information and the skills you need to help adults and children during many emergency situations. Our first aid training delivers the latest information using skills-based training.",
                 style: TextStyle(
@@ -56,7 +56,7 @@ class BasicTrainingDetails extends StatelessWidget {
                   fontWeight: FontWeight.w400
                 ), ),),
             ),
-             SizedBox( height: 10 ),
+             const SizedBox( height: 10 ),
              RedBtn(label: 'Request for Training', onPressed: () {
               Get.toNamed( "/home" );
              } )
