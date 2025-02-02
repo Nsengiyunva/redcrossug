@@ -9,6 +9,7 @@ import 'package:redcross/scenes/ambulances/ambulance_success.dart';
 
 import 'package:redcross/scenes/auth/account_success.dart';
 import 'package:redcross/scenes/auth/otp_verify.dart';
+import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/scenes/auth/sign_up.dart';
 
@@ -72,7 +73,8 @@ class MyApp extends StatelessWidget {
         "/training-home": (context) => const TrainingHome(),
         "/training-list-items": (context) => const TrainingList(),
         "/basic-training": (context) => const BasicTrainingDetails(),
-        "/ambulance-map": (context) => AmbulanceMap()
+        "/ambulance-map": (context) => AmbulanceMap(),
+        "/account-profile": (context) => Profile()
       },
       initialRoute: "/login",
     );

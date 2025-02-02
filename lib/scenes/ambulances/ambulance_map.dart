@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:redcross/controllers/login_controller.dart';
-import 'package:redcross/scenes/widgets/form_textfield.dart';
+// import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
 
 class AmbulanceMap extends StatefulWidget {
   AmbulanceMap({super.key});
-
-  final LoginController _loginController = Get.put(LoginController());
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -127,7 +124,7 @@ class _MapScreenState extends State<AmbulanceMap> {
             },
           ),
           Positioned(
-            bottom: 80,
+            top: 20,
             right: 20,
             child: Column(
               children: [
