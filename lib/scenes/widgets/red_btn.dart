@@ -13,10 +13,11 @@ class RedBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    print("screen width $screenWidth");
+    // double hgt = (screenWidth * 0.25) / 1.9;
+    // print("screen width $hgt");
 
     return SizedBox(
-      height: (screenWidth * 0.25) / 2,
+      height: (screenWidth * 0.25) / 1.9,
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         ElevatedButton(
           onPressed: onPressed,
@@ -33,7 +34,7 @@ class RedBtn extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   fontFamily: "Inter",
                   fontSize: 14,
-                  color: Colors.white)),
+                  color: AppColors.whiteColor)),
         )
       ]),
     );

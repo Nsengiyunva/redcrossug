@@ -68,12 +68,12 @@ class MyApp extends StatelessWidget {
         "/first-aid-emergency-services": (context) =>
             const FirstAidEmergencies(),
         "/first-aid-emergency-details": (context) => const FirstAidDetails(),
-        "/ambulance-map-locations": (context) => AmbulanceMap(),
+        "/ambulance-map-locations": (context) => const AmbulanceMap(),
         "/first-aid-item-details": (context) => const FaDetailsHome(),
         "/training-home": (context) => const TrainingHome(),
         "/training-list-items": (context) => const TrainingList(),
         "/basic-training": (context) => const BasicTrainingDetails(),
-        "/ambulance-map": (context) => AmbulanceMap(),
+        "/ambulance-map": (context) => const AmbulanceMap(),
         "/account-profile": (context) => const Profile()
       },
       initialRoute: "/login",

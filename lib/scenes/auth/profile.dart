@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:redcross/scenes/auth/profile_item.dart';
 import 'package:redcross/scenes/auth/profile_list_item.dart';
-import 'package:redcross/scenes/widgets/icon_card.dart';
-import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
+
+  Future<void> _logout(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Navigator.pushReplacementNamed(context, '/login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +58,19 @@ class Profile extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22.08),
                     color: AppColors.whiteColor),
-                child: const Column(
-                  children: [ProfileListItem(), ProfileListItem()],
+                child: Column(
+                  children: [
+                    ProfileListItem(label: 'Community', onPressed: () {}),
+                    ProfileListItem(label: 'ID Verification', onPressed: () {}),
+                    ProfileListItem(label: 'Payment Methods', onPressed: () {}),
+                    ProfileListItem(
+                        label: 'Security & Biometrics', onPressed: () {}),
+                    ProfileListItem(label: 'Help & Support', onPressed: () {}),
+                    ProfileListItem(
+                        label: 'App Version & Info', onPressed: () {}),
+                    ProfileListItem(
+                        label: 'Log Out', onPressed: () => _logout(context))
+                  ],
                 ))
           ],
         ),
