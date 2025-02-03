@@ -35,7 +35,7 @@ class Profile extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22.08),
                     color: AppColors.whiteColor),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ProfileItem(),
@@ -46,14 +46,15 @@ class Profile extends StatelessWidget {
                     ),
                   ],
                 )),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
                 height: 470.16,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22.08),
                     color: AppColors.whiteColor),
-                child: Column(
+                child: const Column(
                   children: [ProfileListItem(), ProfileListItem()],
                 ))
           ],

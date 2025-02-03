@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
-import 'package:redcross/scenes/screen_four.dart';
 
 import 'package:redcross/scenes/default_home.dart';
-import 'package:redcross/scenes/screen_three.dart';
 import 'package:redcross/scenes/screen_two.dart';
 
 class Home extends StatefulWidget {

@@ -7,11 +7,11 @@ class ProfileListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      decoration: const BoxDecoration(
           border: Border(
               bottom: BorderSide(color: AppColors.greyColorE, width: 1.0))),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text("Community"),

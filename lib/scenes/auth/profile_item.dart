@@ -10,11 +10,11 @@ class ProfileItem extends StatelessWidget {
         child: Row(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 15),
+          padding: const EdgeInsets.only(left: 15),
           child: Container(
             width: 72.69,
             height: 72.69,
-            margin: EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
                 color: AppColors.greyColorB,
                 borderRadius: BorderRadius.circular(50),
@@ -22,8 +22,8 @@ class ProfileItem extends StatelessWidget {
                     Border.all(width: 1.0, color: AppColors.primaryRedColor)),
           ),
         ),
-        SizedBox(width: 15),
-        Column(
+        const SizedBox(width: 15),
+        const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

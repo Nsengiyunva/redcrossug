@@ -24,7 +24,7 @@ class LoginController {
   TextEditingController newPhoneNumber = TextEditingController();
 
   final fieldControllers = List.generate(5, (index) => TextEditingController());
-   final fieldFocusNode = List.generate(5, (index) => FocusNode());
+  final fieldFocusNode = List.generate(5, (index) => FocusNode());
 
   final Future _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
@@ -33,12 +33,12 @@ class LoginController {
     const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
 
     isLoading.value = true;
-    
+
     final Map<String, dynamic> requestBody = {
       "phone_no": "+256775625741",
       "password": "#Satan2023#"
     };
-    
+
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -46,22 +46,22 @@ class LoginController {
         body: jsonEncode(requestBody),
       );
 
-      // print( "response: $response.statusCode" );
+      print(response);
 
       // if (response.statusCode == 201) {
-        // Success
-        final responseData = jsonDecode(response.body);
-        var responseMessage = 'Success: ${responseData['message']}';
-        // print( responseMessage );
-        final SharedPreferences? prefs = await _prefs;
-        await prefs?.setString('token', responseData['token']);
-        // await prefs?.setString('user', user );
-        
-        Get.toNamed('/home', arguments: {'phone_number': "+256775625741" });
+      // Success
+      final responseData = jsonDecode(response.body);
+      var responseMessage = 'Success: ${responseData['message']}';
+      // print( responseMessage );
+      final SharedPreferences? prefs = await _prefs;
+      await prefs?.setString('token', responseData['token']);
+      // await prefs?.setString('user', user );
 
-        // setState(() {
-        //   responseMessage = 'Success: ${responseData['id']}';
-        // });
+      Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});
+
+      // setState(() {
+      //   responseMessage = 'Success: ${responseData['id']}';
+      // });
       // } else {
       //   // Error response
       //   // setState(() {
@@ -69,7 +69,7 @@ class LoginController {
       //   // });
       // }
     } catch (e) {
-      print( "Error: $e" );
+      print("Error: $e");
       Get.snackbar('Error', 'An error occurred while signing the form');
       // Handle exceptions like network errors
       // setState(() {
@@ -81,9 +81,7 @@ class LoginController {
   Future<void> submitForm() async {
     Get.toNamed(
       "/enter-otp",
-      arguments: {
-        'phone_number': newPhoneNumber.text
-      },
+      arguments: {'phone_number': newPhoneNumber.text},
     );
   }
 

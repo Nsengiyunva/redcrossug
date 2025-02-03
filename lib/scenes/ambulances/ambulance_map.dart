@@ -9,7 +9,7 @@ import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
 
 class AmbulanceMap extends StatefulWidget {
-  AmbulanceMap({super.key});
+  const AmbulanceMap({super.key});
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -19,7 +19,7 @@ class _MapScreenState extends State<AmbulanceMap> {
   late GoogleMapController mapController;
   TextEditingController searchController = TextEditingController();
   LatLng? currentPosition;
-  LatLng defaultLocation = LatLng(32.6475256, 0.38506239999999997);
+  LatLng defaultLocation = const LatLng(32.6475256, 0.38506239999999997);
   double currentZoom = 12.0;
 
   @override
@@ -46,7 +46,7 @@ class _MapScreenState extends State<AmbulanceMap> {
       }
     } catch (e) {
       print("Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Location not found! Try another name."),
       ));
     }
@@ -118,7 +118,7 @@ class _MapScreenState extends State<AmbulanceMap> {
             },
             markers: {
               Marker(
-                markerId: MarkerId("searchedLocation"),
+                markerId: const MarkerId("searchedLocation"),
                 position: defaultLocation,
               ),
             },
@@ -131,13 +131,13 @@ class _MapScreenState extends State<AmbulanceMap> {
                 FloatingActionButton(
                   heroTag: "zoomIn",
                   onPressed: _zoomIn,
-                  child: Icon(Icons.zoom_in),
+                  child: const Icon(Icons.zoom_in),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 FloatingActionButton(
                   heroTag: "zoomOut",
                   onPressed: _zoomOut,
-                  child: Icon(Icons.zoom_out),
+                  child: const Icon(Icons.zoom_out),
                 ),
               ],
             ),
@@ -160,11 +160,11 @@ class _MapScreenState extends State<AmbulanceMap> {
                   controller: scrollController, // Allow scrolling
                   children: [
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 15),
                       child: Column(
                         children: [
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -178,13 +178,13 @@ class _MapScreenState extends State<AmbulanceMap> {
                               TagItem(label: "Edit", height: 23, width: 71)
                             ],
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           TextField(
                             controller: searchController,
                             decoration: InputDecoration(
                                 hintText: "Search location...",
                                 suffixIcon: IconButton(
-                                  icon: Icon(Icons.search),
+                                  icon: const Icon(Icons.search),
                                   onPressed: () =>
                                       _searchLocation(searchController.text),
                                 ),
@@ -213,7 +213,7 @@ class _MapScreenState extends State<AmbulanceMap> {
                                 )),
                             onSubmitted: (value) => _searchLocation(value),
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           RedBtn(label: 'Continue', onPressed: () {})
                         ],
                       ),
