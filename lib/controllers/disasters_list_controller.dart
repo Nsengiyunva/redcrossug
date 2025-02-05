@@ -20,20 +20,22 @@ class DisastersListController extends GetxController {
   }
 
   fetchData() async {
-    String? token = await getToken(); 
+    String? token = await getToken();
 
     try {
       isLoading(true);
-      http.Response response = await http.get(Uri.tryParse(
-          'https://urcs-api.taufeeq.dev/api/disasters')!, headers: {
-          'Authorization': "Bearer $token",
-          'X-Requested-With': 'XMLHttpRequest'
-          } );
+      http.Response response = await http.get(
+          Uri.tryParse('https://urcs-api.taufeeq.dev/api/disasters')!,
+          headers: {
+            'Authorization': "Bearer $token",
+            'X-Requested-With': 'XMLHttpRequest'
+          });
       if (response.statusCode == 200) {
         ///data successfully
         var result = jsonDecode(response.body);
         // print( result["data"] );
         disasters.value = result["data"];
+        isLoading(false);
       } else {
         print('error fetching data');
       }

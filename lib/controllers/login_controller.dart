@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/utils/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,15 +47,17 @@ class LoginController {
         body: jsonEncode(requestBody),
       );
 
-      print(response);
+      // print(response);
 
       // if (response.statusCode == 201) {
       // Success
       final responseData = jsonDecode(response.body);
       var responseMessage = 'Success: ${responseData['message']}';
+
+      await StorageService.saveToken(responseData['token']);
       // print( responseMessage );
-      final SharedPreferences? prefs = await _prefs;
-      await prefs?.setString('token', responseData['token']);
+      // final SharedPreferences? prefs = await _prefs;
+      // await prefs?.setString('token', responseData['token']);
       // await prefs?.setString('user', user );
 
       Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});

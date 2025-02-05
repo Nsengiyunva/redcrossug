@@ -60,12 +60,11 @@ class SignUp extends StatelessWidget {
               // const SizedBox(height: 10),
               FormPassword(
                   question: 'Password',
-                  textEditingController: _registerController.registerPassword),
+                  textEditingController: _registerController.password),
               const SizedBox(height: 10),
               FormPassword(
                   question: 'Confirm Password',
-                  textEditingController:
-                      _registerController.registerConfirmPassword),
+                  textEditingController: _registerController.confirmpassword),
               const SizedBox(height: 10),
               const Row(
                 children: [

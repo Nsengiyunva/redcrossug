@@ -1,23 +1,13 @@
-class User{
-  var name;
-  var age;
- 
-  User( { required this.name, required this.age } );
+class User {
+  String name;
 
-  // Convert object to JSON
+  User({required this.name});
+
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'age': age,
-    };
+    return {"name": name};
   }
 
-  // Create object from JSON
-  User.fromJson(Map<String, dynamic> json) {
-    // return User(
-    //   name: json['name'],
-    //   age: json['age'],
-    // );
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(name: json['name']);
   }
 }
-

@@ -1,0 +1,37 @@
+import 'dart:convert';
+import 'package:redcross/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class StorageService {
+  static const String _key = "user_details";
+
+  static Future<void> saveToken(String token) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
+
+  static Future<String?> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
+  static Future<void> saveUser(User user) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userJson = jsonEncode(user.toJson());
+    await prefs.setString(_key, userJson);
+  }
+
+  static Future<User?> getUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userJson = prefs.getString(_key);
+    if (userJson == null) {
+      return null;
+    }
+    return User.fromJson(jsonDecode(userJson));
+  }
+
+  static Future<void> removeUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_key);
+  }
+}
