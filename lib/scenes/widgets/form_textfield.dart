@@ -4,7 +4,7 @@ import 'package:redcross/utils/colors.dart';
 class FormTextfield extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
-  Function() validator;
+  FormFieldValidator<String>? validator;
 
   FormTextfield(
       {super.key,
@@ -64,30 +64,3 @@ class FormTextfield extends StatelessWidget {
     );
   }
 }
-
-
-// TextField(
-//             controller: textEditingController,
-//             style: TextStyle( fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041) ),
-//             decoration: InputDecoration(
-//               alignLabelWithHint: true,
-//               fillColor: Colors.white54,
-//               labelText: question,
-//               labelStyle: TextStyle(color: Colors.black),
-//               border: OutlineInputBorder(),
-//               contentPadding: EdgeInsets.symmetric( vertical: 5, horizontal: 10 ),
-
-//               enabledBorder: OutlineInputBorder(  // Border when not focused
-//                 borderRadius: BorderRadius.circular(18),
-//                 borderSide: const BorderSide(color: Color(0xFFD2D9DE), width: 2),
-//               ),
-//               focusedBorder: OutlineInputBorder(  // Border when focused
-//                 borderRadius: BorderRadius.circular(18),
-//                 borderSide: const BorderSide(color: Color(0xFFED1C24), width: 2),
-//               ),
-//               errorBorder: OutlineInputBorder(   // Border when error occurs
-//                 borderRadius: BorderRadius.circular(18),
-//                 borderSide: const BorderSide(color: Color(0xFFED1C24), width: 2),
-//               ),
-//             )
-//            )
