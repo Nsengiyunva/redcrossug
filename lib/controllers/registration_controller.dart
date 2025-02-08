@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/utils/api_endpoints.dart';
+import 'package:redcross/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegistrationController extends GetxController {
   TextEditingController firstname = TextEditingController();
@@ -21,6 +23,17 @@ class RegistrationController extends GetxController {
 
   final Future _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
+
+  void showToast() {
+    Fluttertoast.showToast(
+      msg: "Hello, this is a toast message!",
+      toastLength: Toast.LENGTH_SHORT, // or Toast.LENGTH_LONG
+      gravity: ToastGravity.BOTTOM, // Position: BOTTOM, CENTER, TOP
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
 
   Future<void> registerAccount() async {
     // const String url = 'https://urcs-api.taufeeq.dev/api/auth/register';
@@ -43,10 +56,40 @@ class RegistrationController extends GetxController {
         'X-Requested-With': 'XMLHttpRequest'
       };
 
-      final result =
+      final response =
           await http.post(url, body: jsonEncode(body), headers: headers);
 
+      var result = jsonDecode(response.body);
+
       print(result);
+
+      if (result["message"] == null) {
+        Get.snackbar(
+          "Success",
+          'Successfully saved.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          borderRadius: 10,
+          margin: const EdgeInsets.all(10),
+          duration: const Duration(seconds: 10),
+          icon: const Icon(Icons.check_circle, color: Colors.white),
+        );
+      } else {
+        print(result["message"]);
+        // Get.snackbar('Error', '$result["message"]');
+        Get.snackbar(
+          "Error",
+          '$result["message"]',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.primaryRedColor,
+          colorText: Colors.white,
+          borderRadius: 10,
+          margin: const EdgeInsets.all(10),
+          duration: const Duration(seconds: 10),
+          icon: const Icon(Icons.check_circle, color: Colors.white),
+        );
+      }
     } catch (error) {
       print(error);
     }

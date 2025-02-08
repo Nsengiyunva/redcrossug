@@ -22,12 +22,12 @@ class ProfileListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 13.8,
                     fontFamily: "Inter",
                     fontWeight: FontWeight.w400,
                     color: AppColors.blackColorE)),
-            Icon(
+            const Icon(
               Icons.arrow_right,
               color: AppColors.primaryRedColor,
               size: 15.51,
