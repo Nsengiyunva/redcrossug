@@ -43,19 +43,25 @@ class AmbulanceForm extends StatelessWidget {
                 FormTextfield(
                   question: 'No. of people hurt/in-need',
                   textEditingController: _formController.noPeopleController,
-                  validator: (value) {},
+                  validator: (value) {
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
                   question: 'No. of ambulances required',
                   textEditingController: _formController.noAmbulancesController,
-                  validator: (value) {},
+                  validator: (value) {
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
                   question: 'No. of emergency patients/Medical Risk',
                   textEditingController: _formController.noPatientsController,
-                  validator: (value) {},
+                  validator: (value) {
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 25),
                 const Row(

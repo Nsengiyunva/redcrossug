@@ -51,13 +51,17 @@ class SignUpState extends State<SignUp> {
                   FormTextfield(
                     question: 'First Name',
                     textEditingController: _registerController.firstname,
-                    validator: (value) {},
+                    validator: (value) {
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 10),
                   FormTextfield(
                       question: 'Last Name',
                       textEditingController: _registerController.lastname,
-                      validator: (value) {}),
+                      validator: (value) {
+                        return null;
+                      }),
                   const SizedBox(height: 10),
                   // FormTextfield(
                   //     question: 'Email Address',

@@ -13,10 +13,6 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
-
-    // print( screenWidth );
-
     return Scaffold(
         backgroundColor: AppColors.whiteColor,
         body: SingleChildScrollView(
@@ -42,11 +38,7 @@ class SignIn extends StatelessWidget {
                         color: Color(0xFF7D8FAB))),
               ),
               const SizedBox(height: 15),
-              PhoneNumberField(
-                textEditingController: _loginController.telephoneController,
-              ),
-              // FormTextfield(
-              //   question: 'Phone Number',
+              // PhoneNumberField(
               //   textEditingController: _loginController.telephoneController,
               // ),
               const SizedBox(height: 25),

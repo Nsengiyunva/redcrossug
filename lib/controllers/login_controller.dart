@@ -14,14 +14,6 @@ class LoginController {
   TextEditingController noAmbulancesController = TextEditingController();
   TextEditingController noPatientsController = TextEditingController();
 
-  TextEditingController registerName = TextEditingController();
-  TextEditingController registerEmail = TextEditingController();
-  TextEditingController registerDOB = TextEditingController();
-  TextEditingController registerCountry = TextEditingController();
-  TextEditingController registerNIN = TextEditingController();
-  TextEditingController registerPassword = TextEditingController();
-  TextEditingController registerConfirmPassword = TextEditingController();
-
   TextEditingController newPhoneNumber = TextEditingController();
 
   final fieldControllers = List.generate(5, (index) => TextEditingController());
@@ -31,54 +23,55 @@ class LoginController {
   var isLoading = false.obs;
 
   Future<void> loginPhoneNumber() async {
-    const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
+    print("Lets login please");
+    // const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
 
-    isLoading.value = true;
+    // isLoading.value = true;
 
-    final Map<String, dynamic> requestBody = {
-      "phone_no": "+256775625741",
-      "password": "#Satan2023#"
-    };
+    // final Map<String, dynamic> requestBody = {
+    //   "phone_no": "+256775625741",
+    //   "password": "#Satan2023#"
+    // };
 
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(requestBody),
-      );
+    // try {
+    //   final response = await http.post(
+    //     Uri.parse(url),
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: jsonEncode(requestBody),
+    //   );
 
-      // print(response);
+    //   print(response);
 
-      // if (response.statusCode == 201) {
-      // Success
-      final responseData = jsonDecode(response.body);
-      var responseMessage = 'Success: ${responseData['message']}';
+    //   // if (response.statusCode == 201) {
+    //   // Success
+    //   // final responseData = jsonDecode(response.body);
+    //   // var responseMessage = 'Success: ${responseData['message']}';
 
-      await StorageService.saveToken(responseData['token']);
-      // print( responseMessage );
-      // final SharedPreferences? prefs = await _prefs;
-      // await prefs?.setString('token', responseData['token']);
-      // await prefs?.setString('user', user );
+    //   // await StorageService.saveToken(responseData['token']);
+    //   // print( responseMessage );
+    //   // final SharedPreferences? prefs = await _prefs;
+    //   // await prefs?.setString('token', responseData['token']);
+    //   // await prefs?.setString('user', user );
 
-      Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});
+    //   // Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});
 
-      // setState(() {
-      //   responseMessage = 'Success: ${responseData['id']}';
-      // });
-      // } else {
-      //   // Error response
-      //   // setState(() {
-      //   //   responseMessage = 'Error: ${response.statusCode}';
-      //   // });
-      // }
-    } catch (e) {
-      print("Error: $e");
-      Get.snackbar('Error', 'An error occurred while signing the form');
-      // Handle exceptions like network errors
-      // setState(() {
-      //   responseMessage = 'Exception: $e';
-      // });
-    }
+    //   // setState(() {
+    //   //   responseMessage = 'Success: ${responseData['id']}';
+    //   // });
+    //   // } else {
+    //   //   // Error response
+    //   //   // setState(() {
+    //   //   //   responseMessage = 'Error: ${response.statusCode}';
+    //   //   // });
+    //   // }
+    // } catch (e) {
+    //   print("Error: $e");
+    //   Get.snackbar('Error', 'An error occurred while signing the form');
+    //   // Handle exceptions like network errors
+    //   // setState(() {
+    //   //   responseMessage = 'Exception: $e';
+    //   // });
+    // }
   }
 
   Future<void> submitForm() async {
