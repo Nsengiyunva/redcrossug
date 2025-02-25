@@ -1,10 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/utils/api_endpoints.dart';
-import 'package:redcross/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegistrationController extends GetxController {
@@ -36,62 +32,60 @@ class RegistrationController extends GetxController {
   }
 
   Future<void> registerAccount() async {
-    // const String url = 'https://urcs-api.taufeeq.dev/api/auth/register';
-
-    isLoading.value = true;
-
     final Map<String, dynamic> body = {
       "first_name": firstname.value.text,
       "last_name": lastname.value.text,
-      "phone_no": "+256703019014",
+      "phone_no": "+256775625741",
       "nationality": nationality.value.text,
       "password": password.value.text
     };
 
-    try {
-      var url =
-          Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.register);
-      var headers = {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      };
+    print("name ${firstname.text}");
 
-      final response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+    // try {
+    //   var url =
+    //       Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.authEndpoints.register);
+    //   var headers = {
+    //     'Content-Type': 'application/json',
+    //     'X-Requested-With': 'XMLHttpRequest'
+    //   };
 
-      var result = jsonDecode(response.body);
+    //   final response =
+    //       await http.post(url, body: jsonEncode(body), headers: headers);
 
-      print(result);
+    //   var result = jsonDecode(response.body);
 
-      if (result["message"] == null) {
-        Get.snackbar(
-          "Success",
-          'Successfully saved.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          borderRadius: 10,
-          margin: const EdgeInsets.all(10),
-          duration: const Duration(seconds: 10),
-          icon: const Icon(Icons.check_circle, color: Colors.white),
-        );
-      } else {
-        print(result["message"]);
-        // Get.snackbar('Error', '$result["message"]');
-        Get.snackbar(
-          "Error",
-          '$result["message"]',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.primaryRedColor,
-          colorText: Colors.white,
-          borderRadius: 10,
-          margin: const EdgeInsets.all(10),
-          duration: const Duration(seconds: 10),
-          icon: const Icon(Icons.check_circle, color: Colors.white),
-        );
-      }
-    } catch (error) {
-      print(error);
-    }
+    //   print(result);
+
+    //   if (result["message"] == null) {
+    //     Get.snackbar(
+    //       "Success",
+    //       'Successfully saved.',
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       backgroundColor: Colors.green,
+    //       colorText: Colors.white,
+    //       borderRadius: 10,
+    //       margin: const EdgeInsets.all(10),
+    //       duration: const Duration(seconds: 10),
+    //       icon: const Icon(Icons.check_circle, color: Colors.white),
+    //     );
+    //   } else {
+    //     print(result["message"]);
+    //     // Get.snackbar('Error', '$result["message"]');
+    //     Get.snackbar(
+    //       "Error",
+    //       '$result["message"]',
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       backgroundColor: AppColors.primaryRedColor,
+    //       colorText: Colors.white,
+    //       borderRadius: 10,
+    //       margin: const EdgeInsets.all(10),
+    //       duration: const Duration(seconds: 10),
+    //       icon: const Icon(Icons.check_circle, color: Colors.white),
+    //     );
+    //   }
+    // } catch (error) {
+    //   print(error);
+    // }
   }
 }

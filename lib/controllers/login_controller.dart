@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/utils/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,55 +22,38 @@ class LoginController {
   var isLoading = false.obs;
 
   Future<void> loginPhoneNumber() async {
-    print("Lets login please");
-    // const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
+    //passwordController.text
+    //telephoneController.text
 
-    // isLoading.value = true;
+    const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
 
-    // final Map<String, dynamic> requestBody = {
-    //   "phone_no": "+256775625741",
-    //   "password": "#Satan2023#"
-    // };
+    isLoading.value = true;
 
-    // try {
-    //   final response = await http.post(
-    //     Uri.parse(url),
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: jsonEncode(requestBody),
-    //   );
+    final Map<String, dynamic> requestBody = {
+      "phone_no": "+256775625741",
+      "password": "#Satan2023#"
+    };
 
-    //   print(response);
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestBody),
+      );
 
-    //   // if (response.statusCode == 201) {
-    //   // Success
-    //   // final responseData = jsonDecode(response.body);
-    //   // var responseMessage = 'Success: ${responseData['message']}';
+      final responseData = jsonDecode(response.body);
+      var responseMessage = 'Success: ${responseData['message']}';
 
-    //   // await StorageService.saveToken(responseData['token']);
-    //   // print( responseMessage );
-    //   // final SharedPreferences? prefs = await _prefs;
-    //   // await prefs?.setString('token', responseData['token']);
-    //   // await prefs?.setString('user', user );
+      print(responseData["user"]);
+      // await StorageService.saveToken(responseData['token']);
+      // await prefs?.setString('user', responseData['user']['name'] );
 
-    //   // Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});
-
-    //   // setState(() {
-    //   //   responseMessage = 'Success: ${responseData['id']}';
-    //   // });
-    //   // } else {
-    //   //   // Error response
-    //   //   // setState(() {
-    //   //   //   responseMessage = 'Error: ${response.statusCode}';
-    //   //   // });
-    //   // }
-    // } catch (e) {
-    //   print("Error: $e");
-    //   Get.snackbar('Error', 'An error occurred while signing the form');
-    //   // Handle exceptions like network errors
-    //   // setState(() {
-    //   //   responseMessage = 'Exception: $e';
-    //   // });
-    // }
+      // Get.snackbar('Success', '${responseData['message']}');
+      // Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});
+    } catch (e) {
+      print("Error: $e");
+      Get.snackbar('Error', 'An error occurred while signing the form');
+    }
   }
 
   Future<void> submitForm() async {

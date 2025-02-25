@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/registration_controller.dart';
-import 'package:redcross/scenes/widgets/country_picker.dart';
 import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/utils/colors.dart';
 
@@ -69,10 +68,10 @@ class SignUpState extends State<SignUp> {
                   // const SizedBox(height: 10),
                   // const DatePicker(question: 'Date of Birth'),
                   // const SizedBox(height: 10),
-                  CountryPicker(
-                      question: 'Nationality',
-                      textEditingController: _registerController.nationality),
-                  const SizedBox(height: 10),
+                  // CountryPicker(
+                  //     question: 'Nationality',
+                  //     textEditingController: _registerController.nationality),
+                  // const SizedBox(height: 10),
                   // FormTextfield(
                   //     question: 'NIN/Passport Number',
                   //     textEditingController: _registerController.registerNIN),
