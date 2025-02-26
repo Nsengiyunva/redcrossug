@@ -16,8 +16,9 @@ class AmbulanceMap extends StatefulWidget {
 }
 
 class _MapScreenState extends State<AmbulanceMap> {
+  String query = "";
   late GoogleMapController mapController;
-  TextEditingController searchController = TextEditingController();
+  // TextEditingController searchController = TextEditingController();
 
   LatLng? currentPosition;
   LatLng defaultLocation = const LatLng(32.6475256, 0.38506239999999997);
@@ -33,32 +34,36 @@ class _MapScreenState extends State<AmbulanceMap> {
   }
 
   Future<void> _searchLocation(String query) async {
-    try {
-      List<Location> locations = await locationFromAddress(query);
-      if (locations.isNotEmpty) {
-        Location location = locations.first;
-        LatLng newPosition = LatLng(location.latitude, location.longitude);
+    if (query.length > 0) {
+      setState(() {
+        query = query; // Update marker position
+      });
+      try {
+        List<Location> locations = await locationFromAddress(query);
+        if (locations.isNotEmpty) {
+          Location location = locations.first;
+          LatLng newPosition = LatLng(location.latitude, location.longitude);
 
-        print(newPosition);
+          print("new position ${newPosition}");
 
-        mapController
-            .animateCamera(CameraUpdate.newLatLngZoom(newPosition, 14));
+          mapController
+              .animateCamera(CameraUpdate.newLatLngZoom(newPosition, 14));
 
-        setState(() {
-          defaultLocation = newPosition; // Update marker position
-        });
+          setState(() {
+            defaultLocation = newPosition; // Update marker position
+          });
+        }
+      } catch (e) {
+        print("Error: $e");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Location not found! Try another name."),
+        ));
       }
-    } catch (e) {
-      print("Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Location not found! Try another name."),
-      ));
+    } else {
+      Get.snackbar('Info', 'Please input a location name before searching...');
     }
   }
 
-  // void _onMapCreated(GoogleMapController controller) {
-  //   mapController = controller;
-  // }
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -184,13 +189,13 @@ class _MapScreenState extends State<AmbulanceMap> {
                           ),
                           const SizedBox(height: 15),
                           TextField(
-                            controller: searchController,
+                            controller: ambulanceController.location_field,
                             decoration: InputDecoration(
                                 hintText: "Search location...",
                                 suffixIcon: IconButton(
                                   icon: const Icon(Icons.search),
-                                  onPressed: () =>
-                                      _searchLocation(searchController.text),
+                                  onPressed: () => _searchLocation(
+                                      ambulanceController.location_field.text),
                                 ),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),

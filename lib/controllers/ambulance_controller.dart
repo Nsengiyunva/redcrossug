@@ -10,6 +10,7 @@ class AmbulanceController extends GetxController {
   TextEditingController no_people_hurt = TextEditingController();
   TextEditingController no_ambulances = TextEditingController();
   TextEditingController no_patients = TextEditingController();
+  TextEditingController location_field = TextEditingController();
 
   var isLoading = false.obs;
   var ambulance_list = [].obs;
@@ -62,7 +63,7 @@ class AmbulanceController extends GetxController {
       "number_of_people": int.tryParse(no_people_hurt.text),
       "number_of_children": int.tryParse(no_people_hurt.text),
       "number_of_critically_ill": int.tryParse(no_patients.text),
-      "location": "Makerere Hill Road"
+      "location": location_field.text
     };
 
     final response = await http.post(
@@ -78,7 +79,7 @@ class AmbulanceController extends GetxController {
 
     var result = jsonDecode(response.body);
 
-    print("result ${result}");
+    // print("result ${result}");
     Get.snackbar('Success', 'Ambulance request successfully submitted.');
     Get.toNamed("/ambulance-success-request");
     isUploading(false);
