@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
-import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/ambulances/ambulance_progress_box.dart';
 import 'package:redcross/scenes/widgets/ambulance_list_item.dart';
 import 'package:redcross/scenes/widgets/red_btn_icon.dart';
@@ -57,7 +56,7 @@ class AmbulanceHome extends StatelessWidget {
                   const SizedBox(height: 15),
                   const AmbulanceProgressBox(),
                   const Text(
-                    "Private Service Providers",
+                    "Service Providers",
                     style: TextStyle(
                         fontSize: 17.94,
                         fontFamily: "Inter",
@@ -76,14 +75,13 @@ class AmbulanceHome extends StatelessWidget {
                       itemCount: ambulanceController.ambulance_list.length,
                       itemBuilder: (context, index) {
                         var item = ambulanceController.ambulance_list[index];
-
+                        // print("item ${item}");
                         return Column(
                           children: [
                             AmbulanceListItem(
-                                place: StorageService.truncateString(
-                                    item["operating_area"], 35),
-                                location: 'Hospital',
-                                time: '23 mins'),
+                                place: item["location"],
+                                location: item["status"]?.toUpperCase(),
+                                time: item["created_at"]),
                             SizedBox(height: 15)
                           ],
                         );

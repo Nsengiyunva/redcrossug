@@ -24,18 +24,19 @@ class AmbulanceController extends GetxController {
 
   fetchPendingAmbulances() async {
     String? token = await StorageService.getToken();
+    isLoading(true);
 
     try {
-      isLoading(true);
       http.Response response = await http.get(
           Uri.tryParse(
-              '${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.ambulances}')!,
+              '${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.ambulance_requests}')!,
           headers: {
             'Authorization': "Bearer $token",
             'X-Requested-With': 'XMLHttpRequest'
           });
 
       var results = jsonDecode(response.body);
+      // print("results ${results}");
       ambulance_list.value = results;
       isLoading(false);
     } catch (e) {
@@ -64,43 +65,22 @@ class AmbulanceController extends GetxController {
       "location": "Makerere Hill Road"
     };
 
-    try {
-      final response = await http.post(
-        Uri.parse(
-            "${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.ambulance_requests}"),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-          'Authorization': "Bearer $token",
-        },
-        body: jsonEncode(payload),
-      );
+    final response = await http.post(
+      Uri.parse(
+          "${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.ambulance_requests}"),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': "Bearer $token",
+      },
+      body: jsonEncode(payload),
+    );
 
-      var result = jsonDecode(response.body);
-      if (result["id"]) {
-        Get.snackbar('Success', 'Ambulance request successfully submitted.');
-        Get.toNamed("/ambulance-success-request");
-      }
-      isUploading(false);
-    } catch (e) {
-      print("Error ${e}");
-      Get.snackbar(
-          'Error', 'An error occurred while submitting ambulance request.');
-    } finally {
-      isUploading(false);
-    }
+    var result = jsonDecode(response.body);
 
-    // try {
-    //   final response = await http.post(
-    //     Uri.parse("https://urcs-api.taufeeq.dev/api/ambulance-requests"),
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: jsonEncode(payload),
-    //   );
-
-    //   var result = jsonDecode(response.body);
-    //   print("result ${result}");
-    // } catch (e) {
-    //   print("error ${e}");
-    // } finally {}
+    print("result ${result}");
+    Get.snackbar('Success', 'Ambulance request successfully submitted.');
+    Get.toNamed("/ambulance-success-request");
+    isUploading(false);
   }
 }
