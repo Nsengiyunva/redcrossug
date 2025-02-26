@@ -47,10 +47,7 @@ class SignIn extends StatelessWidget {
               const SizedBox(height: 10),
               RedBtn(
                   label: 'Continue',
-                  onPressed: () => {
-                        // print("we are here")
-                        _loginController.loginPhoneNumber()
-                      }),
+                  onPressed: () => {_loginController.loginPhoneNumber()}),
               const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +97,6 @@ class SignIn extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF7D8FAB)),
                   ),
-                  // Text( "Register", style: TextStyle( fontSize:20 ) )
                   TextButton(
                     onPressed: () {
                       Get.toNamed("/register-account");

@@ -2,16 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/models/user.dart';
+import 'package:redcross/utils/api_endpoints.dart';
+import 'package:redcross/utils/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class LoginController {
   TextEditingController telephoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  TextEditingController noPeopleController = TextEditingController();
-  TextEditingController noAmbulancesController = TextEditingController();
-  TextEditingController noPatientsController = TextEditingController();
 
   TextEditingController newPhoneNumber = TextEditingController();
 
@@ -21,12 +20,23 @@ class LoginController {
   final Future _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
 
+  Future<void> saveUser(User user) async {
+    final prefs = await SharedPreferences.getInstance();
+    String userJson = jsonEncode(user.toJson());
+    await prefs.setString('user', userJson);
+  }
+
+  // Function to get an object
+  Future<User?> getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userJson = prefs.getString('user');
+    if (userJson == null) return null;
+    return User.fromJson(jsonDecode(userJson));
+  }
+
   Future<void> loginPhoneNumber() async {
     //passwordController.text
     //telephoneController.text
-
-    const String url = 'https://urcs-api.taufeeq.dev/api/auth/login';
-
     isLoading.value = true;
 
     final Map<String, dynamic> requestBody = {
@@ -36,7 +46,8 @@ class LoginController {
 
     try {
       final response = await http.post(
-        Uri.parse(url),
+        Uri.parse(
+            "${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.login}"),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
@@ -44,12 +55,17 @@ class LoginController {
       final responseData = jsonDecode(response.body);
       var responseMessage = 'Success: ${responseData['message']}';
 
-      print(responseData["user"]);
-      // await StorageService.saveToken(responseData['token']);
-      // await prefs?.setString('user', responseData['user']['name'] );
+      User user = User(
+          name: responseData["user"]["name"],
+          phone_no: responseData["user"]["phone_no"]);
 
-      // Get.snackbar('Success', '${responseData['message']}');
-      // Get.toNamed('/home', arguments: {'phone_number': "+256775625741"});
+      await saveUser(user);
+
+      await StorageService.saveToken(responseData['token']);
+
+      Get.snackbar('Success', '${responseData['message']}');
+      Get.toNamed('/home',
+          arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
       print("Error: $e");
       Get.snackbar('Error', 'An error occurred while signing the form');

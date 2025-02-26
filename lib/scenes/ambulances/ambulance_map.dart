@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-// import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/controllers/ambulance_controller.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
@@ -18,9 +18,13 @@ class AmbulanceMap extends StatefulWidget {
 class _MapScreenState extends State<AmbulanceMap> {
   late GoogleMapController mapController;
   TextEditingController searchController = TextEditingController();
+
   LatLng? currentPosition;
   LatLng defaultLocation = const LatLng(32.6475256, 0.38506239999999997);
   double currentZoom = 12.0;
+
+  final AmbulanceController ambulanceController =
+      Get.put(AmbulanceController());
 
   @override
   void initState() {
@@ -214,7 +218,11 @@ class _MapScreenState extends State<AmbulanceMap> {
                             onSubmitted: (value) => _searchLocation(value),
                           ),
                           const SizedBox(height: 15),
-                          RedBtn(label: 'Continue', onPressed: () {})
+                          RedBtn(
+                              label: 'Continue',
+                              onPressed: () {
+                                ambulanceController.submitCreateRequest();
+                              })
                         ],
                       ),
                     )

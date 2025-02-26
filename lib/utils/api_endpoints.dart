@@ -5,6 +5,8 @@ class ApiEndpoints {
 
 class _AuthEndPoints {
   final String register = '/auth/register';
-  final String login = '/auth/login';
+  final String login = 'auth/login';
   final String disasters = '/disasters';
+  final String ambulances = '/auth/ambulances';
+  final String ambulance_requests = 'ambulance-requests';
 }

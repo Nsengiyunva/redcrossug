@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:redcross/utils/colors.dart';
 
 class FormTextfield extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
   FormFieldValidator<String>? validator;
+  bool? isNumberField = false;
 
   FormTextfield(
       {super.key,
       required this.question,
       required this.textEditingController,
-      required this.validator});
+      required this.validator,
+      this.isNumberField});
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +34,16 @@ class FormTextfield extends StatelessWidget {
             const SizedBox(height: 2),
             TextFormField(
               controller: textEditingController,
+              // keyboardType:
+              //     typeNumber! ? TextInputType.number : TextInputType.text,
+              // inputFormatters:
+              //     typeNumber! ? [FilteringTextInputFormatter.digitsOnly] : [],
               style: const TextStyle(
                   fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041)),
               validator: validator,
               decoration: InputDecoration(
+                  filled: true, // Enables background color
+                  fillColor: AppColors.whiteColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(

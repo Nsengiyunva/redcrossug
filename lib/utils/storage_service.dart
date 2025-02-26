@@ -10,6 +10,11 @@ class StorageService {
     await prefs.setString('token', token);
   }
 
+  // static Future<void> saveUserCredentials(Dynamic) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('token', token);
+  // }
+
   static Future<String?> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token');
@@ -22,16 +27,22 @@ class StorageService {
   }
 
   static Future<User?> getUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userJson = prefs.getString(_key);
-    if (userJson == null) {
-      return null;
-    }
+    final prefs = await SharedPreferences.getInstance();
+    String? userJson = prefs.getString('user');
+    if (userJson == null) return null;
     return User.fromJson(jsonDecode(userJson));
   }
 
   static Future<void> removeUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_key);
+  }
+
+  static String truncateString(String text, int maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    } else {
+      return '${text.substring(0, maxLength)}...';
+    }
   }
 }

@@ -26,7 +26,7 @@ class AppColors {
   static const Color blackColorD = Color(0xFF4A4949);
   static const Color blackColorE = Color(0xFF484848);
   static const Color blackColorF = Color(0xFF545454);
-  // Color(0xFF848484)
+  static const Color blueColor = Color(0xFF0080FF);
 
   // Neutral Colors
   // static const Color white = Color(0xFFFFFFFF);

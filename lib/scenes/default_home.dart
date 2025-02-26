@@ -1,13 +1,65 @@
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:redcross/scenes/home_badge.dart';
+// import 'package:redcross/scenes/widgets/card_board.dart';
+// import 'package:redcross/utils/colors.dart';
+
+// class DefaultHome extends StatelessWidget {
+//   DefaultHome({super.key});
+
+// User? retrievedUser = await getUser();
+//     if (retrievedUser != null) {
+//       print("Name: ${retrievedUser.name}, Age: ${retrievedUser.age}");
+//     }
+
+//   @override
+
+// }
+
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:redcross/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:redcross/scenes/home_badge.dart';
 import 'package:redcross/scenes/widgets/card_board.dart';
 import 'package:redcross/utils/colors.dart';
 
-class DefaultHome extends StatelessWidget {
-  DefaultHome({super.key});
+class DefaultHome extends StatefulWidget {
+  const DefaultHome({super.key});
 
+  @override
+  State<DefaultHome> createState() => _DefaultHomeState();
+}
+
+class _DefaultHomeState extends State<DefaultHome> {
+  var fullName = "";
+  String text = "Initial Value";
   var isLogin = false.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    User? retrievedUser = await getUser();
+    // final storedText = prefs.getString('savedText') ?? "No Data Found";
+
+    // Update state after fetching data
+    setState(() {
+      text = retrievedUser?.name ?? "Test";
+    });
+  }
+
+  Future<User?> getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userJson = prefs.getString('user');
+    if (userJson == null) return null;
+    return User.fromJson(jsonDecode(userJson));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +92,7 @@ class DefaultHome extends StatelessWidget {
                                   ))),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Text("Anthony Blinked",
+                              child: Text("Test",
                                   style: TextStyle(
                                     fontSize: 20.97,
                                     color: Color(0xFF545454),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/controllers/ambulance_controller.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
@@ -8,7 +8,8 @@ import 'package:redcross/utils/colors.dart';
 class AmbulanceForm extends StatelessWidget {
   AmbulanceForm({super.key});
 
-  final LoginController _formController = Get.put(LoginController());
+  final AmbulanceController ambulanceController =
+      Get.put(AmbulanceController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +42,9 @@ class AmbulanceForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
+                  isNumberField: true,
                   question: 'No. of people hurt/in-need',
-                  textEditingController: _formController.noPeopleController,
+                  textEditingController: ambulanceController.no_people_hurt,
                   validator: (value) {
                     return null;
                   },
@@ -50,7 +52,7 @@ class AmbulanceForm extends StatelessWidget {
                 const SizedBox(height: 25),
                 FormTextfield(
                   question: 'No. of ambulances required',
-                  textEditingController: _formController.noAmbulancesController,
+                  textEditingController: ambulanceController.no_ambulances,
                   validator: (value) {
                     return null;
                   },
@@ -58,7 +60,7 @@ class AmbulanceForm extends StatelessWidget {
                 const SizedBox(height: 25),
                 FormTextfield(
                   question: 'No. of emergency patients/Medical Risk',
-                  textEditingController: _formController.noPatientsController,
+                  textEditingController: ambulanceController.no_patients,
                   validator: (value) {
                     return null;
                   },
@@ -83,8 +85,8 @@ class AmbulanceForm extends StatelessWidget {
                 RedBtn(
                     label: "Continue",
                     onPressed: () {
-                      // Get.toNamed('/ambulance-success-request');
-                      Get.toNamed('/ambulance-map');
+                      ambulanceController.createAmbulanceRequest();
+                      // Get.toNamed('/ambulance-map');
                     })
               ],
             ),
