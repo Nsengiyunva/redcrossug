@@ -36,7 +36,7 @@ class AmbulanceHome extends StatelessWidget {
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Ambulance",
                     style: TextStyle(
                         fontSize: 26.33,
@@ -44,7 +44,7 @@ class AmbulanceHome extends StatelessWidget {
                         fontFamily: "Inter",
                         color: Color(0xFF000000)),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   RedBtnIcon(
                     noColor: false,
                     label: 'Request for Ambulance',
@@ -65,7 +65,7 @@ class AmbulanceHome extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   ConstrainedBox(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minWidth: 100,
                       maxWidth: 400,
                       minHeight: 50,
@@ -82,13 +82,13 @@ class AmbulanceHome extends StatelessWidget {
                                 place: item["location"],
                                 location: item["status"]?.toUpperCase(),
                                 time: item["created_at"]),
-                            SizedBox(height: 15)
+                            const SizedBox(height: 15)
                           ],
                         );
                       },
                     ),
                   ),
-                  Center(
+                  const Center(
                     child: Column(
                       children: [
                         Text("Red Cross Ambulance Hotlines:",

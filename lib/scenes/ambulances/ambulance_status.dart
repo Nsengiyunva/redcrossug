@@ -52,12 +52,12 @@ class AmbulanceStatus extends StatelessWidget {
                           label: 'Ambulances',
                           noComponent: false,
                           value: "Red Cross Nakasero"),
-                      SizedBox(height: 100),
+                      const SizedBox(height: 100),
                       GestureDetector(
                         onTap: () {
                           Get.toNamed("/ambulance-home");
                         },
-                        child: Text("Back to Home",
+                        child: const Text("Back to Home",
                             style: TextStyle(
                                 fontSize: 14,
                                 color: AppColors.blackColor,

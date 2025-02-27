@@ -34,7 +34,7 @@ class _MapScreenState extends State<AmbulanceMap> {
   }
 
   Future<void> _searchLocation(String query) async {
-    if (query.length > 0) {
+    if (query.isNotEmpty) {
       setState(() {
         query = query; // Update marker position
       });
@@ -44,7 +44,7 @@ class _MapScreenState extends State<AmbulanceMap> {
           Location location = locations.first;
           LatLng newPosition = LatLng(location.latitude, location.longitude);
 
-          print("new position ${newPosition}");
+          print("new position $newPosition");
 
           mapController
               .animateCamera(CameraUpdate.newLatLngZoom(newPosition, 14));

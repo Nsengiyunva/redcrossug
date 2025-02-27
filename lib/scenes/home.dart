@@ -17,7 +17,7 @@ class _BottomNavigationBarExampleState extends State<Home> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    DefaultHome(),
+    const DefaultHome(),
     const ScreenTwo(),
     const FirstAidHome(),
     const Profile()
