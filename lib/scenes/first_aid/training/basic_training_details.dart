@@ -38,17 +38,21 @@ class BasicTrainingDetails extends StatelessWidget {
           );
         }
 
-        // print(
-        //     "we are here ${trainingController.training_details["training"]["image_url"]}");
-
         return SingleChildScrollView(
             child: Container(
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(vertical: 30.0),
                 padding:
-                    const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
                 child: Column(
                   children: [
+                    Text(
+                        "${trainingController.training_details["training"]["name"]}",
+                        style: TextStyle(
+                            fontFamily: "Inter",
+                            color: AppColors.blackColor,
+                            fontWeight: FontWeight.w800)),
+                    SizedBox(height: 15),
                     Container(
                       width: 319, // Set the container width
                       height: 270, // Set the container height
@@ -86,7 +90,7 @@ class BasicTrainingDetails extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: Text(
                           "${trainingController.training_details["training"]["description"]}",
                           style: TextStyle(
@@ -101,7 +105,46 @@ class BasicTrainingDetails extends StatelessWidget {
                     RedBtn(
                         label: 'Request for Training',
                         onPressed: () {
-                          Get.toNamed("/home");
+                          showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(0)),
+                            ),
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(20),
+                                height: 500,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                        "Number of Participants: ${trainingController.training_details["number_of_participants"]}"),
+                                    const SizedBox(height: 15),
+                                    Text(
+                                        "Date of Training: ${trainingController.training_details["start_date"]}"),
+                                    const SizedBox(height: 15),
+                                    Text(
+                                        "Training Fee: ${trainingController.training_details["payment_amount"]}"),
+                                    const SizedBox(height: 15),
+                                    RedBtn(
+                                        label: 'Proceed',
+                                        onPressed: () {
+                                          trainingController
+                                              .trainingApplication(
+                                            trainingController.training_details[
+                                                "training"]["id"],
+                                            trainingController
+                                                .training_details["start_date"],
+                                            trainingController.training_details[
+                                                "number_of_participants"],
+                                          );
+                                        })
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                         })
                   ],
                 )));

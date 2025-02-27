@@ -11,4 +11,5 @@ class _AuthEndPoints {
   final String ambulance_requests = 'ambulance-requests';
   final String trainings = 'trainings';
   final String training_details = 'user-trainings';
+  final String training_application = 'user-trainings';
 }

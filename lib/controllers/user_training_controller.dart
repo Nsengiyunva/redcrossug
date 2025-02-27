@@ -10,6 +10,7 @@ class UserTrainingController extends GetxController {
   var filtered_list = [].obs;
   var isFetching = false.obs;
   var training_details = {}.obs;
+  var isApplying = false.obs;
 
   @override
   Future onInit() async {
@@ -81,6 +82,47 @@ class UserTrainingController extends GetxController {
       Get.snackbar('Error', 'There are no training details found.');
     } finally {
       isFetching(false);
+    }
+  }
+
+  Future<void> trainingApplication(
+      trainingId, trainingDate, trainingParticipants) async {
+    var token = await StorageService.getToken();
+    isApplying(true);
+
+    final Map<String, dynamic> payload = {
+      "training_id": trainingId,
+      "start_date": trainingDate,
+      "number_of_participants": trainingParticipants
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse("${ApiEndpoints.baseUrl}/user-trainings"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer $token",
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: jsonEncode(payload),
+      );
+
+      var result = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        // print(result);
+        Get.snackbar('Success',
+            'Your training request application has been submitted successfully.');
+        Get.toNamed("/home");
+      } else {
+        Get.snackbar('Error', 'Could not submit the training request.');
+      }
+    } catch (e) {
+      print(e);
+      Get.snackbar('Error', 'Could not submit the training request.');
+      isApplying(false);
+    } finally {
+      isApplying(false);
     }
   }
 }
