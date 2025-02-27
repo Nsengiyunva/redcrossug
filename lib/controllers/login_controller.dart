@@ -18,7 +18,7 @@ class LoginController {
   final fieldFocusNode = List.generate(5, (index) => FocusNode());
 
   final Future _prefs = SharedPreferences.getInstance();
-  var isLoading = false.obs;
+  var isLoggingIn = false.obs;
 
   Future<void> saveUser(User user) async {
     final prefs = await SharedPreferences.getInstance();
@@ -26,18 +26,8 @@ class LoginController {
     await prefs.setString('user', userJson);
   }
 
-  // Function to get an object
-  Future<User?> getUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? userJson = prefs.getString('user');
-    if (userJson == null) return null;
-    return User.fromJson(jsonDecode(userJson));
-  }
-
   Future<void> loginPhoneNumber() async {
-    //passwordController.text
-    //telephoneController.text
-    isLoading.value = true;
+    isLoggingIn(true);
 
     final Map<String, dynamic> requestBody = {
       "phone_no": "+256775625741",
@@ -62,12 +52,13 @@ class LoginController {
       await saveUser(user);
 
       await StorageService.saveToken(responseData['token']);
+      isLoggingIn(false);
 
       Get.snackbar('Success', '${responseData['message']}');
       Get.toNamed('/home',
           arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
-      print("Error: $e");
+      isLoggingIn(false);
       Get.snackbar('Error', 'An error occurred while signing the form');
     }
   }

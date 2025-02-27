@@ -70,9 +70,9 @@ class MyApp extends StatelessWidget {
         "/first-aid-emergency-details": (context) => const FirstAidDetails(),
         "/ambulance-map-locations": (context) => const AmbulanceMap(),
         "/first-aid-item-details": (context) => const FaDetailsHome(),
-        "/training-home": (context) => const TrainingHome(),
-        "/training-list-items": (context) => const TrainingList(),
-        "/basic-training": (context) => const BasicTrainingDetails(),
+        "/training-home": (context) => TrainingHome(),
+        "/training-list-items": (context) => TrainingList(),
+        "/basic-training": (context) => BasicTrainingDetails(),
         "/ambulance-map": (context) => const AmbulanceMap(),
         "/account-profile": (context) => const Profile()
       },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:redcross/scenes/first_aid/screens/bleeding_cut.dart';
 import 'package:redcross/scenes/first_aid/screens/bleeding_cut_page2.dart';
 import 'package:redcross/scenes/first_aid/screens/bleeding_cut_page3.dart';
+import 'package:redcross/utils/colors.dart';
 
 class FaDetailsHome extends StatefulWidget {
   const FaDetailsHome({super.key});
@@ -18,9 +19,6 @@ class _SliderWithDotsState extends State<FaDetailsHome> {
     const BleedingCut(),
     const BleedingCutPage2(),
     const BleedingCutPage3()
-    // Container(color: Colors.red, child: const Center(child: Text('Page 1'))),
-    // Container(color: Colors.green, child: const Center(child: Text('Page 2'))),
-    // Container(color: Colors.blue, child: const Center(child: Text('Page 3'))),
   ];
 
   @override
@@ -33,9 +31,9 @@ class _SliderWithDotsState extends State<FaDetailsHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(""),
-        leading: const BackButton() // Back button added here
-      ),
+          title: const Text(""),
+          leading: const BackButton() // Back button added here
+          ),
       body: Column(
         children: [
           Expanded(
@@ -59,7 +57,8 @@ class _SliderWithDotsState extends State<FaDetailsHome> {
                 height: _currentPage == index ? 12.0 : 8.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: _currentPage == index ? Colors.blue : Colors.grey,
+                  color:
+                      _currentPage == index ? AppColors.redColorA : Colors.grey,
                 ),
               ),
             ),

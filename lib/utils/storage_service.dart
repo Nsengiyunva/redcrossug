@@ -10,11 +10,6 @@ class StorageService {
     await prefs.setString('token', token);
   }
 
-  // static Future<void> saveUserCredentials(Dynamic) async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.setString('token', token);
-  // }
-
   static Future<String?> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token');
@@ -43,6 +38,18 @@ class StorageService {
       return text;
     } else {
       return '${text.substring(0, maxLength)}...';
+    }
+  }
+
+  static String displayWhatTime() {
+    int hour = DateTime.now().hour;
+
+    if (hour < 12) {
+      return "Good Morning";
+    } else if (hour < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
     }
   }
 }
