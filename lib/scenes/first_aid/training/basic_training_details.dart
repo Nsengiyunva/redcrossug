@@ -38,8 +38,8 @@ class BasicTrainingDetails extends StatelessWidget {
           );
         }
 
-        print(
-            "we are here ${trainingController.training_details["training"]["image_url"]}");
+        // print(
+        //     "we are here ${trainingController.training_details["training"]["image_url"]}");
 
         return SingleChildScrollView(
             child: Container(
