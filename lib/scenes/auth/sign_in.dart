@@ -108,14 +108,14 @@ class SignIn extends StatelessWidget {
                 Center(
                     child: Column(
                   children: [
-                    const Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                          fontSize: 15.98,
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF7D8FAB)),
-                    ),
+                    // const Text(
+                    //   "Don't have an account?",
+                    //   style: TextStyle(
+                    //       fontSize: 15.98,
+                    //       fontFamily: "Inter",
+                    //       fontWeight: FontWeight.w400,
+                    //       color: Color(0xFF7D8FAB)),
+                    // ),
                     // TextButton(
                     //   onPressed: () {
                     //     // Get.toNamed("/register-account");
