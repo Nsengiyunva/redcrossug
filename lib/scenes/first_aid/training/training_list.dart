@@ -36,7 +36,7 @@ class TrainingList extends StatelessWidget {
           );
         }
 
-        if (trainingController.trainings.length == 0) {
+        if (trainingController.trainings.isEmpty) {
           return const Center(
             child: Column(
               children: [

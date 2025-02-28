@@ -51,9 +51,10 @@ class _DefaultHomeState extends State<DefaultHome> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(time,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16.46,
                                       color: Color(0xFF545454),
                                       fontFamily: "Inter",

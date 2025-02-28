@@ -37,7 +37,7 @@ class IconCard extends StatelessWidget {
                   color: AppColors.redColorA,
                   size: 32.39,
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(label,
                     style: const TextStyle(
                         fontSize: 12,

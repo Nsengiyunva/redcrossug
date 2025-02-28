@@ -48,11 +48,11 @@ class BasicTrainingDetails extends StatelessWidget {
                   children: [
                     Text(
                         "${trainingController.training_details["training"]["name"]}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.blackColor,
                             fontWeight: FontWeight.w800)),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Container(
                       width: 319, // Set the container width
                       height: 270, // Set the container height
@@ -69,10 +69,11 @@ class BasicTrainingDetails extends StatelessWidget {
                           '${trainingController.training_details["training"]["image_url"]}',
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           },
                           errorBuilder: (context, error, stackTrace) {
-                            return Text("Failed to load image");
+                            return const Text("Failed to load image");
                           },
                         ),
                       ),
@@ -89,11 +90,11 @@ class BasicTrainingDetails extends StatelessWidget {
                     const SizedBox(height: 10),
                     Center(
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         child: Text(
                           "${trainingController.training_details["training"]["description"]}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 12,
                               fontFamily: "Inter",
                               color: AppColors.blackColorC,

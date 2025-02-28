@@ -5,7 +5,7 @@ import 'package:redcross/scenes/widgets/training_box_img.dart';
 import 'package:redcross/utils/colors.dart';
 
 class TrainingHome extends StatelessWidget {
-  TrainingHome({super.key});
+  const TrainingHome({super.key});
 
   @override
   Widget build(BuildContext context) {

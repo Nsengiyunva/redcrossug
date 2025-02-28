@@ -5,7 +5,6 @@ import 'package:redcross/scenes/ambulances/ambulance_progress_box.dart';
 import 'package:redcross/scenes/widgets/ambulance_list_item.dart';
 import 'package:redcross/scenes/widgets/red_btn_icon.dart';
 import 'package:redcross/utils/colors.dart';
-import 'package:redcross/utils/storage_service.dart';
 
 class AmbulanceHome extends StatelessWidget {
   AmbulanceHome({super.key});
@@ -15,10 +14,12 @@ class AmbulanceHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(ambulanceController.ambulance_list.length);
-
     return Scaffold(
         backgroundColor: AppColors.bgColor,
+        appBar: AppBar(
+            title: Text(""),
+            leading: const BackButton() // Back button added here
+            ),
         body: Obx(() {
           if (ambulanceController.isLoading.value) {
             return const Center(

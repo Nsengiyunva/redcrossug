@@ -44,11 +44,11 @@ class UserTrainingController extends GetxController {
   }
 
   Future<void> navigateByCategory(String type) async {
-    var category_trainings = trainings
-        .where((item) => item["category"].toLowerCase() == type?.toLowerCase())
+    var categoryTrainings = trainings
+        .where((item) => item["category"].toLowerCase() == type.toLowerCase())
         .toList();
-    filtered_list.value = category_trainings;
-    if (category_trainings.length > 0) {
+    filtered_list.value = categoryTrainings;
+    if (categoryTrainings.length > 0) {
       Get.toNamed("/training-list-items", arguments: {'category': type});
     } else {
       Get.snackbar('Error', 'There are no trainings for the selected category');

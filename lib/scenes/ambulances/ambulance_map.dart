@@ -18,7 +18,6 @@ class AmbulanceMap extends StatefulWidget {
 class _MapScreenState extends State<AmbulanceMap> {
   String query = "";
   late GoogleMapController mapController;
-  // TextEditingController searchController = TextEditingController();
 
   LatLng? currentPosition;
   LatLng defaultLocation = const LatLng(32.6475256, 0.38506239999999997);
@@ -43,8 +42,6 @@ class _MapScreenState extends State<AmbulanceMap> {
         if (locations.isNotEmpty) {
           Location location = locations.first;
           LatLng newPosition = LatLng(location.latitude, location.longitude);
-
-          print("new position $newPosition");
 
           mapController
               .animateCamera(CameraUpdate.newLatLngZoom(newPosition, 14));
@@ -87,8 +84,6 @@ class _MapScreenState extends State<AmbulanceMap> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    print(position);
-
     setState(() {
       currentPosition = LatLng(position.latitude, position.longitude);
     });
@@ -115,6 +110,8 @@ class _MapScreenState extends State<AmbulanceMap> {
 
   @override
   Widget build(BuildContext context) {
+    print(query);
+
     return Scaffold(
       appBar: AppBar(title: const Text('')),
       body: Stack(
@@ -241,11 +238,3 @@ class _MapScreenState extends State<AmbulanceMap> {
     );
   }
 }
-
-
-// Text("Location Details",
-//     style: TextStyle(
-//         fontSize: 18, fontWeight: FontWeight.bold)),
-// SizedBox(height: 10),
-// Text(
-//     "This is a draggable bottom sheet on top of Google Maps."),

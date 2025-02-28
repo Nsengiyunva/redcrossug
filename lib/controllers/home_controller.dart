@@ -5,6 +5,7 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var fullName = ''.obs;
 
+  @override
   Future onInit() async {
     super.onInit();
     fetchFullName();
@@ -17,7 +18,7 @@ class HomeController extends GetxController {
       fullName.value = retrievedUser!.name;
       isLoading(false);
     } catch (e) {
-      print("e ${e}");
+      print("e $e");
     } finally {
       isLoading(false);
     }

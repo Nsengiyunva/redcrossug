@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/widgets/red_btn.dart';
 
 class BleedingCutPage3 extends StatelessWidget {
   const BleedingCutPage3({super.key});

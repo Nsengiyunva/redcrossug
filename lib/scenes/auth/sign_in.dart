@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/form_password.dart';
+import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 
@@ -17,7 +18,7 @@ class SignIn extends StatelessWidget {
         body: Obx(() {
           if (_loginController.isLoggingIn.value) {
             return Container(
-              child: Center(
+              child: const Center(
                 child: Column(
                   children: [
                     CircularProgressIndicator(),
@@ -50,12 +51,14 @@ class SignIn extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 16.99,
-                          color: Color(0xFF7D8FAB))),
+                          color: AppColors.greyColorF)),
                 ),
                 const SizedBox(height: 15),
-                // PhoneNumberField(
-                //   textEditingController: _loginController.telephoneController,
-                // ),
+                FormTextfield(
+                  question: "Phone Number",
+                  textEditingController: _loginController.telephoneController,
+                  validator: (String? value) {},
+                ),
                 const SizedBox(height: 25),
                 FormPassword(
                     question: 'Password',
@@ -113,26 +116,26 @@ class SignIn extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: Color(0xFF7D8FAB)),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Get.toNamed("/register-account");
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppColors.blackColor, // Text color
-                        backgroundColor:
-                            AppColors.whiteColor, // Button background color
-                        padding: const EdgeInsets.all(
-                            15), // Padding inside the button
-                        textStyle: const TextStyle(fontSize: 20), // Text style
-                      ),
-                      child: const Text("Register",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              decorationColor: Color(0xFF545454),
-                              fontFamily: "Inter",
-                              fontSize: 17,
-                              color: Color(0xFF7D8FAB))),
-                    )
+                    // TextButton(
+                    //   onPressed: () {
+                    //     // Get.toNamed("/register-account");
+                    //   },
+                    //   style: TextButton.styleFrom(
+                    //     foregroundColor: AppColors.blackColor, // Text color
+                    //     backgroundColor:
+                    //         AppColors.whiteColor, // Button background color
+                    //     padding: const EdgeInsets.all(
+                    //         15), // Padding inside the button
+                    //     textStyle: const TextStyle(fontSize: 20), // Text style
+                    //   ),
+                    //   child: const Text("Register",
+                    //       style: TextStyle(
+                    //           decoration: TextDecoration.underline,
+                    //           decorationColor: Color(0xFF545454),
+                    //           fontFamily: "Inter",
+                    //           fontSize: 17,
+                    //           color: Color(0xFF7D8FAB))),
+                    // )
                   ],
                 ))
               ],
