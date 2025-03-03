@@ -45,21 +45,23 @@ class LoginController {
       final responseData = jsonDecode(response.body);
       var responseMessage = 'Success: ${responseData['message']}';
 
-      User user = User(
-          name: responseData["user"]["name"],
-          phone_no: responseData["user"]["phone_no"]);
+      // User user = User(
+      //     name: responseData["user"]["name"],
+      //     phone_no: responseData["user"]["phone_no"]);
 
-      await saveUser(user);
+      // await saveUser(user);
 
-      await StorageService.saveToken(responseData['token']);
+      // await StorageService.saveToken(responseData['token']);
       isLoggingIn(false);
+      print("status $responseData");
 
-      Get.snackbar('Success', '${responseData['message']}');
-      Get.toNamed('/home',
-          arguments: {'phone_number': responseData["user"]["phone_no"]});
+      // Get.snackbar('Success', '${responseData['message']}');
+      // Get.toNamed('/home',
+      //     arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
       isLoggingIn(false);
-      Get.snackbar('Error', 'An error occurred while signing the form');
+      print("Error $e");
+      // Get.snackbar('Error', 'An error occurred while signing the form');
     }
   }
 

@@ -17,7 +17,8 @@ class SignIn extends StatelessWidget {
         backgroundColor: AppColors.whiteColor,
         body: Obx(() {
           if (_loginController.isLoggingIn.value) {
-            return Container(
+            return SizedBox(
+              height: MediaQuery.of(context).size.height,
               child: const Center(
                 child: Column(
                   children: [
@@ -57,7 +58,9 @@ class SignIn extends StatelessWidget {
                 FormTextfield(
                   question: "Phone Number",
                   textEditingController: _loginController.telephoneController,
-                  validator: (String? value) {},
+                  validator: (String? value) {
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 25),
                 FormPassword(
@@ -88,7 +91,7 @@ class SignIn extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        //  Get.toNamed( "/register-account" );
+                        // Get.toNamed("/register-account");
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: AppColors.whiteColor,
@@ -108,34 +111,34 @@ class SignIn extends StatelessWidget {
                 Center(
                     child: Column(
                   children: [
-                    // const Text(
-                    //   "Don't have an account?",
-                    //   style: TextStyle(
-                    //       fontSize: 15.98,
-                    //       fontFamily: "Inter",
-                    //       fontWeight: FontWeight.w400,
-                    //       color: Color(0xFF7D8FAB)),
-                    // ),
-                    // TextButton(
-                    //   onPressed: () {
-                    //     // Get.toNamed("/register-account");
-                    //   },
-                    //   style: TextButton.styleFrom(
-                    //     foregroundColor: AppColors.blackColor, // Text color
-                    //     backgroundColor:
-                    //         AppColors.whiteColor, // Button background color
-                    //     padding: const EdgeInsets.all(
-                    //         15), // Padding inside the button
-                    //     textStyle: const TextStyle(fontSize: 20), // Text style
-                    //   ),
-                    //   child: const Text("Register",
-                    //       style: TextStyle(
-                    //           decoration: TextDecoration.underline,
-                    //           decorationColor: Color(0xFF545454),
-                    //           fontFamily: "Inter",
-                    //           fontSize: 17,
-                    //           color: Color(0xFF7D8FAB))),
-                    // )
+                    const Text(
+                      "Don't have an account?",
+                      style: TextStyle(
+                          fontSize: 15.98,
+                          fontFamily: "Inter",
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF7D8FAB)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Get.toNamed("/register-account");
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColors.blackColor, // Text color
+                        backgroundColor:
+                            AppColors.whiteColor, // Button background color
+                        padding: const EdgeInsets.all(
+                            15), // Padding inside the button
+                        textStyle: const TextStyle(fontSize: 20), // Text style
+                      ),
+                      child: const Text("Register",
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              decorationColor: Color(0xFF545454),
+                              fontFamily: "Inter",
+                              fontSize: 17,
+                              color: Color(0xFF7D8FAB))),
+                    )
                   ],
                 ))
               ],

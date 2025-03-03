@@ -5,7 +5,7 @@ class FormPassword extends StatefulWidget {
   final String question;
   final TextEditingController textEditingController;
 
-  FormPassword(
+  const FormPassword(
       {super.key, required this.question, required this.textEditingController});
 
   @override

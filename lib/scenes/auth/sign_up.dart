@@ -62,20 +62,6 @@ class SignUpState extends State<SignUp> {
                         return null;
                       }),
                   const SizedBox(height: 10),
-                  // FormTextfield(
-                  //     question: 'Email Address',
-                  //     textEditingController: _registerController.email),
-                  // const SizedBox(height: 10),
-                  // const DatePicker(question: 'Date of Birth'),
-                  // const SizedBox(height: 10),
-                  // CountryPicker(
-                  //     question: 'Nationality',
-                  //     textEditingController: _registerController.nationality),
-                  // const SizedBox(height: 10),
-                  // FormTextfield(
-                  //     question: 'NIN/Passport Number',
-                  //     textEditingController: _registerController.registerNIN),
-                  // const SizedBox(height: 10),
                   FormPassword(
                       question: 'Password',
                       textEditingController: _registerController.password),

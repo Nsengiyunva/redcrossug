@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 // import 'package:redcross/controllers/user_training_controller.dart';
 import 'package:redcross/scenes/widgets/training_box_img.dart';
 import 'package:redcross/utils/colors.dart';

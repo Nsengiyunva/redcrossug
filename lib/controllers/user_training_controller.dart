@@ -48,7 +48,7 @@ class UserTrainingController extends GetxController {
         .where((item) => item["category"].toLowerCase() == type.toLowerCase())
         .toList();
     filtered_list.value = categoryTrainings;
-    if (categoryTrainings.length > 0) {
+    if (categoryTrainings.isNotEmpty) {
       Get.toNamed("/training-list-items", arguments: {'category': type});
     } else {
       Get.snackbar('Error', 'There are no trainings for the selected category');

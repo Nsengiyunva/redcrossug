@@ -17,7 +17,7 @@ class AmbulanceHome extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
-            title: Text(""),
+            title: const Text(""),
             leading: const BackButton() // Back button added here
             ),
         body: Obx(() {

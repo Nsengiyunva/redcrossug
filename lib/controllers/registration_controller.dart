@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'package:redcross/utils/api_endpoints.dart';
 
 class RegistrationController extends GetxController {
   TextEditingController firstname = TextEditingController();
@@ -19,6 +21,13 @@ class RegistrationController extends GetxController {
 
   final Future _prefs = SharedPreferences.getInstance();
   var isLoading = false.obs;
+  var isFetching = false.obs;
+
+  @override
+  Future onInit() async {
+    super.onInit();
+    fetchCountryFlags();
+  }
 
   void showToast() {
     Fluttertoast.showToast(
@@ -87,5 +96,21 @@ class RegistrationController extends GetxController {
     // } catch (error) {
     //   print(error);
     // }
+  }
+
+  Future<void> fetchCountryFlags() async {
+    isFetching(true);
+    try {
+      http.Response response = await http.get(
+        Uri.tryParse('https://restcountries.com/v3.1/all')!,
+      );
+
+      print("result $response");
+      isFetching(false);
+    } catch (e) {
+      print("Error $e");
+    } finally {
+      isFetching(false);
+    }
   }
 }
