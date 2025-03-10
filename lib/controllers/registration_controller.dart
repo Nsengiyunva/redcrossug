@@ -10,10 +10,8 @@ class RegistrationController extends GetxController {
   TextEditingController email = TextEditingController();
   TextEditingController registerDOB = TextEditingController();
   TextEditingController nationality = TextEditingController();
-  // TextEditingController nin = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
-  // TextEditingController newPhoneNumber = TextEditingController();
 
   final fieldControllers = List.generate(5, (index) => TextEditingController());
   final fieldFocusNode = List.generate(5, (index) => FocusNode());
@@ -28,19 +26,8 @@ class RegistrationController extends GetxController {
     fetchCountryFlags();
   }
 
-  void showToast() {
-    Fluttertoast.showToast(
-      msg: "Hello, this is a toast message!",
-      toastLength: Toast.LENGTH_SHORT, // or Toast.LENGTH_LONG
-      gravity: ToastGravity.BOTTOM, // Position: BOTTOM, CENTER, TOP
-      backgroundColor: Colors.black54,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  }
-
   Future<void> registerAccount() async {
-    final Map<String, dynamic> body = {
+    final Map<String, dynamic> payload = {
       "first_name": firstname.value.text,
       "last_name": lastname.value.text,
       "phone_no": "+256775625741",
@@ -48,7 +35,7 @@ class RegistrationController extends GetxController {
       "password": password.value.text
     };
 
-    print("name ${firstname.text}");
+    print("name ${firstname}");
 
     // try {
     //   var url =

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redcross/controllers/home_controller.dart';
 import 'package:redcross/scenes/auth/profile_item.dart';
 import 'package:redcross/scenes/auth/profile_list_item.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
@@ -15,6 +18,10 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController homeController = Get.put(HomeController());
+
+    print("details ${homeController}");
+
     return Scaffold(
       backgroundColor: AppColors.peachColor,
       body: SingleChildScrollView(
@@ -31,7 +38,7 @@ class Profile extends StatelessWidget {
                   fontFamily: "Inter",
                   fontSize: 23.88,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black),
+                  color: AppColors.blackColor),
             ),
             const SizedBox(height: 30),
             Container(
@@ -39,11 +46,11 @@ class Profile extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22.08),
                     color: AppColors.whiteColor),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ProfileItem(),
-                    Icon(
+                    ProfileItem(name: homeController.fullName.value),
+                    const Icon(
                       Icons.arrow_right,
                       color: AppColors.primaryRedColor,
                       size: 15.51,

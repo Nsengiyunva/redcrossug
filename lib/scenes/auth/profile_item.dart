@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:redcross/utils/colors.dart';
 
 class ProfileItem extends StatelessWidget {
-  const ProfileItem({super.key});
+  final String name;
+  const ProfileItem({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,11 @@ class ProfileItem extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 15),
-        const Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Musoke Asadu",
+            Text(name,
                 style: TextStyle(
                     fontSize: 18.39,
                     fontFamily: "Inter",
