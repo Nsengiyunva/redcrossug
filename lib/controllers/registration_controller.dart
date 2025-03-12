@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class RegistrationController extends GetxController {
@@ -35,7 +34,7 @@ class RegistrationController extends GetxController {
       "password": password.value.text
     };
 
-    print("name ${firstname}");
+    print("name $firstname");
 
     // try {
     //   var url =

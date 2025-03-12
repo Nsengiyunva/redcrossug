@@ -4,7 +4,6 @@ import 'package:redcross/controllers/home_controller.dart';
 import 'package:redcross/scenes/auth/profile_item.dart';
 import 'package:redcross/scenes/auth/profile_list_item.dart';
 import 'package:redcross/utils/colors.dart';
-import 'package:redcross/utils/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
@@ -19,8 +18,6 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeController homeController = Get.put(HomeController());
-
-    print("details ${homeController}");
 
     return Scaffold(
       backgroundColor: AppColors.peachColor,
@@ -49,7 +46,9 @@ class Profile extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ProfileItem(name: homeController.fullName.value),
+                    ProfileItem(
+                        name: homeController.fullName.value,
+                        phone: homeController.phoneNumber.value),
                     const Icon(
                       Icons.arrow_right,
                       color: AppColors.primaryRedColor,

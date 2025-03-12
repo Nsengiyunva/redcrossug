@@ -94,7 +94,9 @@ class _DefaultHomeState extends State<DefaultHome> {
                       CardBoard(
                           title: "Blood Donation",
                           icon_name: "blood_icon",
-                          onPressed: () {}),
+                          onPressed: () {
+                            Get.toNamed("/blood-donation");
+                          }),
                       CardBoard(
                           title: "First Aid",
                           icon_name: "hospital",
@@ -128,7 +130,7 @@ class _DefaultHomeState extends State<DefaultHome> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           CardBoard(
-                              title: "Donations",
+                              title: "Memberships",
                               icon_name: "cash",
                               onPressed: () {}),
                         ],
@@ -152,11 +154,11 @@ class _DefaultHomeState extends State<DefaultHome> {
                                     fontFamily: "Inter",
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xFF1C274C))),
-                            Icon(
-                              Icons.audiotrack,
-                              color: Color(0xFF1C274C),
-                              size: 7.52,
-                            )
+                            // Icon(
+                            //   Icons.audiotrack,
+                            //   color: Color(0xFF1C274C),
+                            //   size: 7.52,
+                            // )
                           ])
                         ],
                       )),
@@ -164,7 +166,7 @@ class _DefaultHomeState extends State<DefaultHome> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       HomeBadge(
-                          title: 'Annual Red Cross Gala',
+                          title: 'Annual Red Cross Gala & Fundraiser',
                           icon_name: "blood_icon"),
                       HomeBadge(
                           title: 'World Blood Donor Day', icon_name: "gala")

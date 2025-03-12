@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:redcross/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class StorageService {
   static const String _key = "user_details";
@@ -39,6 +40,14 @@ class StorageService {
     } else {
       return '${text.substring(0, maxLength)}...';
     }
+  }
+
+  static String formatCurrency(double amount) {
+    if (amount > 0) {
+      return NumberFormat.currency(locale: 'en_UG', symbol: 'UGX')
+          .format(amount);
+    }
+    return "UGX 0";
   }
 
   static String displayWhatTime() {

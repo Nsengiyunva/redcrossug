@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
             changeColor: false),
         "/check-ambulance_status": (context) => AmbulanceStatus(),
         "/ambulance-home": (context) => AmbulanceHome(),
-        "/disaster-details": (context) => const DisasterDetails(),
+        "/disaster-details": (context) => DisasterDetails(),
         "/initiate-payment": (context) => const Payment(),
         "/payment-successful": (context) => const AccountSuccess(
             button_label: 'Close',

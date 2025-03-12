@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:redcross/controllers/disasters_list_controller.dart';
 import 'package:redcross/scenes/widgets/disaster_list_item.dart';
 import 'package:redcross/scenes/widgets/menu_list_items.dart';
+import 'package:redcross/utils/colors.dart';
 
 class Item {
   final String name;
@@ -29,7 +30,7 @@ class DisasterList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFF6F8FC),
+        backgroundColor: AppColors.bgColor,
         appBar: AppBar(
             title: const Text(""),
             leading: const BackButton() // Back button added here

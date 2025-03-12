@@ -16,8 +16,8 @@ class HomeController extends GetxController {
     isLoading(true);
     try {
       var retrievedUser = await StorageService.getUser();
-      print(retrievedUser);
       fullName.value = retrievedUser!.name;
+      phoneNumber.value = retrievedUser.phone_no;
       isLoading(false);
     } catch (e) {
       print("e $e");

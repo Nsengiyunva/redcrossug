@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:redcross/controllers/disasters_list_controller.dart';
 import 'package:redcross/scenes/widgets/donation_progress.dart';
+import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/link_field.dart';
 import 'package:redcross/scenes/widgets/price_tag.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DisasterDetails extends StatefulWidget {
-  const DisasterDetails({super.key});
+  DisasterDetails({super.key});
+
+  final DisastersListController disasterController =
+      Get.put(DisastersListController());
 
   @override
   State<DisasterDetails> createState() => _DisasterDetailsState();
@@ -87,7 +93,6 @@ class _DisasterDetailsState extends State<DisasterDetails> {
       );
     }
 
-    // print( disaster_details );
     var disasterImage = disaster_details!['banner_photo'];
     var fatalities = disaster_details!['fatalities'].toString() ?? "0";
     var amountNeeded = disaster_details!['funding_target'].toString() ?? "0";
@@ -95,10 +100,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
 
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: AppBar(
-          title: const Text(""),
-          leading: const BackButton() // Back button added here
-          ),
+      appBar: AppBar(title: const Text(""), leading: const BackButton()),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -147,7 +149,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                       fontSize: 11.54,
                                       fontFamily: "Inter",
                                       fontWeight: FontWeight.w600,
-                                      color: Color(0xFFFFFFFF))),
+                                      color: AppColors.whiteColor)),
                             )
                           ],
                         )),
@@ -210,7 +212,8 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                           left: BorderSide(
                                               color: AppColors.primaryRedColor,
                                               width: 1))),
-                                  child: Text("$currency $amountNeeded Needed",
+                                  child: Text(
+                                      "${StorageService.formatCurrency(double.parse(disaster_details!['funding_target']))} Needed",
                                       style: const TextStyle(
                                           fontSize: 13.64,
                                           fontWeight: FontWeight.w600,
@@ -233,9 +236,13 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: DonationProgress(
-                              amount: disaster_details!['funds_raised'] ??
+                              amount: StorageService.formatCurrency(
+                                      double.parse(
+                                          disaster_details!['funds_raised'])) ??
                                   "500,000",
-                              target: disaster_details!['funding_target'] ??
+                              target: StorageService.formatCurrency(
+                                      double.parse(disaster_details![
+                                          'funding_target'])) ??
                                   "2,000,000",
                               currency: disaster_details!['currency'] ?? "UGX"),
                         ),
@@ -268,18 +275,22 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                               style: TextStyle(
                                                   fontSize: 16.85,
                                                   fontFamily: "Inter",
-                                                  color: Color(0xFF221105),
+                                                  color: AppColors.blackColorG,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ),
                                           const SizedBox(height: 25),
-                                          const Center(
-                                            child: Text("Enter Price Manually",
-                                                style: TextStyle(
-                                                    fontSize: 14.75,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color(0xFFC1C0BF),
-                                                    fontFamily: "Inter")),
+                                          Center(
+                                            child: FormTextfield(
+                                              no_question: true,
+                                              question: "Enter Price Manually",
+                                              textEditingController: widget
+                                                  .disasterController
+                                                  .donationAmount,
+                                              validator: (String? value) {
+                                                return null;
+                                              },
+                                            ),
                                           ),
                                           const SizedBox(height: 25),
                                           const Row(
@@ -309,9 +320,13 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                               squared: true,
                                               label: 'Continue to Payment',
                                               onPressed: () {
-                                                Navigator.of(context).pop();
-                                                Get.toNamed(
-                                                    "/initiate-payment");
+                                                widget.disasterController
+                                                    .makePayment(
+                                                        disaster_details![
+                                                            'id']);
+                                                // Navigator.of(context).pop();
+                                                // Get.toNamed(
+                                                //     "/initiate-payment");
                                               })
                                         ],
                                       ),

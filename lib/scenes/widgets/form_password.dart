@@ -41,8 +41,10 @@ class FormPasswordState extends State<FormPassword> {
               decoration: InputDecoration(
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _isObscure ? Icons.visibility_off : Icons.visibility,
-                    ),
+                        _isObscure ? Icons.visibility_off : Icons.visibility,
+                        color: _isObscure
+                            ? AppColors.blackColor
+                            : AppColors.primaryRedColor),
                     onPressed: () {
                       setState(() {
                         _isObscure = !_isObscure;
