@@ -12,8 +12,6 @@ import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class DisasterDetails extends StatefulWidget {
   DisasterDetails({super.key});
 
@@ -27,16 +25,13 @@ class DisasterDetails extends StatefulWidget {
 class _DisasterDetailsState extends State<DisasterDetails> {
   Map<String, dynamic>? disaster_details;
   bool isLoading = true;
+  String amount_tab = "250K";
+  int flagId = 2;
 
   @override
   void initState() {
     super.initState();
     _fetchDisasterDetails();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token'); // Returns null if not found
   }
 
   String truncateString(String text, int maxLength) {
@@ -48,7 +43,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   }
 
   Future<void> _fetchDisasterDetails() async {
-    String? token = await getToken();
+    String? token = await StorageService.getToken();
 
     final response = await http.get(
         Uri.tryParse('https://urcs-api.taufeeq.dev/api/disasters/1')!,
@@ -68,6 +63,14 @@ class _DisasterDetailsState extends State<DisasterDetails> {
       });
       throw Exception('Failed to load user data');
     }
+  }
+
+  void updateAmount(int flagId, String amount) {
+    print("flag ${flagId}");
+    // setState(() {
+    //   amount_tab = amount;
+    //   flagId = flagId;
+    // });
   }
 
   @override
@@ -98,13 +101,14 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     var amountNeeded = disaster_details!['funding_target'].toString() ?? "0";
     var currency = disaster_details!['currency'].toString() ?? "UGX";
 
+    print("flag ${widget.disasterController.flagId}");
+
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(title: const Text(""), leading: const BackButton()),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -293,26 +297,95 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                             ),
                                           ),
                                           const SizedBox(height: 25),
-                                          const Row(
+                                          Row(
                                             children: [
                                               PriceTag(
-                                                  label: '100K', active: false),
+                                                  label: '100K',
+                                                  active:
+                                                      widget.disasterController
+                                                                  .flagId ==
+                                                              1
+                                                          ? true
+                                                          : false,
+                                                  onPressed: () {
+                                                    widget.disasterController
+                                                        .setAmountActive(
+                                                            1, "100K");
+                                                  }),
                                               PriceTag(
-                                                  label: '250K', active: true),
+                                                  label: '250K',
+                                                  active:
+                                                      widget.disasterController
+                                                                  .flagId ==
+                                                              2
+                                                          ? true
+                                                          : false,
+                                                  onPressed: () {
+                                                    widget.disasterController
+                                                        .setAmountActive(
+                                                            2, "250K");
+                                                  }),
                                               PriceTag(
-                                                  label: '350K', active: false),
+                                                  label: '350K',
+                                                  active:
+                                                      widget.disasterController
+                                                                  .flagId ==
+                                                              3
+                                                          ? true
+                                                          : false,
+                                                  onPressed: () {
+                                                    widget.disasterController
+                                                        .setAmountActive(
+                                                            3, "350K");
+                                                    // updateAmount(3, "350K");
+                                                  }),
                                             ],
                                           ),
                                           const SizedBox(height: 10),
-                                          const Row(
+                                          Row(
                                             children: [
                                               PriceTag(
-                                                  label: '500K', active: false),
+                                                  label: '500K',
+                                                  active:
+                                                      widget.disasterController
+                                                                  .flagId ==
+                                                              4
+                                                          ? true
+                                                          : false,
+                                                  onPressed: () {
+                                                    // updateAmount(4, "500K");
+                                                    widget.disasterController
+                                                        .setAmountActive(
+                                                            4, "500K");
+                                                  }),
                                               PriceTag(
-                                                  label: '750K', active: false),
+                                                  label: '750K',
+                                                  active:
+                                                      widget.disasterController
+                                                                  .flagId ==
+                                                              5
+                                                          ? true
+                                                          : false,
+                                                  onPressed: () {
+                                                    // updateAmount(5, "750K");
+                                                    widget.disasterController
+                                                        .setAmountActive(
+                                                            5, "750K");
+                                                  }),
                                               PriceTag(
                                                   label: '1 million',
-                                                  active: false),
+                                                  active:
+                                                      widget.disasterController
+                                                                  .flagId ==
+                                                              6
+                                                          ? true
+                                                          : false,
+                                                  onPressed: () {
+                                                    // updateAmount(6, "1M");
+                                                    widget.disasterController
+                                                        .setAmountActive(
+                                                            6, "1M");
+                                                  }),
                                             ],
                                           ),
                                           const Spacer(),
@@ -320,13 +393,15 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                               squared: true,
                                               label: 'Continue to Payment',
                                               onPressed: () {
-                                                widget.disasterController
-                                                    .makePayment(
+                                                // widget.disasterController
+                                                //     .makePayment(
+                                                //         disaster_details![
+                                                //             'id']);
+                                                Navigator.of(context).pop();
+                                                Get.toNamed("/initiate-payment",
+                                                    arguments:
                                                         disaster_details![
                                                             'id']);
-                                                // Navigator.of(context).pop();
-                                                // Get.toNamed(
-                                                //     "/initiate-payment");
                                               })
                                         ],
                                       ),

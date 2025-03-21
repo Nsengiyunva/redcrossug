@@ -59,13 +59,13 @@ class DisasterList extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 26.33,
-                          color: Color(0xFF000000),
+                          color: AppColors.blackColor,
                           fontWeight: FontWeight.w700),
                     )),
                 const SizedBox(height: 10),
                 const MenuListItems(
                   first_title: "Active Disasters",
-                  second_title: "Preparedness",
+                  second_title: "",
                 ),
                 const SizedBox(height: 10),
                 Expanded(

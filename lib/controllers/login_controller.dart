@@ -58,8 +58,8 @@ class LoginController {
           arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
       isLoggingIn(false);
-      print("Error $e");
-      Get.snackbar('Error', 'An error occurred while signing the form');
+      // print("Error $e");
+      Get.snackbar('Error', 'An error occurred while signing the form. ${e}');
     }
   }
 

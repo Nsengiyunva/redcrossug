@@ -12,6 +12,9 @@ class DisastersListController extends GetxController {
   var disasters = [].obs;
   var isDonating = false.obs;
 
+  var amount = "250K".obs;
+  var flagId = 2.obs;
+
   @override
   Future onInit() async {
     super.onInit();
@@ -50,7 +53,6 @@ class DisastersListController extends GetxController {
     isDonating(true);
 
     var token = await StorageService.getToken();
-    var user = await StorageService.getUser();
 
     try {
       final Map<String, dynamic> payload = {
@@ -80,5 +82,10 @@ class DisastersListController extends GetxController {
     } finally {
       isDonating(false);
     }
+  }
+
+  setAmountActive(int flag_set, String amount_set) {
+    amount.value = amount_set;
+    flagId.value = flag_set;
   }
 }

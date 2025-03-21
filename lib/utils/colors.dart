@@ -22,6 +22,8 @@ class AppColors {
   static const Color greyColorD = Color(0xFFD2D9DE);
   static const Color greyColorE = Color(0xFFD2D9D9);
   static const Color greyColorF = Color(0xFF7D8FAB);
+  static const Color greyColorG = Color(0xFF969492);
+  static const Color greyColorH = Color(0xFFEAEAEA);
 
   static const Color blueColorA = Color(0xFF0080FF);
   static const Color whiteColorB = Color(0xFFE8E8E8);
@@ -30,6 +32,7 @@ class AppColors {
   static const Color blackColorD = Color(0xFF4A4949);
   static const Color blackColorE = Color(0xFF484848);
   static const Color blackColorF = Color(0xFF545454);
+  static const Color blackColorL = Color(0xFF393939);
   static const Color blueColor = Color(0xFF0080FF);
 
   // Neutral Colors

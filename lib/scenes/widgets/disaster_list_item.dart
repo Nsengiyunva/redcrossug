@@ -37,7 +37,7 @@ class DisasterListItem extends StatelessWidget {
               width: 75,
               height: 72,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(7),
                 image: const DecorationImage(
                   image: NetworkImage('https://picsum.photos/300'),
                   fit: BoxFit.cover,
@@ -62,13 +62,13 @@ class DisasterListItem extends StatelessWidget {
                                   fontSize: 13.74,
                                   fontFamily: "Inter",
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF000000)))),
+                                  color: AppColors.blackColor))),
                       const Text("|",
                           style: TextStyle(
                               fontSize: 13.74,
                               fontFamily: "Inter",
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF000000))),
+                              color: AppColors.blackColor)),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 2),
                         child: Text(location,
@@ -76,7 +76,7 @@ class DisasterListItem extends StatelessWidget {
                                 fontSize: 13.74,
                                 fontFamily: "Inter",
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xFF000000))),
+                                color: AppColors.blackColor)),
                       ),
                     ],
                   ),
@@ -85,7 +85,7 @@ class DisasterListItem extends StatelessWidget {
                           fontSize: 11.37,
                           fontFamily: "Inter",
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF000000))),
+                          color: AppColors.blackColor)),
                   const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -97,7 +97,7 @@ class DisasterListItem extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.access_time_rounded,
-                                color: Color(0xFFED1C24),
+                                color: AppColors.primaryRedColor,
                                 size: 6.21,
                               ),
                               Padding(
@@ -107,7 +107,7 @@ class DisasterListItem extends StatelessWidget {
                                         fontSize: 7.06,
                                         fontFamily: "Inter",
                                         fontWeight: FontWeight.w400,
-                                        color: Color(0xFFED1C24))),
+                                        color: AppColors.primaryRedColor)),
                               )
                             ],
                           )),
@@ -116,7 +116,7 @@ class DisasterListItem extends StatelessWidget {
                               fontSize: 7.06,
                               fontFamily: "Inter",
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF000000)))
+                              color: AppColors.blackColor))
                     ],
                   )
                 ],

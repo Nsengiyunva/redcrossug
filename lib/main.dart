@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         "/disasters": (context) => DisasterList(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
-        "/account-creation-success": (context) => const AccountSuccess(
+        "/account-creation-success": (context) => AccountSuccess(
             button_label: 'Continue',
             title: 'Welcome aboard',
             success_message: 'Your Account has been created successfully.',
@@ -55,12 +55,13 @@ class MyApp extends StatelessWidget {
         "/check-ambulance_status": (context) => AmbulanceStatus(),
         "/ambulance-home": (context) => AmbulanceHome(),
         "/disaster-details": (context) => DisasterDetails(),
-        "/initiate-payment": (context) => const Payment(),
-        "/payment-successful": (context) => const AccountSuccess(
+        "/initiate-payment": (context) => Payment(),
+        "/payment-successful": (context) => AccountSuccess(
             button_label: 'Close',
             title: 'Thank you',
             success_message: 'Your Donation Payment was Successful',
-            changeColor: true),
+            changeColor: true,
+            payment: true),
         "/register-account": (context) => const SignUp(),
         "/splash-screen": (context) => const SplashScreen(),
         "/enter-otp": (context) => OtpVerify(),
