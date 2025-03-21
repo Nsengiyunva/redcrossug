@@ -29,7 +29,7 @@ class LoginController {
   Future<void> loginPhoneNumber() async {
     isLoggingIn(true);
 
-    final Map<String, dynamic> requestBody = {
+    final Map<String, dynamic> payload = {
       "phone_no": "+256775625741",
       "password": "#Satan2023#"
     };
@@ -39,7 +39,7 @@ class LoginController {
         Uri.parse(
             "${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.login}"),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(requestBody),
+        body: jsonEncode(payload),
       );
 
       final responseData = jsonDecode(response.body);

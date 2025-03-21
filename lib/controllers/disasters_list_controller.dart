@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:redcross/utils/api_endpoints.dart';
 import 'package:redcross/utils/storage_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DisastersListController extends GetxController {
   TextEditingController donationAmount = TextEditingController();
@@ -19,13 +18,8 @@ class DisastersListController extends GetxController {
     fetchData();
   }
 
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token'); // Returns null if not found
-  }
-
   fetchData() async {
-    String? token = await getToken();
+    var token = await StorageService.getToken();
 
     try {
       isLoading(true);
@@ -37,15 +31,16 @@ class DisastersListController extends GetxController {
             'X-Requested-With': 'XMLHttpRequest'
           });
       if (response.statusCode == 200) {
-        //data returned
         var result = jsonDecode(response.body);
         disasters.value = result["data"];
         isLoading(false);
       } else {
-        // print('error fetching data');
+        Get.snackbar('Info', 'No disasters data was found');
       }
     } catch (e) {
       // print('Error while getting data is $e');
+      Get.snackbar('Error',
+          'An error occured while fetching disasters from the server.');
     } finally {
       isLoading(false);
     }
@@ -59,24 +54,29 @@ class DisastersListController extends GetxController {
 
     try {
       final Map<String, dynamic> payload = {
-        "amount": int.parse(donationAmount.text),
-        "phone_no": user?.phone_no,
+        "amount": 500,
+        "phone_no": "256773917523",
         "mobile_network": "MTN"
       };
 
-      final response = await http.post(
-        Uri.parse(
-            "${ApiEndpoints.baseUrl}/$id/${ApiEndpoints.authEndpoints.donate_payment}"),
-        headers: {
-          "X-Requested-With": "XMLHttpRequest",
-          "Authorization": "Bearer $token"
-        },
-        body: jsonEncode(payload),
-      );
+      http.Response response = await http.post(
+          Uri.tryParse(
+              '${ApiEndpoints.baseUrl}/disasters/$id/${ApiEndpoints.authEndpoints.donate_payment}')!,
+          headers: {
+            'Authorization': "Bearer $token",
+            'Content-Type': 'application/json'
+          },
+          body: jsonEncode(payload));
 
-      print("result ${jsonDecode(response.body)}");
+      var result = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        Get.snackbar('Info', '${result['message']}');
+      }
     } catch (e) {
-      print("error $e");
+      // print("error $e");
+      Get.snackbar(
+          'Error', 'An error occured. Payment request could not be submitted.');
     } finally {
       isDonating(false);
     }
