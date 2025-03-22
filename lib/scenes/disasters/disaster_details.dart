@@ -286,6 +286,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                           const SizedBox(height: 25),
                                           Center(
                                             child: FormTextfield(
+                                              isNumberField: false,
                                               no_question: true,
                                               question: "Enter Price Manually",
                                               textEditingController: widget
@@ -393,15 +394,13 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                               squared: true,
                                               label: 'Continue to Payment',
                                               onPressed: () {
-                                                // widget.disasterController
-                                                //     .makePayment(
-                                                //         disaster_details![
-                                                //             'id']);
                                                 Navigator.of(context).pop();
                                                 Get.toNamed("/initiate-payment",
-                                                    arguments:
-                                                        disaster_details![
-                                                            'id']);
+                                                    arguments: {
+                                                      "disasterId":
+                                                          disaster_details![
+                                                              'id']
+                                                    });
                                               })
                                         ],
                                       ),

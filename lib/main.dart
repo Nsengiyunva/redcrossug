@@ -27,13 +27,21 @@ import 'package:redcross/scenes/first_aid/training/training_list.dart';
 
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  // runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({super.key, required this.isLoggedIn});
 
   // This widget is the root of your application.
   @override
@@ -77,7 +85,7 @@ class MyApp extends StatelessWidget {
         "/ambulance-map": (context) => const AmbulanceMap(),
         "/account-profile": (context) => const Profile()
       },
-      initialRoute: "/login",
+      initialRoute: isLoggedIn ? '/home' : '/login',
     );
   }
 }

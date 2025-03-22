@@ -49,9 +49,9 @@ class DisastersListController extends GetxController {
     }
   }
 
-  Future<void> makePayment(int id) async {
+  Future<void> makePayment(String disasterId) async {
     isDonating(true);
-
+    int? id = int.tryParse(disasterId);
     var token = await StorageService.getToken();
 
     try {
@@ -74,6 +74,7 @@ class DisastersListController extends GetxController {
 
       if (response.statusCode == 200) {
         Get.snackbar('Info', '${result['message']}');
+        Get.toNamed("/payment-successful");
       }
     } catch (e) {
       // print("error $e");

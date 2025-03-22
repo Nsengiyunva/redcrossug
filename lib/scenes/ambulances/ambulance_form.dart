@@ -51,6 +51,7 @@ class AmbulanceForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
+                  isNumberField: true,
                   question: 'No. of ambulances required',
                   textEditingController: ambulanceController.no_ambulances,
                   validator: (value) {
@@ -59,6 +60,7 @@ class AmbulanceForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
+                  isNumberField: true,
                   question: 'No. of emergency patients/Medical Risk',
                   textEditingController: ambulanceController.no_patients,
                   validator: (value) {

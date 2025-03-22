@@ -27,6 +27,7 @@ class LoginController {
   }
 
   Future<void> loginPhoneNumber() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
@@ -51,6 +52,7 @@ class LoginController {
       await saveUser(user);
 
       await StorageService.saveToken(responseData['token']);
+      await prefs.setBool('isLoggedIn', true);
       isLoggingIn(false);
 
       Get.snackbar('Success', '${responseData['message']}');

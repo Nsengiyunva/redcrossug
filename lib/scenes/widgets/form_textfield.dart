@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:redcross/utils/colors.dart';
 
 class FormTextfield extends StatelessWidget {
@@ -6,18 +7,19 @@ class FormTextfield extends StatelessWidget {
   final String question;
   final TextEditingController textEditingController;
   FormFieldValidator<String>? validator;
-  bool? isNumberField = false;
+  bool isNumberField;
 
   FormTextfield(
       {super.key,
       required this.question,
       required this.textEditingController,
       required this.validator,
-      this.isNumberField,
+      required this.isNumberField,
       this.no_question});
 
   @override
   Widget build(BuildContext context) {
+    print(isNumberField);
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -35,10 +37,10 @@ class FormTextfield extends StatelessWidget {
             const SizedBox(height: 2),
             TextFormField(
               controller: textEditingController,
-              // keyboardType:
-              //     typeNumber! ? TextInputType.number : TextInputType.text,
-              // inputFormatters:
-              //     typeNumber! ? [FilteringTextInputFormatter.digitsOnly] : [],
+              keyboardType:
+                  isNumberField ? TextInputType.number : TextInputType.text,
+              inputFormatters:
+                  isNumberField ? [FilteringTextInputFormatter.digitsOnly] : [],
               style: const TextStyle(
                   fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041)),
               validator: validator,

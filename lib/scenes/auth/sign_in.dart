@@ -56,6 +56,7 @@ class SignIn extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 FormTextfield(
+                  isNumberField: false,
                   question: "Phone Number",
                   textEditingController: _loginController.telephoneController,
                   validator: (String? value) {
