@@ -55,7 +55,7 @@ class AmbulanceStatus extends StatelessWidget {
                       const SizedBox(height: 100),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed("/ambulance-home");
+                          Get.toNamed("/home");
                         },
                         child: const Text("Back to Home",
                             style: TextStyle(

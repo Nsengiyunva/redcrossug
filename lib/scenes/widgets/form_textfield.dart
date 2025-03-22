@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:redcross/utils/colors.dart';
 
 class FormTextfield extends StatelessWidget {
-  bool? no_question = false;
+  bool no_question;
   final String question;
   final TextEditingController textEditingController;
   FormFieldValidator<String>? validator;
@@ -15,11 +15,10 @@ class FormTextfield extends StatelessWidget {
       required this.textEditingController,
       required this.validator,
       required this.isNumberField,
-      this.no_question});
+      required this.no_question});
 
   @override
   Widget build(BuildContext context) {
-    print(isNumberField);
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -45,7 +44,7 @@ class FormTextfield extends StatelessWidget {
                   fontFamily: "Inter", fontSize: 14, color: Color(0xFF293041)),
               validator: validator,
               decoration: InputDecoration(
-                  hintText: question,
+                  hintText: no_question ? "" : question,
                   filled: true, // Enables background color
                   fillColor: AppColors.whiteColor,
                   border: OutlineInputBorder(

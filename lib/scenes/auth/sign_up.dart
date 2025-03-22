@@ -48,6 +48,7 @@ class SignUpState extends State<SignUp> {
                           fontWeight: FontWeight.w600)),
                   const SizedBox(height: 10),
                   FormTextfield(
+                    no_question: true,
                     isNumberField: false,
                     question: 'First Name',
                     textEditingController: _registerController.firstname,
@@ -57,6 +58,7 @@ class SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 10),
                   FormTextfield(
+                      no_question: true,
                       isNumberField: false,
                       question: 'Last Name',
                       textEditingController: _registerController.lastname,

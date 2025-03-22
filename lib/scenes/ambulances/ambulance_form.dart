@@ -42,6 +42,7 @@ class AmbulanceForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
+                  no_question: true,
                   isNumberField: true,
                   question: 'No. of people hurt/in-need',
                   textEditingController: ambulanceController.no_people_hurt,
@@ -51,6 +52,7 @@ class AmbulanceForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
+                  no_question: true,
                   isNumberField: true,
                   question: 'No. of ambulances required',
                   textEditingController: ambulanceController.no_ambulances,
@@ -60,6 +62,7 @@ class AmbulanceForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
+                  no_question: true,
                   isNumberField: true,
                   question: 'No. of emergency patients/Medical Risk',
                   textEditingController: ambulanceController.no_patients,
