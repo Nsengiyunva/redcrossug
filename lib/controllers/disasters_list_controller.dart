@@ -85,8 +85,8 @@ class DisastersListController extends GetxController {
     }
   }
 
-  setAmountActive(int flag_set, String amount_set) {
-    amount.value = amount_set;
-    flagId.value = flag_set;
+  setAmountActive(int flagSet, String amountSet) {
+    amount.value = amountSet;
+    flagId.value = flagSet;
   }
 }

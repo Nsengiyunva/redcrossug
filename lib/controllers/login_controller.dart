@@ -61,7 +61,7 @@ class LoginController {
     } catch (e) {
       isLoggingIn(false);
       // print("Error $e");
-      Get.snackbar('Error', 'An error occurred while signing the form. ${e}');
+      Get.snackbar('Error', 'An error occurred while signing the form. $e');
     }
   }
 

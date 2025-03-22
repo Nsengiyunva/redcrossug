@@ -49,6 +49,9 @@ dependencies:
   geocoding: ^3.0.0
   fluttertoast: ^8.2.11
   flutter_launcher_icons: ^0.14.3
+  firebase_core: ^3.12.1
+  firebase_messaging: ^15.2.4
+  firebase_analytics: ^11.4.4
 
 dev_dependencies:
   flutter_test:

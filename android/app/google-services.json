@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "588488279273",
+    "project_id": "redcrossug-f3737",
+    "storage_bucket": "redcrossug-f3737.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588488279273:android:654303377c1bc34ab75c78",
+        "android_client_info": {
+          "package_name": "com.example.redcross"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPiczWNNEIIcyyWho0OGSyU8x5y070w6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588488279273:android:e8906bc0e4c28b3cb75c78",
+        "android_client_info": {
+          "package_name": "com.example.redcrossug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPiczWNNEIIcyyWho0OGSyU8x5y070w6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

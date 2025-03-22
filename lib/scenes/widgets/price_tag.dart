@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
 import 'package:redcross/utils/colors.dart';
 
 class PriceTag extends StatelessWidget {

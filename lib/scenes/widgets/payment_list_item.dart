@@ -141,7 +141,7 @@ class PaymentListItemState extends State<PaymentListItem> {
                       color: AppColors.primaryRedColor,
                       size: 20.0,
                     ))),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
                   widget.text_label,
                   style: const TextStyle(

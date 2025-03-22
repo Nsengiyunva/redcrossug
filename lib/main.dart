@@ -1,3 +1,6 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:redcross/models/disaster_list.dart';
@@ -27,11 +30,12 @@ import 'package:redcross/scenes/first_aid/training/training_list.dart';
 
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/splash_screen.dart';
+import 'package:redcross/scenes/top_subscription.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  // runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
@@ -41,13 +45,15 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
-  const MyApp({super.key, required this.isLoggedIn});
+  MyApp({super.key, required this.isLoggedIn});
 
-  // This widget is the root of your application.
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // title: 'Flutter Demo',
+      // title: 'Red Cross Uganda',
+      navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
       debugShowCheckedModeBanner: false,
       routes: {
         "/home": (context) => const Home(),
@@ -55,7 +61,7 @@ class MyApp extends StatelessWidget {
         "/disasters": (context) => DisasterList(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
-        "/account-creation-success": (context) => AccountSuccess(
+        "/account-creation-success": (context) => const AccountSuccess(
             button_label: 'Continue',
             title: 'Welcome aboard',
             success_message: 'Your Account has been created successfully.',
@@ -64,7 +70,7 @@ class MyApp extends StatelessWidget {
         "/ambulance-home": (context) => AmbulanceHome(),
         "/disaster-details": (context) => DisasterDetails(),
         "/initiate-payment": (context) => Payment(),
-        "/payment-successful": (context) => AccountSuccess(
+        "/payment-successful": (context) => const AccountSuccess(
             button_label: 'Close',
             title: 'Thank you',
             success_message: 'Your Donation Payment was Successful',
@@ -83,9 +89,10 @@ class MyApp extends StatelessWidget {
         "/training-list-items": (context) => TrainingList(),
         "/basic-training": (context) => BasicTrainingDetails(),
         "/ambulance-map": (context) => const AmbulanceMap(),
-        "/account-profile": (context) => const Profile()
+        "/account-profile": (context) => const Profile(),
+        "/top-subscribe": (context) => const TopSubscription()
       },
-      initialRoute: isLoggedIn ? '/home' : '/login',
+      initialRoute: isLoggedIn ? '/top-subscribe' : '/login',
     );
   }
 }

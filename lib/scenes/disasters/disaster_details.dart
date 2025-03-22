@@ -66,7 +66,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   }
 
   void updateAmount(int flagId, String amount) {
-    print("flag ${flagId}");
+    print("flag $flagId");
     // setState(() {
     //   amount_tab = amount;
     //   flagId = flagId;
@@ -107,7 +107,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(title: const Text(""), leading: const BackButton()),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

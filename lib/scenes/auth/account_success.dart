@@ -11,7 +11,7 @@ class AccountSuccess extends StatelessWidget {
   final bool changeColor;
   final bool? payment;
 
-  AccountSuccess(
+  const AccountSuccess(
       {super.key,
       required this.button_label,
       required this.title,
