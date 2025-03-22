@@ -287,7 +287,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                           Center(
                                             child: FormTextfield(
                                               isNumberField: false,
-                                              no_question: true,
+                                              no_question: false,
                                               question: "Enter Price Manually",
                                               textEditingController: widget
                                                   .disasterController
