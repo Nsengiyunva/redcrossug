@@ -1,6 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:redcross/models/disaster_list.dart';
@@ -19,6 +18,7 @@ import 'package:redcross/scenes/auth/sign_up.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/disasters/disaster_details.dart';
 import 'package:redcross/scenes/donations/payment.dart';
+import 'package:redcross/scenes/firebase_api.dart';
 
 import 'package:redcross/scenes/first_aid/first_aid_details.dart';
 import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
@@ -39,7 +39,7 @@ void main() async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-
+  FirebaseApi().initNotifications();
   runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
@@ -92,7 +92,8 @@ class MyApp extends StatelessWidget {
         "/account-profile": (context) => const Profile(),
         "/top-subscribe": (context) => const TopSubscription()
       },
-      initialRoute: isLoggedIn ? '/top-subscribe' : '/login',
+      // initialRoute: isLoggedIn ? '/top-subscribe' : '/login',
+      initialRoute: '/top-subscribe',
     );
   }
 }
