@@ -11,8 +11,8 @@ class FirebaseApi {
 
   Future<void> initNotifications() async {
     await _firebase_messaging.requestPermission();
-    final _firebase_message_token = await _firebase_messaging.getToken();
-    print("token ${_firebase_message_token}");
+    final firebase_message_token = await _firebase_messaging.getToken();
+    print("token $firebase_message_token");
     FirebaseMessaging.onBackgroundMessage(handleBackground);
   }
 }

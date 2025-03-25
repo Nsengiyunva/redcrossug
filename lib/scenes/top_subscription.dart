@@ -20,7 +20,7 @@ class _TopSubscriptionState extends State<TopSubscription> {
             leading: const BackButton() // Back button added here
             ),
         body: Container(
-          child: Text("Firebase 1"),
+          child: const Text("Firebase 1"),
         ));
   }
 }
