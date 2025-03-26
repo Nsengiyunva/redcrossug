@@ -25,8 +25,7 @@ class StorageService {
   static Future<User?> getUser() async {
     final prefs = await SharedPreferences.getInstance();
     String? userJson = prefs.getString('user');
-    if (userJson == null) return null;
-    return User.fromJson(jsonDecode(userJson));
+    return User.fromJson(jsonDecode(userJson!));
   }
 
   static Future<void> removeUser() async {
