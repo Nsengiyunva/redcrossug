@@ -1,0 +1,2 @@
+/Users/user/Documents/projects/redcrossug/android/app/.cxx/Debug/73121s3f/x86/CMakeFiles/edit_cache.dir
+/Users/user/Documents/projects/redcrossug/android/app/.cxx/Debug/73121s3f/x86/CMakeFiles/rebuild_cache.dir
