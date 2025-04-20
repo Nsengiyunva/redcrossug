@@ -1,0 +1,8 @@
+POST https://us-central1-redcrossug-f3737.cloudfunctions.net/sendNotification
+Content-Type: application/json
+
+{
+    "token": "clV5WNcmSiqCtmHogId6fL:APA91bEsdBPrR5O6M3D8NQ4ZUPT0cwfoTxhfgWptAPi605i3Sj4cWuIDQWNbKZ10BL4sv7lkYF1vWSw2_k9YVVc_YW_D_aBURlWfcIsYUhGXolFyR2rz7Rs",
+    "title": "Heleynah!",
+    "body": "Jolene."
+}

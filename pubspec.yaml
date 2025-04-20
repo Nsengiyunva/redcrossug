@@ -54,6 +54,9 @@ dependencies:
   firebase_analytics: ^11.4.4
   firebase_data_connect: ^0.1.0
   flutter_local_notifications: ^19.0.0
+  cloud_firestore: ^5.6.6
+  google_api_availability: ^5.0.1
+  firebase_auth: ^5.5.2
 
 dev_dependencies:
   flutter_test:
