@@ -4,6 +4,7 @@ import 'package:redcross/auth_service.dart';
 import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
+import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 
@@ -70,14 +71,17 @@ class SignIn extends StatelessWidget {
                           color: AppColors.greyColorF)),
                 ),
                 const SizedBox(height: 15),
-                FormTextfield(
-                  no_question: true,
-                  isNumberField: false,
-                  question: "Phone Number",
+                // FormTextfield(
+                //   no_question: true,
+                //   isNumberField: false,
+                //   question: "Phone Number",
+                //   textEditingController: _loginController.telephoneController,
+                //   validator: (String? value) {
+                //     return null;
+                //   },
+                // ),
+                PhoneNumberField(
                   textEditingController: _loginController.telephoneController,
-                  validator: (String? value) {
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 25),
                 FormPassword(

@@ -32,7 +32,7 @@ class FormTextfield extends StatelessWidget {
                         fontSize: 12.74,
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
-                        color: AppColors.greyColorC))),
+                        color: AppColors.blackColor))),
             const SizedBox(height: 2),
             TextFormField(
               controller: textEditingController,
