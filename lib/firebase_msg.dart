@@ -23,7 +23,7 @@ class FirebaseMsg {
 
     var token = await msgService.getToken();
 
-    print("token 1 ${token}");
+    print("token 1 $token");
 
     final FlutterLocalNotificationsPlugin localNotificationsPlugin =
         FlutterLocalNotificationsPlugin();

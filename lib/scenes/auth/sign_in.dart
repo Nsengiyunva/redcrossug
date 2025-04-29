@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/auth_service.dart';
 import 'package:redcross/controllers/login_controller.dart';
 import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
@@ -10,6 +11,20 @@ class SignIn extends StatelessWidget {
   SignIn({super.key});
 
   final LoginController _loginController = Get.put(LoginController());
+
+  // void login(BuildContext context) async {
+  //   final authservice = AuthService();
+  //   try {
+  //     var response = await authservice.signInWithEmail(
+  //         _loginController.telephoneController.text,
+  //         _loginController.passwordController.text);
+  //     print("response $response");
+  //   } catch (e) {
+  //     showDialog(
+  //         context: context,
+  //         builder: (context) => AlertDialog(title: Text(e.toString())));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +60,7 @@ class SignIn extends StatelessWidget {
                         fontSize: 23.12,
                         fontFamily: "Manrope",
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF545454))),
+                        color: AppColors.blackColorF)),
                 const Center(
                   child: Text(
                       "Good to see you again! Ready to make an impact? Let’s get started.",
@@ -71,7 +86,10 @@ class SignIn extends StatelessWidget {
                 const SizedBox(height: 10),
                 RedBtn(
                     label: 'Continue',
-                    onPressed: () => {_loginController.loginPhoneNumber()}),
+                    onPressed: () => {
+                          _loginController.loginPhoneNumber()
+                          // login(context)
+                        }),
                 const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +106,7 @@ class SignIn extends StatelessWidget {
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Inter",
                                 fontSize: 13.04,
-                                color: Color(0xFF293041))),
+                                color: AppColors.blueColorB)),
                       ],
                     ),
                     TextButton(
@@ -103,9 +121,9 @@ class SignIn extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               fontFamily: "Inter",
                               fontSize: 12.8,
-                              color: Color(0xFFED1C24),
+                              color: AppColors.primaryRedColor,
                               decoration: TextDecoration.underline,
-                              decorationColor: Color(0xFFED1C24))),
+                              decorationColor: AppColors.primaryRedColor)),
                     )
                   ],
                 ),
@@ -119,7 +137,7 @@ class SignIn extends StatelessWidget {
                           fontSize: 15.98,
                           fontFamily: "Inter",
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF7D8FAB)),
+                          color: AppColors.greyColorF),
                     ),
                     TextButton(
                       onPressed: () {
@@ -136,10 +154,10 @@ class SignIn extends StatelessWidget {
                       child: const Text("Register",
                           style: TextStyle(
                               decoration: TextDecoration.underline,
-                              decorationColor: Color(0xFF545454),
+                              decorationColor: AppColors.blackColorF,
                               fontFamily: "Inter",
                               fontSize: 17,
-                              color: Color(0xFF7D8FAB))),
+                              color: AppColors.greyColorF)),
                     )
                   ],
                 ))
