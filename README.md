@@ -13,4 +13,6 @@ URCS Mobile App
 ---------------------------
 flutter run -d web-server
 ----------------------------
+- screens for red cross.
+- look for those red cross icons.
 

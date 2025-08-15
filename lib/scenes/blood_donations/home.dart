@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/disasters_list_controller.dart';
-import 'package:redcross/scenes/widgets/disaster_list_item.dart';
-import 'package:redcross/scenes/widgets/menu_list_items.dart';
 import 'package:redcross/utils/colors.dart';
 
 class Home extends StatelessWidget {
@@ -41,7 +39,7 @@ class Home extends StatelessWidget {
 
           return Container(
             padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [Text("Blood Donations")],
             ),
