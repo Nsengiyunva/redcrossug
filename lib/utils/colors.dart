@@ -37,14 +37,7 @@ class AppColors {
   static const Color blueColor = Color(0xFF0080FF);
   static const Color blueColorB = Color(0xFF293041);
 
-  // Neutral Colors
-  // static const Color white = Color(0xFFFFFFFF);
-  // static const Color black = Color(0xFF000000);
-  // static const Color grey = Color(0xFF9E9E9E);
-
-  // // Error and Success Colors
-  // static const Color errorColor = Color(0xFFB00020); // Red
-  // static const Color successColor = Color(0xFF00C853); // Green
+  static const Color yellowColorA = Color(0xFFFFFDDC);
 
   // // Custom Gradient Example
   // static const Gradient buttonGradient = LinearGradient(

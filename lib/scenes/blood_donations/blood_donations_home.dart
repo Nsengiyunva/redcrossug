@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
 import 'package:redcross/scenes/widgets/donation_badge.dart';
 import 'package:redcross/scenes/widgets/nav_list_items.dart';
 import 'package:redcross/utils/colors.dart';
@@ -93,7 +94,26 @@ class BloodDonationsHome extends StatelessWidget {
                   ]),
                   const SizedBox(height: 25),
                   const NavListItems(
-                      label: 'Donations Campaigns', subtitle: "See All")
+                      label: 'Donations Campaigns', subtitle: "See All"),
+                  const SizedBox(height: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          height: 107,
+                          width: 335,
+                          padding: EdgeInsets.only(right: 5, left: 10),
+                          decoration: BoxDecoration(
+                            color: AppColors.whiteColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: AppColors.primaryRedColor,
+                              width: 1,
+                            ),
+                          ),
+                          child: BloodDonationListItem()),
+                    ],
+                  )
                 ],
               )),
         ));
