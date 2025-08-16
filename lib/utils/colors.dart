@@ -8,6 +8,8 @@ class AppColors {
   static const Color redColorA = Color(0xFFE30000);
   static const Color redColorB = Color(0xFFFFDCDC);
   static const Color redColorC = Color(0xFFFFE3E1);
+  static const Color redColorD = Color(0xFFFFE5E5);
+  static const Color redColorE = Color(0xFFFFE3E1);
   static const Color bgColor = Color(0xFFF6F8FC);
   static const Color borderColorGrey = Color(0xFFD2D9DE);
 
@@ -25,6 +27,7 @@ class AppColors {
   static const Color greyColorG = Color(0xFF969492);
   static const Color greyColorH = Color(0xFFEAEAEA);
   static const Color greyColorJ = Color(0xFF746565);
+  static const Color greyColorL = Color(0xFF8E8E8E);
 
   static const Color blueColorA = Color(0xFF0080FF);
   static const Color whiteColorB = Color(0xFFE8E8E8);
@@ -38,6 +41,7 @@ class AppColors {
   static const Color blueColorB = Color(0xFF293041);
 
   static const Color yellowColorA = Color(0xFFFFFDDC);
+  static const Color greenColorA = Color(0xFF1A3C40);
 
   // // Custom Gradient Example
   // static const Gradient buttonGradient = LinearGradient(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
 import 'package:redcross/scenes/widgets/donation_badge.dart';
+import 'package:redcross/scenes/widgets/donation_history_item.dart';
 import 'package:redcross/scenes/widgets/nav_list_items.dart';
 import 'package:redcross/utils/colors.dart';
 
@@ -103,17 +104,19 @@ class BloodDonationsHome extends StatelessWidget {
                           height: 107,
                           width: 335,
                           padding: EdgeInsets.only(right: 5, left: 10),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: AppColors.whiteColor,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: AppColors.primaryRedColor,
-                              width: 1,
-                            ),
                           ),
                           child: BloodDonationListItem()),
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 15),
+                  const NavListItems(
+                      label: 'Donation History', subtitle: "See All"),
+                  const SizedBox(height: 15),
+                  const DonationHistoryItem(),
+                  const SizedBox(height: 10),
+                  const DonationHistoryItem()
                 ],
               )),
         ));

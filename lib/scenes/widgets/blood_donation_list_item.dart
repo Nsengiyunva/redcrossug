@@ -43,11 +43,61 @@ class BloodDonationListItem extends StatelessWidget {
             ),
             Expanded(
                 child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text("xx")],
+                children: [
+                  Text("Rotary Nakawa Blood",
+                      style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontFamily: "Inter",
+                          fontSize: 14.02,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          height: 1.25)),
+                  Text("Donation Drive",
+                      style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontFamily: "Inter",
+                          fontSize: 14.02,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          height: 1.25)),
+                  Text("Old Industrial Park, Nakawa Plot 11",
+                      style: TextStyle(
+                          color: AppColors.greyColorL,
+                          fontFamily: "Inter",
+                          fontSize: 7.82,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: -0.22,
+                          height: 1.32)),
+                  SizedBox(height: 10),
+                  const Padding(
+                      padding: EdgeInsets.only(right: 5.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.access_time_rounded,
+                            color: AppColors.primaryRedColor,
+                            size: 6.21,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 2),
+                            child: Text('Tuesday 23rd December | 10AM-5PM',
+                                style: TextStyle(
+                                    color: AppColors.primaryRedColor,
+                                    fontFamily: "Inter",
+                                    fontSize: 7.06,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w400,
+                                    letterSpacing: -0.2,
+                                    height: 1.32)),
+                          )
+                        ],
+                      ))
+                ],
               ),
             ))
           ])),
