@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
 
 class NavListItems extends StatelessWidget {
@@ -20,12 +21,16 @@ class NavListItems extends StatelessWidget {
                     fontSize: 14.81,
                     fontWeight: FontWeight.w700,
                     color: AppColors.blackColor)),
-            Text(subtitle,
-                style: const TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 14.81,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.greyColorJ))
+            TextButton(
+                onPressed: () {
+                  Get.toNamed("/blood-donations-campaigns-list");
+                },
+                child: Text(subtitle,
+                    style: const TextStyle(
+                        fontFamily: "Inter",
+                        fontSize: 14.81,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.greyColorJ)))
           ],
         ));
   }
