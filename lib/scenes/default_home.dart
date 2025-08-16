@@ -56,7 +56,7 @@ class _DefaultHomeState extends State<DefaultHome> {
                                 child: Text(time,
                                     style: const TextStyle(
                                       fontSize: 16.46,
-                                      color: Color(0xFF545454),
+                                      color: AppColors.blackColorF,
                                       fontFamily: "Inter",
                                       fontWeight: FontWeight.w400,
                                     ))),
@@ -95,7 +95,7 @@ class _DefaultHomeState extends State<DefaultHome> {
                           title: "Blood Donation",
                           icon_name: "blood_icon",
                           onPressed: () {
-                            Get.toNamed("/blood-donation");
+                            Get.toNamed("/blood-donations");
                           }),
                       CardBoard(
                           title: "First Aid",
@@ -133,6 +133,10 @@ class _DefaultHomeState extends State<DefaultHome> {
                               title: "Memberships",
                               icon_name: "cash",
                               onPressed: () {}),
+                          CardBoard(
+                              title: "Donations",
+                              icon_name: "cash",
+                              onPressed: () {})
                         ],
                       )),
                   const SizedBox(height: 15),

@@ -50,19 +50,3 @@ class HomeBadge extends StatelessWidget {
         ));
   }
 }
-
-// Column(
-//               children: [
-//                 const SizedBox( height: 20 ),
-//                   Icon(
-//                     iconData,
-//                     color: Colors.white,
-//                     size: 36.0,
-//                   ),
-//                 const SizedBox( height: 10 ),
-//                 Text(
-//                  title,
-//                   style: const TextStyle(color: Colors.white, fontSize: 18),
-//                 )
-//                   ],
-//             ),

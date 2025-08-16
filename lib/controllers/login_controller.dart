@@ -32,7 +32,7 @@ class LoginController {
 
     final Map<String, dynamic> payload = {
       "phone_no": "+256775625741",
-      "password": "#Satan2023#"
+      "password": "Moon2023"
     };
 
     try {

@@ -33,6 +33,8 @@ import 'package:redcross/scenes/splash_screen.dart';
 import 'package:redcross/scenes/top_subscription.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -59,6 +61,7 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const Home(),
         "/login": (context) => SignIn(),
         "/disasters": (context) => DisasterList(),
+        "/blood-donations": (context) => BloodDonationsHome(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
         "/account-creation-success": (context) => const AccountSuccess(
