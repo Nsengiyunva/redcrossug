@@ -63,7 +63,8 @@ class MyApp extends StatelessWidget {
         "/login": (context) => SignIn(),
         "/disasters": (context) => DisasterList(),
         "/blood-donations": (context) => const BloodDonationsHome(),
-        "/blood-donations-campaigns-list": (context) => DonationCampaignList(),
+        "/blood-donations-campaigns-list": (context) =>
+            const DonationCampaignList(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
         "/account-creation-success": (context) => const AccountSuccess(

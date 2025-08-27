@@ -74,7 +74,7 @@ class BloodDonationListItem extends StatelessWidget {
                           letterSpacing: -0.22,
                           height: 1.32)),
                   SizedBox(height: 10),
-                  const Padding(
+                  Padding(
                       padding: EdgeInsets.only(right: 5.0),
                       child: Row(
                         children: [

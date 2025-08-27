@@ -9,7 +9,7 @@ class DonationCampaignList extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
-          title: Text("Back"),
+          title: const Text("Back"),
         ),
         body: SingleChildScrollView(
             child: Container(

@@ -23,7 +23,7 @@ class BloodDonationsHome extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     alignment: Alignment.centerLeft,
                     child: const Text(
                       "Blood Donation",
@@ -35,14 +35,14 @@ class BloodDonationsHome extends StatelessWidget {
                       textAlign: TextAlign.start, // Align text to start
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                           height: 86,
                           width: 335,
-                          padding: EdgeInsets.only(right: 5, left: 10),
+                          padding: const EdgeInsets.only(right: 5, left: 10),
                           decoration: BoxDecoration(
                             color: AppColors.primaryRedColor,
                             borderRadius: BorderRadius.circular(8),
@@ -103,12 +103,12 @@ class BloodDonationsHome extends StatelessWidget {
                       Container(
                           height: 107,
                           width: 335,
-                          padding: EdgeInsets.only(right: 5, left: 10),
+                          padding: const EdgeInsets.only(right: 5, left: 10),
                           decoration: BoxDecoration(
                             color: AppColors.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: BloodDonationListItem()),
+                          child: const BloodDonationListItem()),
                     ],
                   ),
                   const SizedBox(height: 15),
