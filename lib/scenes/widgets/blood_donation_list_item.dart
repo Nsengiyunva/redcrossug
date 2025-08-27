@@ -26,10 +26,11 @@ class BloodDonationListItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Get.toNamed("/disaster-details", arguments: {'title': title, 'id': id});
+        Get.toNamed("/donation-campaign-details",
+            arguments: {'title': "Donation Campaign Details", 'id': 1});
       },
       child: Container(
-          height: 97,
+          height: 107,
           padding: const EdgeInsets.only(left: 10, right: 2),
           decoration: const BoxDecoration(color: AppColors.whiteColor),
           child:
@@ -38,7 +39,7 @@ class BloodDonationListItem extends StatelessWidget {
               width: 87,
               height: 81,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7),
+                  borderRadius: BorderRadius.circular(15),
                   color: AppColors.yellowColorA),
             ),
             Expanded(
