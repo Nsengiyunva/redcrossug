@@ -14,8 +14,11 @@ import 'package:redcross/scenes/auth/otp_verify.dart';
 import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/scenes/auth/sign_up.dart';
+import 'package:redcross/scenes/blood_donations/blood_donation_history.dart';
+import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
+import 'package:redcross/scenes/blood_donations/donation_register.dart';
 
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/disasters/disaster_details.dart';
@@ -64,9 +67,12 @@ class MyApp extends StatelessWidget {
         "/login": (context) => SignIn(),
         "/disasters": (context) => DisasterList(),
         "/blood-donations": (context) => const BloodDonationsHome(),
+        "/blood-donation-history": (context) => const BloodDonationHistory(),
         "/donation-campaign-details": (context) => DonationCampaignDetails(),
         "/blood-donations-campaigns-list": (context) =>
             const DonationCampaignList(),
+        "/blood-donation-register": (context) => const DonationRegister(),
+        "/blood-donation-eligibility": (context) => BloodEligibility(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
         "/account-creation-success": (context) => const AccountSuccess(

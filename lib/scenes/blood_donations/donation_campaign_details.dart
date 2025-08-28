@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redcross/scenes/widgets/red_btn.dart';
+import 'package:redcross/scenes/widgets/text_box_area.dart';
 import 'package:redcross/utils/colors.dart';
 
 class DonationCampaignDetails extends StatelessWidget {
@@ -47,11 +50,11 @@ class DonationCampaignDetails extends StatelessWidget {
                     ),
                     Container(
                         width: 86,
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(3)),
-                        child: Center(child: Text("Upcoming"))),
+                        child: const Center(child: Text("Upcoming"))),
                   ],
                 ),
               ),
@@ -62,13 +65,38 @@ class DonationCampaignDetails extends StatelessWidget {
                       "Join us and help save lives. All eligible donors welcome. Snacks and refreshments will  be provided.")),
               const SizedBox(height: 15),
               Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: const Row(
                     children: [
                       Text("Date:"),
                       Text("Saturday, August 10th, 2025")
                     ],
-                  ))
+                  )),
+              Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text("Rate/Review"),
+                        const Row(children: [
+                          Icon(Icons.star, color: AppColors.primaryRedColor),
+                          Icon(Icons.star, color: AppColors.primaryRedColor),
+                          Icon(Icons.star, color: AppColors.primaryRedColor),
+                          Icon(Icons.star_half,
+                              color: AppColors.primaryRedColor), // half star
+                          Icon(Icons.star_border,
+                              color: AppColors.primaryRedColor),
+                        ]),
+                        const SizedBox(height: 15),
+                        const TextBoxArea(),
+                        const SizedBox(height: 15),
+                        RedBtn(
+                            label: 'Submit',
+                            onPressed: () => {
+                                  Get.toNamed("/blood-donation-register",
+                                      arguments: {})
+                                })
+                      ]))
             ],
           ),
         )));

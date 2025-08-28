@@ -52,9 +52,9 @@ class DonationCampaignList extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
-                  padding: EdgeInsets.only(left: 5, right: 5),
+                  padding: const EdgeInsets.only(left: 5, right: 5),
                   child: const Column(
                     children: [
                       BloodDonationListItem(),
