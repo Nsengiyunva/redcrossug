@@ -26,17 +26,18 @@ class DonationCampaignDetails extends StatelessWidget {
                     color: AppColors.yellowColorA,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text("Logo"),
                   )),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -54,12 +55,12 @@ class DonationCampaignDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Padding(
+              const SizedBox(height: 10),
+              const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                       "Join us and help save lives. All eligible donors welcome. Snacks and refreshments will  be provided.")),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
                   padding: EdgeInsets.all(20),
                   child: const Row(
