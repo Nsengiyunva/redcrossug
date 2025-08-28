@@ -62,7 +62,7 @@ class DonationCampaignDetails extends StatelessWidget {
               SizedBox(height: 15),
               Container(
                   padding: EdgeInsets.all(20),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Text("Date:"),
                       Text("Saturday, August 10th, 2025")
