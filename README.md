@@ -4,11 +4,7 @@ URCS Mobile App
 
 ## Getting Started
 
--Helena - done
--Nowen -quotation - done
--VunyeContact - done
--Johnson-MoES - done
--Andrew-passport, stories.
+## Isaac  Nsengiyunva King
 
 ---------------------------
 flutter run -d web-server
