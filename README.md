@@ -4,7 +4,7 @@ URCS Mobile App
 
 ## Getting Started
 
-## Isaac  Nsengiyunva King
+## URCS
 
 ---------------------------
 flutter run -d web-server
