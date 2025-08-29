@@ -15,6 +15,7 @@ import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/scenes/auth/sign_up.dart';
 import 'package:redcross/scenes/blood_donations/blood_donation_history.dart';
+import 'package:redcross/scenes/blood_donations/blood_donation_history_details.dart';
 import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
@@ -36,6 +37,7 @@ import 'package:redcross/scenes/first_aid/training/training_list.dart';
 import 'package:redcross/scenes/home.dart';
 import 'package:redcross/scenes/splash_screen.dart';
 import 'package:redcross/scenes/top_subscription.dart';
+import 'package:redcross/scenes/widgets/blood_donation_history_item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
@@ -62,13 +64,15 @@ class MyApp extends StatelessWidget {
       // title: 'Red Cross Uganda',
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
       debugShowCheckedModeBanner: false,
+      //SignIn()
       routes: {
         "/home": (context) => const Home(),
-        "/login": (context) => SignIn(),
+        "/login": (context) => BloodDonationHistoryDetails(),
         "/disasters": (context) => DisasterList(),
         "/blood-donations": (context) => const BloodDonationsHome(),
         "/blood-donation-history": (context) => const BloodDonationHistory(),
         "/donation-campaign-details": (context) => DonationCampaignDetails(),
+        "/blood-history-details": (context) => BloodDonationHistoryDetails(),
         "/blood-donations-campaigns-list": (context) =>
             const DonationCampaignList(),
         "/blood-donation-register": (context) => const DonationRegister(),
