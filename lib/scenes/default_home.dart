@@ -129,14 +129,16 @@ class _DefaultHomeState extends State<DefaultHome> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CardBoard(
-                              title: "Memberships",
-                              icon_name: "cash",
-                              onPressed: () {}),
+                          // CardBoard(
+                          //     title: "Memberships",
+                          //     icon_name: "cash",
+                          //     onPressed: () {}),
                           CardBoard(
                               title: "Donations",
                               icon_name: "cash",
-                              onPressed: () {})
+                              onPressed: () {
+                                Get.toNamed("/home-donations");
+                              })
                         ],
                       )),
                   const SizedBox(height: 15),

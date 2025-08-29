@@ -51,9 +51,9 @@ class AmbulanceServicesHome extends StatelessWidget {
                           ),
                         ],
                       )),
-                  SizedBox(height: 10),
-                  AmbulanceProgressBox(),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  const AmbulanceProgressBox(),
+                  const SizedBox(height: 10),
                   RedBtn(
                       label: 'Commercial Ambulance',
                       onPressed: () {

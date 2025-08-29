@@ -24,7 +24,7 @@ class DonationBadge extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0),
         margin: const EdgeInsets.only(left: 20.0),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFE5E5),
+          color: AppColors.redColorD,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(

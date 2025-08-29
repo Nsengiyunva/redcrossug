@@ -101,8 +101,6 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     var amountNeeded = disaster_details!['funding_target'].toString() ?? "0";
     var currency = disaster_details!['currency'].toString() ?? "UGX";
 
-    print("flag ${widget.disasterController.flagId}");
-
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(title: const Text(""), leading: const BackButton()),
