@@ -5,8 +5,8 @@ import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 
-class AmbulanceForm extends StatelessWidget {
-  AmbulanceForm({super.key});
+class AmbulanceEmergency extends StatelessWidget {
+  AmbulanceEmergency({super.key});
 
   final AmbulanceController ambulanceController =
       Get.put(AmbulanceController());
@@ -16,7 +16,7 @@ class AmbulanceForm extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
-            title: const Text("Commercial Ambulance",
+            title: const Text("Request Ambulance",
                 style: TextStyle(
                     fontSize: 16,
                     fontFamily: "Inter",
@@ -33,7 +33,7 @@ class AmbulanceForm extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Ambulance Information",
+                  "Emergency Information",
                   style: TextStyle(
                       fontSize: 20.14,
                       fontFamily: "Manrope",
@@ -44,7 +44,7 @@ class AmbulanceForm extends StatelessWidget {
                 FormTextfield(
                   no_question: true,
                   isNumberField: true,
-                  question: 'Ambulance Type',
+                  question: 'No. of people hurt/ in-need',
                   textEditingController: ambulanceController.no_people_hurt,
                   validator: (value) {
                     return null;
@@ -54,7 +54,7 @@ class AmbulanceForm extends StatelessWidget {
                 FormTextfield(
                   no_question: true,
                   isNumberField: true,
-                  question: 'Purpose of Ambulance',
+                  question: 'No. of ambulances required',
                   textEditingController: ambulanceController.no_ambulances,
                   validator: (value) {
                     return null;
@@ -64,17 +64,7 @@ class AmbulanceForm extends StatelessWidget {
                 FormTextfield(
                   no_question: true,
                   isNumberField: true,
-                  question: 'Service Duration',
-                  textEditingController: ambulanceController.no_patients,
-                  validator: (value) {
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 25),
-                FormTextfield(
-                  no_question: true,
-                  isNumberField: true,
-                  question: 'Service Timing',
+                  question: 'No. of emergency patients/Medical Risk',
                   textEditingController: ambulanceController.no_patients,
                   validator: (value) {
                     return null;
@@ -101,7 +91,7 @@ class AmbulanceForm extends StatelessWidget {
                     label: "Continue",
                     onPressed: () {
                       // ambulanceController.createAmbulanceRequest();
-                      Get.toNamed('/ambulance-success-request');
+                      Get.toNamed('/ambulance-map-locations');
                     })
               ],
             ),

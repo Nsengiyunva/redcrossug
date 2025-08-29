@@ -63,7 +63,10 @@ class AmbulanceSuccess extends StatelessWidget {
                   child: RedBtn(
                     label: "Check Status",
                     onPressed: () {
-                      Get.toNamed("/check-ambulance_status");
+                      // Get.toNamed("/check-ambulance_status");
+                      Get.toNamed(
+                        "/ambulance-home",
+                      );
                     },
                   ),
                 )
