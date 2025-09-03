@@ -21,8 +21,8 @@ class BloodDonationHistoryDetails extends StatelessWidget {
           child: Container(
               width: 345,
               height: 392,
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-              decoration: BoxDecoration(color: AppColors.redColorD),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              decoration: const BoxDecoration(color: AppColors.redColorD),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +35,7 @@ class BloodDonationHistoryDetails extends StatelessWidget {
                         Icon(Icons.water_drop_rounded,
                             color: AppColors.primaryRedColor)
                       ]),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -44,13 +44,13 @@ class BloodDonationHistoryDetails extends StatelessWidget {
                       Text("Arua Regional Drive - Aug 7, 2025")
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [Text("You Last Donated"), Text("June 14, 2025")],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -59,7 +59,7 @@ class BloodDonationHistoryDetails extends StatelessWidget {
                       Text("Not Eligible(wait till Sept 2025)")
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   RedBtn(
                     label: 'Close',
                     onPressed: () {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/scenes/widgets/donation_card_progress.dart';
-import 'package:redcross/scenes/widgets/donation_progress.dart';
 import 'package:redcross/utils/colors.dart';
 
 class DonationListingItem extends StatelessWidget {
@@ -23,12 +22,9 @@ class DonationListingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("pic ${photo}");
-
     return GestureDetector(
       onTap: () {
-        Get.toNamed("/donation-campaign-details",
-            arguments: {'title': "Donation Campaign Details", 'id': 1});
+        Get.toNamed("/donation-category-details");
       },
       child: Container(
           height: 107,

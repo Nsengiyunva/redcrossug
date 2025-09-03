@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CollapsibleItem extends StatefulWidget {
+  const CollapsibleItem({super.key});
+
   @override
   _CollapsibleItemState createState() => _CollapsibleItemState();
 }
 
 class _CollapsibleItemState extends State<CollapsibleItem> {
-  List<Item> _items = <Item>[
+  final List<Item> _items = <Item>[
     Item(header: 'Fruits', body: ['Apple', 'Banana', 'Orange']),
     Item(header: 'Vegetables', body: ['Carrot', 'Broccoli']),
   ];
@@ -19,7 +21,7 @@ class _CollapsibleItemState extends State<CollapsibleItem> {
           minHeight: MediaQuery.of(context).size.height,
         ),
         child: ExpansionPanelList(
-          animationDuration: Duration(milliseconds: 300),
+          animationDuration: const Duration(milliseconds: 300),
           expansionCallback: (int index, bool isExpanded) {
             setState(() {
               _items[index].isExpanded = !isExpanded;
@@ -36,7 +38,7 @@ class _CollapsibleItemState extends State<CollapsibleItem> {
                 children: item.body
                     .map((text) => ListTile(
                           title: Text(text),
-                          contentPadding: EdgeInsets.only(left: 40),
+                          contentPadding: const EdgeInsets.only(left: 40),
                         ))
                     .toList(),
               ),

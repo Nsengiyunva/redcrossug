@@ -30,7 +30,7 @@ class DonationTabItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
         ),
         child: Text(label,
-            style: TextStyle(
+            style: const TextStyle(
                 fontFamily: "Inter",
                 fontSize: 12.3,
                 fontWeight: FontWeight.bold,

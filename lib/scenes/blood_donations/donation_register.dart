@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/registration_controller.dart';
-import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/utils/colors.dart';
 
 import '../widgets/form_textfield.dart';

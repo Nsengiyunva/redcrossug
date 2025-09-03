@@ -114,7 +114,7 @@ class HomeDonations extends StatelessWidget {
                         title: 'Donate  to RedCross', icon_name: "blood_icon"),
                     DonationBadge(title: 'Donate to a Cause', icon_name: "gala")
                   ]),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Container(
                       width: 335,
                       height: 48,

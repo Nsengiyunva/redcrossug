@@ -38,11 +38,11 @@ class AmbulanceServicesHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Ambulance Services"),
+                  const Text("Ambulance Services"),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 15),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+                      margin: const EdgeInsets.symmetric(vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 25),
                       child: Column(
                         children: [
                           Center(
@@ -59,13 +59,13 @@ class AmbulanceServicesHome extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed("/ambulance-request-form");
                       }),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   RedBtn(
                       label: 'Emergency Response',
                       onPressed: () {
                         Get.toNamed("/ambulance-emergency-form");
                       }),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   const Center(
                       child: Column(
                     children: [

@@ -22,6 +22,7 @@ import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
+import 'package:redcross/scenes/blood_donations/drive_details.dart';
 
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/disasters/disaster_details.dart';
@@ -75,8 +76,10 @@ class MyApp extends StatelessWidget {
         "/disasters": (context) => DisasterList(),
         "/blood-donations": (context) => const BloodDonationsHome(),
         "/blood-donation-history": (context) => const BloodDonationHistory(),
-        "/donation-campaign-details": (context) => DonationCampaignDetails(),
-        "/blood-history-details": (context) => BloodDonationHistoryDetails(),
+        "/donation-campaign-details": (context) =>
+            const DonationCampaignDetails(),
+        "/blood-history-details": (context) =>
+            const BloodDonationHistoryDetails(),
         "/blood-donations-campaigns-list": (context) =>
             const DonationCampaignList(),
         "/blood-donation-register": (context) => const DonationRegister(),
@@ -115,7 +118,8 @@ class MyApp extends StatelessWidget {
         "/account-profile": (context) => const Profile(),
         "/top-subscribe": (context) => const TopSubscription(),
         "/home-donations": (context) => const HomeDonations(),
-        "/donations-categories": (context) => const DonationCategories()
+        "/donations-categories": (context) => const DonationCategories(),
+        "/donation-category-details": (context) => const DriveDetails()
       },
       // initialRoute: isLoggedIn ? '/top-subscribe' : '/login',
       initialRoute: '/login',
