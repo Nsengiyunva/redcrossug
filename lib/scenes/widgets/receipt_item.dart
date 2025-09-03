@@ -19,7 +19,7 @@ class ReceiptItem extends StatelessWidget {
             width: double.infinity, // take full width
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-              child: Text("$label".toUpperCase(),
+              child: Text(label.toUpperCase(),
                   textAlign: TextAlign.start,
                   style: const TextStyle(
                       fontSize: 11.11,
@@ -31,7 +31,7 @@ class ReceiptItem extends StatelessWidget {
         ),
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
-            child: Text("$value".toUpperCase(),
+            child: Text(value.toUpperCase(),
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                     fontSize: 16.89,

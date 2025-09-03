@@ -50,7 +50,7 @@ class DonationHistory extends StatelessWidget {
                           Get.toNamed("/donation-receipt");
                         },
                         child: const Text("",
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontFamily: "Inter",
                                 fontSize: 14.81,
                                 fontWeight: FontWeight.w500,

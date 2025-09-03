@@ -48,7 +48,7 @@ class _DriveDetailsState extends State<DriveDetails> {
                 ),
                 child: Image.asset('assets/images/donations_1.png'),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -64,7 +64,7 @@ class _DriveDetailsState extends State<DriveDetails> {
                   Container(
                       width: 84,
                       height: 24,
-                      margin: EdgeInsets.only(right: 25),
+                      margin: const EdgeInsets.only(right: 25),
                       decoration:
                           const BoxDecoration(color: AppColors.yellowColorA),
                       child: const Center(child: Text("10:30:05")))
@@ -78,7 +78,7 @@ class _DriveDetailsState extends State<DriveDetails> {
                   amount: StorageService.formatCurrency(500000) ?? "500,000",
                   target: StorageService.formatCurrency(650000) ?? "2,000,000",
                   currency: "UGX"),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               RedBtn(
                   label: 'Donate',
                   onPressed: () {

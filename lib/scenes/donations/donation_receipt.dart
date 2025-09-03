@@ -25,7 +25,7 @@ class DonationReceipt extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                        child: Container(
+                        child: SizedBox(
                       width: 91,
                       height: 91,
                       child: Image.asset(
@@ -33,23 +33,23 @@ class DonationReceipt extends StatelessWidget {
                         fit: BoxFit.cover, // fill the container
                       ),
                     )),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     const ReceiptItem(
                         label: 'Donor Name', value: 'Mukisa Geofrey'),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     const ReceiptItem(
                         label: 'Date & Time', value: 'May 10, 2024'),
                     const SizedBox(height: 15),
                     const ReceiptItem(
                         label: 'Donation Type', value: 'Cause Donation'),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     const ReceiptItem(label: 'Amount', value: 'UGX 50,000'),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     const ReceiptItem(label: 'Cause', value: 'Kasese Floods'),
                     const SizedBox(height: 15),
                     const ReceiptItem(
                         label: 'Payment Mode', value: 'Mobile Money'),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -4,7 +4,7 @@ import 'package:redcross/utils/colors.dart';
 class DashedLine extends StatelessWidget {
   final Widget child;
 
-  const DashedLine({Key? key, required this.child}) : super(key: key);
+  const DashedLine({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

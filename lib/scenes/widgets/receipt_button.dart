@@ -6,7 +6,7 @@ class ReceiptButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
 
-  ReceiptButton(
+  const ReceiptButton(
       {super.key,
       required this.active,
       required this.label,
@@ -33,7 +33,7 @@ class ReceiptButton extends StatelessWidget {
             ),
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
           ),
-          child: Text("$label",
+          child: Text(label,
               style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 14,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
 
 class DonationTabItem extends StatelessWidget {

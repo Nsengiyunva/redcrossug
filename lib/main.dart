@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
         "/blood-donations-campaigns-list": (context) =>
             const DonationCampaignList(),
         "/blood-donation-register": (context) => const DonationRegister(),
-        "/blood-donation-eligibility": (context) => BloodEligibility(),
+        "/blood-donation-eligibility": (context) => const BloodEligibility(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
         "/account-creation-success": (context) => const AccountSuccess(
@@ -122,8 +122,8 @@ class MyApp extends StatelessWidget {
         "/home-donations": (context) => const HomeDonations(),
         "/donations-categories": (context) => const DonationCategories(),
         "/donation-category-details": (context) => DriveDetails(),
-        "/donation-history-list": (context) => DonationHistory(),
-        "/donation-receipt": (context) => DonationReceipt(),
+        "/donation-history-list": (context) => const DonationHistory(),
+        "/donation-receipt": (context) => const DonationReceipt(),
       },
       // initialRoute: isLoggedIn ? '/top-subscribe' : '/login',
       initialRoute: '/login',
