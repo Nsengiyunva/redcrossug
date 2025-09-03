@@ -43,7 +43,7 @@ class LoginController {
         body: jsonEncode(payload),
       );
 
-      // print("here: ${response.body}");
+      // print("result: ${response.body}");
 
       final responseData = jsonDecode(response.body);
 
@@ -62,7 +62,7 @@ class LoginController {
           arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
       isLoggingIn(false);
-      // print("Error $e");
+      print("Error $e");
       Get.snackbar('Error', 'An error occurred while signing the form. $e');
     }
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:redcross/scenes/widgets/donation_progress.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
-import 'package:redcross/scenes/widgets/text_box_area.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 
@@ -29,11 +27,11 @@ class DriveDetails extends StatelessWidget {
                 height: 230,
                 width: 327,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.red, width: 1)),
-                child: Image.asset('assets/images/ambulance.png'),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.asset('assets/images/donations_1.png'),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -49,22 +47,22 @@ class DriveDetails extends StatelessWidget {
                   Container(
                       width: 84,
                       height: 24,
+                      margin: EdgeInsets.only(right: 25),
                       decoration:
                           const BoxDecoration(color: AppColors.yellowColorA),
-                      child: const Center(child: Text("10:30:05"))),
-                  DonationProgress(
-                      amount:
-                          StorageService.formatCurrency(500000) ?? "500,000",
-                      target:
-                          StorageService.formatCurrency(650000) ?? "2,000,000",
-                      currency: "UGX"),
-                  SizedBox(height: 10),
-                  RedBtn(label: 'Donate Now', onPressed: () {})
+                      child: const Center(child: Text("10:30:05")))
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 15),
               const Text(
-                  "Refuuge children and their families in Kakira Ward B, have been hit hard by impact of Floods.")
+                  "Refugee children and their families in Kakira Ward B, have been hit hard by impact of Floods."),
+              const SizedBox(height: 15),
+              DonationProgress(
+                  amount: StorageService.formatCurrency(500000) ?? "500,000",
+                  target: StorageService.formatCurrency(650000) ?? "2,000,000",
+                  currency: "UGX"),
+              SizedBox(height: 15),
+              RedBtn(label: 'Donate', onPressed: () {})
             ],
           ),
         )));

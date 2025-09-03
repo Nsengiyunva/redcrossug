@@ -8,7 +8,6 @@ class PhoneNumberField extends StatefulWidget {
   final TextEditingController textEditingController;
 
   const PhoneNumberField({super.key, required this.textEditingController});
-
   @override
   _PhoneNumberField createState() => _PhoneNumberField();
 }
@@ -21,19 +20,307 @@ class _PhoneNumberField extends State<PhoneNumberField> {
       "country_code": 256,
       "name": "Uganda",
       "code": "UG",
-      "emoji": "🇦🇨",
-      "unicode": "U+1F1E6 U+1F1E8",
+      "emoji": "🇺🇬",
+      "unicode": "U+1F1FA U+1F1EC",
       "image":
           "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/UG.svg"
     },
     {
-      "country_code": 254,
-      "name": "Kenya",
-      "code": "KE",
-      "emoji": "🇮🇩",
-      "unicode": "U+1F1EE U+1F1E9",
+      "country_code": 213,
+      "name": "Algeria",
+      "code": "DZ",
+      "emoji": "🇩🇿",
+      "unicode": "U+1F1E9 U+1F1FF",
       "image":
-          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/KE.svg"
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/DZ.svg"
+    },
+    {
+      "country_code": 244,
+      "name": "Angola",
+      "code": "AO",
+      "emoji": "🇦🇴",
+      "unicode": "U+1F1E6 U+1F1F4",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/AO.svg"
+    },
+    {
+      "country_code": 229,
+      "name": "Benin",
+      "code": "BJ",
+      "emoji": "🇧🇯",
+      "unicode": "U+1F1E7 U+1F1EF",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BJ.svg"
+    },
+    {
+      "country_code": 267,
+      "name": "Botswana",
+      "code": "BW",
+      "emoji": "🇧🇼",
+      "unicode": "U+1F1E7 U+1F1FC",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BW.svg"
+    },
+    {
+      "country_code": 226,
+      "name": "Burkina Faso",
+      "code": "BF",
+      "emoji": "🇧🇫",
+      "unicode": "U+1F1E7 U+1F1EB",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BF.svg"
+    },
+    {
+      "country_code": 257,
+      "name": "Burundi",
+      "code": "BI",
+      "emoji": "🇧🇮",
+      "unicode": "U+1F1E7 U+1F1EE",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BI.svg"
+    },
+    {
+      "country_code": 237,
+      "name": "Cameroon",
+      "code": "CM",
+      "emoji": "🇨🇲",
+      "unicode": "U+1F1E8 U+1F1F2",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CM.svg"
+    },
+    {
+      "country_code": 238,
+      "name": "Cape Verde",
+      "code": "CV",
+      "emoji": "🇨🇻",
+      "unicode": "U+1F1E8 U+1F1FB",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CV.svg"
+    },
+    {
+      "country_code": 236,
+      "name": "Central African Republic",
+      "code": "CF",
+      "emoji": "🇨🇫",
+      "unicode": "U+1F1E8 U+1F1EB",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CF.svg"
+    },
+    {
+      "country_code": 235,
+      "name": "Chad",
+      "code": "TD",
+      "emoji": "🇹🇩",
+      "unicode": "U+1F1F9 U+1F1E9",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/TD.svg"
+    },
+    {
+      "country_code": 243,
+      "name": "Democratic Republic of the Congo",
+      "code": "CD",
+      "emoji": "🇨🇩",
+      "unicode": "U+1F1E8 U+1F1E9",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CD.svg"
+    },
+    {
+      "country_code": 242,
+      "name": "Republic of the Congo",
+      "code": "CG",
+      "emoji": "🇨🇬",
+      "unicode": "U+1F1E8 U+1F1EC",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CG.svg"
+    },
+    {
+      "country_code": 225,
+      "name": "Ivory Coast",
+      "code": "CI",
+      "emoji": "🇨🇮",
+      "unicode": "U+1F1E8 U+1F1EE",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/CI.svg"
+    },
+    {
+      "country_code": 20,
+      "name": "Egypt",
+      "code": "EG",
+      "emoji": "🇪🇬",
+      "unicode": "U+1F1EA U+1F1EC",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/EG.svg"
+    },
+    {
+      "country_code": 240,
+      "name": "Equatorial Guinea",
+      "code": "GQ",
+      "emoji": "🇬🇶",
+      "unicode": "U+1F1EC U+1F1F6",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GQ.svg"
+    },
+    {
+      "country_code": 291,
+      "name": "Eritrea",
+      "code": "ER",
+      "emoji": "🇪🇷",
+      "unicode": "U+1F1EA U+1F1F7",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ER.svg"
+    },
+    {
+      "country_code": 268,
+      "name": "Eswatini",
+      "code": "SZ",
+      "emoji": "🇸🇿",
+      "unicode": "U+1F1F8 U+1F1FF",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/SZ.svg"
+    },
+    {
+      "country_code": 251,
+      "name": "Ethiopia",
+      "code": "ET",
+      "emoji": "🇪🇹",
+      "unicode": "U+1F1EA U+1F1F9",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ET.svg"
+    },
+    {
+      "country_code": 241,
+      "name": "Gabon",
+      "code": "GA",
+      "emoji": "🇬🇦",
+      "unicode": "U+1F1EC U+1F1E6",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GA.svg"
+    },
+    {
+      "country_code": 220,
+      "name": "Gambia",
+      "code": "GM",
+      "emoji": "🇬🇲",
+      "unicode": "U+1F1EC U+1F1F2",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GM.svg"
+    },
+    {
+      "country_code": 233,
+      "name": "Ghana",
+      "code": "GH",
+      "emoji": "🇬🇭",
+      "unicode": "U+1F1EC U+1F1ED",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GH.svg"
+    },
+    {
+      "country_code": 224,
+      "name": "Guinea",
+      "code": "GN",
+      "emoji": "🇬🇳",
+      "unicode": "U+1F1EC U+1F1F3",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GN.svg"
+    },
+    {
+      "country_code": 245,
+      "name": "Guinea-Bissau",
+      "code": "GW",
+      "emoji": "🇬🇼",
+      "unicode": "U+1F1EC U+1F1FC",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GW.svg"
+    },
+    {
+      "country_code": 264,
+      "name": "Namibia",
+      "code": "NA",
+      "emoji": "🇳🇦",
+      "unicode": "U+1F1F3 U+1F1E6",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/NA.svg"
+    },
+    {
+      "country_code": 234,
+      "name": "Nigeria",
+      "code": "NG",
+      "emoji": "🇳🇬",
+      "unicode": "U+1F1F3 U+1F1EC",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/NG.svg"
+    },
+    {
+      "country_code": 221,
+      "name": "Senegal",
+      "code": "SN",
+      "emoji": "🇸🇳",
+      "unicode": "U+1F1F8 U+1F1F3",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/SN.svg"
+    },
+    {
+      "country_code": 27,
+      "name": "South Africa",
+      "code": "ZA",
+      "emoji": "🇿🇦",
+      "unicode": "U+1F1FF U+1F1E6",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ZA.svg"
+    },
+    {
+      "country_code": 249,
+      "name": "Sudan",
+      "code": "SD",
+      "emoji": "🇸🇩",
+      "unicode": "U+1F1F8 U+1F1E9",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/SD.svg"
+    },
+    {
+      "country_code": 211,
+      "name": "South Sudan",
+      "code": "SS",
+      "emoji": "🇸🇸",
+      "unicode": "U+1F1F8 U+1F1F8",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/SS.svg"
+    },
+    {
+      "country_code": 255,
+      "name": "Tanzania",
+      "code": "TZ",
+      "emoji": "🇹🇿",
+      "unicode": "U+1F1F9 U+1F1FF",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/TZ.svg"
+    },
+    {
+      "country_code": 216,
+      "name": "Tunisia",
+      "code": "TN",
+      "emoji": "🇹🇳",
+      "unicode": "U+1F1F9 U+1F1F3",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/TN.svg"
+    },
+    {
+      "country_code": 260,
+      "name": "Zambia",
+      "code": "ZM",
+      "emoji": "🇿🇲",
+      "unicode": "U+1F1FF U+1F1F2",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ZM.svg"
+    },
+    {
+      "country_code": 263,
+      "name": "Zimbabwe",
+      "code": "ZW",
+      "emoji": "🇿🇼",
+      "unicode": "U+1F1FF U+1F1FC",
+      "image":
+          "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/ZW.svg"
     }
   ];
 

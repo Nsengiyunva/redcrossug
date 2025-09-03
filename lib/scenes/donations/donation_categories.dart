@@ -56,6 +56,11 @@ class DonationCategories extends StatelessWidget {
                     title: 'Funding fair  for Red Cross 2',
                     subtitle: 'DFCU Blood Drive',
                   ),
+                  SizedBox(height: 15),
+                  DonationListingItem(
+                    title: 'Funding fair  for Red Cross 3',
+                    subtitle: 'DFCU Blood Drive',
+                  ),
                 ],
               )),
         ));

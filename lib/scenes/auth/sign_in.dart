@@ -69,15 +69,6 @@ class SignIn extends StatelessWidget {
                           color: AppColors.greyColorF)),
                 ),
                 const SizedBox(height: 15),
-                // FormTextfield(
-                //   no_question: true,
-                //   isNumberField: false,
-                //   question: "Phone Number",
-                //   textEditingController: _loginController.telephoneController,
-                //   validator: (String? value) {
-                //     return null;
-                //   },
-                // ),
                 PhoneNumberField(
                   textEditingController: _loginController.telephoneController,
                 ),

@@ -12,3 +12,14 @@ flutter run -d web-server
 - screens for red cross.
 - look for those red cross icons.
 
+  ------------------------------------------------------------------
+  1 - website -  Demo on friday -  (1m) - 500k/500k after deployment.
+  2 - Logo   -  150k  - done
+  3 - app - playstore - 3m -  2.5m
+  --------------------------------
+  300k  - website
+  400k  - personal
+  ------------------
+  300k  - hosting
+  ------------------
+
