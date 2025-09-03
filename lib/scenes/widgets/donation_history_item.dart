@@ -8,23 +8,21 @@ class DonationHistoryItem extends StatelessWidget {
   // final String location;
   // final String photo;
   // final int id;
+  final VoidCallback onPressed;
 
-  const DonationHistoryItem({
-    super.key,
-    // required this.id,
-    // required this.title,
-    // required this.subtitle,
-    // required this.date,
-    // required this.location,
-    // required this.photo
-  });
+  const DonationHistoryItem({super.key, required this.onPressed
+      // required this.id,
+      // required this.title,
+      // required this.subtitle,
+      // required this.date,
+      // required this.location,
+      // required this.photo
+      });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Get.toNamed("/disaster-details", arguments: {'title': title, 'id': id});
-      },
+      onTap: onPressed,
       child: Container(
           height: 66.66,
           width: 335.14,

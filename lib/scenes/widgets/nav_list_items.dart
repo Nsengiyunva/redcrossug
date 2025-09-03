@@ -5,8 +5,13 @@ import 'package:redcross/utils/colors.dart';
 class NavListItems extends StatelessWidget {
   final String label;
   final String subtitle;
+  final VoidCallback onPressed;
 
-  const NavListItems({super.key, required this.label, required this.subtitle});
+  const NavListItems(
+      {super.key,
+      required this.label,
+      required this.subtitle,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +27,10 @@ class NavListItems extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: AppColors.blackColor)),
             TextButton(
-                onPressed: () {
-                  Get.toNamed("/blood-donations-campaigns-list");
-                },
+                onPressed: onPressed,
+                //() {
+                // Get.toNamed("/blood-donations-campaigns-list");
+                //  },
                 child: Text(subtitle,
                     style: const TextStyle(
                         fontFamily: "Inter",

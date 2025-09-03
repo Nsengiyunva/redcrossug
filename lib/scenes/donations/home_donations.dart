@@ -135,15 +135,20 @@ class HomeDonations extends StatelessWidget {
                         ],
                       )),
                   const SizedBox(height: 25),
-                  const NavListItems(label: 'Donations', subtitle: "See All"),
+                  NavListItems(
+                      label: 'Donations',
+                      subtitle: "See All",
+                      onPressed: () {
+                        Get.toNamed("/donation-history-list");
+                      }),
                   const SizedBox(height: 5),
-                  const DonationHistoryItem(),
+                  DonationHistoryItem(onPressed: () {}),
                   const SizedBox(height: 10),
-                  const DonationHistoryItem(),
+                  DonationHistoryItem(onPressed: () {}),
                   const SizedBox(height: 10),
-                  const DonationHistoryItem(),
+                  DonationHistoryItem(onPressed: () {}),
                   const SizedBox(height: 10),
-                  const DonationHistoryItem()
+                  DonationHistoryItem(onPressed: () {})
                 ],
               )),
         ));
