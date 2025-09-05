@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/widgets/dashed_line.dart';
 import 'package:redcross/scenes/widgets/receipt_button.dart';
 import 'package:redcross/scenes/widgets/receipt_item.dart';
 import 'package:redcross/utils/colors.dart';

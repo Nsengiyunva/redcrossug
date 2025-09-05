@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
 import 'package:redcross/utils/colors.dart';
 
@@ -55,15 +56,30 @@ class DonationCampaignList extends StatelessWidget {
               const SizedBox(height: 15),
               Container(
                   padding: const EdgeInsets.only(left: 5, right: 5),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      BloodDonationListItem(),
-                      SizedBox(height: 15),
-                      BloodDonationListItem(),
-                      SizedBox(height: 15),
-                      BloodDonationListItem(),
-                      SizedBox(height: 15),
-                      BloodDonationListItem(),
+                      BloodDonationListItem(onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => DonationCampaignDetails()),
+                        );
+                      }),
+                      const SizedBox(height: 15),
+                      BloodDonationListItem(onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => DonationCampaignDetails()),
+                        );
+                      }),
+                      const SizedBox(height: 15),
+                      BloodDonationListItem(onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => DonationCampaignDetails()),
+                        );
+                      }),
+                      const SizedBox(height: 15),
+                      BloodDonationListItem(onPressed: () {}),
                     ],
                   )),
             ],

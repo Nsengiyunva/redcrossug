@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/controllers/home_controller.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/ambulances/ambulance_home.dart';
+import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
+import 'package:redcross/scenes/disasters/disaster_list.dart';
+import 'package:redcross/scenes/donations/home_donations.dart';
+import 'package:redcross/scenes/first_aid/first_aid_home.dart';
 import 'package:redcross/scenes/home_badge.dart';
 import 'package:redcross/scenes/widgets/card_board.dart';
 import 'package:redcross/utils/colors.dart';
@@ -95,13 +100,21 @@ class _DefaultHomeState extends State<DefaultHome> {
                           title: "Blood Donation",
                           icon_name: "blood_icon",
                           onPressed: () {
-                            Get.toNamed("/blood-donations");
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => BloodDonationsHome()),
+                            );
+                            // Get.toNamed("/blood-donations");
                           }),
                       CardBoard(
                           title: "First Aid",
                           icon_name: "hospital",
                           onPressed: () {
-                            Get.toNamed("/first-aid-home");
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => FirstAidHome()),
+                            );
+                            // Get.toNamed("/first-aid-home");
                           }),
                     ],
                   ),
@@ -112,14 +125,22 @@ class _DefaultHomeState extends State<DefaultHome> {
                         title: "Ambulance",
                         icon_name: "ambulance",
                         onPressed: () {
-                          Get.toNamed('/ambulance-home');
+                          // Get.toNamed('/ambulance-home');
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => AmbulanceHome()),
+                          );
                         },
                       ),
                       CardBoard(
                         title: "Disasters",
                         icon_name: "disasters",
                         onPressed: () {
-                          Get.toNamed('/disasters');
+                          // Get.toNamed('/disasters');
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => DisasterList()),
+                          );
                         },
                       ),
                     ],
@@ -129,15 +150,15 @@ class _DefaultHomeState extends State<DefaultHome> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // CardBoard(
-                          //     title: "Memberships",
-                          //     icon_name: "cash",
-                          //     onPressed: () {}),
                           CardBoard(
                               title: "Donations",
                               icon_name: "cash",
                               onPressed: () {
-                                Get.toNamed("/home-donations");
+                                // Get.toNamed("/home-donations");
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeDonations()),
+                                );
                               })
                         ],
                       )),

@@ -38,6 +38,8 @@ class BloodDonationHistory extends StatelessWidget {
                     SizedBox(height: 10),
                     BloodDonationHistoryItem(),
                     SizedBox(height: 10),
+                    BloodDonationHistoryItem(),
+                    SizedBox(height: 10),
                   ],
                 ))));
   }

@@ -9,26 +9,28 @@ class BloodDonationListItem extends StatelessWidget {
   // final String location;
   // final String photo;
   // final int id;
+  final VoidCallback onPressed;
 
-  const BloodDonationListItem({
-    super.key,
-    // required this.id,
-    // required this.title,
-    // required this.subtitle,
-    // required this.date,
-    // required this.location,
-    // required this.photo
-  });
+  const BloodDonationListItem(
+      {super.key,
+      // required this.id,
+      // required this.title,
+      // required this.subtitle,
+      // required this.date,
+      // required this.location,
+      // required this.photo
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     // print("pic ${photo}");
 
     return GestureDetector(
-      onTap: () {
-        Get.toNamed("/donation-campaign-details",
-            arguments: {'title': "Donation Campaign Details", 'id': 1});
-      },
+      onTap: onPressed,
+      //() {
+      // Get.toNamed("/donation-campaign-details",
+      //     arguments: {'title': "Donation Campaign Details", 'id': 1});
+      //},
       child: Container(
           height: 107,
           padding: const EdgeInsets.only(left: 10, right: 2),

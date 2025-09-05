@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 // import 'package:get/get.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
 import 'package:redcross/scenes/widgets/donation_badge.dart';
@@ -99,7 +100,11 @@ class BloodDonationsHome extends StatelessWidget {
                     label: 'Donations Campaigns',
                     subtitle: "See All",
                     onPressed: () {
-                      Get.toNamed("/blood-donations-campaigns-list");
+                      // Get.toNamed("/blood-donations-campaigns-list");
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => DonationCampaignList()),
+                      );
                     },
                   ),
                   const SizedBox(height: 10),
@@ -114,16 +119,14 @@ class BloodDonationsHome extends StatelessWidget {
                             color: AppColors.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const BloodDonationListItem()),
+                          child: BloodDonationListItem(onPressed: () {})),
                     ],
                   ),
                   const SizedBox(height: 15),
                   NavListItems(
                     label: 'Donation History',
                     subtitle: "See All",
-                    onPressed: () {
-                      Get.toNamed("/blood-donations-campaigns-list");
-                    },
+                    onPressed: () {},
                   ),
                   const SizedBox(height: 15),
                   DonationHistoryItem(
