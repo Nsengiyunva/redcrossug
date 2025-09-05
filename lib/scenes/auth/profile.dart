@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:redcross/controllers/home_controller.dart';
 import 'package:redcross/scenes/auth/profile_item.dart';
 import 'package:redcross/scenes/auth/profile_list_item.dart';
+import 'package:redcross/scenes/auth/sign_in.dart' show SignIn;
 import 'package:redcross/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,12 @@ class Profile extends StatelessWidget {
   Future<void> _logout(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
-    Navigator.pushReplacementNamed(context, '/login');
+    Navigator.of(context, rootNavigator: true).pushReplacementNamed('/login');
+
+    // Navigator.pushReplacementNamed(context, '/login');
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (context) => SignIn()),
+    // );
   }
 
   @override
