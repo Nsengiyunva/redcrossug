@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DisasterListItem extends StatelessWidget {
   final String title;
@@ -21,7 +22,8 @@ class DisasterListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("pic ${photo}");
+    var picture = 'https://urcs-api.taufeeq.dev/api/${photo}';
+    // print("pic ${picture}");
 
     return GestureDetector(
       onTap: () {
@@ -34,16 +36,26 @@ class DisasterListItem extends StatelessWidget {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
-              width: 75,
-              height: 72,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                image: const DecorationImage(
-                  image: NetworkImage('https://picsum.photos/300'),
-                  fit: BoxFit.cover,
+                width: 75,
+                height: 72,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7),
+                  // image: const DecorationImage(
+                  //   image: NetworkImage('https://picsum.photos/300'),
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
-              ),
-            ),
+                child: Image.network(
+                  '$picture',
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(child: CircularProgressIndicator());
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.error, color: Colors.red);
+                  },
+                )),
             Expanded(
                 child: Container(
               // height: 120,
