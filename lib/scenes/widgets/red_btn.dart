@@ -13,9 +13,6 @@ class RedBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    // double hgt = (screenWidth * 0.25) / 1.9;
-    // print("screen width $hgt");
-
     return SizedBox(
       height: (screenWidth * 0.25) / 1.9,
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

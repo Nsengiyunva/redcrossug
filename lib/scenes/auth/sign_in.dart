@@ -11,20 +11,6 @@ class SignIn extends StatelessWidget {
 
   final LoginController _loginController = Get.put(LoginController());
 
-  // void login(BuildContext context) async {
-  //   final authservice = AuthService();
-  //   try {
-  //     var response = await authservice.signInWithEmail(
-  //         _loginController.telephoneController.text,
-  //         _loginController.passwordController.text);
-  //     print("response $response");
-  //   } catch (e) {
-  //     showDialog(
-  //         context: context,
-  //         builder: (context) => AlertDialog(title: Text(e.toString())));
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
