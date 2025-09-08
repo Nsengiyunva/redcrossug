@@ -102,7 +102,8 @@ class _DefaultHomeState extends State<DefaultHome> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => BloodDonationsHome()),
+                                  builder: (context) =>
+                                      const BloodDonationsHome()),
                             );
                             // Get.toNamed("/blood-donations");
                           }),
@@ -112,7 +113,7 @@ class _DefaultHomeState extends State<DefaultHome> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => FirstAidHome()),
+                                  builder: (context) => const FirstAidHome()),
                             );
                             // Get.toNamed("/first-aid-home");
                           }),
@@ -157,7 +158,8 @@ class _DefaultHomeState extends State<DefaultHome> {
                                 // Get.toNamed("/home-donations");
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (context) => HomeDonations()),
+                                      builder: (context) =>
+                                          const HomeDonations()),
                                 );
                               })
                         ],

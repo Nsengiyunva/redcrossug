@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
 
 class BloodDonationListItem extends StatelessWidget {

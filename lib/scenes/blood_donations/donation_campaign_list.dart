@@ -61,21 +61,24 @@ class DonationCampaignList extends StatelessWidget {
                       BloodDonationListItem(onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => DonationCampaignDetails()),
+                              builder: (context) =>
+                                  const DonationCampaignDetails()),
                         );
                       }),
                       const SizedBox(height: 15),
                       BloodDonationListItem(onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => DonationCampaignDetails()),
+                              builder: (context) =>
+                                  const DonationCampaignDetails()),
                         );
                       }),
                       const SizedBox(height: 15),
                       BloodDonationListItem(onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => DonationCampaignDetails()),
+                              builder: (context) =>
+                                  const DonationCampaignDetails()),
                         );
                       }),
                       const SizedBox(height: 15),

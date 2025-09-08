@@ -66,10 +66,10 @@ class _BottomNavigationBarExampleState extends State<Home> {
       child: Scaffold(
         body: Stack(
           children: [
-            _buildOffStageNavigator(0, DefaultHome()),
-            _buildOffStageNavigator(1, BloodDonationsHome()),
-            _buildOffStageNavigator(2, FirstAidHome()),
-            _buildOffStageNavigator(3, Profile()),
+            _buildOffStageNavigator(0, const DefaultHome()),
+            _buildOffStageNavigator(1, const BloodDonationsHome()),
+            _buildOffStageNavigator(2, const FirstAidHome()),
+            _buildOffStageNavigator(3, const Profile()),
           ],
         ),
         bottomNavigationBar: Container(
@@ -87,8 +87,8 @@ class _BottomNavigationBarExampleState extends State<Home> {
               onTap: _onTap,
               selectedItemColor: AppColors.primaryRedColor, // active tab color
               unselectedItemColor: AppColors.greyColorN, // inactive tabs
-              selectedLabelStyle:
-                  TextStyle(fontFamily: "Inter", fontWeight: FontWeight.w400),
+              selectedLabelStyle: const TextStyle(
+                  fontFamily: "Inter", fontWeight: FontWeight.w400),
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
                 BottomNavigationBarItem(

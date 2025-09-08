@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:redcross/controllers/home_controller.dart';
 import 'package:redcross/scenes/auth/profile_item.dart';
 import 'package:redcross/scenes/auth/profile_list_item.dart';
-import 'package:redcross/scenes/auth/sign_in.dart' show SignIn;
 import 'package:redcross/utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

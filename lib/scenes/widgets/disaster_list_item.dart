@@ -22,7 +22,7 @@ class DisasterListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var picture = 'https://urcs-api.taufeeq.dev/api/${photo}';
+    var picture = 'https://urcs-api.taufeeq.dev/api/$photo';
     // print("pic ${picture}");
 
     return GestureDetector(
@@ -46,14 +46,14 @@ class DisasterListItem extends StatelessWidget {
                   // ),
                 ),
                 child: Image.network(
-                  '$picture',
+                  picture,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   },
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error, color: Colors.red);
+                    return const Icon(Icons.error, color: Colors.red);
                   },
                 )),
             Expanded(

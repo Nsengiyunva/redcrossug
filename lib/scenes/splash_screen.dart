@@ -27,12 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-       child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-         children: [
-          Image.asset( 'assets/images/redcross_main.png', width: 800, height: 800 )
-         ],
-       ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/redcross_main.png',
+                width: 800, height: 800)
+          ],
+        ),
       ),
     );
   }
