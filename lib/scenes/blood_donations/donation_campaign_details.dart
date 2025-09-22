@@ -8,10 +8,9 @@ import 'package:redcross/utils/storage_service.dart';
 class DonationCampaignDetails extends StatelessWidget {
   final Map<String, dynamic> campaign;
 
-  const DonationCampaignDetails({super.key, required this.campaign});
+  DonationCampaignDetails({super.key, required this.campaign});
 
   Map<String, dynamic> displayColor(String status) {
-    // const Map<String, dynamic> colorOption;
     switch (status) {
       case "ongoing":
         return {
@@ -90,6 +89,7 @@ class DonationCampaignDetails extends StatelessWidget {
                     ),
                     Container(
                         width: 86,
+                        height: 24,
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             color: options["color"],

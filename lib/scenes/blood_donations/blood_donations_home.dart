@@ -126,7 +126,7 @@ class BloodDonationsHome extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const DonationCampaignDetails(
+                                          DonationCampaignDetails(
                                             campaign: {},
                                           )),
                                 );
