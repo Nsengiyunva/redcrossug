@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class DisasterListItem extends StatelessWidget {
   final String title;

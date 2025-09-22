@@ -7,10 +7,12 @@ class AppColors {
   static const Color primaryRedColor = Color(0xFFED1C24);
   static const Color redColorA = Color(0xFFE30000);
   static const Color redColorL = Color(0xFFFFA9A9);
+  static const Color redColorM = Color(0xFFFFE3E1);
   static const Color redColorB = Color(0xFFFFDCDC);
   static const Color redColorC = Color(0xFFFFE3E1);
   static const Color redColorD = Color(0xFFFFE5E5);
   static const Color redColorE = Color(0xFFFFE3E1);
+  static const Color redColorH = Color(0xFFFFE5E1);
   static const Color bgColor = Color(0xFFF6F8FC);
   static const Color borderColorGrey = Color(0xFFD2D9DE);
 
@@ -30,6 +32,7 @@ class AppColors {
   static const Color greyColorJ = Color(0xFF746565);
   static const Color greyColorL = Color(0xFF8E8E8E);
   static const Color greyColorN = Color(0xFF7E848A);
+  static const Color greyColorP = Color(0xFF535353);
 
   static const Color blueColorA = Color(0xFF0080FF);
   static const Color whiteColorB = Color(0xFFE8E8E8);
@@ -45,7 +48,11 @@ class AppColors {
   static const Color blueColorB = Color(0xFF293041);
 
   static const Color yellowColorA = Color(0xFFFFFDDC);
+  static const Color yellowColorB = Color(0xFFFFF6E1);
+  static const Color deepYellowA = Color(0xFFEB9A03);
   static const Color greenColorA = Color(0xFF1A3C40);
+  static const Color greenColorB = Color(0xFFE1FFE3);
+  static const Color deepGreenA = Color(0xFF00CB11);
 
   // // Custom Gradient Example
   // static const Gradient buttonGradient = LinearGradient(

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redcross/controllers/donations_controller.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
+import 'package:redcross/scenes/widgets/heading_tab.dart';
 import 'package:redcross/utils/colors.dart';
 
 class DonationCampaignList extends StatelessWidget {
-  const DonationCampaignList({super.key});
+  DonationCampaignList({super.key});
+
+  final DonationsController donationsController =
+      Get.put(DonationsController());
 
   @override
   Widget build(BuildContext context) {
@@ -13,80 +19,78 @@ class DonationCampaignList extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Back"),
         ),
-        body: SingleChildScrollView(
-            child: Container(
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(vertical: 20.0),
-          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 25,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Text("Upcoming",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 2),
-                      child: Text("Active",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 5),
-                      child: Text("Completed",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700)),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              Container(
-                  padding: const EdgeInsets.only(left: 5, right: 5),
-                  child: Column(
+        body: Obx(() {
+          if (donationsController.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (donationsController.campaign_list.isEmpty) {
+            return const Center(
+                child: Center(child: Text('Nothing was found.')));
+          }
+
+          return SingleChildScrollView(
+              child: Container(
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(vertical: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 25,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      BloodDonationListItem(onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const DonationCampaignDetails()),
-                        );
-                      }),
-                      const SizedBox(height: 15),
-                      BloodDonationListItem(onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const DonationCampaignDetails()),
-                        );
-                      }),
-                      const SizedBox(height: 15),
-                      BloodDonationListItem(onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const DonationCampaignDetails()),
-                        );
-                      }),
-                      const SizedBox(height: 15),
-                      BloodDonationListItem(onPressed: () {}),
+                      Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: HeadingTab(title: 'Upcoming', active: true)),
+                      Padding(
+                          padding: EdgeInsets.only(left: 2),
+                          child: HeadingTab(title: 'Active', active: false)),
+                      Padding(
+                          padding: EdgeInsets.only(right: 10),
+                          child: HeadingTab(title: 'Completed', active: false)),
                     ],
-                  )),
-            ],
-          ),
-        )));
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ListView.builder(
+                  shrinkWrap: true, // ensures list takes only needed height
+                  physics:
+                      const NeverScrollableScrollPhysics(), // disables inner scrolling
+                  itemCount: donationsController.campaign_list.length,
+                  itemBuilder: (context, index) {
+                    var item = donationsController.campaign_list[index];
+                    var location = item["locations"][0];
+
+                    return Column(
+                      children: [
+                        const SizedBox(height: 15),
+                        BloodDonationListItem(
+                            name: item["name"],
+                            location:
+                                '${location["region"]} ${location["district"]} ${location["location"]}',
+                            date: '${item["start_date"]}',
+                            time: '10AM-6PM',
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        DonationCampaignDetails(
+                                          campaign: item,
+                                        )),
+                              );
+                            })
+                      ],
+                    );
+                  },
+                )
+              ],
+            ),
+          ));
+        }));
   }
 }

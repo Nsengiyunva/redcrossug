@@ -3,12 +3,41 @@ import 'package:get/get.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/text_box_area.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class DonationCampaignDetails extends StatelessWidget {
-  const DonationCampaignDetails({super.key});
+  final Map<String, dynamic> campaign;
+
+  const DonationCampaignDetails({super.key, required this.campaign});
+
+  Map<String, dynamic> displayColor(String status) {
+    // const Map<String, dynamic> colorOption;
+    switch (status) {
+      case "ongoing":
+        return {
+          "color": AppColors.yellowColorB,
+          "textColor": AppColors.deepYellowA
+        };
+
+      case "completed":
+        return {
+          "color": AppColors.redColorH,
+          "textColor": AppColors.primaryRedColor
+        };
+
+      case "active":
+        return {
+          "color": AppColors.greenColorB,
+          "textColor": AppColors.deepGreenA
+        };
+      default:
+        return {};
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    var options = displayColor(campaign["status"]);
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
@@ -26,11 +55,15 @@ class DonationCampaignDetails extends StatelessWidget {
                   width: 327,
                   height: 172,
                   decoration: BoxDecoration(
-                    color: AppColors.yellowColorA,
-                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.redColorE,
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Center(
-                    child: Text("Logo"),
+                    child: Icon(
+                      Icons.water_drop_outlined,
+                      size: 106, // this sets both height & width together
+                      color: AppColors.primaryRedColor,
+                    ),
                   )),
               const SizedBox(height: 10),
               Container(
@@ -40,21 +73,38 @@ class DonationCampaignDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Rotary Nakawa"),
-                        Text("Blood Donation Drive")
-                      ],
+                    SizedBox(
+                      width: 219,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("${campaign["name"]}",
+                              style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 17,
+                                  height: StorageService.getHeight(20, 17))),
+                        ],
+                      ),
                     ),
                     Container(
                         width: 86,
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(3)),
-                        child: const Center(child: Text("Upcoming"))),
+                            color: options["color"],
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Center(
+                            child: Text(campaign["status"].toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: "Inter",
+                                    color: options["textColor"],
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing:
+                                        StorageService.getSpacing(12),
+                                    height:
+                                        StorageService.getHeight(12, 12))))),
                   ],
                 ),
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
-// import 'package:get/get.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
 import 'package:redcross/scenes/widgets/donation_badge.dart';
 import 'package:redcross/scenes/widgets/donation_history_item.dart';
@@ -100,10 +99,9 @@ class BloodDonationsHome extends StatelessWidget {
                     label: 'Donations Campaigns',
                     subtitle: "See All",
                     onPressed: () {
-                      // Get.toNamed("/blood-donations-campaigns-list");
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => const DonationCampaignList()),
+                            builder: (context) => DonationCampaignList()),
                       );
                     },
                   ),
@@ -119,7 +117,20 @@ class BloodDonationsHome extends StatelessWidget {
                             color: AppColors.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: BloodDonationListItem(onPressed: () {})),
+                          child: BloodDonationListItem(
+                              name: "xxx",
+                              location: "xx",
+                              date: "xxx",
+                              time: "10AM",
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DonationCampaignDetails(
+                                            campaign: {},
+                                          )),
+                                );
+                              })),
                     ],
                   ),
                   const SizedBox(height: 15),

@@ -60,4 +60,12 @@ class StorageService {
       return "Good Evening";
     }
   }
+
+  static double getSpacing(int fontSize) {
+    return fontSize * 0.02;
+  }
+
+  static double getHeight(int height, int fontSize) {
+    return height / fontSize;
+  }
 }
