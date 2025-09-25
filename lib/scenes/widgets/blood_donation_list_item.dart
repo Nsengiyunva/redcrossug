@@ -10,7 +10,7 @@ class BloodDonationListItem extends StatelessWidget {
   // final int id;
   final VoidCallback onPressed;
 
-  BloodDonationListItem(
+  const BloodDonationListItem(
       {super.key,
       // required this.id,
       required this.name,
@@ -59,7 +59,7 @@ class BloodDonationListItem extends StatelessWidget {
                 children: [
                   SizedBox(
                       width: 163,
-                      child: Text("${name}",
+                      child: Text(name,
                           style: const TextStyle(
                               color: AppColors.blackColor,
                               fontFamily: "Inter",
@@ -68,7 +68,7 @@ class BloodDonationListItem extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               height: 1.25))),
                   const SizedBox(height: 5),
-                  Text("${location}",
+                  Text(location,
                       style: const TextStyle(
                           color: AppColors.greyColorL,
                           fontFamily: "Inter",
@@ -89,7 +89,7 @@ class BloodDonationListItem extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 2),
-                            child: Text('${date} | ${time}',
+                            child: Text('$date | $time',
                                 style: const TextStyle(
                                     color: AppColors.primaryRedColor,
                                     fontFamily: "Inter",

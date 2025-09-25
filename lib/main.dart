@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
         "/blood-donations": (context) => const BloodDonationsHome(),
         "/blood-donation-history": (context) => const BloodDonationHistory(),
         "/donation-campaign-details": (context) => DonationCampaignDetails(
-              campaign: {},
+              campaign: const {},
             ),
         "/blood-history-details": (context) =>
             const BloodDonationHistoryDetails(),

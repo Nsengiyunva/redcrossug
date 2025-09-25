@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:redcross/models/user.dart';
 import 'package:redcross/utils/api_endpoints.dart';
 import 'package:redcross/utils/storage_service.dart';
 import 'package:http/http.dart' as http;

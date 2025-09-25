@@ -8,7 +8,7 @@ import 'package:redcross/utils/storage_service.dart';
 class DonationCampaignDetails extends StatelessWidget {
   final Map<String, dynamic> campaign;
 
-  DonationCampaignDetails({super.key, required this.campaign});
+  const DonationCampaignDetails({super.key, required this.campaign});
 
   Map<String, dynamic> displayColor(String status) {
     switch (status) {

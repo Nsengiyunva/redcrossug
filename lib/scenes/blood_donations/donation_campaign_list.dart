@@ -45,13 +45,13 @@ class DonationCampaignList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(left: 10),
+                          padding: const EdgeInsets.only(left: 10),
                           child: HeadingTab(title: 'Upcoming', active: true)),
                       Padding(
-                          padding: EdgeInsets.only(left: 2),
+                          padding: const EdgeInsets.only(left: 2),
                           child: HeadingTab(title: 'Active', active: false)),
                       Padding(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: HeadingTab(title: 'Completed', active: false)),
                     ],
                   ),

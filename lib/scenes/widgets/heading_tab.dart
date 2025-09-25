@@ -20,7 +20,7 @@ class HeadingTab extends StatelessWidget {
             ),
           ),
         ),
-        child: Text('${title}'.toUpperCase(),
+        child: Text(title.toUpperCase(),
             style: TextStyle(
                 fontFamily: "Inter",
                 fontSize: 14,

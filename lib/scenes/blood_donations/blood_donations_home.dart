@@ -127,7 +127,7 @@ class BloodDonationsHome extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           DonationCampaignDetails(
-                                            campaign: {},
+                                            campaign: const {},
                                           )),
                                 );
                               })),
