@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
+import 'package:redcross/scenes/ambulances/ambulance_status.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
@@ -51,7 +52,7 @@ class _MapScreenState extends State<AmbulanceMap> {
           });
         }
       } catch (e) {
-        print("Error: $e");
+        // print("Error: $e");
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Location not found! Try another name."),
         ));
@@ -215,7 +216,8 @@ class _MapScreenState extends State<AmbulanceMap> {
                                   // Border when error occurs
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: const BorderSide(
-                                      color: Color(0xFFED1C24), width: 1),
+                                      color: AppColors.primaryRedColor,
+                                      width: 1),
                                 )),
                             onSubmitted: (value) => _searchLocation(value),
                           ),
@@ -224,6 +226,10 @@ class _MapScreenState extends State<AmbulanceMap> {
                               label: 'Continue',
                               onPressed: () {
                                 ambulanceController.submitCreateRequest();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => AmbulanceStatus()),
+                                );
                               })
                         ],
                       ),

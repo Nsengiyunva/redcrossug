@@ -53,16 +53,16 @@ class AmbulanceStatus extends StatelessWidget {
                           noComponent: false,
                           value: "Red Cross Nakasero"),
                       const SizedBox(height: 100),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed("/home");
-                        },
-                        child: const Text("Back to Home",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: AppColors.blackColor,
-                                fontFamily: "Inter")),
-                      )
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     // Get.toNamed("/home");
+                      //   },
+                      //   child: const Text("Back to Home",
+                      //       style: TextStyle(
+                      //           fontSize: 14,
+                      //           color: AppColors.blackColor,
+                      //           fontFamily: "Inter")),
+                      // )
                     ])),
               ],
             ),

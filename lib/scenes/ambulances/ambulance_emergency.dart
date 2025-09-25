@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
+import 'package:redcross/scenes/ambulances/ambulance_map.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
@@ -38,7 +39,7 @@ class AmbulanceEmergency extends StatelessWidget {
                       fontSize: 20.14,
                       fontFamily: "Manrope",
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF545454)),
+                      color: AppColors.blackColorF),
                 ),
                 const SizedBox(height: 25),
                 FormTextfield(
@@ -91,7 +92,10 @@ class AmbulanceEmergency extends StatelessWidget {
                     label: "Continue",
                     onPressed: () {
                       // ambulanceController.createAmbulanceRequest();
-                      Get.toNamed('/ambulance-map-locations');
+                      // Get.toNamed('/ambulance-map-locations');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => AmbulanceMap()),
+                      );
                     })
               ],
             ),

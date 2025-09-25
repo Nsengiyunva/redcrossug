@@ -80,7 +80,7 @@ class AmbulanceController extends GetxController {
     var result = jsonDecode(response.body);
 
     Get.snackbar('Success', 'Ambulance request successfully submitted.');
-    Get.toNamed("/ambulance-success-request");
+    // Get.toNamed("/ambulance-success-request");
     isUploading(false);
   }
 }

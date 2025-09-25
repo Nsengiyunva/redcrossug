@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
+import 'package:redcross/scenes/ambulances/ambulance_emergency.dart';
 import 'package:redcross/scenes/ambulances/ambulance_form.dart';
 import 'package:redcross/scenes/ambulances/ambulance_progress_box.dart';
-import 'package:redcross/scenes/widgets/ambulance_list_item.dart';
+// import 'package:redcross/scenes/ambulances/ambulance_progress_box.dart';
+// import 'package:redcross/scenes/widgets/ambulance_list_item.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
-import 'package:redcross/scenes/widgets/red_btn_icon.dart';
+// import 'package:redcross/scenes/widgets/red_btn_icon.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 
-class AmbulanceHome extends StatelessWidget {
-  AmbulanceHome({super.key});
+class AmbulanceCurrent extends StatelessWidget {
+  AmbulanceCurrent({super.key});
 
   final AmbulanceController ambulanceController =
       Get.put(AmbulanceController());
@@ -40,14 +42,16 @@ class AmbulanceHome extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                             letterSpacing: StorageService.getSpacing(26),
                             height: StorageService.getHeight(30, 26))),
-                    SizedBox(height: 75),
+                    SizedBox(height: 20),
                     Container(
                       child: Center(
                         child: Image.asset('assets/images/ambulance.png',
                             width: 230, height: 214.37),
                       ),
                     ),
-                    const SizedBox(height: 75),
+                    const SizedBox(height: 20),
+                    AmbulanceProgressBox(),
+                    SizedBox(height: 15),
                     RedBtn(
                         label: 'Commercial Ambulance',
                         squared: true,
@@ -55,11 +59,11 @@ class AmbulanceHome extends StatelessWidget {
                         iconned: true,
                         icon_name: "alert",
                         onPressed: () {
+                          // Get.toNamed("/ambulance-request-form");
                           Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => AmbulanceForm()),
                           );
-                          // Get.toNamed("/ambulance-request-form");
                         }),
                     const SizedBox(height: 10),
                     RedBtn(
@@ -71,6 +75,10 @@ class AmbulanceHome extends StatelessWidget {
                         icon_name: "alert",
                         onPressed: () {
                           // Get.toNamed("/ambulance-request-form");
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => AmbulanceEmergency()),
+                          );
                         }),
                     const SizedBox(height: 75),
                     const Center(

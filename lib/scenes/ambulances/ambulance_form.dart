@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
+import 'package:redcross/scenes/ambulances/ambulance_status.dart';
+import 'package:redcross/scenes/ambulances/ambulance_success.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
@@ -101,7 +103,11 @@ class AmbulanceForm extends StatelessWidget {
                     label: "Continue",
                     onPressed: () {
                       // ambulanceController.createAmbulanceRequest();
-                      Get.toNamed('/ambulance-success-request');
+                      // Get.toNamed('/ambulance-success-request');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => AmbulanceSuccess()),
+                      );
                     })
               ],
             ),
