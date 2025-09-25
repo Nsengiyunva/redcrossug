@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class BloodEligibility extends StatefulWidget {
   const BloodEligibility({super.key});
@@ -12,75 +14,170 @@ class _BloodEligibilityState extends State<BloodEligibility> {
   final List<Item> _items = <Item>[
     Item(header: 'Platelet Donation', body: ['Apple', 'Banana', 'Orange']),
     Item(header: 'Whole Blood Donation', body: ['Carrot', 'Broccoli']),
-    Item(header: 'Plasma Donation', body: ['Carrot', 'Broccoli']),
+    Item(header: 'Plasma Donation', body: ['Mango', 'Papaya']),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Blood Eligibility')),
+      appBar: AppBar(title: const Text(''), leading: const BackButton()),
       body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Blood",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 26.33,
+                  color: AppColors.primaryRedColor,
+                  fontWeight: FontWeight.w700,
+                  height: StorageService.getHeight(28, 26),
+                  letterSpacing: StorageService.getSpacing(26),
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                "Donation Eligibility",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 26.33,
+                  color: AppColors.blackColor,
+                  fontWeight: FontWeight.w700,
+                  height: StorageService.getHeight(28, 26),
+                  letterSpacing: StorageService.getSpacing(26),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                "Next Eligible donation date:",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 14.4,
+                  color: AppColors.blackColorZ,
+                  fontWeight: FontWeight.w700,
+                  height: StorageService.getHeight(24, 14),
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                "Saturday, July 10th, 2025",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 14.4,
+                  color: AppColors.blackColorZ,
+                  fontWeight: FontWeight.w700,
+                  height: StorageService.getHeight(24, 14),
+                ),
+              ),
+              const SizedBox(height: 15),
+
+              // ✅ Custom expandable widgets instead of ExpansionPanelList
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: _items.length,
+                itemBuilder: (context, index) {
+                  final item = _items[index];
+                  return CustomExpandableTile(
+                    title: item.header,
+                    children: item.body,
+                  );
+                },
+              ),
+
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  // Get.toNamed("/blood-donation-history");
+                },
+                child: const Text('See'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Custom Expandable Tile
+class CustomExpandableTile extends StatefulWidget {
+  final String title;
+  final List<String> children;
+
+  const CustomExpandableTile({
+    super.key,
+    required this.title,
+    required this.children,
+  });
+
+  @override
+  _CustomExpandableTileState createState() => _CustomExpandableTileState();
+}
+
+class _CustomExpandableTileState extends State<CustomExpandableTile>
+    with SingleTickerProviderStateMixin {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: _isExpanded ? AppColors.primaryRedColor : Colors.grey.shade300,
+          width: 2,
+        ),
+      ),
+      child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ExpansionPanelList.radio(
-              animationDuration: const Duration(milliseconds: 300),
-              children: _items
-                  .map((item) => ExpansionPanelRadio(
-                        value: item.header,
-                        headerBuilder: (context, isExpanded) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            decoration: BoxDecoration(
-                              color: isExpanded
-                                  ? Colors.red.shade100
-                                  : Colors.grey.shade200, // header background
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  isExpanded
-                                      ? Icons.arrow_drop_down
-                                      : Icons.arrow_right,
-                                  color: Colors.red,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  item.header,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        body: Column(
-                          children: item.body
-                              .map((text) => ListTile(
-                                    title: Text(text),
-                                    contentPadding:
-                                        const EdgeInsets.only(left: 40),
-                                  ))
-                              .toList(),
-                        ),
+          // Header
+          ListTile(
+            title: Text(
+              widget.title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: _isExpanded ? AppColors.primaryRedColor : Colors.black,
+              ),
+            ),
+            trailing: AnimatedRotation(
+              turns: _isExpanded ? 0.5 : 0, // rotates 180° when expanded
+              duration: const Duration(milliseconds: 200),
+              child: Icon(
+                Icons.keyboard_arrow_right, // 👈 your custom arrow
+                size: 28,
+                color: _isExpanded ? AppColors.primaryRedColor : Colors.black,
+              ),
+            ),
+            onTap: () {
+              setState(() => _isExpanded = !_isExpanded);
+            },
+          ),
+
+          // Body
+          AnimatedCrossFade(
+            firstChild: const SizedBox.shrink(),
+            secondChild: Column(
+              children: widget.children
+                  .map((text) => ListTile(
+                        contentPadding:
+                            const EdgeInsets.only(left: 40, right: 16),
+                        title: Text(text),
                       ))
                   .toList(),
             ),
+            crossFadeState: _isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 300),
           ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed("/blood-donation-history");
-            },
-            child: const Text('See'),
-          )
         ],
-      )),
+      ),
     );
   }
 }
@@ -88,6 +185,5 @@ class _BloodEligibilityState extends State<BloodEligibility> {
 class Item {
   String header;
   List<String> body;
-  bool isExpanded;
-  Item({required this.header, required this.body, this.isExpanded = false});
+  Item({required this.header, required this.body});
 }
