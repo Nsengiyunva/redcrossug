@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
 import 'package:redcross/scenes/widgets/icon_card.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
@@ -42,7 +43,11 @@ class FirstAidHome extends StatelessWidget {
             RedBtn(
                 label: 'Call for Emergency Services',
                 onPressed: () {
-                  Get.toNamed("/first-aid-emergency-services");
+                  // Get.toNamed("/first-aid-emergency-services");
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => FirstAidEmergencies()),
+                  );
                 })
           ],
         ),

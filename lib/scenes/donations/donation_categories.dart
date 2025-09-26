@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/blood_donations/drive_details.dart';
 import 'package:redcross/scenes/widgets/donation_listing_item.dart';
 import 'package:redcross/scenes/widgets/donation_tab_item.dart';
 // import 'package:get/get.dart';
@@ -26,10 +27,10 @@ class DonationCategories extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 30.0),
               padding:
                   const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
+                  const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Text("Categories",
                           style: TextStyle(
@@ -37,8 +38,8 @@ class DonationCategories extends StatelessWidget {
                               fontSize: 16,
                               color: AppColors.blackColorG,
                               fontWeight: FontWeight.w600))),
-                  SizedBox(height: 10),
-                  Row(
+                  const SizedBox(height: 10),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       DonationTabItem(label: "All Categories"),
@@ -46,25 +47,45 @@ class DonationCategories extends StatelessWidget {
                       DonationTabItem(label: "Education")
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DonationListingItem(
                     title: 'Funding fair  for Red Cross 1',
                     subtitle: 'DFCU Blood Drive',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => DriveDetails()),
+                      );
+                    },
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DonationListingItem(
                     title: 'Funding fair  for Red Cross 2',
                     subtitle: 'DFCU Blood Drive',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => DriveDetails()),
+                      );
+                    },
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DonationListingItem(
                     title: 'Funding fair  for Red Cross 3',
                     subtitle: 'DFCU Blood Drive',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => DriveDetails()),
+                      );
+                    },
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DonationListingItem(
                     title: 'Funding fair  for Red Cross 4',
                     subtitle: 'DFCU Blood Drive',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => DriveDetails()),
+                      );
+                    },
                   ),
                 ],
               )),

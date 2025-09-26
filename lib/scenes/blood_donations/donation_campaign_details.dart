@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
+import 'package:redcross/scenes/widgets/blood_donation_detail_item.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/text_box_area.dart';
 import 'package:redcross/utils/colors.dart';
@@ -38,6 +39,8 @@ class DonationCampaignDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var options = displayColor(campaign["status"]);
+    print("${campaign["status"]}");
+
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
@@ -110,48 +113,85 @@ class DonationCampaignDetails extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
                   child: Text(
-                      "Join us and help save lives. All eligible donors welcome. Snacks and refreshments will  be provided.")),
+                      "Join us and help save lives. All eligible donors welcome. Snacks and refreshments will  be provided.",
+                      style: TextStyle(
+                          fontFamily: "Inter",
+                          fontWeight: FontWeight.w400,
+                          height: StorageService.getHeight(20, 12),
+                          fontSize: 12))),
               const SizedBox(height: 15),
               Container(
-                  padding: const EdgeInsets.all(20),
-                  child: const Row(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  child: Column(
                     children: [
-                      Text("Date:"),
-                      Text("Saturday, August 10th, 2025")
+                      BloodDonationDetailItem(
+                        label: 'Date',
+                        value: 'Saturday, August 10th, 2025',
+                      ),
+                      SizedBox(height: 5),
+                      BloodDonationDetailItem(
+                        label: 'Time',
+                        value: '9:00AM - 4:00PM',
+                      ),
+                      SizedBox(height: 5),
+                      BloodDonationDetailItem(
+                        label: 'Location',
+                        value: 'Mulago',
+                      ),
+                      SizedBox(height: 10),
+                      if (campaign["status"] == "completed")
+                        Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 5),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Rate/Review",
+                                      style: TextStyle(
+                                          fontSize: 12.16,
+                                          fontFamily: "Inter",
+                                          color: AppColors.primaryRedColor,
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing:
+                                              StorageService.getSpacing(12),
+                                          height: StorageService.getHeight(
+                                              14, 12))),
+                                  SizedBox(height: 5),
+                                  const Row(children: [
+                                    Icon(Icons.star,
+                                        color: AppColors.primaryRedColor),
+                                    Icon(Icons.star,
+                                        color: AppColors.primaryRedColor),
+                                    Icon(Icons.star,
+                                        color: AppColors.primaryRedColor),
+                                    Icon(Icons.star_half,
+                                        color: AppColors
+                                            .primaryRedColor), // half star
+                                    Icon(Icons.star_border,
+                                        color: AppColors.primaryRedColor),
+                                  ]),
+                                  const SizedBox(height: 15),
+                                  const TextBoxArea(),
+                                  const SizedBox(height: 15),
+                                  RedBtn(
+                                      label: 'Submit',
+                                      squared: true,
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DonationRegister()),
+                                        );
+                                        // Get.toNamed("/ambulance-request-forsm");
+                                      })
+                                ])),
                     ],
                   )),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text("Rate/Review"),
-                        const Row(children: [
-                          Icon(Icons.star, color: AppColors.primaryRedColor),
-                          Icon(Icons.star, color: AppColors.primaryRedColor),
-                          Icon(Icons.star, color: AppColors.primaryRedColor),
-                          Icon(Icons.star_half,
-                              color: AppColors.primaryRedColor), // half star
-                          Icon(Icons.star_border,
-                              color: AppColors.primaryRedColor),
-                        ]),
-                        const SizedBox(height: 15),
-                        const TextBoxArea(),
-                        const SizedBox(height: 15),
-                        RedBtn(
-                            label: 'Submit',
-                            squared: true,
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => DonationRegister()),
-                              );
-                              // Get.toNamed("/ambulance-request-forsm");
-                            })
-                      ]))
             ],
           ),
         )));

@@ -6,6 +6,7 @@ import 'package:redcross/utils/colors.dart';
 class DonationListingItem extends StatelessWidget {
   final String title;
   final String subtitle;
+  final VoidCallback onPressed;
   // final String date;
   // final String location;
   // final String photo;
@@ -15,7 +16,7 @@ class DonationListingItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.subtitle,
-    // required this.date,
+    required this.onPressed,
     // required this.location,
     // required this.photo
   });
@@ -23,9 +24,10 @@ class DonationListingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed("/donation-category-details");
-      },
+      onTap: onPressed,
+      //() {
+      // Get.toNamed("/donation-category-details");
+      // },
       child: Container(
           height: 107,
           padding: const EdgeInsets.only(left: 10, right: 2),

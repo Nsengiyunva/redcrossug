@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/donations/donation_categories.dart';
 import 'package:redcross/scenes/widgets/donation_badge.dart';
 import 'package:redcross/scenes/widgets/donation_history_item.dart';
 import 'package:redcross/scenes/widgets/nav_list_items.dart';
@@ -78,7 +79,12 @@ class HomeDonations extends StatelessWidget {
                                   width: 100, // custom width
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      Get.toNamed("/donations-categories");
+                                      // Get.toNamed("/donations-categories");
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DonationCategories()),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: AppColors
