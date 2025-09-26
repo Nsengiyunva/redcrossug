@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
 
 class BloodDonationHistoryItem extends StatelessWidget {
-  // final String title;
+  final VoidCallback onPressed;
   // final String subtitle;
   // final String date;
   // final String location;
@@ -12,7 +12,7 @@ class BloodDonationHistoryItem extends StatelessWidget {
 
   const BloodDonationHistoryItem({
     super.key,
-    // required this.id,
+    required this.onPressed,
     // required this.title,
     // required this.subtitle,
     // required this.date,
@@ -25,10 +25,7 @@ class BloodDonationHistoryItem extends StatelessWidget {
     // print("pic ${photo}");
 
     return GestureDetector(
-      onTap: () {
-        Get.toNamed("/blood-history-details",
-            arguments: {'title': "Donation Campaign Details", 'id': 1});
-      },
+      onTap: onPressed,
       child: Container(
           height: 66.66,
           width: 335.14,

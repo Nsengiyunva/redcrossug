@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/blood_donations/donation_register.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/text_box_area.dart';
 import 'package:redcross/utils/colors.dart';
@@ -142,10 +143,14 @@ class DonationCampaignDetails extends StatelessWidget {
                         const SizedBox(height: 15),
                         RedBtn(
                             label: 'Submit',
-                            onPressed: () => {
-                                  Get.toNamed("/blood-donation-register",
-                                      arguments: {})
-                                })
+                            squared: true,
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => DonationRegister()),
+                              );
+                              // Get.toNamed("/ambulance-request-forsm");
+                            })
                       ]))
             ],
           ),

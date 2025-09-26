@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/registration_controller.dart';
+import 'package:redcross/scenes/auth/profile.dart';
+import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/utils/colors.dart';
 
 import '../widgets/form_textfield.dart';
@@ -85,12 +87,20 @@ class DonationRegisterState extends State<DonationRegister> {
                   RedBtn(
                     label: 'Register',
                     onPressed: () {
-                      Get.toNamed("/blood-donation-eligibility");
+                      // Get.toNamed("/blood-donation-eligibility");
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => BloodEligibility()),
+                      );
                     },
                   ),
                   const SizedBox(height: 10),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Profile()),
+                      );
+                    },
                     child: const Text('Edit Donor  Profile',
                         style: TextStyle(color: AppColors.primaryRedColor)),
                   ),

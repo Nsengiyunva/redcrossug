@@ -118,10 +118,10 @@ class BloodDonationsHome extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: BloodDonationListItem(
-                              name: "xxx",
-                              location: "xx",
-                              date: "xxx",
-                              time: "10AM",
+                              name: "Rotary Nakawa Blood",
+                              location: "Old Industrial Park, Nakawa Plot 11",
+                              date: "Tuesday 23rd December  2024",
+                              time: "10AM-5PM",
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
