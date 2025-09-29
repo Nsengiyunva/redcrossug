@@ -87,7 +87,6 @@ class DonationsController extends GetxController {
 
   Future<void> registerDonor(int campaignId) async {
     isUploading(true);
-    User? retrievedUser = await StorageService.getUser();
     var token = await StorageService.getToken();
 
     final Map<String, dynamic> payload = {
@@ -100,7 +99,7 @@ class DonationsController extends GetxController {
     };
 
     final response = await http.post(
-      Uri.parse("${ApiEndpoints.baseUrl}/campaigns/${campaignId}/donors"),
+      Uri.parse("${ApiEndpoints.baseUrl}/campaigns/$campaignId/donors"),
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
@@ -115,6 +114,6 @@ class DonationsController extends GetxController {
 
     // Get.snackbar('Success', 'Ambulance request successfully submitted.');
     // Get.toNamed("/ambulance-success-request");
-    isUploading(false);
+    // isUploading(false);
   }
 }

@@ -43,7 +43,7 @@ class _BloodEligibilityState extends State<BloodEligibility> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bgColor,
-        title: BackButtonText(),
+        title: const BackButtonText(),
         leading: const BackButton(),
       ),
       body: Padding(

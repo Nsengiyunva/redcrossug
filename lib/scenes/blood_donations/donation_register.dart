@@ -43,8 +43,6 @@ class DonationRegisterState extends State<DonationRegister> {
 
   @override
   Widget build(BuildContext context) {
-    // print(widget.payload);
-
     return Scaffold(
         backgroundColor: AppColors.whiteColor,
         body: SingleChildScrollView(
@@ -122,9 +120,8 @@ class DonationRegisterState extends State<DonationRegister> {
                     child: RedBtn(
                       label: 'Register',
                       onPressed: () {
-                        _donation_controller.goToEligibility(context);
-                        // _donation_controller
-                        //     .registerDonor(widget.payload["id"]);
+                        _donation_controller
+                            .registerDonor(widget.payload["id"]);
                         // Get.toNamed("/blood-donation-eligibility");
                         // Navigator.of(context).push(
                         //   MaterialPageRoute(
