@@ -113,10 +113,17 @@ class HomeDonations extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  const Row(children: [
+                  Row(children: [
                     DonationBadge(
-                        title: 'Donate  to RedCross', icon_name: "blood_icon"),
-                    DonationBadge(title: 'Donate to a Cause', icon_name: "gala")
+                      title: 'Donate  to RedCross',
+                      icon_name: "blood_icon",
+                      onPressed: () {},
+                    ),
+                    DonationBadge(
+                      title: 'Donate to a Cause',
+                      icon_name: "gala",
+                      onPressed: () {},
+                    )
                   ]),
                   const SizedBox(height: 15),
                   Container(

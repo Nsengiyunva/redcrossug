@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/donations_controller.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
+import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
 import 'package:redcross/scenes/widgets/heading_tab.dart';
 import 'package:redcross/utils/colors.dart';
@@ -17,7 +18,7 @@ class DonationCampaignList extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
-          title: const Text("Back"),
+          title: const BackButtonText(),
         ),
         body: Obx(() {
           final selected = donationsController.selectedTab.value;

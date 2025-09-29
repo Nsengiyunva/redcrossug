@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
+import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/blood_donation_detail_item.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/text_box_area.dart';
@@ -39,12 +40,11 @@ class DonationCampaignDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var options = displayColor(campaign["status"]);
-    // print("${campaign["status"]}");
 
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
-          title: const Text("Back"),
+          title: const BackButtonText(),
         ),
         body: SingleChildScrollView(
             child: Container(

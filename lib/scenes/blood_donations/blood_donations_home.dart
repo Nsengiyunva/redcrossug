@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
@@ -97,12 +98,20 @@ class BloodDonationsHome extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  const Row(children: [
+                  Row(children: [
                     DonationBadge(
                         title: 'Eligibility to Donate',
-                        icon_name: "blood_icon"),
+                        icon_name: "blood_icon",
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => BloodEligibility()),
+                          );
+                        }),
                     DonationBadge(
-                        title: 'Donation Highlights', icon_name: "gala")
+                        title: 'Donation Highlights',
+                        icon_name: "gala",
+                        onPressed: () {})
                   ]),
                   const SizedBox(height: 25),
                   NavListItems(
