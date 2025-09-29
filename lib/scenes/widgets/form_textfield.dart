@@ -48,26 +48,26 @@ class FormTextfield extends StatelessWidget {
                   filled: true, // Enables background color
                   fillColor: AppColors.whiteColor,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8),
                       borderSide: const BorderSide(
                           color: AppColors.greyColorD, width: 1)),
                   enabledBorder: OutlineInputBorder(
                     // Border when not focused
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide:
                         const BorderSide(color: AppColors.greyColorD, width: 1),
                   ),
                   focusedBorder: OutlineInputBorder(
                     // Border when focused
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                         color: AppColors.primaryRedColor, width: 1),
                   ),
                   errorBorder: OutlineInputBorder(
                     // Border when error occurs
                     borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        const BorderSide(color: Color(0xFFED1C24), width: 1),
+                    borderSide: const BorderSide(
+                        color: AppColors.primaryRedColor, width: 1),
                   )),
             ),
           ],

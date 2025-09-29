@@ -5,6 +5,7 @@ import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({super.key});
@@ -40,19 +41,21 @@ class SignIn extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Welcome Back",
+                Text("Welcome Back",
                     style: TextStyle(
                         fontSize: 23.12,
                         fontFamily: "Manrope",
                         fontWeight: FontWeight.w700,
-                        color: AppColors.blackColorF)),
-                const Center(
+                        color: AppColors.blackColorF,
+                        letterSpacing: StorageService.getSpacing(23))),
+                Center(
                   child: Text(
                       "Good to see you again! Ready to make an impact? Let’s get started.",
                       style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 16.99,
-                          color: AppColors.greyColorF)),
+                          color: AppColors.greyColorF,
+                          letterSpacing: StorageService.getSpacing(17))),
                 ),
                 const SizedBox(height: 15),
                 PhoneNumberField(

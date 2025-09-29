@@ -39,7 +39,7 @@ class DonationCampaignDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var options = displayColor(campaign["status"]);
-    print("${campaign["status"]}");
+    // print("${campaign["status"]}");
 
     return Scaffold(
         backgroundColor: AppColors.bgColor,
@@ -143,6 +143,19 @@ class DonationCampaignDetails extends StatelessWidget {
                         value: 'Mulago',
                       ),
                       const SizedBox(height: 10),
+                      if (campaign["status"] == "ongoing")
+                        RedBtn(
+                            label: 'Register as a Potential Donor',
+                            squared: true,
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => DonationRegister(
+                                          payload: campaign,
+                                        )),
+                              );
+                              // Get.toNamed("/ambulance-request-forsm");
+                            }),
                       if (campaign["status"] == "completed")
                         Container(
                             padding: const EdgeInsets.symmetric(
@@ -178,17 +191,6 @@ class DonationCampaignDetails extends StatelessWidget {
                                   const SizedBox(height: 15),
                                   const TextBoxArea(),
                                   const SizedBox(height: 15),
-                                  RedBtn(
-                                      label: 'Submit',
-                                      squared: true,
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const DonationRegister()),
-                                        );
-                                        // Get.toNamed("/ambulance-request-forsm");
-                                      })
                                 ])),
                     ],
                   )),

@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/models/user.dart';
+import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/utils/api_endpoints.dart';
 import 'package:redcross/utils/storage_service.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +10,13 @@ import 'package:http/http.dart' as http;
 class DonationsController extends GetxController {
   var isLoading = false.obs;
   var campaign_list = [].obs;
+  var filtered_campaigns = <Map<String, dynamic>>[].obs;
+  var selectedTab = 'ongoing'.obs;
+
+  TextEditingController healthy_today = TextEditingController();
+  TextEditingController donated_yet = TextEditingController();
+  TextEditingController blood_group = TextEditingController();
+  TextEditingController last_donation_date = TextEditingController();
 
   var isUploading = false.obs;
 
@@ -14,6 +24,37 @@ class DonationsController extends GetxController {
   Future onInit() async {
     super.onInit();
     fetchCampaignList();
+
+    ever(campaign_list, (_) => applyFilter());
+    ever(selectedTab, (_) => applyFilter());
+  }
+
+  void setTab(String tab) {
+    selectedTab.value = tab;
+  }
+
+  void goToEligibility(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const BloodEligibility(),
+      ),
+    );
+  }
+
+  void applyFilter() {
+    if (campaign_list.isEmpty) {
+      filtered_campaigns.clear();
+      return;
+    }
+
+    final tab = selectedTab.value.toLowerCase();
+    // filtered_campaigns.assignAll(
+    //   campaign_list.where((item) {
+    //     final status = (item['status'] ?? '').toString().toLowerCase();
+    //     return status ==
+    //         tab; // assumes API returns 'upcoming', 'active', 'completed'
+    //   }).toList(),
+    // );
   }
 
   fetchCampaignList() async {
@@ -33,7 +74,6 @@ class DonationsController extends GetxController {
       campaign_list.value = results;
       isLoading(false);
     } catch (e) {
-      // print(e);
     } finally {
       isLoading(false);
     }
@@ -45,34 +85,36 @@ class DonationsController extends GetxController {
   //   );
   // }
 
-  // Future<void> submitCreateRequest() async {
-  //   isUploading(true);
-  //   User? retrievedUser = await StorageService.getUser();
-  //   var token = await StorageService.getToken();
+  Future<void> registerDonor(int campaignId) async {
+    isUploading(true);
+    User? retrievedUser = await StorageService.getUser();
+    var token = await StorageService.getToken();
 
-  //   final Map<String, dynamic> payload = {
-  //     "phone_number": retrievedUser?.phone_no,
-  //     "number_of_people": int.tryParse(no_people_hurt.text),
-  //     "number_of_children": int.tryParse(no_people_hurt.text),
-  //     "number_of_critically_ill": int.tryParse(no_patients.text),
-  //     "location": location_field.text
-  //   };
+    final Map<String, dynamic> payload = {
+      "blood_type": blood_group.text,
+      "has_donated_before": donated_yet.text,
+      "last_donation_date": last_donation_date.text,
+      "weight": 75,
+      "medical_conditions": "None",
+      "location_id": 1
+    };
 
-  //   final response = await http.post(
-  //     Uri.parse(
-  //         "${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.ambulance_requests}"),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'X-Requested-With': 'XMLHttpRequest',
-  //       'Authorization': "Bearer $token",
-  //     },
-  //     body: jsonEncode(payload),
-  //   );
+    final response = await http.post(
+      Uri.parse("${ApiEndpoints.baseUrl}/campaigns/${campaignId}/donors"),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': "Bearer $token",
+      },
+      body: jsonEncode(payload),
+    );
 
-  //   var result = jsonDecode(response.body);
+    var result = jsonDecode(response.body);
 
-  //   Get.snackbar('Success', 'Ambulance request successfully submitted.');
-  //   Get.toNamed("/ambulance-success-request");
-  //   isUploading(false);
-  // }
+    print("result-1 $result");
+
+    // Get.snackbar('Success', 'Ambulance request successfully submitted.');
+    // Get.toNamed("/ambulance-success-request");
+    isUploading(false);
+  }
 }

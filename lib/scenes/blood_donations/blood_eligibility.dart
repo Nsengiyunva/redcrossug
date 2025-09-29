@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/auth/account_success.dart';
 import 'package:redcross/scenes/blood_donations/blood_donation_success.dart';
+import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
@@ -41,13 +42,15 @@ class _BloodEligibilityState extends State<BloodEligibility> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Back'),
+        backgroundColor: AppColors.bgColor,
+        title: BackButtonText(),
         leading: const BackButton(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
         child: ListView(
           children: [
+            const SizedBox(height: 30),
             Text(
               "Blood",
               style: TextStyle(
@@ -58,7 +61,7 @@ class _BloodEligibilityState extends State<BloodEligibility> {
                   height: StorageService.getHeight(28, 26),
                   letterSpacing: StorageService.getSpacing(26)),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 5),
             Text(
               "Donation Eligibility",
               style: TextStyle(
@@ -69,7 +72,7 @@ class _BloodEligibilityState extends State<BloodEligibility> {
                   height: StorageService.getHeight(28, 26),
                   letterSpacing: StorageService.getSpacing(26)),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 15),
 
             // 🔹 Sub heading
             Text(
@@ -78,7 +81,7 @@ class _BloodEligibilityState extends State<BloodEligibility> {
                 fontSize: 14.4,
                 fontFamily: "Inter",
                 fontWeight: FontWeight.w700,
-                color: AppColors.blackColorZ,
+                color: AppColors.blackColor,
                 height: StorageService.getHeight(24, 14),
               ),
             ),
@@ -88,27 +91,27 @@ class _BloodEligibilityState extends State<BloodEligibility> {
               style: TextStyle(
                   fontSize: 14.4,
                   fontFamily: "Inter",
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.blackColorZ,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.greyColorB,
                   height: StorageService.getHeight(24, 14)),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 50),
 
             ..._items.map((item) {
               return CustomExpandableTile(item: item);
             }),
 
-            const SizedBox(height: 25),
-            RedBtn(
-              label: 'Continue',
-              onPressed: () {
-                // Get.toNamed("/blood-donation-eligibility");
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const BloodDonationSuccess()),
-                );
-              },
-            ),
+            // const SizedBox(height: 25),
+            // RedBtn(
+            //   label: 'Continue',
+            //   onPressed: () {
+            //     // Get.toNamed("/blood-donation-eligibility");
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //           builder: (context) => const BloodDonationSuccess()),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),
@@ -139,27 +142,40 @@ class _CustomExpandableTileState extends State<CustomExpandableTile>
             });
           },
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            margin: const EdgeInsets.only(bottom: 15),
+            height: 61,
+            width: 348,
             decoration: BoxDecoration(
-              color: Colors.red.shade50,
+              color: AppColors.whiteColor,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.red, width: 1.5),
+              // border: Border.all(color: Colors.red, width: 1),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.water_drop_outlined, color: Colors.red),
+                    Container(
+                        width: 42,
+                        height: 42,
+                        margin: const EdgeInsets.only(left: 2, top: 2),
+                        decoration: BoxDecoration(
+                            color: AppColors.redColorM,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: const Center(
+                            child: Icon(Icons.water_drop_outlined,
+                                size: 27, color: AppColors.primaryRedColor))),
                     const SizedBox(width: 10),
                     Text(
                       widget.item.header,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                      ),
+                      style: TextStyle(
+                          fontSize: 16.36,
+                          fontFamily: "Inter",
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.blackColor,
+                          height: StorageService.getHeight(20, 16),
+                          letterSpacing: StorageService.getSpacing(16)),
                     ),
                   ],
                 ),
@@ -169,7 +185,7 @@ class _CustomExpandableTileState extends State<CustomExpandableTile>
                   child: const Icon(
                     Icons.keyboard_arrow_down_rounded,
                     size: 28,
-                    color: Colors.red,
+                    color: AppColors.primaryRedColor,
                   ),
                 ),
               ],
@@ -183,9 +199,29 @@ class _CustomExpandableTileState extends State<CustomExpandableTile>
                 .map(
                   (text) => ListTile(
                     contentPadding: const EdgeInsets.only(left: 40, right: 10),
-                    title: Text(
-                      text,
-                      style: const TextStyle(fontSize: 16),
+                    tileColor: AppColors.whiteColor,
+                    title: Row(
+                      children: [
+                        const Text(
+                          "• ",
+                          style: TextStyle(
+                            fontSize: 20, // bigger bullet
+                            height: 1, // aligns well with text
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            text,
+                            style: TextStyle(
+                                fontFamily: "Inter",
+                                fontSize: 11.75,
+                                fontWeight: FontWeight.w300,
+                                color: AppColors.blackColorG,
+                                height: StorageService.getHeight(15, 12),
+                                letterSpacing: StorageService.getSpacing(12)),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 )

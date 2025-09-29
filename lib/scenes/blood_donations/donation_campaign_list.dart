@@ -20,6 +20,8 @@ class DonationCampaignList extends StatelessWidget {
           title: const Text("Back"),
         ),
         body: Obx(() {
+          final selected = donationsController.selectedTab.value;
+
           if (donationsController.isLoading.value) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -46,13 +48,28 @@ class DonationCampaignList extends StatelessWidget {
                     children: [
                       Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: HeadingTab(title: 'Upcoming', active: true)),
+                          child: HeadingTab(
+                              title: 'Upcoming',
+                              active: true,
+                              onPressed: () {
+                                donationsController.setTab('ongoing');
+                              })),
                       Padding(
                           padding: const EdgeInsets.only(left: 2),
-                          child: HeadingTab(title: 'Active', active: false)),
+                          child: HeadingTab(
+                              title: 'Active',
+                              active: false,
+                              onPressed: () {
+                                donationsController.setTab('active');
+                              })),
                       Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: HeadingTab(title: 'Completed', active: false)),
+                          child: HeadingTab(
+                              title: 'Completed',
+                              active: false,
+                              onPressed: () {
+                                donationsController.setTab('completed');
+                              })),
                     ],
                   ),
                 ),

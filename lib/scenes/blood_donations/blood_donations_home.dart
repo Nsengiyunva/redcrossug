@@ -40,50 +40,60 @@ class BloodDonationsHome extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                          height: 86,
-                          width: 335,
-                          padding: const EdgeInsets.only(right: 5, left: 10),
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryRedColor,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => DonationCampaignList()),
+                          );
+                        },
+                        child: Container(
+                            height: 86,
+                            width: 335,
+                            padding: const EdgeInsets.only(right: 5, left: 10),
+                            decoration: BoxDecoration(
                               color: AppColors.primaryRedColor,
-                              width: 1,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: AppColors.primaryRedColor,
+                                width: 1,
+                              ),
                             ),
-                          ),
-                          child: const Center(
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                SizedBox(
-                                    height: 52,
-                                    width: 52,
-                                    child: Icon(
-                                      Icons.home,
-                                      color: Colors.white,
-                                      size: 52,
-                                    )),
-                                Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                            child: const Center(
+                                child: Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Find Donation",
-                                          style: TextStyle(
-                                              fontFamily: "Inter",
-                                              fontSize: 23.14,
-                                              fontWeight: FontWeight.bold,
-                                              color: AppColors.whiteColor)),
-                                      Text("Campaigns",
-                                          style: TextStyle(
-                                              fontFamily: "Inter",
-                                              fontSize: 23.14,
-                                              fontWeight: FontWeight.bold,
-                                              color: AppColors.whiteColor))
-                                    ])
-                              ]))),
+                                  SizedBox(
+                                      height: 52,
+                                      width: 52,
+                                      child: Icon(
+                                        Icons.home,
+                                        color: AppColors.whiteColor,
+                                        size: 52,
+                                      )),
+                                  Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Find Donation",
+                                            style: TextStyle(
+                                                fontFamily: "Inter",
+                                                fontSize: 23.14,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.whiteColor)),
+                                        Text("Campaigns",
+                                            style: TextStyle(
+                                                fontFamily: "Inter",
+                                                fontSize: 23.14,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.whiteColor))
+                                      ])
+                                ]))),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
