@@ -7,6 +7,7 @@ import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/donations/home_donations.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
 import 'package:redcross/scenes/home_badge.dart';
+import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/scenes/widgets/card_board.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
@@ -149,7 +150,7 @@ class _DefaultHomeState extends State<DefaultHome> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CardBoard(
                               title: "Donations",
@@ -160,6 +161,17 @@ class _DefaultHomeState extends State<DefaultHome> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const HomeDonations()),
+                                );
+                              }),
+                          CardBoard(
+                              title: "Memberships",
+                              icon_name: "cash",
+                              onPressed: () {
+                                // Get.toNamed("/home-donations");
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VolunteerHome()),
                                 );
                               })
                         ],

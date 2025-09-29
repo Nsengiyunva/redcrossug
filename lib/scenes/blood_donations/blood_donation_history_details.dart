@@ -67,7 +67,7 @@ class BloodDonationHistoryDetails extends StatelessWidget {
                       // Get.toNamed("/blood-donations");
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => BloodDonationsHome()),
+                            builder: (context) => const BloodDonationsHome()),
                       );
                     },
                   )

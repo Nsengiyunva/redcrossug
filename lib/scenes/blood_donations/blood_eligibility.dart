@@ -96,7 +96,7 @@ class _BloodEligibilityState extends State<BloodEligibility> {
 
             ..._items.map((item) {
               return CustomExpandableTile(item: item);
-            }).toList(),
+            }),
 
             const SizedBox(height: 25),
             RedBtn(
@@ -105,7 +105,7 @@ class _BloodEligibilityState extends State<BloodEligibility> {
                 // Get.toNamed("/blood-donation-eligibility");
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => BloodDonationSuccess()),
+                      builder: (context) => const BloodDonationSuccess()),
                 );
               },
             ),

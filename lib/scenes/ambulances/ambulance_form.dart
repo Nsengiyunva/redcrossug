@@ -106,7 +106,7 @@ class AmbulanceForm extends StatelessWidget {
                       // Get.toNamed('/ambulance-success-request');
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => AmbulanceSuccess()),
+                            builder: (context) => const AmbulanceSuccess()),
                       );
                     })
               ],

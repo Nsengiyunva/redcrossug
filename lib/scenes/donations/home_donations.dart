@@ -83,7 +83,7 @@ class HomeDonations extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                DonationCategories()),
+                                                const DonationCategories()),
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(

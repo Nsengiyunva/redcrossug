@@ -94,7 +94,8 @@ class AmbulanceEmergency extends StatelessWidget {
                       // ambulanceController.createAmbulanceRequest();
                       // Get.toNamed('/ambulance-map-locations');
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => AmbulanceMap()),
+                        MaterialPageRoute(
+                            builder: (context) => const AmbulanceMap()),
                       );
                     })
               ],

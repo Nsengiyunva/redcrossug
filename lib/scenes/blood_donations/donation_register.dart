@@ -90,7 +90,7 @@ class DonationRegisterState extends State<DonationRegister> {
                       // Get.toNamed("/blood-donation-eligibility");
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => BloodEligibility()),
+                            builder: (context) => const BloodEligibility()),
                       );
                     },
                   ),
@@ -98,7 +98,8 @@ class DonationRegisterState extends State<DonationRegister> {
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Profile()),
+                        MaterialPageRoute(
+                            builder: (context) => const Profile()),
                       );
                     },
                     child: const Text('Edit Donor  Profile',

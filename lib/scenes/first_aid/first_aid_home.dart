@@ -46,7 +46,7 @@ class FirstAidHome extends StatelessWidget {
                   // Get.toNamed("/first-aid-emergency-services");
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => FirstAidEmergencies()),
+                        builder: (context) => const FirstAidEmergencies()),
                   );
                 })
           ],

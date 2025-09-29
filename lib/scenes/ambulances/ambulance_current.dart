@@ -30,7 +30,8 @@ class AmbulanceCurrent extends StatelessWidget {
 
           return SingleChildScrollView(
             child: Container(
-                padding: EdgeInsets.symmetric(vertical: 103, horizontal: 30),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 103, horizontal: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +43,7 @@ class AmbulanceCurrent extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                             letterSpacing: StorageService.getSpacing(26),
                             height: StorageService.getHeight(30, 26))),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
                       child: Center(
                         child: Image.asset('assets/images/ambulance.png',
@@ -50,8 +51,8 @@ class AmbulanceCurrent extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    AmbulanceProgressBox(),
-                    SizedBox(height: 15),
+                    const AmbulanceProgressBox(),
+                    const SizedBox(height: 15),
                     RedBtn(
                         label: 'Commercial Ambulance',
                         squared: true,
@@ -103,7 +104,7 @@ class AmbulanceCurrent extends StatelessWidget {
                                 height: StorageService.getHeight(25, 14),
                                 letterSpacing: StorageService.getSpacing(14),
                                 fontFamily: "Inter")),
-                        SizedBox(width: 15),
+                        const SizedBox(width: 15),
                         Text("+256 410 678 896",
                             style: TextStyle(
                                 color: AppColors.blueColorA,

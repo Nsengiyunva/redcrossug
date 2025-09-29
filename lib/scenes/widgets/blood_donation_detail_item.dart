@@ -22,7 +22,7 @@ class BloodDonationDetailItem extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 letterSpacing: StorageService.getSpacing(12),
                 height: StorageService.getHeight(20, 12))),
-        Text("$value",
+        Text(value,
             style: TextStyle(
                 fontSize: 12,
                 fontFamily: "Inter",

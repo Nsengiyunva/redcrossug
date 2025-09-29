@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class CardBoard extends StatelessWidget {
   final String title;
@@ -14,7 +16,7 @@ class CardBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconMap = <String, IconData>{
-      'blood_icon': Icons.bloodtype_rounded,
+      'blood_icon': Icons.water_drop_outlined,
       'hospital': Icons.location_city,
       'ambulance': Icons.fire_truck_sharp,
       'disasters': Icons.storm_sharp,
@@ -35,7 +37,7 @@ class CardBoard extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         decoration: BoxDecoration(
-          color: const Color(0xFFED1C24),
+          color: AppColors.primaryRedColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -43,17 +45,19 @@ class CardBoard extends StatelessWidget {
             const SizedBox(height: 20),
             Icon(
               iconData,
-              color: Colors.white,
-              size: 22.6,
+              color: AppColors.whiteColor,
+              size: 36.16,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 16.55,
                   fontFamily: "Inter",
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFFFFFFFF)),
+                  height: StorageService.getHeight(23, 16),
+                  letterSpacing: StorageService.getSpacing(16),
+                  color: AppColors.whiteColor),
             )
           ],
         ),

@@ -74,7 +74,7 @@ class BloodDonationSuccess extends StatelessWidget {
                       // );
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => BloodDonationHistory()),
+                            builder: (context) => const BloodDonationHistory()),
                       );
                     },
                   ),

@@ -40,7 +40,7 @@ class BloodDonationHistory extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  BloodDonationHistoryDetails()),
+                                  const BloodDonationHistoryDetails()),
                         );
                       },
                     ),
@@ -50,7 +50,7 @@ class BloodDonationHistory extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  BloodDonationHistoryDetails()),
+                                  const BloodDonationHistoryDetails()),
                         );
                       },
                     ),
@@ -60,7 +60,7 @@ class BloodDonationHistory extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  BloodDonationHistoryDetails()),
+                                  const BloodDonationHistoryDetails()),
                         );
                       },
                     ),

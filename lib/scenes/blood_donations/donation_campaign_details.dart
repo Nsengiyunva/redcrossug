@@ -114,7 +114,7 @@ class DonationCampaignDetails extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Text(
                       "Join us and help save lives. All eligible donors welcome. Snacks and refreshments will  be provided.",
                       style: TextStyle(
@@ -128,21 +128,21 @@ class DonationCampaignDetails extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Column(
                     children: [
-                      BloodDonationDetailItem(
+                      const BloodDonationDetailItem(
                         label: 'Date',
                         value: 'Saturday, August 10th, 2025',
                       ),
-                      SizedBox(height: 5),
-                      BloodDonationDetailItem(
+                      const SizedBox(height: 5),
+                      const BloodDonationDetailItem(
                         label: 'Time',
                         value: '9:00AM - 4:00PM',
                       ),
-                      SizedBox(height: 5),
-                      BloodDonationDetailItem(
+                      const SizedBox(height: 5),
+                      const BloodDonationDetailItem(
                         label: 'Location',
                         value: 'Mulago',
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       if (campaign["status"] == "completed")
                         Container(
                             padding: const EdgeInsets.symmetric(
@@ -161,7 +161,7 @@ class DonationCampaignDetails extends StatelessWidget {
                                               StorageService.getSpacing(12),
                                           height: StorageService.getHeight(
                                               14, 12))),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   const Row(children: [
                                     Icon(Icons.star,
                                         color: AppColors.primaryRedColor),
@@ -185,7 +185,7 @@ class DonationCampaignDetails extends StatelessWidget {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  DonationRegister()),
+                                                  const DonationRegister()),
                                         );
                                         // Get.toNamed("/ambulance-request-forsm");
                                       })
