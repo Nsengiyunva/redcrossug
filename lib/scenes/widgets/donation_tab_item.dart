@@ -3,8 +3,9 @@ import 'package:redcross/utils/colors.dart';
 
 class DonationTabItem extends StatelessWidget {
   final String label;
+  final bool active;
 
-  const DonationTabItem({super.key, required this.label});
+  const DonationTabItem({super.key, required this.label, required this.active});
 
   @override
   Widget build(BuildContext context) {
@@ -17,22 +18,20 @@ class DonationTabItem extends StatelessWidget {
           // Get.toNamed("/donations-categories");
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.whiteColor,
+          backgroundColor:
+              active ? AppColors.primaryRedColor : AppColors.whiteColor,
           foregroundColor: Colors.white, // text color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5), // rounded corners
-            // side: const BorderSide(
-            //     color: Colors.black,
-            //     width: 0), // border
           ),
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
         ),
         child: Text(label,
-            style: const TextStyle(
+            style: TextStyle(
                 fontFamily: "Inter",
                 fontSize: 12.3,
-                fontWeight: FontWeight.bold,
-                color: AppColors.blackColor)),
+                color: active ? AppColors.whiteColor : AppColors.blackColorG,
+                fontWeight: FontWeight.bold)),
       ),
     ));
   }

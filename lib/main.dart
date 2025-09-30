@@ -120,7 +120,7 @@ class MyApp extends StatelessWidget {
         "/account-profile": (context) => const Profile(),
         "/top-subscribe": (context) => const TopSubscription(),
         "/home-donations": (context) => const HomeDonations(),
-        "/donations-categories": (context) => const DonationCategories(),
+        "/donations-categories": (context) => DonationCategories(),
         "/donation-category-details": (context) => DriveDetails(),
         "/donation-history-list": (context) => const DonationHistory(),
         "/donation-receipt": (context) => const DonationReceipt(),

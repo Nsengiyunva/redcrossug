@@ -83,7 +83,7 @@ class HomeDonations extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const DonationCategories()),
+                                                DonationCategories()),
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
@@ -122,7 +122,12 @@ class HomeDonations extends StatelessWidget {
                     DonationBadge(
                       title: 'Donate to a Cause',
                       icon_name: "gala",
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => DonationCategories()),
+                        );
+                      },
                     )
                   ]),
                   const SizedBox(height: 15),

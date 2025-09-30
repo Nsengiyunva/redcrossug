@@ -9,7 +9,9 @@ import 'package:http/http.dart' as http;
 
 class DonationsController extends GetxController {
   var isLoading = false.obs;
+  var isFetchingCauses = false.obs;
   var campaign_list = [].obs;
+  var causes_list = [].obs;
   var filtered_campaigns = <Map<String, dynamic>>[].obs;
   var selectedTab = 'ongoing'.obs;
 
@@ -24,6 +26,7 @@ class DonationsController extends GetxController {
   Future onInit() async {
     super.onInit();
     fetchCampaignList();
+    fetchCauses();
 
     ever(campaign_list, (_) => applyFilter());
     ever(selectedTab, (_) => applyFilter());
@@ -64,18 +67,27 @@ class DonationsController extends GetxController {
     try {
       http.Response response = await http.get(
           Uri.tryParse(
-              '${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.donations}')!,
+              '${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.causes}')!,
           headers: {
             'Authorization': "Bearer $token",
             'X-Requested-With': 'XMLHttpRequest'
           });
 
       var results = jsonDecode(response.body);
-      campaign_list.value = results;
-      isLoading(false);
+      // print("res - $results");
+      causes_list.value = results['data'];
+      isFetchingCauses(false);
     } finally {
-      isLoading(false);
+      isFetchingCauses(false);
     }
+  }
+
+  fetchCauses() async {
+    String? token = await StorageService.getToken();
+    isFetchingCauses(true);
+
+    try {} catch (e) {
+    } finally {}
   }
 
   // Future<void> createAmbulanceRequest() async {

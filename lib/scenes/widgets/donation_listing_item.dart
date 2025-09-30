@@ -39,14 +39,11 @@ class DonationListingItem extends StatelessWidget {
                 width: 99,
                 height: 89.42,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: Colors.black, // border color
-                    width: 1.0, // border width
-                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                child:
-                    Center(child: Image.asset('assets/images/ambulance.png'))),
+                child: Center(
+                    child: Image.asset('assets/images/donation_2.png',
+                        fit: BoxFit.cover))),
             Expanded(
                 child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),

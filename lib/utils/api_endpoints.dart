@@ -14,6 +14,6 @@ class _AuthEndPoints {
   final String training_application = 'user-trainings';
   final String donate_payment = 'donate';
   final String donations = 'campaigns';
-  final String register_donor = '';
+  final String causes = 'causes';
   // final String blood_donations = 'campaigns';
 }

@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:redcross/controllers/donations_controller.dart';
 import 'package:redcross/scenes/blood_donations/drive_details.dart';
 import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/donation_listing_item.dart';
 import 'package:redcross/scenes/widgets/donation_tab_item.dart';
 import 'package:redcross/utils/colors.dart';
 
-class DonationCategories extends StatelessWidget {
+class DonationCategories extends StatefulWidget {
   const DonationCategories({super.key});
+
+  @override
+  State<DonationCategories> createState() => _DonationCategoriesState();
+}
+
+class _DonationCategoriesState extends State<DonationCategories> {
+  final DonationsController _donations_controller =
+      Get.put(DonationsController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,72 +28,29 @@ class DonationCategories extends StatelessWidget {
             ),
         body: SingleChildScrollView(
           child: Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(vertical: 30.0),
-              padding:
-                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text("Categories",
-                          style: TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: 16,
-                              color: AppColors.blackColorG,
-                              fontWeight: FontWeight.w600))),
-                  const SizedBox(height: 10),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      DonationTabItem(label: "All Categories"),
-                      DonationTabItem(label: "Health"),
-                      DonationTabItem(label: "Education")
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  DonationListingItem(
-                    title: 'Funding fair  for Red Cross 1',
-                    subtitle: 'DFCU Blood Drive',
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => DriveDetails()),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  DonationListingItem(
-                    title: 'Funding fair  for Red Cross 2',
-                    subtitle: 'DFCU Blood Drive',
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => DriveDetails()),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  DonationListingItem(
-                    title: 'Funding fair  for Red Cross 3',
-                    subtitle: 'DFCU Blood Drive',
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => DriveDetails()),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  DonationListingItem(
-                    title: 'Funding fair  for Red Cross 4',
-                    subtitle: 'DFCU Blood Drive',
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => DriveDetails()),
-                      );
-                    },
-                  ),
-                ],
-              )),
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(vertical: 30.0),
+            padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
+            child: Obx(() {
+              return Column(
+                children: _donations_controller.causes_list
+                    .map((donation) => Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: DonationListingItem(
+                            title: donation['title'],
+                            subtitle: "Test 2",
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => DriveDetails()),
+                              );
+                            },
+                          ),
+                        ))
+                    .toList(),
+              );
+            }),
+          ),
         ));
   }
 }
