@@ -105,7 +105,7 @@ class BloodDonationsHome extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => BloodEligibility()),
+                                builder: (context) => const BloodEligibility()),
                           );
                         }),
                     DonationBadge(

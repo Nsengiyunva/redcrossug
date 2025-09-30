@@ -32,7 +32,7 @@ class HomeDonations extends StatelessWidget {
                         fontSize: 26.33,
                         fontWeight: FontWeight.w700,
                       ),
-                      textAlign: TextAlign.start, // Align text to start
+                      textAlign: TextAlign.start,
                     ),
                   ),
                   const SizedBox(height: 15),

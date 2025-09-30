@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/drive_details.dart';
+import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/donation_listing_item.dart';
 import 'package:redcross/scenes/widgets/donation_tab_item.dart';
-// import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
 
 class DonationCategories extends StatelessWidget {
@@ -13,12 +13,7 @@ class DonationCategories extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
-            title: const Text("Back",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.blackColor)),
+            title: const BackButtonText(),
             leading: const BackButton() // Back button added here
             ),
         body: SingleChildScrollView(

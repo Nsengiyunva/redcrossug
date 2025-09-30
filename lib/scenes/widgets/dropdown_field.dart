@@ -12,7 +12,7 @@ class DropdownField<T> extends StatefulWidget {
   final String? Function(T?)? validator;
 
   const DropdownField({
-    Key? key,
+    super.key,
     required this.label,
     required this.hint,
     required this.items,
@@ -21,7 +21,7 @@ class DropdownField<T> extends StatefulWidget {
     this.onChanged,
     this.validator,
     String? selectedValue,
-  }) : super(key: key);
+  });
 
   @override
   _DropdownFieldWithControllerState<T> createState() =>
@@ -43,7 +43,7 @@ class _DropdownFieldWithControllerState<T> extends State<DropdownField<T>> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
-      value: selectedValue,
+      initialValue: selectedValue,
       decoration: InputDecoration(
         labelText: widget.label,
         border: OutlineInputBorder(

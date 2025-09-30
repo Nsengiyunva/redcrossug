@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
-import 'package:redcross/scenes/ambulances/ambulance_status.dart';
 import 'package:redcross/scenes/ambulances/ambulance_success.dart';
 import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';

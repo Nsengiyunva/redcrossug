@@ -1,15 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/donations_controller.dart';
-import 'package:redcross/controllers/registration_controller.dart';
 import 'package:redcross/scenes/auth/profile.dart';
-import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/widgets/date_picker.dart';
 import 'package:redcross/scenes/widgets/dropdown_field.dart';
 import 'package:redcross/utils/colors.dart';
 
-import '../widgets/form_textfield.dart';
 import '../widgets/red_btn.dart';
 
 class DonationRegister extends StatefulWidget {

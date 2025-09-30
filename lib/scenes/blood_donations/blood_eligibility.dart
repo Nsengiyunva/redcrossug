@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redcross/scenes/auth/account_success.dart';
-import 'package:redcross/scenes/blood_donations/blood_donation_success.dart';
 import 'package:redcross/scenes/widgets/back_button_text.dart';
-import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 

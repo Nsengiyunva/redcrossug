@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
 import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/blood_donation_detail_item.dart';

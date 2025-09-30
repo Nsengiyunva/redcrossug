@@ -73,7 +73,6 @@ class DonationsController extends GetxController {
       var results = jsonDecode(response.body);
       campaign_list.value = results;
       isLoading(false);
-    } catch (e) {
     } finally {
       isLoading(false);
     }

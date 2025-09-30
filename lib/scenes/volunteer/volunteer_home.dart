@@ -6,7 +6,7 @@ class VolunteerHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Volunteers"),
+      child: const Text("Volunteers"),
     );
   }
 }
