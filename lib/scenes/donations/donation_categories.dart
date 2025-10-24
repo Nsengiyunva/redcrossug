@@ -4,8 +4,8 @@ import 'package:redcross/controllers/donations_controller.dart';
 import 'package:redcross/scenes/blood_donations/drive_details.dart';
 import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/donation_listing_item.dart';
-import 'package:redcross/scenes/widgets/donation_tab_item.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class DonationCategories extends StatefulWidget {
   const DonationCategories({super.key});
@@ -33,21 +33,25 @@ class _DonationCategoriesState extends State<DonationCategories> {
             padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
             child: Obx(() {
               return Column(
-                children: _donations_controller.causes_list
-                    .map((donation) => Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child: DonationListingItem(
-                            title: donation['title'],
-                            subtitle: "Test 2",
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => DriveDetails()),
-                              );
-                            },
-                          ),
-                        ))
-                    .toList(),
+                children: _donations_controller.causes_list.map((donation) {
+                  print(donation!['funds_raised']);
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: DonationListingItem(
+                      title: donation!['title'],
+                      target: donation!['target'],
+                      funds_raised: donation!['funds_raised'],
+                      subtitle: StorageService.truncateString(
+                          donation!['description'], 25),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => DriveDetails()),
+                        );
+                      },
+                    ),
+                  );
+                }).toList(),
               );
             }),
           ),

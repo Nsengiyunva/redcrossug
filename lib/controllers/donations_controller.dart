@@ -86,8 +86,7 @@ class DonationsController extends GetxController {
     String? token = await StorageService.getToken();
     isFetchingCauses(true);
 
-    try {} catch (e) {
-    } finally {}
+    try {} finally {}
   }
 
   // Future<void> createAmbulanceRequest() async {

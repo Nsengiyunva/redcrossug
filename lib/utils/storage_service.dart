@@ -68,4 +68,9 @@ class StorageService {
   static double getHeight(int height, int fontSize) {
     return height / fontSize;
   }
+
+  // static String formatCurrency(num amount) {
+  //   final formatter = NumberFormat('#,##0', 'en_US');
+  //   return formatter.format(amount);
+  // }
 }

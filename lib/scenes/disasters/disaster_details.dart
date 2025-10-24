@@ -34,14 +34,6 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     _fetchDisasterDetails();
   }
 
-  String truncateString(String text, int maxLength) {
-    if (text.length <= maxLength) {
-      return text;
-    } else {
-      return '${text.substring(0, maxLength)}...';
-    }
-  }
-
   Future<void> _fetchDisasterDetails() async {
     String? token = await StorageService.getToken();
 
@@ -163,7 +155,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
                 child: Text(
-                  truncateString(disaster_details!['name'], 25),
+                  StorageService.truncateString(disaster_details!['name'], 25),
                   style: const TextStyle(
                       fontFamily: "Inter",
                       fontSize: 26.33,

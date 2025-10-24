@@ -6,19 +6,18 @@ class DonationListingItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onPressed;
-  // final String date;
-  // final String location;
+  final double funds_raised;
+  final double target;
   // final String photo;
   // final int id;
 
-  const DonationListingItem({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.onPressed,
-    // required this.location,
-    // required this.photo
-  });
+  const DonationListingItem(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.onPressed,
+      required this.funds_raised,
+      required this.target});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +63,10 @@ class DonationListingItem extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           color: AppColors.blackColorG)),
                   const SizedBox(height: 10),
-                  DonationCardProgress()
+                  DonationCardProgress(
+                    target: '$target',
+                    funds_raised: '$funds_raised',
+                  )
                 ],
               ),
             ))

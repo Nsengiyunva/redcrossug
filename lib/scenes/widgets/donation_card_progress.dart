@@ -5,7 +5,15 @@ import 'package:redcross/utils/colors.dart';
 class DonationCardProgress extends StatelessWidget {
   final currencyFormat = NumberFormat("#,##0.00", "en_US");
 
-  DonationCardProgress({super.key});
+  final String target;
+  final String funds_raised;
+  double? progress;
+
+  DonationCardProgress(
+      {super.key,
+      required this.target,
+      required this.funds_raised,
+      this.progress});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +26,7 @@ class DonationCardProgress extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: LinearProgressIndicator(
-              value: 0.4,
+              value: progress ?? 0.4,
               backgroundColor: Colors.grey[500],
               color: AppColors.primaryRedColor,
               minHeight: 8,
@@ -26,16 +34,16 @@ class DonationCardProgress extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        const Row(
+        Row(
           children: [
             Text(
-              "UGX 350,000",
-              style: TextStyle(
+              funds_raised ?? "350,000",
+              style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Inter"),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 2),
               child: Text("/",
                   style: TextStyle(
@@ -45,10 +53,10 @@ class DonationCardProgress extends StatelessWidget {
                       fontFamily: "Inter")),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 2),
               child: Text(
-                "UGX 3,000,000",
-                style: TextStyle(
+                target ?? "3,000,000",
+                style: const TextStyle(
                     color: AppColors.greyColorG,
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
