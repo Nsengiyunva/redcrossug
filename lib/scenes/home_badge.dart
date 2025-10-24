@@ -17,11 +17,11 @@ class HomeBadge extends StatelessWidget {
     final iconData = iconMap[icon_name] ?? Icons.error;
 
     return Container(
-        width: 168.1,
-        height: 92.85,
+        width: 172,
+        height: 95,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2),
-        margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+        margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
         decoration: BoxDecoration(
           color: const Color(0xFFFFE5E5),
           borderRadius: BorderRadius.circular(25),

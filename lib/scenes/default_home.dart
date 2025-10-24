@@ -187,19 +187,14 @@ class _DefaultHomeState extends State<DefaultHome> {
                                   fontSize: 12.79,
                                   fontFamily: "Inter",
                                   fontWeight: FontWeight.w700,
-                                  color: Color(0xFF1C274C))),
+                                  color: AppColors.greyColorZ)),
                           Row(children: [
                             Text('See All',
                                 style: TextStyle(
                                     fontSize: 8.83,
                                     fontFamily: "Inter",
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0xFF1C274C))),
-                            // Icon(
-                            //   Icons.audiotrack,
-                            //   color: Color(0xFF1C274C),
-                            //   size: 7.52,
-                            // )
+                                    color: AppColors.greyColorZ)),
                           ])
                         ],
                       )),
