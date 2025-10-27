@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/scenes/donations/donation_categories.dart';
 import 'package:redcross/scenes/home_badge.dart';
+import 'package:redcross/scenes/volunteer/volunteer_register.dart';
 import 'package:redcross/scenes/widgets/donation_badge.dart';
 import 'package:redcross/scenes/widgets/donation_history_item.dart';
 import 'package:redcross/scenes/widgets/nav_list_items.dart';
@@ -101,7 +102,7 @@ class VolunteerHome extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const DonationCategories()),
+                                                const VolunteerRegister()),
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
