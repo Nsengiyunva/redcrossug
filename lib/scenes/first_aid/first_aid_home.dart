@@ -124,8 +124,8 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                 ),
                 onPressed: () {
                   openWhatsApp(
-                    phone: "256773917523",
-                    message: "Hey, Hello Red Cross Society",
+                    phone: "256760588189",
+                    message: "Hey, Hello Uganda Red Cross Society",
                   );
                 },
               )),

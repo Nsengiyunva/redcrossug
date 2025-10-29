@@ -23,3 +23,10 @@ flutter run -d web-server
   300k  - hosting
   ------------------
 
+
+-  duplicate  top  mgt  -  board members
+-  make link  to appear at the top.
+-  heading - Top Management: Board Members( 2024-2027 )
+
+- reduce subsidiary pics -  so  that they appear on page 1.
+- link their respective website.

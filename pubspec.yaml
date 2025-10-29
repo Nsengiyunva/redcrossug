@@ -60,7 +60,6 @@ dependencies:
   cached_network_image: ^3.4.1
   url_launcher: ^6.1.10
   image_picker: ^1.0.4
-  file_picker: ^6.0.0 
 
 dev_dependencies:
   flutter_test:
