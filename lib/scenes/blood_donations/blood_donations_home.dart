@@ -171,6 +171,8 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/blood_banks_list.dart';
+import 'package:redcross/scenes/blood_donations/blood_drive_requests_list.dart';
+import 'package:redcross/scenes/blood_donations/created_blood_drive_request_screen.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
 
 class BloodDonationsHome extends StatelessWidget {
@@ -264,9 +266,17 @@ class BloodDonationHome extends StatelessWidget {
                     Expanded(
                       child: _buildSecondaryButton(
                         context,
-                        'Book Appointment',
+                        'Blood Drive Request',
                         Icons.calendar_today_outlined,
-                        () {},
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    // CreateBloodDriveRequestScreen()
+                                    BloodDriveRequestsList()),
+                          );
+                        },
                       ),
                     ),
                     SizedBox(width: screenWidth * 0.03),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+import 'package:redcross/scenes/blood_donations/appointments.dart';
+
 class BloodBanksList extends StatefulWidget {
   const BloodBanksList({Key? key}) : super(key: key);
 
@@ -382,6 +384,16 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                 ),
               ),
               SizedBox(height: screenHeight * 0.025),
+              IconButton(
+                icon: const Icon(Icons.event_note),
+                tooltip: 'View Appointments',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const Appointments()),
+                  );
+                },
+              ),
 
               // Search Bar
               Container(
