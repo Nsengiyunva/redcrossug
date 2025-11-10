@@ -31,8 +31,8 @@ class LoginController {
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
-      "phone_no": "+256775625741",
-      "password": "Moon2023"
+      "phone_no": "+256751830778",
+      "password": "#Satan2023#"
     };
 
     try {

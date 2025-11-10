@@ -84,7 +84,7 @@ class DonationsController extends GetxController {
 
   fetchCauses() async {
     String? token = await StorageService.getToken();
-    isFetchingCauses(true);
+    // isFetchingCauses(true);r
 
     try {} finally {}
   }

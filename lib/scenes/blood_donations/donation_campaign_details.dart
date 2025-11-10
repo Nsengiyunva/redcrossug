@@ -147,12 +147,12 @@ class DonationCampaignDetails extends StatelessWidget {
                             label: 'Register as a Potential Donor',
                             squared: true,
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => DonationRegister(
-                                          payload: campaign,
-                                        )),
-                              );
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //       builder: (context) => DonationRegister(
+                              //             payload: campaign,
+                              //           )),
+                              // );
                               // Get.toNamed("/ambulance-request-forsm");
                             }),
                       if (campaign["status"] == "completed")

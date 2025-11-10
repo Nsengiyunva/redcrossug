@@ -30,3 +30,5 @@ flutter run -d web-server
 
 - reduce subsidiary pics -  so  that they appear on page 1.
 - link their respective website.
+--------------------------------------
+Memberships and Volunteers

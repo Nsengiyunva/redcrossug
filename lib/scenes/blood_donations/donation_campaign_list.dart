@@ -23,6 +23,8 @@ class DonationCampaignList extends StatelessWidget {
         body: Obx(() {
           final selected = donationsController.selectedTab.value;
 
+          print(donationsController.isLoading.value);
+
           if (donationsController.isLoading.value) {
             return const Center(
               child: CircularProgressIndicator(),

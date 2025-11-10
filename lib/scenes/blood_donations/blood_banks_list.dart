@@ -1,0 +1,941 @@
+import 'package:flutter/material.dart';
+import 'dart:convert';
+
+class BloodBanksList extends StatefulWidget {
+  const BloodBanksList({Key? key}) : super(key: key);
+
+  @override
+  State<BloodBanksList> createState() => _BloodBanksScreenState();
+}
+
+class _BloodBanksScreenState extends State<BloodBanksList> {
+  List<BloodBank> bloodBanks = [];
+  List<BloodBank> filteredBloodBanks = [];
+  bool isLoading = true;
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBloodBanks();
+    _searchController.addListener(_filterBloodBanks);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _loadBloodBanks() {
+    // Simulating API call - replace this with your actual API call
+    final sampleData = {
+      "success": true,
+      "message": "Blood banks retrieved successfully",
+      "data": [
+        {
+          "id": 6,
+          "name": "Arua Regional Blood Bank",
+          "district": "Arua",
+          "address": "Arua Regional Referral Hospital",
+          "phone": "+256-476-420607",
+          "affiliated_hospital": "Arua Regional Referral Hospital",
+          "latitude": "3.01944400",
+          "longitude": "30.91250000"
+        },
+        {
+          "id": 5,
+          "name": "Fort Portal Regional Blood Bank",
+          "district": "Kabarole",
+          "address": "Fort Portal Regional Referral Hospital",
+          "phone": "+256-483-422250",
+          "affiliated_hospital": "Fort Portal Regional Referral Hospital",
+          "latitude": "0.65527800",
+          "longitude": "30.28138900"
+        },
+        {
+          "id": 2,
+          "name": "Gulu Regional Blood Bank",
+          "district": "Gulu",
+          "address": "Gulu Regional Referral Hospital",
+          "phone": "+256-471-432059",
+          "affiliated_hospital": "Gulu Regional Referral Hospital",
+          "latitude": "2.77777800",
+          "longitude": "32.29777800"
+        },
+        {
+          "id": 7,
+          "name": "Lira Blood Collection Centre",
+          "district": "Lira",
+          "address": "Lira Regional Referral Hospital",
+          "phone": "+256-473-420141",
+          "affiliated_hospital": "Lira Regional Referral Hospital",
+          "latitude": "2.25166700",
+          "longitude": "32.90194400"
+        },
+        {
+          "id": 4,
+          "name": "Mbale Regional Blood Bank",
+          "district": "Mbale",
+          "address": "Mbale Regional Referral Hospital",
+          "phone": "+256-454-433572",
+          "affiliated_hospital": "Mbale Regional Referral Hospital",
+          "latitude": "1.07666700",
+          "longitude": "34.17638900"
+        },
+        {
+          "id": 3,
+          "name": "Mbarara Regional Blood Bank",
+          "district": "Mbarara",
+          "address": "Mbarara Regional Referral Hospital",
+          "phone": "+256-485-421317",
+          "affiliated_hospital": "Mbarara Regional Referral Hospital",
+          "latitude": "-0.61638900",
+          "longitude": "30.65888900"
+        },
+        {
+          "id": 1,
+          "name": "Nakaseero Blood Bank",
+          "district": "Kampala",
+          "address": "Uganda Blood Transfusion Service, Nakasero",
+          "phone": "+256-414-346576",
+          "email": "info@ubts.go.ug",
+          "affiliated_hospital": "Uganda Blood Transfusion Service",
+          "latitude": "0.31750000",
+          "longitude": "32.58580000"
+        },
+        {
+          "id": 8,
+          "name": "Soroti Regional Blood Bank",
+          "district": "Soroti",
+          "address": "Soroti Regional Referral Hospital",
+          "phone": "+256-454-461122",
+          "affiliated_hospital": "Soroti Regional Referral Hospital",
+          "latitude": "1.71611100",
+          "longitude": "33.61305600"
+        }
+      ]
+    };
+
+    setState(() {
+      bloodBanks = (sampleData['data'] as List)
+          .map((json) => BloodBank.fromJson(json))
+          .toList();
+      filteredBloodBanks = bloodBanks;
+      isLoading = false;
+    });
+  }
+
+  void _filterBloodBanks() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      if (query.isEmpty) {
+        filteredBloodBanks = bloodBanks;
+      } else {
+        filteredBloodBanks = bloodBanks.where((bank) {
+          return bank.name.toLowerCase().contains(query) ||
+              bank.district.toLowerCase().contains(query) ||
+              bank.address.toLowerCase().contains(query);
+        }).toList();
+      }
+    });
+  }
+
+  void _showBloodBankDetails(BloodBank bank) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => _buildBloodBankDetails(bank),
+    );
+  }
+
+  void _showBookAppointmentForm(BloodBank bank) {
+    Navigator.pop(context); // Close the details sheet
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookAppointmentScreen(bloodBank: bank),
+      ),
+    );
+  }
+
+  Widget _buildBloodBankDetails(BloodBank bank) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Container(
+      height: screenHeight * 0.7,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      padding: EdgeInsets.all(screenWidth * 0.05),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.03),
+          Text(
+            bank.name,
+            style: TextStyle(
+              fontSize: screenWidth * 0.06,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.02),
+          _buildDetailRow(
+              Icons.location_city, 'District', bank.district, screenWidth),
+          SizedBox(height: screenHeight * 0.015),
+          _buildDetailRow(
+              Icons.location_on, 'Address', bank.address, screenWidth),
+          SizedBox(height: screenHeight * 0.015),
+          _buildDetailRow(Icons.phone, 'Phone', bank.phone, screenWidth),
+          if (bank.email != null) ...[
+            SizedBox(height: screenHeight * 0.015),
+            _buildDetailRow(Icons.email, 'Email', bank.email!, screenWidth),
+          ],
+          SizedBox(height: screenHeight * 0.015),
+          _buildDetailRow(Icons.local_hospital, 'Hospital',
+              bank.affiliatedHospital, screenWidth),
+          Spacer(),
+
+          // Action Buttons
+          GestureDetector(
+            onTap: () => _showBookAppointmentForm(bank),
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Center(
+                child: Text(
+                  'Book Appointment',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: screenWidth * 0.045,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.015),
+          Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    // Open phone dialer
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(vertical: screenHeight * 0.018),
+                    decoration: BoxDecoration(
+                      color: Colors.red[50],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.phone, color: Colors.red, size: 20),
+                        SizedBox(width: 8),
+                        Text(
+                          'Call',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: screenWidth * 0.03),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    // Open map with coordinates
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(vertical: screenHeight * 0.018),
+                    decoration: BoxDecoration(
+                      color: Colors.red[50],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.map, color: Colors.red, size: 20),
+                        SizedBox(width: 8),
+                        Text(
+                          'Directions',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(
+      IconData icon, String label, String value, double screenWidth) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.red[50],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, color: Colors.red, size: 20),
+        ),
+        SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.035,
+                  color: Colors.grey[600],
+                ),
+              ),
+              SizedBox(height: 2),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final horizontalPadding = screenWidth * 0.05;
+
+    return Scaffold(
+      backgroundColor: Colors.grey[50],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: screenHeight * 0.02),
+              Text(
+                'Blood Banks',
+                style: TextStyle(
+                  fontSize: screenWidth * 0.09,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.01),
+              Text(
+                '${bloodBanks.length} blood banks across Uganda',
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04,
+                  color: Colors.grey[600],
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.025),
+
+              // Search Bar
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search by name, district, or address',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.04,
+                      vertical: screenHeight * 0.018,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.025),
+
+              // Blood Banks List
+              Expanded(
+                child: isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.red,
+                        ),
+                      )
+                    : filteredBloodBanks.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search_off,
+                                  size: screenWidth * 0.2,
+                                  color: Colors.grey[400],
+                                ),
+                                SizedBox(height: screenHeight * 0.02),
+                                Text(
+                                  'No blood banks found',
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.045,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: filteredBloodBanks.length,
+                            itemBuilder: (context, index) {
+                              final bank = filteredBloodBanks[index];
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: screenHeight * 0.015,
+                                ),
+                                child: _buildBloodBankCard(
+                                    bank, screenWidth, screenHeight),
+                              );
+                            },
+                          ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBloodBankCard(
+      BloodBank bank, double screenWidth, double screenHeight) {
+    return GestureDetector(
+      onTap: () => _showBloodBankDetails(bank),
+      child: Container(
+        padding: EdgeInsets.all(screenWidth * 0.04),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: screenWidth * 0.15,
+              height: screenWidth * 0.15,
+              decoration: BoxDecoration(
+                color: Colors.red[50],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                Icons.local_hospital,
+                color: Colors.red,
+                size: screenWidth * 0.08,
+              ),
+            ),
+            SizedBox(width: screenWidth * 0.04),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    bank.name,
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.042,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.005),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        size: screenWidth * 0.04,
+                        color: Colors.grey[600],
+                      ),
+                      SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          bank.district,
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.035,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: screenHeight * 0.003),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.phone,
+                        size: screenWidth * 0.04,
+                        color: Colors.grey[600],
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        bank.phone,
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.035,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right,
+              color: Colors.grey[400],
+              size: screenWidth * 0.06,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Book Appointment Screen
+class BookAppointmentScreen extends StatefulWidget {
+  final BloodBank bloodBank;
+
+  const BookAppointmentScreen({Key? key, required this.bloodBank})
+      : super(key: key);
+
+  @override
+  State<BookAppointmentScreen> createState() => _BookAppointmentScreenState();
+}
+
+class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _notesController = TextEditingController();
+
+  DateTime? _preferredDate;
+  String? _timePreference;
+
+  final List<String> _timePreferences = [
+    'Morning',
+    'Afternoon',
+    'Evening',
+  ];
+
+  @override
+  void dispose() {
+    _notesController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _preferredDate ?? DateTime.now().add(Duration(days: 1)),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.red,
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != _preferredDate) {
+      setState(() {
+        _preferredDate = picked;
+      });
+    }
+  }
+
+  void _submitAppointment() {
+    if (_formKey.currentState!.validate()) {
+      if (_preferredDate == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please select a preferred donation date'),
+            backgroundColor: Colors.orange,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+
+      final appointmentData = {
+        'preferred_blood_bank_id': widget.bloodBank.id,
+        'preferred_donation_date':
+            _preferredDate?.toIso8601String().split('T')[0],
+        'time_preference': _timePreference,
+        'notes': _notesController.text.isEmpty ? null : _notesController.text,
+      };
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Appointment booked successfully!'),
+          backgroundColor: Colors.green,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+
+      print('Appointment Data: $appointmentData');
+
+      // Navigate back after delay
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.pop(context);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final horizontalPadding = screenWidth * 0.05;
+
+    return Scaffold(
+      backgroundColor: Colors.grey[50],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: screenHeight * 0.02),
+                  Text(
+                    'Book Appointment',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.09,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  Text(
+                    'Schedule your blood donation',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.04,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+
+                  // Blood Bank Info Card
+                  Container(
+                    padding: EdgeInsets.all(screenWidth * 0.04),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: screenWidth * 0.15,
+                          height: screenWidth * 0.15,
+                          decoration: BoxDecoration(
+                            color: Colors.red[50],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.local_hospital,
+                            color: Colors.red,
+                            size: screenWidth * 0.08,
+                          ),
+                        ),
+                        SizedBox(width: screenWidth * 0.04),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.bloodBank.name,
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.042,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: screenHeight * 0.005),
+                              Text(
+                                widget.bloodBank.district,
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.035,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+
+                  // Preferred Donation Date
+                  Text(
+                    'Preferred Donation Date',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.04,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  GestureDetector(
+                    onTap: () => _selectDate(context),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.04,
+                        vertical: screenHeight * 0.02,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.calendar_today, color: Colors.red),
+                          SizedBox(width: screenWidth * 0.03),
+                          Text(
+                            _preferredDate == null
+                                ? 'Select date'
+                                : '${_preferredDate!.day}/${_preferredDate!.month}/${_preferredDate!.year}',
+                            style: TextStyle(
+                              fontSize: screenWidth * 0.04,
+                              color: _preferredDate == null
+                                  ? Colors.grey[400]
+                                  : Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.025),
+
+                  // Time Preference
+                  Text(
+                    'Time Preference',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.04,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  DropdownButtonFormField<String>(
+                    value: _timePreference,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: 'Select time preference',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.04,
+                        vertical: screenHeight * 0.02,
+                      ),
+                      prefixIcon: Icon(Icons.access_time, color: Colors.red),
+                    ),
+                    items: _timePreferences.map((String time) {
+                      return DropdownMenuItem<String>(
+                        value: time,
+                        child: Text(time),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _timePreference = newValue;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select your time preference';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: screenHeight * 0.025),
+
+                  // Notes
+                  Text(
+                    'Notes (Optional)',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.04,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.01),
+                  TextFormField(
+                    controller: _notesController,
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText:
+                          'E.g., Regular donor, AB+ blood type. Last donation was 3 months ago.',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.04,
+                        vertical: screenHeight * 0.02,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.05),
+
+                  // Submit Button
+                  GestureDetector(
+                    onTap: _submitAppointment,
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                        vertical: screenHeight * 0.02,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Confirm Appointment',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: screenWidth * 0.045,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BloodBank {
+  final int id;
+  final String name;
+  final String district;
+  final String address;
+  final String phone;
+  final String? email;
+  final String affiliatedHospital;
+  final double latitude;
+  final double longitude;
+
+  BloodBank({
+    required this.id,
+    required this.name,
+    required this.district,
+    required this.address,
+    required this.phone,
+    this.email,
+    required this.affiliatedHospital,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory BloodBank.fromJson(Map<String, dynamic> json) {
+    return BloodBank(
+      id: json['id'],
+      name: json['name'],
+      district: json['district'],
+      address: json['address'],
+      phone: json['phone'],
+      email: json['email'],
+      affiliatedHospital: json['affiliated_hospital'],
+      latitude: double.parse(json['latitude']),
+      longitude: double.parse(json['longitude']),
+    );
+  }
+}

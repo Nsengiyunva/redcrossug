@@ -4,6 +4,7 @@ import 'package:redcross/scenes/widgets/icon_card.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io';
 
 class FirstAidHome extends StatefulWidget {
   const FirstAidHome({super.key});
@@ -15,6 +16,7 @@ class FirstAidHome extends StatefulWidget {
 class _FirstAidHomeState extends State<FirstAidHome> {
   final _phoneController = TextEditingController();
   final _msgController = TextEditingController(text: "Hello from Flutter!");
+  String androidPackageName = "com.whatsapp";
 
   @override
   void dispose() {
@@ -58,6 +60,22 @@ class _FirstAidHomeState extends State<FirstAidHome> {
         );
       }
     }
+  }
+
+  Future<void> _openApp() async {
+    if (Platform.isAndroid) {
+      final Uri androidUri =
+          Uri.parse("intent://#Intent;package=$androidPackageName;end");
+      if (!await launchUrl(androidUri)) {
+        debugPrint("App not installed on Android");
+      }
+    }
+    // else if (Platform.isIOS) {
+    //   final Uri iosUri = Uri.parse(iosUrlScheme);
+    //   if (!await launchUrl(iosUri)) {
+    //     debugPrint("App not installed on iOS");
+    //   }
+    // }
   }
 
   @override
@@ -129,6 +147,15 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                   );
                 },
               )),
+              const SizedBox(height: 25),
+              Center(
+                  child: TextButton(
+                onPressed: _openApp,
+                child: const Text(
+                  'Open Blended Learning App',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ))
             ],
           ),
         ),
