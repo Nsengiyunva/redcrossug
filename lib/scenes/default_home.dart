@@ -220,7 +220,7 @@ import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 
 class DefaultHome extends StatelessWidget {
-  const DefaultHome({Key? key}) : super(key: key);
+  const DefaultHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +238,7 @@ class DefaultHome extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

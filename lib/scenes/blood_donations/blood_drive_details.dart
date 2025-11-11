@@ -7,7 +7,7 @@ import 'package:redcross/models/blood_drive_request.dart';
 class BloodDriveDetails extends StatelessWidget {
   final BloodDriveRequest request;
 
-  const BloodDriveDetails({Key? key, required this.request}) : super(key: key);
+  const BloodDriveDetails({super.key, required this.request});
 
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
@@ -36,7 +36,7 @@ class BloodDriveDetails extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -324,7 +324,7 @@ class BloodDriveDetails extends StatelessWidget {
                         onTap: () {
                           // Handle edit action
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Edit functionality coming soon'),
                               backgroundColor: Colors.blue,
                               behavior: SnackBarBehavior.floating,
@@ -443,14 +443,14 @@ class BloodDriveDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.red[50],
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, color: Colors.red, size: 18),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -462,7 +462,7 @@ class BloodDriveDetails extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(
                   value,
                   style: TextStyle(
@@ -495,7 +495,7 @@ class BloodDriveDetails extends StatelessWidget {
             color: available ? Colors.green : Colors.red,
             size: screenWidth * 0.05,
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Text(
             facility,
             style: TextStyle(
@@ -515,12 +515,13 @@ class BloodDriveDetails extends StatelessWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text('Cancel Request'),
+          title: const Text('Cancel Request'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Are you sure you want to cancel this blood drive request?'),
-              SizedBox(height: 16),
+              const Text(
+                  'Are you sure you want to cancel this blood drive request?'),
+              const SizedBox(height: 16),
               TextField(
                 controller: reasonController,
                 maxLines: 3,
@@ -536,13 +537,13 @@ class BloodDriveDetails extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: Text('No, Keep It'),
+              child: const Text('No, Keep It'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(dialogContext);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                     content: Text('Request cancelled successfully'),
                     backgroundColor: Colors.orange,
                     behavior: SnackBarBehavior.floating,
@@ -550,7 +551,7 @@ class BloodDriveDetails extends StatelessWidget {
                 );
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 'Yes, Cancel',
                 style: TextStyle(color: Colors.red),
               ),

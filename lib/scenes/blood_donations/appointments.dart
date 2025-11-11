@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:redcross/models/appointment.dart';
 
 class Appointments extends StatefulWidget {
-  const Appointments({Key? key}) : super(key: key);
+  const Appointments({super.key});
 
   @override
   State<Appointments> createState() => _AppointmentsState();
@@ -165,7 +165,7 @@ class _AppointmentsState extends State<Appointments> {
 
     return Container(
       height: screenHeight * 0.75,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),
@@ -200,7 +200,7 @@ class _AppointmentsState extends State<Appointments> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 6,
                 ),
@@ -231,8 +231,8 @@ class _AppointmentsState extends State<Appointments> {
             ),
             child: Row(
               children: [
-                Icon(Icons.local_hospital, color: Colors.red, size: 24),
-                SizedBox(width: 12),
+                const Icon(Icons.local_hospital, color: Colors.red, size: 24),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +244,7 @@ class _AppointmentsState extends State<Appointments> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         appointment.preferredBloodBank.district,
                         style: TextStyle(
@@ -299,7 +299,7 @@ class _AppointmentsState extends State<Appointments> {
             screenWidth,
           ),
 
-          Spacer(),
+          const Spacer(),
 
           // Action Buttons
           if (appointment.canBeCancelled) ...[
@@ -312,7 +312,7 @@ class _AppointmentsState extends State<Appointments> {
                         // Modify appointment logic
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Modify appointment feature'),
                             behavior: SnackBarBehavior.floating,
                           ),
@@ -325,7 +325,7 @@ class _AppointmentsState extends State<Appointments> {
                           color: Colors.blue[50],
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.edit, color: Colors.blue, size: 20),
@@ -356,7 +356,7 @@ class _AppointmentsState extends State<Appointments> {
                         color: Colors.red[50],
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.cancel, color: Colors.red, size: 20),
@@ -410,21 +410,21 @@ class _AppointmentsState extends State<Appointments> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Cancel Appointment'),
-        content: Text(
+        title: const Text('Cancel Appointment'),
+        content: const Text(
           'Are you sure you want to cancel this appointment? This action cannot be undone.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('No, Keep It'),
+            child: const Text('No, Keep It'),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context); // Close dialog
               Navigator.pop(context); // Close bottom sheet
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+                const SnackBar(
                   content: Text('Appointment cancelled successfully'),
                   backgroundColor: Colors.green,
                   behavior: SnackBarBehavior.floating,
@@ -432,7 +432,7 @@ class _AppointmentsState extends State<Appointments> {
               );
               // API call to cancel appointment
             },
-            child: Text(
+            child: const Text(
               'Yes, Cancel',
               style: TextStyle(color: Colors.red),
             ),
@@ -448,14 +448,14 @@ class _AppointmentsState extends State<Appointments> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Colors.red[50],
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, color: Colors.red, size: 20),
         ),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -467,7 +467,7 @@ class _AppointmentsState extends State<Appointments> {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
                 value,
                 style: TextStyle(
@@ -494,7 +494,7 @@ class _AppointmentsState extends State<Appointments> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -529,13 +529,13 @@ class _AppointmentsState extends State<Appointments> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     _buildFilterChip('All', 'all', screenWidth),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     _buildFilterChip('Pending', 'pending', screenWidth),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     _buildFilterChip('Confirmed', 'confirmed', screenWidth),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     _buildFilterChip('Completed', 'completed', screenWidth),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     _buildFilterChip('Cancelled', 'cancelled', screenWidth),
                   ],
                 ),
@@ -545,7 +545,7 @@ class _AppointmentsState extends State<Appointments> {
               // Appointments List
               Expanded(
                 child: isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -657,7 +657,7 @@ class _AppointmentsState extends State<Appointments> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10,
                     vertical: 4,
                   ),
@@ -685,7 +685,7 @@ class _AppointmentsState extends State<Appointments> {
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   DateFormat('MMM d, yyyy')
                       .format(appointment.preferredDonationDate),
@@ -694,13 +694,13 @@ class _AppointmentsState extends State<Appointments> {
                     color: Colors.grey[600],
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Icon(
                   Icons.access_time,
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   appointment.timePreference,
                   style: TextStyle(
@@ -718,7 +718,7 @@ class _AppointmentsState extends State<Appointments> {
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     appointment.preferredBloodBank.district,
@@ -734,7 +734,7 @@ class _AppointmentsState extends State<Appointments> {
                 appointment.status.toLowerCase() == 'pending') ...[
               SizedBox(height: screenHeight * 0.01),
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 10,
                   vertical: 6,
                 ),
@@ -745,8 +745,9 @@ class _AppointmentsState extends State<Appointments> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.info_outline, size: 16, color: Colors.blue),
-                    SizedBox(width: 6),
+                    const Icon(Icons.info_outline,
+                        size: 16, color: Colors.blue),
+                    const SizedBox(width: 6),
                     Text(
                       '${appointment.daysUntilAppointment} day${appointment.daysUntilAppointment != 1 ? 's' : ''} until appointment',
                       style: TextStyle(

@@ -5,7 +5,7 @@ import 'package:redcross/models/blood_drive_request.dart';
 // ==================== CREATE BLOOD DRIVE REQUEST SCREEN ====================
 
 class CreateBloodDriveRequestScreen extends StatefulWidget {
-  const CreateBloodDriveRequestScreen({Key? key}) : super(key: key);
+  const CreateBloodDriveRequestScreen({super.key});
 
   @override
   State<CreateBloodDriveRequestScreen> createState() =>
@@ -46,13 +46,14 @@ class _CreateBloodDriveRequestScreenState
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _requestedDate ?? DateTime.now().add(Duration(days: 7)),
+      initialDate:
+          _requestedDate ?? DateTime.now().add(const Duration(days: 7)),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Colors.red,
               onPrimary: Colors.white,
               onSurface: Colors.black,
@@ -73,7 +74,7 @@ class _CreateBloodDriveRequestScreenState
     if (_formKey.currentState!.validate()) {
       if (_requestedDate == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Please select a requested date'),
             backgroundColor: Colors.orange,
             behavior: SnackBarBehavior.floating,
@@ -101,7 +102,7 @@ class _CreateBloodDriveRequestScreenState
       };
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Blood drive request submitted successfully!'),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
@@ -110,7 +111,7 @@ class _CreateBloodDriveRequestScreenState
 
       print('Request Data: $requestData');
 
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Navigator.pop(context);
       });
     }
@@ -128,7 +129,7 @@ class _CreateBloodDriveRequestScreenState
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -297,7 +298,7 @@ class _CreateBloodDriveRequestScreenState
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today, color: Colors.red),
+                          const Icon(Icons.calendar_today, color: Colors.red),
                           SizedBox(width: screenWidth * 0.03),
                           Text(
                             _requestedDate == null
@@ -334,21 +335,21 @@ class _CreateBloodDriveRequestScreenState
                           (value) => setState(() => _hasTents = value!),
                           screenWidth,
                         ),
-                        Divider(height: 1),
+                        const Divider(height: 1),
                         _buildCheckbox(
                           'Public Address System',
                           _hasPublicAddress,
                           (value) => setState(() => _hasPublicAddress = value!),
                           screenWidth,
                         ),
-                        Divider(height: 1),
+                        const Divider(height: 1),
                         _buildCheckbox(
                           'Chairs',
                           _hasChairs,
                           (value) => setState(() => _hasChairs = value!),
                           screenWidth,
                         ),
-                        Divider(height: 1),
+                        const Divider(height: 1),
                         _buildCheckbox(
                           'Tables',
                           _hasTables,

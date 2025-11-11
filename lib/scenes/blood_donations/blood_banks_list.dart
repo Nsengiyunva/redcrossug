@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:redcross/scenes/blood_donations/appointments.dart';
 
 class BloodBanksList extends StatefulWidget {
-  const BloodBanksList({Key? key}) : super(key: key);
+  const BloodBanksList({super.key});
 
   @override
   State<BloodBanksList> createState() => _BloodBanksScreenState();
@@ -168,7 +168,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
 
     return Container(
       height: screenHeight * 0.7,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),
@@ -212,7 +212,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
           SizedBox(height: screenHeight * 0.015),
           _buildDetailRow(Icons.local_hospital, 'Hospital',
               bank.affiliatedHospital, screenWidth),
-          Spacer(),
+          const Spacer(),
 
           // Action Buttons
           GestureDetector(
@@ -251,7 +251,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                       color: Colors.red[50],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.phone, color: Colors.red, size: 20),
@@ -281,7 +281,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                       color: Colors.red[50],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.map, color: Colors.red, size: 20),
@@ -311,14 +311,14 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Colors.red[50],
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, color: Colors.red, size: 20),
         ),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,7 +330,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
                 value,
                 style: TextStyle(
@@ -357,7 +357,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -406,15 +406,16 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                         color: Colors.red.withOpacity(0.3),
                         spreadRadius: 1,
                         blurRadius: 8,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.event_note, color: Colors.white, size: 20),
-                      SizedBox(width: 8),
+                      const Icon(Icons.event_note,
+                          color: Colors.white, size: 20),
+                      const SizedBox(width: 8),
                       Text(
                         'View My Appointments',
                         style: TextStyle(
@@ -454,7 +455,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
               // Blood Banks List
               Expanded(
                 child: isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -553,7 +554,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                         size: screenWidth * 0.04,
                         color: Colors.grey[600],
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Expanded(
                         child: Text(
                           bank.district,
@@ -573,7 +574,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                         size: screenWidth * 0.04,
                         color: Colors.grey[600],
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         bank.phone,
                         style: TextStyle(
@@ -602,8 +603,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
 class BookAppointmentScreen extends StatefulWidget {
   final BloodBank bloodBank;
 
-  const BookAppointmentScreen({Key? key, required this.bloodBank})
-      : super(key: key);
+  const BookAppointmentScreen({super.key, required this.bloodBank});
 
   @override
   State<BookAppointmentScreen> createState() => _BookAppointmentScreenState();
@@ -631,13 +631,14 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _preferredDate ?? DateTime.now().add(Duration(days: 1)),
+      initialDate:
+          _preferredDate ?? DateTime.now().add(const Duration(days: 1)),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Colors.red,
               onPrimary: Colors.white,
               onSurface: Colors.black,
@@ -658,7 +659,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
     if (_formKey.currentState!.validate()) {
       if (_preferredDate == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Please select a preferred donation date'),
             backgroundColor: Colors.orange,
             behavior: SnackBarBehavior.floating,
@@ -677,7 +678,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Appointment booked successfully!'),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
@@ -687,7 +688,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       print('Appointment Data: $appointmentData');
 
       // Navigate back after delay
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Navigator.pop(context);
       });
     }
@@ -705,7 +706,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -816,7 +817,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today, color: Colors.red),
+                          const Icon(Icons.calendar_today, color: Colors.red),
                           SizedBox(width: screenWidth * 0.03),
                           Text(
                             _preferredDate == null
@@ -846,7 +847,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                   ),
                   SizedBox(height: screenHeight * 0.01),
                   DropdownButtonFormField<String>(
-                    value: _timePreference,
+                    initialValue: _timePreference,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -860,7 +861,8 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                         horizontal: screenWidth * 0.04,
                         vertical: screenHeight * 0.02,
                       ),
-                      prefixIcon: Icon(Icons.access_time, color: Colors.red),
+                      prefixIcon:
+                          const Icon(Icons.access_time, color: Colors.red),
                     ),
                     items: _timePreferences.map((String time) {
                       return DropdownMenuItem<String>(

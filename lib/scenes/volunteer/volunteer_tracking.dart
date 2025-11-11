@@ -20,7 +20,7 @@ class VolunteerTracking extends StatelessWidget {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(vertical: 30.0),
           padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 15),
-          child: Text("Volunteer Tracking"),
+          child: const Text("Volunteer Tracking"),
         )));
   }
 }

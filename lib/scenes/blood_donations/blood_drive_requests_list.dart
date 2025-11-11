@@ -7,7 +7,7 @@ import 'package:redcross/scenes/blood_donations/blood_drive_details.dart';
 import 'package:redcross/scenes/blood_donations/created_blood_drive_request_screen.dart';
 
 class BloodDriveRequestsList extends StatefulWidget {
-  const BloodDriveRequestsList({Key? key}) : super(key: key);
+  const BloodDriveRequestsList({super.key});
 
   @override
   State<BloodDriveRequestsList> createState() =>
@@ -105,7 +105,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CreateBloodDriveRequestScreen(),
+        builder: (context) => const CreateBloodDriveRequestScreen(),
       ),
     );
   }
@@ -137,7 +137,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -168,7 +168,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
               // Requests List
               Expanded(
                 child: isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(
                           color: Colors.red,
                         ),
@@ -215,8 +215,8 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _navigateToCreateRequest,
         backgroundColor: Colors.red,
-        icon: Icon(Icons.add, color: Colors.white),
-        label: Text(
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text(
           'New Request',
           style: TextStyle(
             color: Colors.white,
@@ -287,7 +287,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Expanded(
                   child: Text(
                     '${request.district} • ${request.location}',
@@ -309,7 +309,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
                   DateFormat('MMM dd, yyyy').format(request.requestedDate),
                   style: TextStyle(
@@ -323,7 +323,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
                   '${request.expectedDonors} expected donors',
                   style: TextStyle(
@@ -341,7 +341,7 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   size: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Expanded(
                   child: Text(
                     '${request.contactPerson} • ${request.contactNumber}',

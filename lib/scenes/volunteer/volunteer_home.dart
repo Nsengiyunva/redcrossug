@@ -207,7 +207,7 @@ class VolunteerHome extends StatelessWidget {
                   const SizedBox(height: 15),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 2.0),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         PictureBadge(

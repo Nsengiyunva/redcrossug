@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:redcross/models/user.dart';
 import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/utils/api_endpoints.dart';
 import 'package:redcross/utils/storage_service.dart';
@@ -66,19 +65,18 @@ class DonationsController extends GetxController {
 
     try {
       http.Response response = await http.get(
-          Uri.tryParse(
-              '${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.causes}')!,
+          Uri.tryParse('${ApiEndpoints.baseUrl}/blood-donation/campaigns')!,
           headers: {
             'Authorization': "Bearer $token",
             'X-Requested-With': 'XMLHttpRequest'
           });
 
       var results = jsonDecode(response.body);
-      // print("res - $results");
-      causes_list.value = results['data'];
-      isFetchingCauses(false);
+      // print(results);
+      campaign_list.value = results;
+      isLoading(false);
     } finally {
-      isFetchingCauses(false);
+      isLoading(false);
     }
   }
 

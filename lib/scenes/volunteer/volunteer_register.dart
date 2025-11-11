@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:redcross/utils/colors.dart';
 
 class VolunteerRegister extends StatefulWidget {
-  const VolunteerRegister({Key? key}) : super(key: key);
+  const VolunteerRegister({super.key});
 
   @override
   State<VolunteerRegister> createState() => _RegistrationFormState();
@@ -262,7 +262,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                         children: [
                           Expanded(
                             child: DropdownButtonFormField<String>(
-                              value: _nationalIdController.text.isEmpty
+                              initialValue: _nationalIdController.text.isEmpty
                                   ? null
                                   : _nationalIdController.text,
                               decoration: const InputDecoration(
@@ -418,7 +418,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                         children: [
                           Expanded(
                             child: DropdownButtonFormField<String>(
-                              value: _selectedBranch,
+                              initialValue: _selectedBranch,
                               decoration: const InputDecoration(
                                 labelText: 'URCS Branch',
                                 hintText: 'Choose a Branch',
@@ -472,7 +472,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: _selectedSpecialization,
+                        initialValue: _selectedSpecialization,
                         decoration: const InputDecoration(
                           labelText: 'Key Specialization',
                           hintText: 'Choose Specialization',
@@ -535,7 +535,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: _selectedEducationLevel,
+                        initialValue: _selectedEducationLevel,
                         decoration: const InputDecoration(
                           labelText: 'Choose Education Level',
                           hintText: 'Primary',

@@ -173,10 +173,12 @@ import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/blood_banks_list.dart';
 import 'package:redcross/scenes/blood_donations/blood_drive_requests_list.dart';
 import 'package:redcross/scenes/blood_donations/created_blood_drive_request_screen.dart';
+import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
+import 'package:redcross/scenes/donations/donation_history.dart';
 
 class BloodDonationsHome extends StatelessWidget {
-  const BloodDonationsHome({Key? key}) : super(key: key);
+  const BloodDonationsHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +195,7 @@ class BloodDonationsHome extends StatelessWidget {
 }
 
 class BloodDonationHome extends StatelessWidget {
-  const BloodDonationHome({Key? key}) : super(key: key);
+  const BloodDonationHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +253,7 @@ class BloodDonationHome extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DonationRegister()),
+                                builder: (context) => const DonationRegister()),
                           );
                         },
                       ),
@@ -274,7 +276,7 @@ class BloodDonationHome extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) =>
                                     // CreateBloodDriveRequestScreen()
-                                    BloodDriveRequestsList()),
+                                    const BloodDriveRequestsList()),
                           );
                         },
                       ),
@@ -289,7 +291,7 @@ class BloodDonationHome extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BloodBanksList()),
+                                builder: (context) => const BloodBanksList()),
                           );
                         },
                       ),
@@ -309,13 +311,24 @@ class BloodDonationHome extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'See All',
-                      style: TextStyle(
-                        fontSize: screenWidth * 0.04,
-                        color: Colors.grey,
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  // CreateBloodDriveRequestScreen()
+                                  DonationCampaignList()),
+                        );
+                      },
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.04,
+                          color: Colors.grey,
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
                 SizedBox(height: screenHeight * 0.02),
@@ -335,13 +348,24 @@ class BloodDonationHome extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'See All',
-                      style: TextStyle(
-                        fontSize: screenWidth * 0.04,
-                        color: Colors.grey,
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  // CreateBloodDriveRequestScreen()
+                                  const DonationHistory()),
+                        );
+                      },
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          fontSize: screenWidth * 0.04,
+                          color: Colors.grey,
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
                 SizedBox(height: screenHeight * 0.02),

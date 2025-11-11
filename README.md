@@ -22,8 +22,6 @@ flutter run -d web-server
   ------------------
   300k  - hosting
   ------------------
-
-
 -  duplicate  top  mgt  -  board members
 -  make link  to appear at the top.
 -  heading - Top Management: Board Members( 2024-2027 )
@@ -32,3 +30,9 @@ flutter run -d web-server
 - link their respective website.
 --------------------------------------
 Memberships and Volunteers
+----------------------
+- Addressing system functionality gaps in the logical flow of the payment  processes
+- Integration of URA to generate PRNs, System generated Invoice, receipts and  end to end validations
+- Assessment of the Mobile  Money Payment Process
+- Validating ˜UI Designs
+- 

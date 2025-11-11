@@ -147,7 +147,7 @@
 import 'package:flutter/material.dart';
 
 class DonationRegister extends StatefulWidget {
-  const DonationRegister({Key? key}) : super(key: key);
+  const DonationRegister({super.key});
 
   @override
   State<DonationRegister> createState() => _RegisterDonorFormState();
@@ -190,7 +190,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Colors.red,
               onPrimary: Colors.white,
               onSurface: Colors.black,
@@ -221,7 +221,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Registration Successful!'),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
@@ -244,7 +244,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -287,7 +287,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                   ),
                   SizedBox(height: screenHeight * 0.01),
                   DropdownButtonFormField<String>(
-                    value: _selectedBloodType,
+                    initialValue: _selectedBloodType,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -383,7 +383,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                         horizontal: screenWidth * 0.04,
                         vertical: screenHeight * 0.02,
                       ),
-                      prefixIcon: Icon(Icons.phone, color: Colors.red),
+                      prefixIcon: const Icon(Icons.phone, color: Colors.red),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -423,7 +423,8 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                         horizontal: screenWidth * 0.04,
                         vertical: screenHeight * 0.02,
                       ),
-                      prefixIcon: Icon(Icons.location_on, color: Colors.red),
+                      prefixIcon:
+                          const Icon(Icons.location_on, color: Colors.red),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -457,7 +458,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today, color: Colors.red),
+                          const Icon(Icons.calendar_today, color: Colors.red),
                           SizedBox(width: screenWidth * 0.03),
                           Text(
                             _lastDonationDate == null
