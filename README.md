@@ -35,4 +35,10 @@ Memberships and Volunteers
 - Integration of URA to generate PRNs, System generated Invoice, receipts and  end to end validations
 - Assessment of the Mobile  Money Payment Process
 - Validating ˜UI Designs
-- 
+- apche2
+- test the functional
+
+1 phase - 1 week
+2 phase - 1 week.
+
+we can then proceed to invite the  techinical team to assess/uat with them for them to check and verify  the system.

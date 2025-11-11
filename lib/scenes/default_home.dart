@@ -215,7 +215,6 @@
 //         }));
 //   }
 // }
-
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 
@@ -525,85 +524,85 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(
-                icon: Icons.home,
-                label: 'Home',
-                index: 0,
-              ),
-              _buildNavItem(
-                icon: Icons.water_drop_outlined,
-                label: 'B. Donation',
-                index: 1,
-              ),
-              _buildNavItem(
-                icon: Icons.medical_services_outlined,
-                label: 'First Aid',
-                index: 2,
-              ),
-              _buildNavItem(
-                icon: Icons.person_outline,
-                label: 'Profile',
-                index: 3,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildBottomNav() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black.withOpacity(0.05),
+  //           blurRadius: 10,
+  //           offset: const Offset(0, -2),
+  //         ),
+  //       ],
+  //     ),
+  //     child: SafeArea(
+  //       child: Padding(
+  //         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //         child: Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //           children: [
+  //             _buildNavItem(
+  //               icon: Icons.home,
+  //               label: 'Home',
+  //               index: 0,
+  //             ),
+  //             _buildNavItem(
+  //               icon: Icons.water_drop_outlined,
+  //               label: 'B. Donation',
+  //               index: 1,
+  //             ),
+  //             _buildNavItem(
+  //               icon: Icons.medical_services_outlined,
+  //               label: 'First Aid',
+  //               index: 2,
+  //             ),
+  //             _buildNavItem(
+  //               icon: Icons.person_outline,
+  //               label: 'Profile',
+  //               index: 3,
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget _buildNavItem({
-    required IconData icon,
-    required String label,
-    required int index,
-  }) {
-    final isSelected = _selectedIndex == index;
-    return InkWell(
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: isSelected ? const Color(0xFFE31E24) : Colors.grey,
-              size: 28,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: isSelected ? const Color(0xFFE31E24) : Colors.grey,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildNavItem({
+  //   required IconData icon,
+  //   required String label,
+  //   required int index,
+  // }) {
+  //   final isSelected = _selectedIndex == index;
+  //   return InkWell(
+  //     onTap: () {
+  //       setState(() {
+  //         _selectedIndex = index;
+  //       });
+  //     },
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(vertical: 8),
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           Icon(
+  //             icon,
+  //             color: isSelected ? const Color(0xFFE31E24) : Colors.grey,
+  //             size: 28,
+  //           ),
+  //           const SizedBox(height: 4),
+  //           Text(
+  //             label,
+  //             style: TextStyle(
+  //               fontSize: 12,
+  //               color: isSelected ? const Color(0xFFE31E24) : Colors.grey,
+  //               fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
