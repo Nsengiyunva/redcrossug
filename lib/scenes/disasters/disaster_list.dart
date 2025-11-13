@@ -77,12 +77,18 @@ class DisasterList extends StatelessWidget {
                           itemBuilder: (context, index) {
                             var item = disasterController.disasters[index];
                             return DisasterListItem(
-                                id: item['id'],
-                                title: truncateString(item['name'], 20),
-                                subtitle: truncateString(item['summary'], 80),
-                                date: item['reported_date'],
-                                location: item['district'],
-                                photo: item['banner_photo']);
+                              id: item['id'] ?? '',
+                              title: truncateString(
+                                  item['name'] ?? 'Unnamed Disaster', 20),
+                              subtitle: truncateString(
+                                  item['summary'] ?? 'No summary available',
+                                  80),
+                              date: item['reported_date'] ?? 'Unknown date',
+                              location: item['districts'] ?? 'Unknown location',
+                              photo: item['banner_photo'] ??
+                                  '', // or a default placeholder image
+                            );
+                            //disasters/wWflu35PtDeJeu8k7Nx5fHKXenorY0gIwtOWk6mY.jpg
                           },
                         )))
               ],
