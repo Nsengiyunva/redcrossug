@@ -405,6 +405,9 @@
 //   });
 // }
 import 'package:flutter/material.dart';
+import 'package:redcross/models/donation.dart';
+import 'package:redcross/models/donation_item.dart';
+import 'package:redcross/scenes/donations/donation_details.dart';
 
 class DonationHistory extends StatelessWidget {
   const DonationHistory({super.key});
@@ -619,82 +622,101 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
     required bool isHighlighted,
     required bool isTablet,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F5),
-        borderRadius: BorderRadius.circular(16),
-        border: isHighlighted
-            ? Border.all(
-                color: const Color(0xFF2196F3),
-                width: 2.5,
-              )
-            : null,
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(isTablet ? 20.0 : 16.0),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFE5E7),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(
-                Icons.water_drop,
-                color: Color(0xFFE31E24),
-                size: 24,
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DonationDetails(
+                donation: Donation(
+                  id: 1,
+                  organizationName: "NITA Uganda",
+                  donorName: "Test Donor",
+                  date: DateTime.now(),
+                  donationType: "Blood",
+                  amount: 50000,
+                  paymentMode: "Cash",
+                ),
               ),
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    donation.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF2C2C2C),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    donation.date,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF5F5F5),
+            borderRadius: BorderRadius.circular(16),
+            border: isHighlighted
+                ? Border.all(
+                    color: const Color(0xFF2196F3),
+                    width: 2.5,
+                  )
+                : null,
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(isTablet ? 20.0 : 16.0),
+            child: Row(
               children: [
-                Text(
-                  donation.units,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2C2C2C),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFE5E7),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(
+                    Icons.water_drop,
+                    color: Color(0xFFE31E24),
+                    size: 24,
                   ),
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  'Units',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        donation.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF2C2C2C),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        donation.date,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      donation.units,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2C2C2C),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Units',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 
   // --- PAGINATION BAR ---
@@ -814,16 +836,4 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
       ),
     );
   }
-}
-
-class DonationItem {
-  final String title;
-  final String date;
-  final String units;
-
-  DonationItem({
-    required this.title,
-    required this.date,
-    required this.units,
-  });
 }

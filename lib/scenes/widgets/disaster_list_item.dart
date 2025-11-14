@@ -159,7 +159,6 @@ class DisasterListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Responsive scaling factors
     final imageSize = screenWidth * 0.18; // 18% of screen width
     final titleFont = screenWidth * 0.035; // scales dynamically
     final subtitleFont = screenWidth * 0.030;
@@ -178,11 +177,11 @@ class DisasterListItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 2,
-              offset: const Offset(0, 1),
+              offset: Offset(0, 1),
             ),
           ],
         ),

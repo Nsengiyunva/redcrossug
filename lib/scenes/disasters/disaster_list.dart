@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:redcross/controllers/disasters_list_controller.dart';
+import 'package:redcross/models/item.dart';
+import 'package:redcross/scenes/incidents/incident_list.dart';
 import 'package:redcross/scenes/widgets/disaster_list_item.dart';
 import 'package:redcross/scenes/widgets/menu_list_items.dart';
 import 'package:redcross/utils/colors.dart';
-
-class Item {
-  final String name;
-  final double price;
-  final String description;
-
-  Item({required this.name, required this.price, required this.description});
-}
 
 class DisasterList extends StatelessWidget {
   DisasterList({super.key});
@@ -53,16 +47,42 @@ class DisasterList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      'Disasters',
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: 26.33,
-                          color: AppColors.blackColor,
-                          fontWeight: FontWeight.w700),
-                    )),
+                Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Disasters',
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontSize: 26.33,
+                            color: AppColors.blackColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+
+                        // Right-side button
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => IncidentList(),
+                              ),
+                            );
+                          },
+                          child: Text("View Incidents"),
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ]),
                 const SizedBox(height: 10),
                 const MenuListItems(
                   first_title: "Active Disasters",
