@@ -4,7 +4,7 @@ import 'package:redcross/models/donation.dart';
 class DonationDetails extends StatelessWidget {
   final Donation donation;
 
-  const DonationDetails({Key? key, required this.donation}) : super(key: key);
+  const DonationDetails({super.key, required this.donation});
 
   @override
   Widget build(BuildContext context) {

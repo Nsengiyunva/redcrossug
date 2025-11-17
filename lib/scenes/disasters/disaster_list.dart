@@ -69,15 +69,15 @@ class DisasterList extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => IncidentList(),
+                                builder: (context) => const IncidentList(),
                               ),
                             );
                           },
-                          child: Text("View Incidents"),
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 12),
                           ),
+                          child: Text("View Incidents"),
                         ),
                       ],
                     ),

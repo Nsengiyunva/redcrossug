@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:redcross/models/blood_drive_request.dart';
 
 // ==================== CREATE BLOOD DRIVE REQUEST SCREEN ====================
 

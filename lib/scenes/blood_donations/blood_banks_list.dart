@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/models/blood_bank.dart';
-import 'dart:convert';
 
 import 'package:redcross/scenes/blood_donations/appointments.dart';
 

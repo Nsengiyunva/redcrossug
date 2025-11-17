@@ -91,7 +91,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
 
     final disasterImage = disasterDetails!['banner_photo'] ?? '';
     final fatalities =
-        (disasterDetails!['fatalities']?.toString() ?? "0") + " lives lost";
+        "${disasterDetails!['fatalities']?.toString() ?? "0"} lives lost";
     final amountNeeded = disasterDetails!['funding_target']?.toString() ?? "0";
     final currency = disasterDetails!['currency'] ?? "UGX";
 
@@ -107,7 +107,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
               children: [
                 Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: screenHeight * 0.35,
                       child: disasterImage.length > 0
@@ -142,8 +142,8 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                           color: AppColors.primaryRedColor,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Row(
-                          children: const [
+                        child: const Row(
+                          children: [
                             Icon(
                               Icons.circle_rounded,
                               color: AppColors.whiteColor,

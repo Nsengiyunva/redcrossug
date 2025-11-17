@@ -4,7 +4,7 @@ import 'package:redcross/models/incident.dart';
 class IncidentDetails extends StatelessWidget {
   final Incident report;
 
-  const IncidentDetails({Key? key, required this.report}) : super(key: key);
+  const IncidentDetails({super.key, required this.report});
 
   Color _getSeverityColor(String severity) {
     switch (severity.toLowerCase()) {
@@ -122,8 +122,8 @@ class IncidentDetails extends StatelessWidget {
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Row(
-                            children: const [
+                          child: const Row(
+                            children: [
                               Icon(Icons.warning,
                                   color: Colors.white, size: 14),
                               SizedBox(width: 4),
@@ -357,7 +357,7 @@ class IncidentDetails extends StatelessWidget {
                           ],
                         ),
                       );
-                    }).toList(),
+                    }),
                   ],
 
                   const SizedBox(height: 32),

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class CreateIncidentReport extends StatefulWidget {
-  const CreateIncidentReport({Key? key}) : super(key: key);
+  const CreateIncidentReport({super.key});
 
   @override
   State<CreateIncidentReport> createState() =>
@@ -108,7 +108,7 @@ class _CreateIncidentReportScreenState extends State<CreateIncidentReport> {
                     label: 'Latitude',
                     hint: '0.4871',
                     keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
+                        const TextInputType.numberWithOptions(decimal: true),
                     required: true,
                   ),
                 ),
@@ -119,7 +119,7 @@ class _CreateIncidentReportScreenState extends State<CreateIncidentReport> {
                     label: 'Longitude',
                     hint: '30.2051',
                     keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
+                        const TextInputType.numberWithOptions(decimal: true),
                     required: true,
                   ),
                 ),

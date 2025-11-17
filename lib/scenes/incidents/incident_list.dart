@@ -5,7 +5,7 @@ import 'package:redcross/scenes/incidents/create_incident_report.dart';
 import 'package:redcross/scenes/incidents/incident_details.dart';
 
 class IncidentList extends StatefulWidget {
-  const IncidentList({Key? key}) : super(key: key);
+  const IncidentList({super.key});
 
   @override
   State<IncidentList> createState() => _IncidentReportsListScreenState();
@@ -503,8 +503,8 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                       color: Colors.red.shade50,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Icon(Icons.warning, color: Colors.red, size: 12),
                         SizedBox(width: 4),
                         Text(
