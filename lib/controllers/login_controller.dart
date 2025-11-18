@@ -31,8 +31,8 @@ class LoginController {
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
-      "phone_no": "+256751830778",
-      "password": "#Satan2023#"
+      "phone_no": telephoneController.text,
+      "password": passwordController.text
     };
 
     try {
@@ -62,7 +62,6 @@ class LoginController {
           arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
       isLoggingIn(false);
-      print("Error $e");
       Get.snackbar('Error', 'An error occurred while signing the form. $e');
     }
   }
