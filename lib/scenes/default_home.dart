@@ -216,36 +216,33 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:redcross/models/user.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
+import 'package:redcross/utils/storage_service.dart';
 
-class DefaultHome extends StatelessWidget {
+class DefaultHome extends StatefulWidget {
   const DefaultHome({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Red Cross',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        scaffoldBackgroundColor: const Color(0xFFF5F5F5),
-        fontFamily: 'SF Pro',
-      ),
-      home: const HomeScreen(),
-    );
-  }
+  State<DefaultHome> createState() => _HomeScreenState();
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class _HomeScreenState extends State<DefaultHome> {
+  var time = StorageService.displayWhatTime();
+  User? loggedInUser;
+  final int _selectedIndex = 0;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  void initState() {
+    super.initState();
+    loadUser();
+  }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final int _selectedIndex = 0;
+  void loadUser() async {
+    loggedInUser = await StorageService.getUser();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -285,16 +282,16 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Good afternoon',
+              time ?? "",
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
               ),
             ),
             const SizedBox(height: 4),
-            const Text(
-              'Garvin John Wick',
-              style: TextStyle(
+            Text(
+              loggedInUser?.name ?? "",
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2C2C2C),

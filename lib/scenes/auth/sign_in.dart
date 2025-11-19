@@ -11,141 +11,188 @@ class SignIn extends StatelessWidget {
   SignIn({super.key});
 
   final LoginController _loginController = Get.put(LoginController());
+  String _selectedPhoneCode = "256";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColors.whiteColor,
-        body: Obx(() {
-          if (_loginController.isLoggingIn.value) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: const Center(
-                child: Column(
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 25),
-                    Text("Signing in...")
-                  ],
-                ),
-              ),
-            );
-          }
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width > 600;
+    final isDesktop = size.width > 900;
 
-          return SingleChildScrollView(
-              child: Container(
-            width: double.maxFinite,
-            margin: const EdgeInsets.symmetric(vertical: 30.0),
-            padding:
-                const EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
+    final horizontalPadding =
+        isDesktop ? size.width * 0.25 : (isTablet ? 48.0 : 25.0);
+    final verticalPadding = isTablet ? 60.0 : 40.0;
+
+    return Scaffold(
+      backgroundColor: AppColors.whiteColor,
+      body: Obx(() {
+        // =====================================================
+        // Loading Screen
+        // =====================================================
+        if (_loginController.isLoggingIn.value) {
+          return SizedBox(
+            height: size.height,
+            child: const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(color: AppColors.primaryRedColor),
+                  SizedBox(height: 25),
+                  Text(
+                    "Signing in...",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Inter",
+                      color: AppColors.blackColor,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+
+        // =====================================================
+        // Sign In Form
+        // =====================================================
+        return SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+                horizontal: horizontalPadding, vertical: verticalPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Welcome Back",
-                    style: TextStyle(
-                        fontSize: 23.12,
-                        fontFamily: "Manrope",
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.blackColorF,
-                        letterSpacing: StorageService.getSpacing(23))),
+                // ---------------------- Title ----------------------
+                Text(
+                  "Welcome Back",
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontFamily: "Manrope",
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.blackColorF,
+                    letterSpacing: StorageService.getSpacing(23),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Center(
                   child: Text(
-                      "Good to see you again! Ready to make an impact? Let’s get started.",
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: 16.99,
-                          color: AppColors.greyColorF,
-                          letterSpacing: StorageService.getSpacing(17))),
+                    "Good to see you again! Ready to make an impact? Let’s get started.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 17,
+                      color: AppColors.greyColorF,
+                      height: 1.4,
+                      letterSpacing: StorageService.getSpacing(17),
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 15),
-                PhoneNumberField(
-                  textEditingController: _loginController.telephoneController,
+                const SizedBox(height: 40),
+
+                // ---------------------- Phone Number ----------------------
+                PhoneFormField(
+                  controller: _loginController.telephoneController,
+                  onCountryChanged: (code) => _selectedPhoneCode = code,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) return "Required";
+                    if (val.length < 7) return "Invalid phone number";
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 25),
+
+                // ---------------------- Password ----------------------
                 FormPassword(
-                    question: 'Password',
-                    textEditingController: _loginController.passwordController),
-                const SizedBox(height: 10),
+                  question: 'Password',
+                  textEditingController: _loginController.passwordController,
+                ),
+                const SizedBox(height: 25),
+
+                // ---------------------- Login Button ----------------------
                 RedBtn(
-                    label: 'Continue',
-                    onPressed: () => {
-                          _loginController.loginPhoneNumber()
-                          // login(context)
-                        }),
-                const SizedBox(height: 50),
+                  label: 'Continue',
+                  onPressed: () => _loginController.loginPhoneNumber(),
+                ),
+                const SizedBox(height: 45),
+
+                // ---------------------- Keep Me Signed In + Forgot Password ----------------------
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Row(
+                    Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.check_box_rounded,
                           color: AppColors.primaryRedColor,
-                          size: 24.0,
+                          size: 22,
                         ),
-                        Text("Keep me Signed In",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Inter",
-                                fontSize: 13.04,
-                                color: AppColors.blueColorB)),
+                        const SizedBox(width: 6),
+                        Text(
+                          "Keep me Signed In",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Inter",
+                            fontSize: 13,
+                            color: AppColors.blueColorB,
+                          ),
+                        ),
                       ],
                     ),
                     TextButton(
                       onPressed: () {
-                        // Get.toNamed("/register-account");
+                        // TODO: Add forgot password route
                       },
-                      style: TextButton.styleFrom(
-                        backgroundColor: AppColors.whiteColor,
+                      child: const Text(
+                        "Forgot Password",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.primaryRedColor,
+                          fontFamily: "Inter",
+                          fontSize: 13,
+                          color: AppColors.primaryRedColor,
+                        ),
                       ),
-                      child: const Text("Forgot Password",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Inter",
-                              fontSize: 12.8,
-                              color: AppColors.primaryRedColor,
-                              decoration: TextDecoration.underline,
-                              decorationColor: AppColors.primaryRedColor)),
-                    )
+                    ),
                   ],
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 30),
+
+                // ---------------------- Register ----------------------
                 Center(
-                    child: Column(
-                  children: [
-                    const Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                          fontSize: 15.98,
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(
+                          fontSize: 16,
                           fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.greyColorF),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Get.toNamed("/register-account");
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppColors.blackColor, // Text color
-                        backgroundColor:
-                            AppColors.whiteColor, // Button background color
-                        padding: const EdgeInsets.all(
-                            15), // Padding inside the button
-                        textStyle: const TextStyle(fontSize: 20), // Text style
+                          color: AppColors.greyColorF,
+                        ),
                       ),
-                      child: const Text("Register",
+                      TextButton(
+                        onPressed: () {
+                          Get.toNamed("/register-account");
+                        },
+                        child: const Text(
+                          "Register",
                           style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              decorationColor: AppColors.blackColorF,
-                              fontFamily: "Inter",
-                              fontSize: 17,
-                              color: AppColors.greyColorF)),
-                    )
-                  ],
-                ))
+                            fontFamily: "Inter",
+                            fontSize: 18,
+                            color: AppColors.greyColorF,
+                            decoration: TextDecoration.underline,
+                            decorationColor: AppColors.greyColorF,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
-          ));
-        }));
+          ),
+        );
+      }),
+    );
   }
 }

@@ -31,7 +31,7 @@ class LoginController {
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
-      "phone_no": telephoneController.text,
+      "phone_no": "+256" + telephoneController.text,
       "password": passwordController.text
     };
 
@@ -42,8 +42,6 @@ class LoginController {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(payload),
       );
-
-      // print("result: ${response.body}");
 
       final responseData = jsonDecode(response.body);
 

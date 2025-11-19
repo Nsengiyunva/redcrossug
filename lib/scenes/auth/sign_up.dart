@@ -111,14 +111,15 @@ import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/utils/colors.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
 
   @override
-  State<SignUp> createState() => _RegistrationScreenState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _RegistrationScreenState extends State<SignUp> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -133,6 +134,8 @@ class _RegistrationScreenState extends State<SignUp> {
   bool _acceptPrivacy = false;
   bool _hasMembership = false;
   bool _isLoading = false;
+
+  String _selectedPhoneCode = "256";
 
   @override
   void dispose() {
@@ -153,9 +156,7 @@ class _RegistrationScreenState extends State<SignUp> {
   }
 
   Future<void> _handleSubmit() async {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
+    if (!_formKey.currentState!.validate()) return;
 
     if (!_acceptPrivacy) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -164,19 +165,16 @@ class _RegistrationScreenState extends State<SignUp> {
       return;
     }
 
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
-    final username = "+DNhMCx71sCejEPfNQf/4w==";
-    final password = "MSHGBhk9E5WHwpJqruvbbIxChO9DUuvP6JEn/IZA/7w=";
-
+    const username = "+DNhMCx71sCejEPfNQf/4w==";
+    const password = "MSHGBhk9E5WHwpJqruvbbIxChO9DUuvP6JEn/IZA/7w=";
     final credentials = base64Encode(utf8.encode('$username:$password'));
 
     final payload = {
       'first_name': _firstNameController.text.trim(),
       'last_name': _lastNameController.text.trim(),
-      'phone_no': _phoneController.text.trim(),
+      'phone_no': '+$_selectedPhoneCode${_phoneController.text.trim()}',
       'email': _emailController.text.trim(),
       'has_membership': _hasMembership,
       'membership_id':
@@ -187,7 +185,6 @@ class _RegistrationScreenState extends State<SignUp> {
     };
 
     try {
-      // Replace with your actual API endpoint
       final response = await http.post(
         Uri.parse('https://urcs-api.taufeeq.dev/api/auth/register'),
         headers: {
@@ -198,17 +195,17 @@ class _RegistrationScreenState extends State<SignUp> {
         body: jsonEncode(payload),
       );
 
-      var result = jsonDecode(response.body);
+      final result = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Success: $result["message"]')),
+          SnackBar(content: Text('${result["message"]}')),
         );
 
         Future.delayed(const Duration(seconds: 1), () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SignIn()),
+            MaterialPageRoute(builder: (_) => SignIn()),
           );
         });
       } else {
@@ -216,16 +213,12 @@ class _RegistrationScreenState extends State<SignUp> {
           SnackBar(content: Text('Error: ${result["message"]}')),
         );
       }
-      print(response.body);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
-      print("error $e");
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
   }
 
@@ -235,332 +228,284 @@ class _RegistrationScreenState extends State<SignUp> {
     final isTablet = size.width > 600;
     final isDesktop = size.width > 900;
 
-    // Responsive padding
     final horizontalPadding =
         isDesktop ? size.width * 0.25 : (isTablet ? 48.0 : 24.0);
     final verticalPadding = isTablet ? 60.0 : 40.0;
-
-    // Responsive font sizes
     final titleFontSize = isDesktop ? 32.0 : (isTablet ? 28.0 : 24.0);
     final labelFontSize = isTablet ? 15.0 : 14.0;
     final buttonHeight = isTablet ? 64.0 : 56.0;
 
     return Scaffold(
-        backgroundColor: AppColors.bgColor,
-        appBar: AppBar(title: const Text(""), leading: const BackButton()),
-        body: SafeArea(
-          child: Center(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(maxWidth: isDesktop ? 600 : double.infinity),
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(
-                  horizontal: horizontalPadding,
-                  vertical: 24.0,
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: verticalPadding),
-                      Center(
-                        child: Text(
-                          "Let's get to know you",
-                          style: TextStyle(
-                            fontSize: titleFontSize,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF666666),
-                          ),
-                          textAlign: TextAlign.center,
+      backgroundColor: AppColors.bgColor,
+      appBar: AppBar(leading: const BackButton(), title: const Text("")),
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints:
+                BoxConstraints(maxWidth: isDesktop ? 600 : double.infinity),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding, vertical: 24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: verticalPadding),
+                    Center(
+                      child: Text(
+                        "Let's get to know you",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: titleFontSize,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF666666),
                         ),
                       ),
-                      SizedBox(height: verticalPadding),
+                    ),
+                    SizedBox(height: verticalPadding),
 
-                      // Responsive layout for name fields
-                      if (isTablet)
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildTextField(
+                    // First & Last Name
+                    if (isTablet)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildTextField(
                                 controller: _firstNameController,
                                 label: 'First Name',
                                 labelFontSize: labelFontSize,
                                 validator: (val) =>
-                                    val?.isEmpty ?? true ? 'Required' : null,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: _buildTextField(
+                                    val?.isEmpty ?? true ? 'Required' : null),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildTextField(
                                 controller: _lastNameController,
                                 label: 'Last Name',
                                 labelFontSize: labelFontSize,
                                 validator: (val) =>
-                                    val?.isEmpty ?? true ? 'Required' : null,
-                              ),
-                            ),
-                          ],
-                        )
-                      else ...[
-                        _buildTextField(
-                          controller: _firstNameController,
-                          label: 'First Name',
-                          labelFontSize: labelFontSize,
-                          validator: (val) =>
-                              val?.isEmpty ?? true ? 'Required' : null,
-                        ),
-                        const SizedBox(height: 24),
-                        _buildTextField(
-                          controller: _lastNameController,
-                          label: 'Last Name',
-                          labelFontSize: labelFontSize,
-                          validator: (val) =>
-                              val?.isEmpty ?? true ? 'Required' : null,
-                        ),
-                      ],
-                      const SizedBox(height: 24),
-
-                      // Responsive layout for contact fields
-                      if (isTablet)
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildTextField(
-                                controller: _phoneController,
-                                label: 'Phone Number',
-                                labelFontSize: labelFontSize,
-                                keyboardType: TextInputType.phone,
-                                validator: (val) =>
-                                    val?.isEmpty ?? true ? 'Required' : null,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: _buildTextField(
-                                controller: _emailController,
-                                label: 'Email',
-                                labelFontSize: labelFontSize,
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (val) {
-                                  if (val?.isEmpty ?? true) return 'Required';
-                                  if (!val!.contains('@'))
-                                    return 'Invalid email';
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        )
-                      else ...[
-                        _buildTextField(
-                          controller: _phoneController,
-                          label: 'Phone Number',
-                          labelFontSize: labelFontSize,
-                          keyboardType: TextInputType.phone,
-                          validator: (val) =>
-                              val?.isEmpty ?? true ? 'Required' : null,
-                        ),
-                        const SizedBox(height: 24),
-                        _buildTextField(
-                          controller: _emailController,
-                          label: 'Email',
-                          labelFontSize: labelFontSize,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (val) {
-                            if (val?.isEmpty ?? true) return 'Required';
-                            if (!val!.contains('@')) return 'Invalid email';
-                            return null;
-                          },
-                        ),
-                      ],
-                      const SizedBox(height: 24),
-
+                                    val?.isEmpty ?? true ? 'Required' : null),
+                          ),
+                        ],
+                      )
+                    else ...[
                       _buildTextField(
-                        controller: _nationalityController,
-                        label: 'Nationality',
+                        controller: _firstNameController,
+                        label: 'First Name',
                         labelFontSize: labelFontSize,
                         validator: (val) =>
                             val?.isEmpty ?? true ? 'Required' : null,
                       ),
                       const SizedBox(height: 24),
-
-                      CheckboxListTile(
-                        title: Text(
-                          'I have a membership',
-                          style: TextStyle(fontSize: labelFontSize),
-                        ),
-                        value: _hasMembership,
-                        onChanged: (val) =>
-                            setState(() => _hasMembership = val ?? false),
-                        controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.zero,
+                      _buildTextField(
+                        controller: _lastNameController,
+                        label: 'Last Name',
+                        labelFontSize: labelFontSize,
+                        validator: (val) =>
+                            val?.isEmpty ?? true ? 'Required' : null,
                       ),
+                    ],
+                    const SizedBox(height: 24),
 
-                      if (_hasMembership) ...[
-                        const SizedBox(height: 16),
-                        _buildTextField(
+                    // Phone & Email
+                    if (isTablet)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 8),
+                                PhoneFormField(
+                                  controller: _phoneController,
+                                  onCountryChanged: (code) =>
+                                      _selectedPhoneCode = code,
+                                  validator: (val) {
+                                    if (val == null || val.isEmpty) {
+                                      return "Required";
+                                    }
+                                    if (val.length < 7) return "Invalid phone";
+                                    if (val.length < 9)
+                                      return "Invalid Phone Number entered.";
+                                    return null;
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildTextField(
+                              controller: _emailController,
+                              label: 'Email',
+                              labelFontSize: labelFontSize,
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (val) {
+                                if (val?.isEmpty ?? true) return 'Required';
+                                if (!val!.contains('@')) return 'Invalid email';
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    else ...[
+                      PhoneFormField(
+                        controller: _phoneController,
+                        onCountryChanged: (code) => _selectedPhoneCode = code,
+                        validator: (val) {
+                          if (val == null || val.isEmpty) return "Required";
+                          if (val.length < 7) return "Invalid phone";
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      _buildTextField(
+                        controller: _emailController,
+                        label: 'Email',
+                        labelFontSize: labelFontSize,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (val) {
+                          if (val?.isEmpty ?? true) return 'Required';
+                          if (!val!.contains('@')) return 'Invalid email';
+                          return null;
+                        },
+                      ),
+                    ],
+                    const SizedBox(height: 24),
+
+                    // Nationality
+                    _buildTextField(
+                        controller: _nationalityController,
+                        label: 'Nationality',
+                        labelFontSize: labelFontSize,
+                        validator: (val) =>
+                            val?.isEmpty ?? true ? 'Required' : null),
+                    const SizedBox(height: 24),
+
+                    // Membership
+                    CheckboxListTile(
+                      title: Text('I have a membership',
+                          style: TextStyle(fontSize: labelFontSize)),
+                      value: _hasMembership,
+                      onChanged: (val) =>
+                          setState(() => _hasMembership = val ?? false),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    if (_hasMembership) ...[
+                      const SizedBox(height: 16),
+                      _buildTextField(
                           controller: _membershipIdController,
                           label: 'Membership ID',
                           labelFontSize: labelFontSize,
                           validator: (val) =>
                               _hasMembership && (val?.isEmpty ?? true)
                                   ? 'Required'
-                                  : null,
-                        ),
-                      ],
-                      const SizedBox(height: 24),
+                                  : null),
+                    ],
+                    const SizedBox(height: 24),
 
-                      // Responsive layout for password fields
-                      if (isTablet)
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildTextField(
-                                controller: _passwordController,
-                                label: 'Password',
-                                labelFontSize: labelFontSize,
-                                obscureText: _obscurePassword,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscurePassword
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: () => setState(() =>
-                                      _obscurePassword = !_obscurePassword),
-                                ),
-                                validator: (val) {
-                                  if (val?.isEmpty ?? true) return 'Required';
-                                  if (val!.length < 8)
-                                    return 'Min 8 characters';
-                                  return null;
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: _buildTextField(
-                                controller: _confirmPasswordController,
-                                label: 'Confirm Password',
-                                labelFontSize: labelFontSize,
-                                obscureText: _obscureConfirmPassword,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureConfirmPassword
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: () => setState(() =>
+                    // Password & Confirm Password
+                    if (isTablet)
+                      Row(
+                        children: [
+                          Expanded(
+                              child: _buildPasswordField(
+                                  controller: _passwordController,
+                                  label: 'Password',
+                                  obscureText: _obscurePassword,
+                                  toggleObscure: () => setState(() =>
+                                      _obscurePassword = !_obscurePassword))),
+                          const SizedBox(width: 16),
+                          Expanded(
+                              child: _buildPasswordField(
+                                  controller: _confirmPasswordController,
+                                  label: 'Confirm Password',
+                                  obscureText: _obscureConfirmPassword,
+                                  toggleObscure: () => setState(() =>
                                       _obscureConfirmPassword =
                                           !_obscureConfirmPassword),
-                                ),
-                                validator: (val) {
-                                  if (val?.isEmpty ?? true) return 'Required';
-                                  if (val != _passwordController.text)
-                                    return 'Passwords do not match';
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        )
-                      else ...[
-                        _buildTextField(
+                                  validator: (val) {
+                                    if (val?.isEmpty ?? true) return 'Required';
+                                    if (val != _passwordController.text) {
+                                      return 'Passwords do not match';
+                                    }
+                                    return null;
+                                  })),
+                        ],
+                      )
+                    else ...[
+                      _buildPasswordField(
                           controller: _passwordController,
                           label: 'Password',
-                          labelFontSize: labelFontSize,
                           obscureText: _obscurePassword,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _obscurePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () => setState(
-                                () => _obscurePassword = !_obscurePassword),
-                          ),
-                          validator: (val) {
-                            if (val?.isEmpty ?? true) return 'Required';
-                            if (val!.length < 8) return 'Min 8 characters';
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 24),
-                        _buildTextField(
+                          toggleObscure: () => setState(
+                              () => _obscurePassword = !_obscurePassword)),
+                      const SizedBox(height: 24),
+                      _buildPasswordField(
                           controller: _confirmPasswordController,
                           label: 'Confirm Password',
-                          labelFontSize: labelFontSize,
                           obscureText: _obscureConfirmPassword,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _obscureConfirmPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () => setState(() =>
-                                _obscureConfirmPassword =
-                                    !_obscureConfirmPassword),
-                          ),
+                          toggleObscure: () => setState(() =>
+                              _obscureConfirmPassword =
+                                  !_obscureConfirmPassword),
                           validator: (val) {
                             if (val?.isEmpty ?? true) return 'Required';
-                            if (val != _passwordController.text)
+                            if (val != _passwordController.text) {
                               return 'Passwords do not match';
+                            }
                             return null;
-                          },
-                        ),
-                      ],
-                      const SizedBox(height: 24),
+                          }),
+                    ],
+                    const SizedBox(height: 24),
 
-                      CheckboxListTile(
-                        title: Text(
-                          'By continuing, you accept our privacy policy',
-                          style: TextStyle(fontSize: labelFontSize),
-                        ),
-                        value: _acceptPrivacy,
-                        onChanged: (val) =>
-                            setState(() => _acceptPrivacy = val ?? false),
-                        controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.zero,
+                    // Privacy
+                    CheckboxListTile(
+                      title: Text(
+                        'By continuing, you accept our privacy policy',
+                        style: TextStyle(fontSize: labelFontSize),
                       ),
-                      const SizedBox(height: 24),
+                      value: _acceptPrivacy,
+                      onChanged: (val) =>
+                          setState(() => _acceptPrivacy = val ?? false),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    const SizedBox(height: 24),
 
-                      SizedBox(
-                        width: double.infinity,
-                        height: buttonHeight,
-                        child: ElevatedButton(
-                          onPressed: _isLoading ? null : _handleSubmit,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: _isLoading
-                              ? const CircularProgressIndicator(
-                                  color: Colors.white)
-                              : Text(
-                                  'Continue',
-                                  style: TextStyle(
+                    // Submit Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: buttonHeight,
+                      child: ElevatedButton(
+                        onPressed: _isLoading ? null : _handleSubmit,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white)
+                            : Text(
+                                'Continue',
+                                style: TextStyle(
                                     fontSize: isTablet ? 18.0 : 16.0,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                        ),
+                                    color: Colors.white),
+                              ),
                       ),
-                      const SizedBox(height: 40),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
                 ),
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _buildTextField({
@@ -575,14 +520,11 @@ class _RegistrationScreenState extends State<SignUp> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: labelFontSize,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
-          ),
-        ),
+        Text(label,
+            style: TextStyle(
+                fontSize: labelFontSize,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87)),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
@@ -598,26 +540,48 @@ class _RegistrationScreenState extends State<SignUp> {
               borderSide: BorderSide(color: Colors.grey[300]!),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey[300]!),
-            ),
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey[300]!)),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
-            ),
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.red, width: 2)),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.red, width: 1),
-            ),
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.red, width: 1)),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
-            ),
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.red, width: 2)),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildPasswordField({
+    required TextEditingController controller,
+    required String label,
+    required bool obscureText,
+    required VoidCallback toggleObscure,
+    String? Function(String?)? validator,
+  }) {
+    return _buildTextField(
+      controller: controller,
+      label: label,
+      labelFontSize: 14.0,
+      obscureText: obscureText,
+      suffixIcon: IconButton(
+        icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility,
+            color: Colors.grey),
+        onPressed: toggleObscure,
+      ),
+      validator: validator ??
+          (val) {
+            if (val?.isEmpty ?? true) return 'Required';
+            if (val!.length < 8) return 'Min 8 characters';
+            return null;
+          },
     );
   }
 }

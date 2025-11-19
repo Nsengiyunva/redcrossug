@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/models/member_profile.dart';
 import 'package:redcross/models/membership.dart';
-import 'package:redcross/scenes/memberships/edit_member.dart';
 
 class CreateMember extends StatefulWidget {
   const CreateMember({super.key});

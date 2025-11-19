@@ -172,6 +172,7 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/blood_banks_list.dart';
 import 'package:redcross/scenes/blood_donations/blood_drive_requests_list.dart';
+import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
 import 'package:redcross/scenes/donations/donation_history.dart';
@@ -239,7 +240,13 @@ class BloodDonationHome extends StatelessWidget {
                         context,
                         'Eligibility to Donate',
                         Icons.water_drop_outlined,
-                        () {},
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BloodEligibility()),
+                          );
+                        },
                       ),
                     ),
                     SizedBox(width: screenWidth * 0.03),

@@ -77,7 +77,7 @@ class DisasterList extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 12),
                           ),
-                          child: Text("View Incidents"),
+                          child: const Text("View Incidents"),
                         ),
                       ],
                     ),
