@@ -139,21 +139,21 @@ class SignIn extends StatelessWidget {
                         ),
                       ],
                     ),
-                    TextButton(
-                      onPressed: () {
-                        // TODO: Add forgot password route
-                      },
-                      child: const Text(
-                        "Forgot Password",
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          decorationColor: AppColors.primaryRedColor,
-                          fontFamily: "Inter",
-                          fontSize: 13,
-                          color: AppColors.primaryRedColor,
-                        ),
-                      ),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     // TODO: Add forgot password route
+                    //   },
+                    //   child: const Text(
+                    //     "Forgot Password",
+                    //     style: TextStyle(
+                    //       decoration: TextDecoration.underline,
+                    //       decorationColor: AppColors.primaryRedColor,
+                    //       fontFamily: "Inter",
+                    //       fontSize: 13,
+                    //       color: AppColors.primaryRedColor,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 const SizedBox(height: 30),

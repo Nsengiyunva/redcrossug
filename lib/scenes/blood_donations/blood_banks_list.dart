@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:redcross/models/blood_bank.dart';
 
 import 'package:redcross/scenes/blood_donations/appointments.dart';
@@ -16,17 +19,38 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
   bool isLoading = true;
   final TextEditingController _searchController = TextEditingController();
 
+  late Future<List<BloodBank>> _bloodBankFuture;
+
   @override
   void initState() {
     super.initState();
     _loadBloodBanks();
     _searchController.addListener(_filterBloodBanks);
+    _bloodBankFuture = _fetchBloodBanks();
   }
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<List<BloodBank>> _fetchBloodBanks() async {
+    const url = "https://urcs-api.taufeeq.dev/api/blood-donation/blood-banks";
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      final jsonBody = jsonDecode(response.body);
+      if (response.statusCode == 200 && jsonBody["success"] == true) {
+        final List data = jsonBody["data"];
+        return data.map((e) => BloodBank.fromJson(e)).toList();
+      } else {
+        throw Exception(jsonBody["message"] ?? "Failed to load blood banks");
+      }
+    } catch (e) {
+      throw Exception("Error: $e");
+    }
   }
 
   void _loadBloodBanks() {
@@ -345,6 +369,12 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
     );
   }
 
+  Future<void> _refresh() async {
+    setState(() {
+      _bloodBankFuture = _fetchBloodBanks();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -481,19 +511,83 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                               ],
                             ),
                           )
-                        : ListView.builder(
-                            itemCount: filteredBloodBanks.length,
-                            itemBuilder: (context, index) {
-                              final bank = filteredBloodBanks[index];
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: screenHeight * 0.015,
+                        : FutureBuilder<List<BloodBank>>(
+                            future: _bloodBankFuture,
+                            builder: (context, snapshot) {
+                              // LOADING
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.red));
+                              }
+
+                              // ERROR
+                              if (snapshot.hasError) {
+                                return Center(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.error,
+                                          color: Colors.red, size: 40),
+                                      const SizedBox(height: 10),
+                                      Text(snapshot.error.toString()),
+                                      const SizedBox(height: 20),
+                                      ElevatedButton(
+                                        onPressed: _refresh,
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red),
+                                        child: const Text("Retry"),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+
+                              final banks = snapshot.data ?? [];
+
+                              // EMPTY STATE
+                              if (banks.isEmpty) {
+                                return const Center(
+                                    child: Text("No blood banks available."));
+                              }
+
+                              return RefreshIndicator(
+                                color: Colors.red,
+                                onRefresh: _refresh,
+                                child: ListView.builder(
+                                  padding: const EdgeInsets.all(12),
+                                  itemCount: banks.length,
+                                  itemBuilder: (context, index) {
+                                    final bank = banks[index];
+
+                                    // final bank = filteredBloodBanks[index];
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: screenHeight * 0.015,
+                                      ),
+                                      child: _buildBloodBankCard(
+                                          bank, screenWidth, screenHeight),
+                                    );
+                                  },
                                 ),
-                                child: _buildBloodBankCard(
-                                    bank, screenWidth, screenHeight),
                               );
                             },
                           ),
+
+                // ListView.builder(
+                //     itemCount: filteredBloodBanks.length,
+                //     itemBuilder: (context, index) {
+                //       final bank = filteredBloodBanks[index];
+                //       return Padding(
+                //         padding: EdgeInsets.only(
+                //           bottom: screenHeight * 0.015,
+                //         ),
+                //         child: _buildBloodBankCard(
+                //             bank, screenWidth, screenHeight),
+                //       );
+                //     },
+                //   ),
               ),
             ],
           ),
@@ -677,20 +771,18 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       };
 
       // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Appointment booked successfully!'),
-          backgroundColor: Colors.green,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     content: Text('Appointment booked successfully!'),
+      //     backgroundColor: Colors.green,
+      //     behavior: SnackBarBehavior.floating,
+      //   ),
+      // );
 
-      print('Appointment Data: $appointmentData');
-
-      // Navigate back after delay
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pop(context);
-      });
+      // // Navigate back after delay
+      // Future.delayed(const Duration(seconds: 2), () {
+      //   Navigator.pop(context);
+      // });
     }
   }
 

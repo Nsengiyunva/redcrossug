@@ -12,13 +12,13 @@ class BloodEligibility extends StatefulWidget {
 
 class _BloodEligibilityState extends State<BloodEligibility> {
   final List<Item> _items = <Item>[
-    Item(header: 'Platelet Donation', body: [
-      'Donation frequency: Every 56 days, up to 6 times a year',
-      'You must be in good health and feeling well',
-      'You must be at least 16 years old in most states',
-      'You must weigh at least 50 kgs',
-      'You must be HIV/AIDS negative'
-    ]),
+    // Item(header: 'Platelet Donation', body: [
+    //   'Donation frequency: Every 56 days, up to 6 times a year',
+    //   'You must be in good health and feeling well',
+    //   'You must be at least 16 years old in most states',
+    //   'You must weigh at least 50 kgs',
+    //   'You must be HIV/AIDS negative'
+    // ]),
     Item(header: 'Whole Blood Donation', body: [
       'Donation frequency: Every 56 days, up to 6 times a year',
       'You must be in good health and feeling well',
@@ -26,13 +26,13 @@ class _BloodEligibilityState extends State<BloodEligibility> {
       'You must weigh at least 50 kgs',
       'You must be HIV/AIDS negative'
     ]),
-    Item(header: 'Plasma Donation', body: [
-      'Donation frequency: Every 56 days, up to 6 times a year',
-      'You must be in good health and feeling well',
-      'You must be at least 16 years old in most states',
-      'You must weigh at least 50 kgs',
-      'You must be HIV/AIDS negative'
-    ]),
+    // Item(header: 'Plasma Donation', body: [
+    //   'Donation frequency: Every 56 days, up to 6 times a year',
+    //   'You must be in good health and feeling well',
+    //   'You must be at least 16 years old in most states',
+    //   'You must weigh at least 50 kgs',
+    //   'You must be HIV/AIDS negative'
+    // ]),
   ];
 
   @override

@@ -1,150 +1,7 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:redcross/controllers/donations_controller.dart';
-// import 'package:redcross/scenes/auth/profile.dart';
-// import 'package:redcross/scenes/widgets/date_picker.dart';
-// import 'package:redcross/scenes/widgets/dropdown_field.dart';
-// import 'package:redcross/utils/colors.dart';
-
-// import '../widgets/red_btn.dart';
-
-// class DonationRegister extends StatefulWidget {
-//   final Map<String, dynamic> payload;
-
-//   const DonationRegister({super.key, required this.payload});
-
-//   @override
-//   DonationRegisterState createState() => DonationRegisterState();
-// }
-
-// class DonationRegisterState extends State<DonationRegister> {
-//   String? selectedStatus;
-//   String? selectedOption;
-//   String? selectedHealth;
-
-//   final List<String> groups = ['O', 'AB', 'A'];
-//   final List<String> health_options = ['Yes', 'No'];
-
-//   final _formKey = GlobalKey<FormState>();
-//   final DonationsController _donation_controller =
-//       Get.put(DonationsController());
-
-//   void validateForm() {
-//     if (_formKey.currentState!.validate()) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text("Form is valid!")),
-//       );
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         backgroundColor: AppColors.whiteColor,
-//         body: SingleChildScrollView(
-//             child: Container(
-//           width: double.maxFinite,
-//           margin: const EdgeInsets.symmetric(vertical: 30.0),
-//           padding: const EdgeInsets.symmetric(vertical: 80.0, horizontal: 25.0),
-//           child: Form(
-//               key: _formKey,
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   const Text("Register as a Donor",
-//                       style: TextStyle(
-//                           fontSize: 20.14,
-//                           color: AppColors.blackColorF,
-//                           fontFamily: "Manrope",
-//                           fontWeight: FontWeight.w600)),
-//                   const SizedBox(height: 50),
-//                   DropdownField<String>(
-//                     controller: _donation_controller.blood_group,
-//                     label: "Blood Group",
-//                     hint: "Choose a Blood Group",
-//                     items: groups,
-//                     selectedValue: selectedStatus,
-//                     onChanged: (value) {
-//                       setState(() {
-//                         selectedStatus = value;
-//                         // You can call your filtering logic here
-//                         // print("xxx: $selectedStatus");
-//                       });
-//                     },
-//                     validator: (value) =>
-//                         value == null ? "Choose a Blood Group" : null,
-//                   ),
-//                   const SizedBox(height: 30),
-//                   DatePicker(
-//                       question: 'Last Donation  Date',
-//                       controller: _donation_controller.last_donation_date),
-//                   const SizedBox(height: 30),
-//                   DropdownField<String>(
-//                     controller: _donation_controller.donated_yet,
-//                     label: "Have you donated in  the last 3 Months?",
-//                     hint: "Choose One",
-//                     items: health_options,
-//                     selectedValue: selectedOption,
-//                     onChanged: (value) {
-//                       setState(() {
-//                         selectedOption = value;
-//                         // You can call your filtering logic here
-//                         print("x1: $selectedOption");
-//                       });
-//                     },
-//                     validator: (value) => value == null ? "Choose One" : null,
-//                   ),
-//                   const SizedBox(height: 30),
-//                   DropdownField<String>(
-//                     controller: _donation_controller.healthy_today,
-//                     label: "Do you feel Healthy today?",
-//                     hint: "Choose One",
-//                     items: health_options,
-//                     selectedValue: selectedHealth,
-//                     onChanged: (value) {
-//                       setState(() {
-//                         selectedHealth = value;
-//                         // You can call your filtering logic here
-//                         // print("xxx: $selectedStatus");
-//                       });
-//                     },
-//                     validator: (value) => value == null ? "Choose One" : null,
-//                   ),
-//                   const SizedBox(height: 25),
-//                   Center(
-//                     child: RedBtn(
-//                       label: 'Register',
-//                       onPressed: () {
-//                         _donation_controller
-//                             .registerDonor(widget.payload["id"]);
-//                         // Get.toNamed("/blood-donation-eligibility");
-//                         // Navigator.of(context).push(
-//                         //   MaterialPageRoute(
-//                         //       builder: (context) => const BloodEligibility()),
-//                         // );
-//                       },
-//                     ),
-//                   ),
-//                   const SizedBox(height: 15),
-//                   Center(
-//                     child: TextButton(
-//                       onPressed: () {
-//                         Navigator.of(context).push(
-//                           MaterialPageRoute(
-//                               builder: (context) => const Profile()),
-//                         );
-//                       },
-//                       child: const Text('Edit Donor Profile',
-//                           style: TextStyle(color: AppColors.primaryRedColor)),
-//                     ),
-//                   )
-//                 ],
-//               )),
-//         )));
-//   }
-// }
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:redcross/utils/storage_service.dart';
 
 class DonationRegister extends StatefulWidget {
   const DonationRegister({super.key});
@@ -161,6 +18,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
 
   String? _selectedBloodType;
   DateTime? _lastDonationDate;
+  bool _isDonor = false;
 
   final List<String> _bloodTypes = [
     'A+',
@@ -173,6 +31,14 @@ class _RegisterDonorFormState extends State<DonationRegister> {
     'O-'
   ];
 
+  late Future<void> _loadDonorFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDonorFuture = _checkAndPrefillDonor();
+  }
+
   @override
   void dispose() {
     _serialNoController.dispose();
@@ -181,54 +47,109 @@ class _RegisterDonorFormState extends State<DonationRegister> {
     super.dispose();
   }
 
+  Future<void> _checkAndPrefillDonor() async {
+    String? token = await StorageService.getToken();
+
+    try {
+      final response = await http.get(
+        Uri.parse(
+            "https://urcs-api.taufeeq.dev/api/blood-donation/user/blood-donor-profile"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer $token",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        if (json['success'] == true && json['data'] != null) {
+          final donor = json['data'];
+
+          setState(() {
+            _selectedBloodType = donor['blood_type'];
+            _serialNoController.text = donor['serial_no'] ?? '';
+            _locationController.text = donor['location'] ?? '';
+            _phoneNoController.text = donor['phone_no'] ?? '';
+            _lastDonationDate =
+                DateTime.tryParse(donor['last_donation_date'] ?? '');
+            _isDonor = true;
+          });
+        }
+      } else if (response.statusCode == 404) {
+        // Not a donor → leave form empty
+      }
+    } catch (e) {
+      print("Error checking donor: $e");
+    }
+  }
+
+  // ===================== DATE PICKER ======================
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+    if (_isDonor) return; // disable for registered donors
+
+    final picked = await showDatePicker(
       context: context,
       initialDate: _lastDonationDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime.now(),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Colors.red,
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
-            ),
-          ),
-          child: child!,
-        );
-      },
     );
-    if (picked != null && picked != _lastDonationDate) {
-      setState(() {
-        _lastDonationDate = picked;
-      });
+
+    if (picked != null) {
+      setState(() => _lastDonationDate = picked);
     }
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Create the data object
-      final donorData = {
-        'blood_type': _selectedBloodType,
-        'serial_no': _serialNoController.text,
-        'location': _locationController.text,
-        'phone_no': _phoneNoController.text,
-        'last_donation_date':
-            _lastDonationDate?.toIso8601String().split('T')[0],
-      };
+  // ===================== SUBMIT ======================
+  void _submitForm() async {
+    if (_isDonor) return; // cannot submit again
+    if (!_formKey.currentState!.validate()) return;
 
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Registration Successful!'),
-          backgroundColor: Colors.green,
-          behavior: SnackBarBehavior.floating,
-        ),
+    var token = await StorageService.getToken();
+
+    final donorData = {
+      "blood_type": _selectedBloodType,
+      "serial_no": _serialNoController.text,
+      "location": _locationController.text,
+      "phone_no": _phoneNoController.text,
+      "last_donation_date": _lastDonationDate?.toIso8601String().split('T')[0],
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse('https://urcs-api.taufeeq.dev/api/blood-donation/donors'),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(donorData),
       );
 
-      print('Donor Data: $donorData');
+      final result = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(result['message'] ?? 'Registration successful!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          Navigator.pop(context);
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                result['message'] ?? 'Failed to register. Please try again!'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: $e"), backgroundColor: Colors.red),
+      );
     }
   }
 
@@ -236,7 +157,6 @@ class _RegisterDonorFormState extends State<DonationRegister> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final horizontalPadding = screenWidth * 0.05;
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
@@ -248,266 +168,205 @@ class _RegisterDonorFormState extends State<DonationRegister> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      body: FutureBuilder(
+        future: _loadDonorFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: screenHeight * 0.02),
-                  // Title
+                  SizedBox(height: 10),
+
                   Text(
-                    'Register as a Donor',
+                    _isDonor
+                        ? "You're already registered"
+                        : "Register as a Donor",
                     style: TextStyle(
-                      fontSize: screenWidth * 0.09,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.01),
-                  Text(
-                    'Please fill in your details to register',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.04),
 
-                  // Blood Type Dropdown
                   Text(
-                    'Blood Type',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
-                    ),
+                    _isDonor ? "Your donor details" : "Fill the form below",
+                    style: TextStyle(fontSize: 15, color: Colors.grey[600]),
                   ),
-                  SizedBox(height: screenHeight * 0.01),
-                  DropdownButtonFormField<String>(
-                    initialValue: _selectedBloodType,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: 'Select your blood type',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.04,
-                        vertical: screenHeight * 0.02,
-                      ),
-                    ),
-                    items: _bloodTypes.map((String bloodType) {
-                      return DropdownMenuItem<String>(
-                        value: bloodType,
-                        child: Text(bloodType),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedBloodType = newValue;
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please select your blood type';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: screenHeight * 0.025),
 
-                  // Serial Number
-                  Text(
-                    'Serial Number',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
+                  SizedBox(height: 30),
+
+                  // =================== BLOOD TYPE ===================
+                  Text("Blood Type", style: titleStyle()),
+                  SizedBox(height: 6),
+
+                  AbsorbPointer(
+                    absorbing: _isDonor,
+                    child: DropdownButtonFormField<String>(
+                      value: _selectedBloodType,
+                      decoration: inputStyle(),
+                      items: _bloodTypes.map((type) {
+                        return DropdownMenuItem(value: type, child: Text(type));
+                      }).toList(),
+                      onChanged: (v) => setState(() => _selectedBloodType = v),
+                      validator: (value) {
+                        if (!_isDonor && (value == null || value.isEmpty)) {
+                          return "Please select a blood type";
+                        }
+                        return null;
+                      },
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.01),
+
+                  SizedBox(height: 20),
+
+                  // =================== SERIAL NUMBER ===================
+                  Text("Serial Number", style: titleStyle()),
+                  SizedBox(height: 6),
                   TextFormField(
                     controller: _serialNoController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: 'Enter your serial number',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.04,
-                        vertical: screenHeight * 0.02,
-                      ),
-                    ),
+                    readOnly: _isDonor,
+                    decoration: inputStyle(),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your serial number';
+                      if (!_isDonor && (value == null || value.isEmpty)) {
+                        return "Enter serial number";
                       }
                       return null;
                     },
                   ),
-                  SizedBox(height: screenHeight * 0.025),
 
-                  // Phone Number
-                  Text(
-                    'Phone Number',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
+                  SizedBox(height: 20),
+
+                  // =================== PHONE ===================
+                  Text("Phone Number", style: titleStyle()),
+                  SizedBox(height: 6),
                   TextFormField(
                     controller: _phoneNoController,
+                    readOnly: _isDonor,
                     keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: '+256XXXXXXXXX',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.04,
-                        vertical: screenHeight * 0.02,
-                      ),
-                      prefixIcon: const Icon(Icons.phone, color: Colors.red),
+                    decoration: inputStyle().copyWith(
+                      prefixIcon: Icon(Icons.phone, color: Colors.red),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your phone number';
-                      }
-                      if (!value.startsWith('+256')) {
-                        return 'Phone number must start with +256';
+                      if (!_isDonor && (value == null || value.isEmpty)) {
+                        return "Enter phone number";
                       }
                       return null;
                     },
                   ),
-                  SizedBox(height: screenHeight * 0.025),
 
-                  // Location
-                  Text(
-                    'Location',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
+                  SizedBox(height: 20),
+
+                  // =================== LOCATION ===================
+                  Text("Location", style: titleStyle()),
+                  SizedBox(height: 6),
                   TextFormField(
                     controller: _locationController,
+                    readOnly: _isDonor,
                     maxLines: 2,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: 'Enter your location',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.04,
-                        vertical: screenHeight * 0.02,
-                      ),
-                      prefixIcon:
-                          const Icon(Icons.location_on, color: Colors.red),
+                    decoration: inputStyle().copyWith(
+                      prefixIcon: Icon(Icons.location_on, color: Colors.red),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your location';
+                      if (!_isDonor && (value == null || value.isEmpty)) {
+                        return "Enter your location";
                       }
                       return null;
                     },
                   ),
-                  SizedBox(height: screenHeight * 0.025),
 
-                  // Last Donation Date
-                  Text(
-                    'Last Donation Date',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
+                  SizedBox(height: 20),
+
+                  // =================== LAST DONATION DATE ===================
+                  Text("Last Donation Date", style: titleStyle()),
+                  SizedBox(height: 6),
+
                   GestureDetector(
                     onTap: () => _selectDate(context),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.04,
-                        vertical: screenHeight * 0.02,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.calendar_today, color: Colors.red),
-                          SizedBox(width: screenWidth * 0.03),
-                          Text(
-                            _lastDonationDate == null
-                                ? 'Select date'
-                                : '${_lastDonationDate!.day}/${_lastDonationDate!.month}/${_lastDonationDate!.year}',
-                            style: TextStyle(
-                              fontSize: screenWidth * 0.04,
-                              color: _lastDonationDate == null
-                                  ? Colors.grey[400]
-                                  : Colors.black,
+                    child: AbsorbPointer(
+                      absorbing: true,
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.calendar_today, color: Colors.red),
+                            SizedBox(width: 10),
+                            Text(
+                              _lastDonationDate == null
+                                  ? "Select date"
+                                  : "${_lastDonationDate!.day}/${_lastDonationDate!.month}/${_lastDonationDate!.year}",
+                              style: TextStyle(
+                                color: _isDonor ? Colors.grey : Colors.black,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.05),
 
-                  // Submit Button
+                  SizedBox(height: 40),
+
+                  // =================== SUBMIT BUTTON ===================
                   GestureDetector(
-                    onTap: _submitForm,
+                    onTap: _isDonor ? null : _submitForm,
                     child: Container(
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                        vertical: screenHeight * 0.02,
-                      ),
+                      padding: EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: _isDonor ? Colors.grey : Colors.red,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Center(
                         child: Text(
-                          'Register as Donor',
+                          _isDonor ? "Already Registered" : "Register as Donor",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: screenWidth * 0.045,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.03),
+
+                  SizedBox(height: 30),
                 ],
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
+    );
+  }
+
+  // =================== Reusable Styles ===================
+  InputDecoration inputStyle() {
+    return InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide.none,
+      ),
+    );
+  }
+
+  TextStyle titleStyle() {
+    return TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      color: Colors.grey[800],
     );
   }
 }
