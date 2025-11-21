@@ -325,8 +325,9 @@ class _SignUpState extends State<SignUp> {
                                       return "Required";
                                     }
                                     if (val.length < 7) return "Invalid phone";
-                                    if (val.length < 9)
+                                    if (val.length < 9) {
                                       return "Invalid Phone Number entered.";
+                                    }
                                     return null;
                                   },
                                 ),

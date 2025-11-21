@@ -44,4 +44,5 @@ Memberships and Volunteers
 we can then proceed to invite the  techinical team to assess/uat with them for them to check and verify  the system.
 
 -----------
-
+$strBarcode	= KSecurity::generateFrameworkBarcode(Component9Manager::COM_CODE, Component9Manager::BARCODE_CATEGORY_ADD, $intFinancialYear, 'component1', $intComponent1ID);
+---------------------------------------------------------------

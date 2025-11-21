@@ -31,7 +31,7 @@ class LoginController {
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
-      "phone_no": "+256" + telephoneController.text,
+      "phone_no": "+256${telephoneController.text}",
       "password": passwordController.text
     };
 

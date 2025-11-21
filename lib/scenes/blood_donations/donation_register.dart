@@ -182,13 +182,13 @@ class _RegisterDonorFormState extends State<DonationRegister> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   Text(
                     _isDonor
                         ? "You're already registered"
                         : "Register as a Donor",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
@@ -199,16 +199,16 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     style: TextStyle(fontSize: 15, color: Colors.grey[600]),
                   ),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   // =================== BLOOD TYPE ===================
                   Text("Blood Type", style: titleStyle()),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
 
                   AbsorbPointer(
                     absorbing: _isDonor,
                     child: DropdownButtonFormField<String>(
-                      value: _selectedBloodType,
+                      initialValue: _selectedBloodType,
                       decoration: inputStyle(),
                       items: _bloodTypes.map((type) {
                         return DropdownMenuItem(value: type, child: Text(type));
@@ -223,11 +223,11 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     ),
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // =================== SERIAL NUMBER ===================
                   Text("Serial Number", style: titleStyle()),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   TextFormField(
                     controller: _serialNoController,
                     readOnly: _isDonor,
@@ -240,17 +240,17 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     },
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // =================== PHONE ===================
                   Text("Phone Number", style: titleStyle()),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   TextFormField(
                     controller: _phoneNoController,
                     readOnly: _isDonor,
                     keyboardType: TextInputType.phone,
                     decoration: inputStyle().copyWith(
-                      prefixIcon: Icon(Icons.phone, color: Colors.red),
+                      prefixIcon: const Icon(Icons.phone, color: Colors.red),
                     ),
                     validator: (value) {
                       if (!_isDonor && (value == null || value.isEmpty)) {
@@ -260,17 +260,18 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     },
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // =================== LOCATION ===================
                   Text("Location", style: titleStyle()),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   TextFormField(
                     controller: _locationController,
                     readOnly: _isDonor,
                     maxLines: 2,
                     decoration: inputStyle().copyWith(
-                      prefixIcon: Icon(Icons.location_on, color: Colors.red),
+                      prefixIcon:
+                          const Icon(Icons.location_on, color: Colors.red),
                     ),
                     validator: (value) {
                       if (!_isDonor && (value == null || value.isEmpty)) {
@@ -280,27 +281,27 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     },
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // =================== LAST DONATION DATE ===================
                   Text("Last Donation Date", style: titleStyle()),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
 
                   GestureDetector(
                     onTap: () => _selectDate(context),
                     child: AbsorbPointer(
                       absorbing: true,
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 18),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.calendar_today, color: Colors.red),
-                            SizedBox(width: 10),
+                            const Icon(Icons.calendar_today, color: Colors.red),
+                            const SizedBox(width: 10),
                             Text(
                               _lastDonationDate == null
                                   ? "Select date"
@@ -315,14 +316,14 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     ),
                   ),
 
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   // =================== SUBMIT BUTTON ===================
                   GestureDetector(
                     onTap: _isDonor ? null : _submitForm,
                     child: Container(
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(vertical: 18),
+                      padding: const EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
                         color: _isDonor ? Colors.grey : Colors.red,
                         borderRadius: BorderRadius.circular(16),
@@ -330,7 +331,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                       child: Center(
                         child: Text(
                           _isDonor ? "Already Registered" : "Register as Donor",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -340,7 +341,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                     ),
                   ),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

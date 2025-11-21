@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 // ==================== CREATE BLOOD DRIVE REQUEST SCREEN ====================
 
@@ -28,6 +32,8 @@ class _CreateBloodDriveRequestScreenState
   bool _hasPublicAddress = false;
   bool _hasChairs = false;
   bool _hasTables = false;
+
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -69,7 +75,54 @@ class _CreateBloodDriveRequestScreenState
     }
   }
 
-  void _submitRequest() {
+  // void _submitRequest() {
+  //   if (_formKey.currentState!.validate()) {
+  //     if (_requestedDate == null) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text('Please select a requested date'),
+  //           backgroundColor: Colors.orange,
+  //           behavior: SnackBarBehavior.floating,
+  //         ),
+  //       );
+  //       return;
+  //     }
+
+  //     final requestData = {
+  //       'organization_name': _organizationNameController.text,
+  //       'expected_donors': int.parse(_expectedDonorsController.text),
+  //       'district': _districtController.text,
+  //       'location': _locationController.text,
+  //       'contact_person': _contactPersonController.text,
+  //       'contact_number': _contactNumberController.text,
+  //       'contact_email': _contactEmailController.text,
+  //       'has_tents': _hasTents,
+  //       'has_public_address': _hasPublicAddress,
+  //       'has_chairs': _hasChairs,
+  //       'has_tables': _hasTables,
+  //       'requested_date': _requestedDate?.toIso8601String().split('T')[0],
+  //       'additional_notes': _additionalNotesController.text.isEmpty
+  //           ? null
+  //           : _additionalNotesController.text,
+  //     };
+
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Blood drive request submitted successfully!'),
+  //         backgroundColor: Colors.green,
+  //         behavior: SnackBarBehavior.floating,
+  //       ),
+  //     );
+
+  //     print('Request Data: $requestData');
+
+  //     Future.delayed(const Duration(seconds: 2), () {
+  //       Navigator.pop(context);
+  //     });
+  //   }
+  // }
+
+  Future<void> _submitRequest() async {
     if (_formKey.currentState!.validate()) {
       if (_requestedDate == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -100,19 +153,72 @@ class _CreateBloodDriveRequestScreenState
             : _additionalNotesController.text,
       };
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Blood drive request submitted successfully!'),
-          backgroundColor: Colors.green,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-
-      print('Request Data: $requestData');
-
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pop(context);
+      // Show a loading indicator
+      setState(() {
+        _isLoading = true;
       });
+
+      try {
+        // Get your auth token if needed
+        final token = await StorageService.getToken();
+
+        final response = await http.post(
+          Uri.parse(
+              'https://urcs-api.taufeeq.dev/api/blood-donation/drive-requests'),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          body: jsonEncode(requestData),
+        );
+
+        setState(() {
+          _isLoading = false;
+        });
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          // Success
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Blood drive request submitted successfully!'),
+              backgroundColor: Colors.green,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pop(context);
+          });
+
+          print('Response: ${response.body}');
+        } else {
+          // Server returned an error
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                  'Failed to submit request. Status: ${response.statusCode}'),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+
+          print(
+              'Failed to submit request. Status: ${response.statusCode}, Body: ${response.body}');
+        }
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error submitting request: $e'),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        print('Error submitting request: $e');
+      }
     }
   }
 

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:redcross/models/appointment.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class Appointments extends StatefulWidget {
   const Appointments({super.key});
@@ -21,88 +25,137 @@ class _AppointmentsState extends State<Appointments> {
     _loadAppointments();
   }
 
-  void _loadAppointments() {
-    final sampleData = {
-      "success": true,
-      "message": "Appointments retrieved successfully",
-      "data": {
-        "appointments": [
-          {
-            "id": 2,
-            "blood_donor_id": 1,
-            "donor_name": "Joe Biden",
-            "location": "Palm Courts, Plot 7A Lugogo By-Pass, Kampala",
-            "phone_number": "+256751830778",
-            "last_donation_date": "2024-01-31T21:00:00.000000Z",
-            "preferred_blood_bank_id": 2,
-            "preferred_donation_date": "2025-10-31T21:00:00.000000Z",
-            "status": "completed",
-            "time_preference": "Afternoon",
-            "preferred_time": "14:00:00",
-            "notes":
-                "Regular donor, AB+ blood type. Last donation was 3 months ago.",
-            "cancellation_reason": null,
-            "status_label": "Completed",
-            "status_color": "success",
-            "can_be_modified": false,
-            "can_be_cancelled": false,
-            "is_overdue": false,
-            "days_until_appointment": -9,
-            "preferred_blood_bank": {
-              "id": 2,
-              "name": "Gulu Regional Blood Bank",
-              "district": "Gulu",
-              "address": "Gulu Regional Referral Hospital",
-              "phone": "+256-471-432059",
-              "latitude": "2.77777800",
-              "longitude": "32.29777800",
-              "coordinates": {"lat": 2.777778, "lng": 32.297778}
-            }
-          },
-          {
-            "id": 3,
-            "blood_donor_id": 1,
-            "donor_name": "Joe Biden",
-            "location": "Palm Courts, Plot 7A Lugogo By-Pass, Kampala",
-            "phone_number": "+256751830778",
-            "last_donation_date": "2024-01-31T21:00:00.000000Z",
-            "preferred_blood_bank_id": 1,
-            "preferred_donation_date": "2025-11-15T21:00:00.000000Z",
-            "status": "pending",
-            "time_preference": "Morning",
-            "preferred_time": "09:00:00",
-            "notes": "First time donor",
-            "status_label": "Pending",
-            "status_color": "warning",
-            "can_be_modified": true,
-            "can_be_cancelled": true,
-            "is_overdue": false,
-            "days_until_appointment": 5,
-            "preferred_blood_bank": {
-              "id": 1,
-              "name": "Nakaseero Blood Bank",
-              "district": "Kampala",
-              "address": "Uganda Blood Transfusion Service, Nakasero",
-              "phone": "+256-414-346576",
-              "latitude": "0.31750000",
-              "longitude": "32.58580000",
-              "coordinates": {"lat": 0.3175, "lng": 32.5858}
-            }
-          }
-        ]
-      }
-    };
+  // void _loadAppointments() {
+  //   final sampleData = {
+  //     "success": true,
+  //     "message": "Appointments retrieved successfully",
+  //     "data": {
+  //       "appointments": [
+  //         {
+  //           "id": 2,
+  //           "blood_donor_id": 1,
+  //           "donor_name": "Joe Biden",
+  //           "location": "Palm Courts, Plot 7A Lugogo By-Pass, Kampala",
+  //           "phone_number": "+256751830778",
+  //           "last_donation_date": "2024-01-31T21:00:00.000000Z",
+  //           "preferred_blood_bank_id": 2,
+  //           "preferred_donation_date": "2025-10-31T21:00:00.000000Z",
+  //           "status": "completed",
+  //           "time_preference": "Afternoon",
+  //           "preferred_time": "14:00:00",
+  //           "notes":
+  //               "Regular donor, AB+ blood type. Last donation was 3 months ago.",
+  //           "cancellation_reason": null,
+  //           "status_label": "Completed",
+  //           "status_color": "success",
+  //           "can_be_modified": false,
+  //           "can_be_cancelled": false,
+  //           "is_overdue": false,
+  //           "days_until_appointment": -9,
+  //           "preferred_blood_bank": {
+  //             "id": 2,
+  //             "name": "Gulu Regional Blood Bank",
+  //             "district": "Gulu",
+  //             "address": "Gulu Regional Referral Hospital",
+  //             "phone": "+256-471-432059",
+  //             "latitude": "2.77777800",
+  //             "longitude": "32.29777800",
+  //             "coordinates": {"lat": 2.777778, "lng": 32.297778}
+  //           }
+  //         },
+  //         {
+  //           "id": 3,
+  //           "blood_donor_id": 1,
+  //           "donor_name": "Joe Biden",
+  //           "location": "Palm Courts, Plot 7A Lugogo By-Pass, Kampala",
+  //           "phone_number": "+256751830778",
+  //           "last_donation_date": "2024-01-31T21:00:00.000000Z",
+  //           "preferred_blood_bank_id": 1,
+  //           "preferred_donation_date": "2025-11-15T21:00:00.000000Z",
+  //           "status": "pending",
+  //           "time_preference": "Morning",
+  //           "preferred_time": "09:00:00",
+  //           "notes": "First time donor",
+  //           "status_label": "Pending",
+  //           "status_color": "warning",
+  //           "can_be_modified": true,
+  //           "can_be_cancelled": true,
+  //           "is_overdue": false,
+  //           "days_until_appointment": 5,
+  //           "preferred_blood_bank": {
+  //             "id": 1,
+  //             "name": "Nakaseero Blood Bank",
+  //             "district": "Kampala",
+  //             "address": "Uganda Blood Transfusion Service, Nakasero",
+  //             "phone": "+256-414-346576",
+  //             "latitude": "0.31750000",
+  //             "longitude": "32.58580000",
+  //             "coordinates": {"lat": 0.3175, "lng": 32.5858}
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   };
 
+  //   setState(() {
+  //     final data = sampleData['data'] as Map<String, dynamic>?;
+
+  //     final apptList = data?['appointments'] as List? ?? [];
+
+  //     appointments =
+  //         apptList.map((json) => Appointment.fromJson(json)).toList();
+
+  //     isLoading = false;
+  //   });
+  // }
+  Future<void> _loadAppointments() async {
     setState(() {
-      final data = sampleData['data'] as Map<String, dynamic>?;
-
-      final apptList = data?['appointments'] as List? ?? [];
-
-      appointments =
-          apptList.map((json) => Appointment.fromJson(json)).toList();
-
-      isLoading = false;
+      isLoading = true;
     });
+
+    try {
+      final token = await StorageService.getToken();
+
+      final response = await http.get(
+        Uri.parse(
+            'https://urcs-api.taufeeq.dev/api/blood-donation/appointments'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body)['data'];
+
+        final List apptList = data['appointments'] as List? ?? [];
+
+        setState(() {
+          appointments =
+              apptList.map((json) => Appointment.fromJson(json)).toList();
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Network error, please try again.'),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        print(
+            "Failed to fetch appointments. Status: ${response.statusCode}, Body: ${response.body}");
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      // print("Error fetching appointments: $e");
+    }
   }
 
   List<Appointment> get filteredAppointments {
@@ -137,10 +190,6 @@ class _AppointmentsState extends State<Appointments> {
     );
   }
 
-  // ------------------------
-  // FIXED: Safe scroll content
-  // ------------------------
-
   Widget _buildAppointmentDetails(Appointment appointment) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -165,19 +214,55 @@ class _AppointmentsState extends State<Appointments> {
               ),
             ),
 
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Appointment Details',
+            //       style: TextStyle(
+            //         fontSize: screenWidth * 0.06,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //     Container(
+            //       padding:
+            //           const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+            //       decoration: BoxDecoration(
+            //         color: _getStatusColor(appointment.statusColor)
+            //             .withOpacity(0.1),
+            //         borderRadius: BorderRadius.circular(20),
+            //       ),
+            //       child: Text(
+            //         appointment.statusLabel,
+            //         style: TextStyle(
+            //           color: _getStatusColor(appointment.statusColor),
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Appointment Details',
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.06,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Appointment Details',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.06,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis, // prevents overflow
                   ),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: EdgeInsets.symmetric(
+                    horizontal:
+                        screenWidth * 0.02, // responsive horizontal padding
+                    vertical:
+                        screenHeight * 0.008, // responsive vertical padding
+                  ),
                   decoration: BoxDecoration(
                     color: _getStatusColor(appointment.statusColor)
                         .withOpacity(0.1),
@@ -188,9 +273,10 @@ class _AppointmentsState extends State<Appointments> {
                     style: TextStyle(
                       color: _getStatusColor(appointment.statusColor),
                       fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.035, // responsive font size
                     ),
                   ),
-                )
+                ),
               ],
             ),
 
@@ -279,10 +365,6 @@ class _AppointmentsState extends State<Appointments> {
     );
   }
 
-  // ------------------------
-  // Cancel dialog
-  // ------------------------
-
   void _showCancelDialog(Appointment appointment) {
     showDialog(
       context: context,
@@ -353,7 +435,7 @@ class _AppointmentsState extends State<Appointments> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: w * 0.05),
@@ -430,6 +512,98 @@ class _AppointmentsState extends State<Appointments> {
     );
   }
 
+  // Widget _buildAppointmentCard(Appointment appointment, double w, double h) {
+  //   return GestureDetector(
+  //     onTap: () => _showAppointmentDetails(appointment),
+  //     child: Container(
+  //       padding: EdgeInsets.all(w * 0.04),
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.circular(16),
+  //         boxShadow: const [
+  //           BoxShadow(
+  //             color: Colors.black12,
+  //             blurRadius: 8,
+  //           )
+  //         ],
+  //       ),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Text(
+  //                 appointment.preferredBloodBank.name,
+  //                 style: TextStyle(
+  //                     fontSize: w * 0.04, fontWeight: FontWeight.bold),
+  //               ),
+  //               Container(
+  //                 padding:
+  //                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+  //                 decoration: BoxDecoration(
+  //                   color: _getStatusColor(appointment.statusColor)
+  //                       .withOpacity(0.1),
+  //                   borderRadius: BorderRadius.circular(12),
+  //                 ),
+  //                 child: Text(
+  //                   appointment.statusLabel,
+  //                   style: TextStyle(
+  //                       color: _getStatusColor(appointment.statusColor)),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           const SizedBox(height: 8),
+  //           Row(
+  //             children: [
+  //               const Icon(Icons.calendar_today, size: 16),
+  //               const SizedBox(width: 6),
+  //               Text(DateFormat('MMM d, yyyy')
+  //                   .format(appointment.preferredDonationDate)),
+  //             ],
+  //           ),
+  //           Row(
+  //             children: [
+  //               const Icon(Icons.access_time, size: 16),
+  //               const SizedBox(width: 6),
+  //               Text(appointment.timePreference),
+  //             ],
+  //           ),
+  //           Row(
+  //             children: [
+  //               const Icon(Icons.location_on, size: 16),
+  //               const SizedBox(width: 6),
+  //               Expanded(child: Text(appointment.preferredBloodBank.district)),
+  //             ],
+  //           ),
+  //           if (appointment.daysUntilAppointment > 0 &&
+  //               appointment.status.toLowerCase() == 'pending')
+  //             Container(
+  //               padding:
+  //                   const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+  //               margin: const EdgeInsets.only(top: 10),
+  //               decoration: BoxDecoration(
+  //                   color: Colors.blue[50],
+  //                   borderRadius: BorderRadius.circular(8)),
+  //               child: Row(
+  //                 children: [
+  //                   const Icon(Icons.info_outline,
+  //                       size: 16, color: Colors.blue),
+  //                   const SizedBox(width: 6),
+  //                   Text(
+  //                     "${appointment.daysUntilAppointment} day(s) remaining",
+  //                     style: const TextStyle(color: Colors.blue),
+  //                   ),
+  //                 ],
+  //               ),
+  //             )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildAppointmentCard(Appointment appointment, double w, double h) {
     return GestureDetector(
       onTap: () => _showAppointmentDetails(appointment),
@@ -438,7 +612,7 @@ class _AppointmentsState extends State<Appointments> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 8,
@@ -448,13 +622,17 @@ class _AppointmentsState extends State<Appointments> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Top row with blood bank name and status
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  appointment.preferredBloodBank.name,
-                  style: TextStyle(
-                      fontSize: w * 0.04, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    appointment.preferredBloodBank.name,
+                    style: TextStyle(
+                        fontSize: w * 0.04, fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Container(
                   padding:
@@ -473,28 +651,51 @@ class _AppointmentsState extends State<Appointments> {
               ],
             ),
             const SizedBox(height: 8),
+
+            // Preferred Donation Date
             Row(
               children: [
                 const Icon(Icons.calendar_today, size: 16),
                 const SizedBox(width: 6),
-                Text(DateFormat('MMM d, yyyy')
-                    .format(appointment.preferredDonationDate)),
+                Expanded(
+                  child: Text(
+                    DateFormat('MMM d, yyyy')
+                        .format(appointment.preferredDonationDate),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
+
+            // Time Preference
             Row(
               children: [
                 const Icon(Icons.access_time, size: 16),
                 const SizedBox(width: 6),
-                Text(appointment.timePreference),
+                Expanded(
+                  child: Text(
+                    appointment.timePreference,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
+
+            // Location
             Row(
               children: [
                 const Icon(Icons.location_on, size: 16),
                 const SizedBox(width: 6),
-                Expanded(child: Text(appointment.preferredBloodBank.district)),
+                Expanded(
+                  child: Text(
+                    appointment.preferredBloodBank.district,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
+
+            // Days remaining info
             if (appointment.daysUntilAppointment > 0 &&
                 appointment.status.toLowerCase() == 'pending')
               Container(
@@ -509,9 +710,12 @@ class _AppointmentsState extends State<Appointments> {
                     const Icon(Icons.info_outline,
                         size: 16, color: Colors.blue),
                     const SizedBox(width: 6),
-                    Text(
-                      "${appointment.daysUntilAppointment} day(s) remaining",
-                      style: const TextStyle(color: Colors.blue),
+                    Expanded(
+                      child: Text(
+                        "${appointment.daysUntilAppointment} day(s) remaining",
+                        style: const TextStyle(color: Colors.blue),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),

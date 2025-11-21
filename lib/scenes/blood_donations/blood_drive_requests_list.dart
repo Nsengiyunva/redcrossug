@@ -1,10 +1,14 @@
 // ==================== BLOOD DRIVE REQUESTS LIST SCREEN ====================
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:redcross/models/blood_drive_request.dart';
 import 'package:redcross/scenes/blood_donations/blood_drive_details.dart';
 import 'package:redcross/scenes/blood_donations/created_blood_drive_request_screen.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class BloodDriveRequestsList extends StatefulWidget {
   const BloodDriveRequestsList({super.key});
@@ -15,8 +19,9 @@ class BloodDriveRequestsList extends StatefulWidget {
 }
 
 class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
-  List<BloodDriveRequest> requests = [];
   bool isLoading = true;
+  List<BloodDriveRequest> requests = [];
+
   int currentPage = 1;
   int lastPage = 1;
 
@@ -26,70 +31,115 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
     _loadRequests();
   }
 
-  void _loadRequests() {
-    // Sample data - replace with actual API call
-    final sampleData = {
-      "success": true,
-      "data": {
-        "current_page": 1,
-        "data": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "organization_name": "Red Cross Rwanda - Kigali Branch",
-            "expected_donors": 150,
-            "district": "Gasabo",
-            "location": "Kigali Convention Centre, Main Hall",
-            "contact_person": "Marie Uwimana",
-            "contact_number": "+250788123456",
-            "contact_email": "marie.uwimana@redcross.rw",
-            "has_tents": true,
-            "has_public_address": true,
-            "has_chairs": false,
-            "has_tables": true,
-            "status": "approved",
-            "requested_date": "2025-12-14T21:00:00.000000Z",
-            "additional_notes":
-                "We need assistance with chairs as our venue doesn't provide them.",
-            "admin_notes": null,
-            "cancellation_reason": null,
-            "cancelled_at": null,
-            "reviewed_at": "2025-10-31T15:11:49.000000Z",
-            "reviewed_by": {
-              "id": 3,
-              "name": "Admin User",
-              "first_name": "Admin",
-              "last_name": "User",
-              "email": "admin@example.com",
-              "membership_id": null,
-              "phone_no": "+256700000001",
-              "nationality": "Ugandan",
-            },
-            "created_at": "2025-10-31T14:59:36.000000Z",
-            "updated_at": "2025-10-31T15:11:49.000000Z",
-            "user": {
-              "id": 1,
-              "name": "Joe Biden",
-              "first_name": "Joe",
-              "last_name": "Biden",
-              "email": "nsambataufeeq@gmail.com",
-              "membership_id": "URCS-102/M/3768/2024",
-              "phone_no": "+256751830778",
-              "nationality": "Uganda",
-            }
-          }
-        ],
-        "last_page": 1,
-      }
-    };
+  // void _loadRequests() {
+  //   // Sample data - replace with actual API call
+  //   final sampleData = {
+  //     "success": true,
+  //     "data": {
+  //       "current_page": 1,
+  //       "data": [
+  //         {
+  //           "id": 1,
+  //           "user_id": 1,
+  //           "organization_name": "Red Cross Rwanda - Kigali Branch",
+  //           "expected_donors": 150,
+  //           "district": "Gasabo",
+  //           "location": "Kigali Convention Centre, Main Hall",
+  //           "contact_person": "Marie Uwimana",
+  //           "contact_number": "+250788123456",
+  //           "contact_email": "marie.uwimana@redcross.rw",
+  //           "has_tents": true,
+  //           "has_public_address": true,
+  //           "has_chairs": false,
+  //           "has_tables": true,
+  //           "status": "approved",
+  //           "requested_date": "2025-12-14T21:00:00.000000Z",
+  //           "additional_notes":
+  //               "We need assistance with chairs as our venue doesn't provide them.",
+  //           "admin_notes": null,
+  //           "cancellation_reason": null,
+  //           "cancelled_at": null,
+  //           "reviewed_at": "2025-10-31T15:11:49.000000Z",
+  //           "reviewed_by": {
+  //             "id": 3,
+  //             "name": "Admin User",
+  //             "first_name": "Admin",
+  //             "last_name": "User",
+  //             "email": "admin@example.com",
+  //             "membership_id": null,
+  //             "phone_no": "+256700000001",
+  //             "nationality": "Ugandan",
+  //           },
+  //           "created_at": "2025-10-31T14:59:36.000000Z",
+  //           "updated_at": "2025-10-31T15:11:49.000000Z",
+  //           "user": {
+  //             "id": 1,
+  //             "name": "Joe Biden",
+  //             "first_name": "Joe",
+  //             "last_name": "Biden",
+  //             "email": "nsambataufeeq@gmail.com",
+  //             "membership_id": "URCS-102/M/3768/2024",
+  //             "phone_no": "+256751830778",
+  //             "nationality": "Uganda",
+  //           }
+  //         }
+  //       ],
+  //       "last_page": 1,
+  //     }
+  //   };
 
+  //   setState(() {
+  //     // requests = (sampleData['data']?['data'] as List)
+  //     //     .map((json) => BloodDriveRequest.fromJson(json))
+  //     //     .toList();
+  //     // lastPage = sampleData['data']['last_page'];
+  //     isLoading = false;
+  //   });
+  // }
+
+  Future<void> _loadRequests() async {
     setState(() {
-      // requests = (sampleData['data']?['data'] as List)
-      //     .map((json) => BloodDriveRequest.fromJson(json))
-      //     .toList();
-      // lastPage = sampleData['data']['last_page'];
-      isLoading = false;
+      isLoading = true;
     });
+
+    try {
+      final token = await StorageService.getToken();
+
+      final response = await http.get(
+        Uri.parse(
+            'https://urcs-api.taufeeq.dev/api/blood-donation/drive-requests'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData =
+            jsonDecode(response.body)['data'];
+
+        final List dataList = responseData['data'] as List? ?? [];
+
+        setState(() {
+          requests =
+              dataList.map((json) => BloodDriveRequest.fromJson(json)).toList();
+          lastPage = responseData['last_page'] ?? 1;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        print(
+            'Failed to load requests. Status: ${response.statusCode}, Body: ${response.body}');
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching requests: $e');
+    }
   }
 
   void _navigateToDetails(BloodDriveRequest request) {

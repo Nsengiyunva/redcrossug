@@ -117,17 +117,17 @@ class SignIn extends StatelessWidget {
                 const SizedBox(height: 45),
 
                 // ---------------------- Keep Me Signed In + Forgot Password ----------------------
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.check_box_rounded,
                           color: AppColors.primaryRedColor,
                           size: 22,
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         Text(
                           "Keep me Signed In",
                           style: TextStyle(
