@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:redcross/models/incident.dart';
-import 'package:redcross/models/incident_user.dart';
+import 'package:redcross/scenes/disasters/disaster_list.dart';
+// import 'package:redcross/models/incident_user.dart';
 import 'package:redcross/scenes/incidents/create_incident_report.dart';
 import 'package:redcross/scenes/incidents/incident_details.dart';
+import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class IncidentList extends StatefulWidget {
   const IncidentList({super.key});
@@ -18,98 +24,73 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
   String? selectedStatus;
   String? selectedDistrict;
 
-  final List<Incident> allReports = [
-    Incident(
-      id: 8,
-      title: 'Lightning in Bunyangabu',
-      description: 'Heavy Storms/ Hailstorms in Bunyangabu',
-      incidentType: 'lightning',
-      severityLevel: 'serious',
-      status: 'submitted',
-      district: 'Bunyangabu',
-      locationAddress: 'Bunyagabu',
-      contactPhone: '0762775625',
-      latitude: 0.48710000,
-      longitude: 30.20510000,
-      timeSinceReported: '3 days ago',
-      createdAt: DateTime.parse('2025-11-11T10:51:48.000000Z'),
-      isEmergency: true,
-      priorityScore: 130,
-      additionalNotes: 'N/A',
-      media: [],
-      statusHistory: [],
-      user: IncidentUser(
-        id: 1,
-        name: 'Joe Biden',
-        email: 'nsambataufeeq@gmail.com',
-        phoneNo: '+256751830778',
-        membershipId: 'URCS-102/M/3768/2024',
-      ),
-    ),
-    Incident(
-      id: 7,
-      title: 'Lightning in Bunyangabu',
-      description: 'Heavy Storms/ Hailstorms in Bunyangabu',
-      incidentType: 'lightning',
-      severityLevel: 'serious',
-      status: 'resolved',
-      district: 'Bunyangabu',
-      locationAddress: 'Bunyagabu',
-      contactPhone: '0762775625',
-      latitude: 0.48710000,
-      longitude: 30.20510000,
-      timeSinceReported: '1 week ago',
-      createdAt: DateTime.parse('2025-11-06T14:37:18.000000Z'),
-      isEmergency: true,
-      priorityScore: 130,
-      additionalNotes: 'N/A',
-      media: [],
-      statusHistory: [],
-      user: IncidentUser(
-        id: 1,
-        name: 'Joe Biden',
-        email: 'nsambataufeeq@gmail.com',
-        phoneNo: '+256751830778',
-        membershipId: 'URCS-102/M/3768/2024',
-      ),
-    ),
-    Incident(
-      id: 6,
-      title: 'Heavy Storms/ Hailstorms in Bunyangabu',
-      description: 'Heavy Storms/ Hailstorms in Bunyangabu',
-      incidentType: 'heavy_storms_hailstorms',
-      severityLevel: 'serious',
-      status: 'submitted',
-      district: 'Bunyangabu',
-      locationAddress: 'Bunyagabu',
-      contactPhone: '0762775625',
-      latitude: 0.48710000,
-      longitude: 30.20510000,
-      timeSinceReported: '1 week ago',
-      createdAt: DateTime.parse('2025-11-06T14:36:17.000000Z'),
-      isEmergency: true,
-      priorityScore: 130,
-      additionalNotes: 'N/A',
-      media: [],
-      statusHistory: [],
-      user: IncidentUser(
-        id: 1,
-        name: 'Joe Biden',
-        email: 'nsambataufeeq@gmail.com',
-        phoneNo: '+256751830778',
-        membershipId: 'URCS-102/M/3768/2024',
-      ),
-    ),
-  ];
+  bool isLoading = true;
+
+  List<Incident> allReports = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchIncidents();
+  }
+
+  Future<void> fetchIncidents() async {
+    final token = await StorageService.getToken();
+
+    if (token == null || token.isEmpty) {
+      return;
+    }
+
+    try {
+      final response = await http.get(
+        Uri.parse("https://urcs-api.taufeeq.dev/api/incident-reports"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+      );
+
+      // print("STATUS: ${response.statusCode}");
+      // print("BODY: ${response.body}"); // 👀 See the response here
+
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+
+        final List incidentList = decoded["data"]["data"];
+
+        setState(() {
+          allReports =
+              incidentList.map((json) => Incident.fromJson(json)).toList();
+          isLoading = false;
+        });
+      } else {
+        throw Exception("Failed to load");
+      }
+    } catch (e) {
+      // print("FETCH ERROR: $e");
+      setState(() => isLoading = false);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to fetch incidents'),
+          backgroundColor: AppColors.primaryRedColor,
+        ),
+      );
+    }
+  }
 
   List<Incident> get filteredReports {
     return allReports.where((report) {
       bool matchesType = selectedIncidentType == null ||
           report.incidentType == selectedIncidentType;
+
       bool matchesSeverity =
           selectedSeverity == null || report.severityLevel == selectedSeverity;
+
       bool matchesStatus =
           selectedStatus == null || report.status == selectedStatus;
+
       bool matchesDistrict =
           selectedDistrict == null || report.district == selectedDistrict;
 
@@ -129,7 +110,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
   Color _getSeverityColor(String severity) {
     switch (severity.toLowerCase()) {
       case 'critical':
-        return Colors.red;
+        return AppColors.primaryRedColor;
       case 'serious':
         return Colors.orange;
       case 'moderate':
@@ -158,6 +139,14 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(color: AppColors.primaryRedColor),
+        ),
+      );
+    }
+
     final hasActiveFilters = selectedIncidentType != null ||
         selectedSeverity != null ||
         selectedStatus != null ||
@@ -165,11 +154,16 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => DisasterList()),
+            );
+          },
         ),
         title: const Text(
           'Incident Reports',
@@ -180,10 +174,12 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.search, color: Colors.black),
+          //   onPressed: () {
+
+          //   },
+          // ),
         ],
       ),
       body: Column(
@@ -203,7 +199,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                   child: Text(
                     'ALL REPORTS',
                     style: TextStyle(
-                      color: !showFilters ? Colors.red : Colors.grey,
+                      color: !showFilters
+                          ? AppColors.primaryRedColor
+                          : Colors.grey,
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
@@ -291,7 +289,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                           setState(() {});
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: AppColors.primaryRedColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -299,9 +297,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                         child: const Text(
                           'View Reports',
                           style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.whiteColor),
                         ),
                       ),
                     ),
@@ -362,10 +360,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             ),
           );
         },
-        backgroundColor: Colors.red,
-        child: const Icon(Icons.add),
+        backgroundColor: AppColors.primaryRedColor,
+        child: const Icon(Icons.add, color: AppColors.whiteColor),
       ),
-      // bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -564,37 +561,6 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade300,
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.report_outlined), label: 'Reports'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.medical_services_outlined), label: 'First Aid'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), label: 'Profile'),
-        ],
       ),
     );
   }

@@ -12,4 +12,14 @@ class IncidentUser {
     required this.phoneNo,
     this.membershipId,
   });
+
+  factory IncidentUser.fromJson(Map<String, dynamic> json) {
+    return IncidentUser(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phoneNo: json['phone_no'] ?? '',
+      membershipId: json['membership_id'],
+    );
+  }
 }

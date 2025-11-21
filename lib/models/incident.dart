@@ -48,4 +48,43 @@ class Incident {
     required this.statusHistory,
     required this.user,
   });
+
+  factory Incident.fromJson(Map<String, dynamic> json) {
+    return Incident(
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      incidentType: json['incident_type'] ?? '',
+      severityLevel: json['severity_level'] ?? '',
+      status: json['status'] ?? '',
+      district: json['district'] ?? '',
+      locationAddress: json['location_address'] ?? '',
+      contactPhone: json['contact_phone'] ?? '',
+      latitude: double.tryParse(json['latitude'].toString()) ?? 0.0,
+      longitude: double.tryParse(json['longitude'].toString()) ?? 0.0,
+      timeSinceReported: json['time_since_reported'] ?? '',
+      createdAt: DateTime.parse(json['created_at']),
+      isEmergency: json['is_emergency'] ?? false,
+      priorityScore: json['priority_score'] ?? 0,
+      additionalNotes: json['additional_notes'],
+      estimatedAffectedPeople: json['estimated_affected_people'],
+      estimatedCasualties: json['estimated_casualties'],
+      media: json['media'] != null
+          ? (json['media'] as List).map((m) => MediaFile.fromJson(m)).toList()
+          : [],
+      statusHistory: json['status_history'] != null
+          ? (json['status_history'] as List)
+              .map((e) => StatusHistory.fromJson(e))
+              .toList()
+          : [],
+      user: json['user'] != null
+          ? IncidentUser.fromJson(json['user'])
+          : IncidentUser(
+              id: json['user_id'] ?? 0,
+              name: 'Reporter',
+              email: '',
+              phoneNo: '',
+            ),
+    );
+  }
 }
