@@ -6,7 +6,6 @@ import 'package:redcross/models/blood_bank.dart';
 
 import 'package:redcross/scenes/blood_donations/appointments.dart';
 import 'package:redcross/scenes/blood_donations/book_appointment.dart';
-import 'package:redcross/utils/storage_service.dart';
 
 class BloodBanksList extends StatefulWidget {
   const BloodBanksList({super.key});

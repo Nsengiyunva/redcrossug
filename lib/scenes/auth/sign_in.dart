@@ -26,9 +26,6 @@ class SignIn extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       body: Obx(() {
-        // =====================================================
-        // Loading Screen
-        // =====================================================
         if (_loginController.isLoggingIn.value) {
           return SizedBox(
             height: size.height,
@@ -52,9 +49,6 @@ class SignIn extends StatelessWidget {
           );
         }
 
-        // =====================================================
-        // Sign In Form
-        // =====================================================
         return SingleChildScrollView(
           child: Container(
             width: double.infinity,
@@ -141,7 +135,7 @@ class SignIn extends StatelessWidget {
                     ),
                     // TextButton(
                     //   onPressed: () {
-                    //     // TODO: Add forgot password route
+                    //
                     //   },
                     //   child: const Text(
                     //     "Forgot Password",

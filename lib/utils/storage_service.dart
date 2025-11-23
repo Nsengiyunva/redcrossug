@@ -6,6 +6,18 @@ import 'package:intl/intl.dart';
 class StorageService {
   static const String _key = "user_details";
 
+  static Future<void> cacheData(String key, List<dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, jsonEncode(data));
+  }
+
+  static Future<List<dynamic>?> getCachedData(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString(key);
+    if (data == null) return null;
+    return jsonDecode(data);
+  }
+
   static Future<void> saveToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);

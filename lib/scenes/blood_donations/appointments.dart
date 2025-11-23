@@ -64,8 +64,8 @@ class _AppointmentsState extends State<Appointments> {
             behavior: SnackBarBehavior.floating,
           ),
         );
-        print(
-            "Failed to fetch appointments. Status: ${response.statusCode}, Body: ${response.body}");
+        // print(
+        //     "Failed to fetch appointments. Status: ${response.statusCode}, Body: ${response.body}");
       }
     } catch (e) {
       setState(() {
@@ -130,35 +130,6 @@ class _AppointmentsState extends State<Appointments> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Text(
-            //       'Appointment Details',
-            //       style: TextStyle(
-            //         fontSize: screenWidth * 0.06,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //     Container(
-            //       padding:
-            //           const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
-            //       decoration: BoxDecoration(
-            //         color: _getStatusColor(appointment.statusColor)
-            //             .withOpacity(0.1),
-            //         borderRadius: BorderRadius.circular(20),
-            //       ),
-            //       child: Text(
-            //         appointment.statusLabel,
-            //         style: TextStyle(
-            //           color: _getStatusColor(appointment.statusColor),
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //     )
-            //   ],
-            // ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

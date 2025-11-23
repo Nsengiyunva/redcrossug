@@ -297,7 +297,7 @@ class _BookAppointmentScreenState extends State<BookAppointment> {
                       ),
                       SizedBox(height: screenHeight * 0.01),
                       DropdownButtonFormField<String>(
-                        value: _timePreference,
+                        initialValue: _timePreference,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,

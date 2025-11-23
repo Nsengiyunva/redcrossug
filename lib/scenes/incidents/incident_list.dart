@@ -173,7 +173,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
+        actions: const [
           // IconButton(
           //   icon: const Icon(Icons.search, color: Colors.black),
           //   onPressed: () {

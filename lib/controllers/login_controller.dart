@@ -31,15 +31,17 @@ class LoginController {
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
-      "phone_no": "+256${telephoneController.text}",
-      "password": passwordController.text
+      "phone_no": "+256773917523", //"+256${telephoneController.text}",
+      "password": "#Moon2025#" //passwordController.text
     };
 
     try {
       final response = await http.post(
-        Uri.parse(
-            "${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.login}"),
-        headers: {'Content-Type': 'application/json'},
+        Uri.parse("https://urcs-api.taufeeq.dev/api/auth/login"),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
         body: jsonEncode(payload),
       );
 
@@ -60,6 +62,7 @@ class LoginController {
           arguments: {'phone_number': responseData["user"]["phone_no"]});
     } catch (e) {
       isLoggingIn(false);
+      print("errro $e");
       Get.snackbar('Error', 'An error occurred while signing the form. $e');
     }
   }

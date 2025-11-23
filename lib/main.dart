@@ -45,9 +45,11 @@ import 'package:redcross/scenes/top_subscription.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   await Firebase.initializeApp();
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -66,9 +68,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       // title: 'Red Cross Uganda',
-      navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
+      // navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
       debugShowCheckedModeBanner: false,
-      //SignIn()
       routes: {
         "/home": (context) => const Home(),
         "/login": (context) => SignIn(),

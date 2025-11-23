@@ -1,7 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:redcross/models/branch.dart';
+import 'package:redcross/models/district.dart';
+import 'package:redcross/models/specialization.dart';
 import 'dart:io';
+import 'package:shimmer/shimmer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class VolunteerRegister extends StatefulWidget {
   const VolunteerRegister({super.key});
@@ -49,7 +57,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
 
   // Dropdown and Selection Values
   String _selectedGender = 'Male';
-  String? _selectedBranch;
+  int? _selectedBranch;
   String? _selectedSpecialization;
   String? _selectedEducationLevel;
 
@@ -58,6 +66,13 @@ class _RegistrationFormState extends State<VolunteerRegister> {
   File? _passportPhoto;
 
   final ImagePicker _picker = ImagePicker();
+
+  List<Branch> branches = [];
+  List<District> districts = [];
+  List<Specialization> specializations = [];
+  // List<EducationLevel> educationLevels = [];
+
+  bool isLoading = true;
 
   @override
   void dispose() {
@@ -79,6 +94,95 @@ class _RegistrationFormState extends State<VolunteerRegister> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAllDropDowns();
+  }
+
+  Future<void> _loadAllDropDowns() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final token = await StorageService.getToken();
+
+    // final cachedBranches = await StorageService.getCachedData("branches");
+    // final cachedDistricts = await StorageService.getCachedData("districts");
+    // final cachedSpecs = await StorageService.getCachedData("specializations");
+    // final cachedEdu = await StorageService.getCachedData("educationLevels");
+
+    // if (cachedBranches != null &&
+    //     cachedDistricts != null &&
+    //     cachedSpecs != null &&
+    //     cachedEdu != null) {
+    //   setState(() {
+    //     branches = cachedBranches.map((e) => Branch.fromJson(e)).toList();
+    //     districts = cachedDistricts.map((e) => District.fromJson(e)).toList();
+    //     specializations =
+    //         cachedSpecs.map((e) => Specialization.fromJson(e)).toList();
+    //     isLoading = false;
+    //   });
+    //   return;
+    // }
+
+    try {
+      final responses = await Future.wait([
+        http.get(
+          Uri.parse('https://urcs-api.taufeeq.dev/api/vms/branches'),
+          headers: {"Authorization": "Bearer $token"},
+        ),
+        http.get(
+          Uri.parse('https://urcs-api.taufeeq.dev/api/vms/districts'),
+          headers: {"Authorization": "Bearer $token"},
+        ),
+        http.get(
+          Uri.parse('https://urcs-api.taufeeq.dev/api/vms/specializations'),
+          headers: {"Authorization": "Bearer $token"},
+        ),
+      ]);
+
+      final branchesParsedJson = jsonDecode(responses[0].body)['data'];
+      final districtsParsedJson = jsonDecode(responses[1].body)['data'];
+      final specsParsedJson = jsonDecode(responses[2].body)['data'];
+
+      final districtsJson = districtsParsedJson['choices']['districts'];
+      final levelsJson = districtsParsedJson['choices']['qualifications'];
+      // final languagesJson = districtsParsedJson['choices']['languages'];
+
+      var x =
+          branchesParsedJson.map<Branch>((e) => Branch.fromJson(e)).toList();
+
+      print("branches $branchesParsedJson");
+      print(x);
+
+      // setState(() {
+      //   branches =
+      //       branchesParsedJson.map<Branch>((e) => Branch.fromJson(e)).toList();
+
+      //   districts =
+      //       districtsJson.map<District>((e) => District.fromJson(e)).toList();
+
+      //   specializations = specsParsedJson
+      //       .map<Specialization>((e) => Specialization.fromJson(e))
+      //       .toList();
+      // });
+
+      // Cache for future fast loads
+      // await StorageService.cacheData(
+      //     "branches", branches.map((e) => e.toJson()).toList());
+      // await StorageService.cacheData(
+      //     "districts", districts.map((e) => e.toJson()).toList());
+      // await StorageService.cacheData(
+      //     "specializations", specializations.map((e) => e.toJson()).toList());
+
+      setState(() => isLoading = false);
+    } catch (e) {
+      setState(() => isLoading = false);
+      print("Error loading dropdowns: $e");
+    }
   }
 
   Future<void> _pickQualificationFile() async {
@@ -138,9 +242,29 @@ class _RegistrationFormState extends State<VolunteerRegister> {
       // print('Education Level: $_selectedEducationLevel');
       // print('References: ${_referencesController.text}');
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registration submitted successfully!')),
-      );
+      final payload = {
+        "firstname": _firstNameController.text,
+        "surname": _surnameController.text,
+        "email": _emailController.text,
+        "phone": _phoneController.text,
+        "password1": _passwordController.text,
+        "password2": _passwordController.text,
+        "dob": _dateOfBirthController.text,
+        "gender": _selectedGender,
+        "district": _districtController.text,
+        "branch": _selectedBranch,
+        "specialization": _keySpecializationController.text,
+        "highest_qualification": _selectedEducationLevel,
+        "relevant_skills": _otherSkillsController.text,
+        "languages": _otherLanguageController.text,
+        "availability": "Immediate",
+      };
+
+      print("payload $payload");
+
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(content: Text('Registration submitted successfully!')),
+      // );
     }
   }
 
@@ -170,11 +294,29 @@ class _RegistrationFormState extends State<VolunteerRegister> {
     });
   }
 
+  Widget shimmerDropdown() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.white,
+      child: Container(
+        height: 55,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: Colors.grey.shade300,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // print('b $branches');
+    // print('s $specializations');
+    // print('districts $districts');
+
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Registration Form'),
+          title: const Text('Volunteer Registration Form'),
           backgroundColor: AppColors.bgColor,
         ),
         body: Theme(
@@ -417,30 +559,52 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                       Row(
                         children: [
                           Expanded(
-                            child: DropdownButtonFormField<String>(
-                              initialValue: _selectedBranch,
-                              decoration: const InputDecoration(
-                                labelText: 'URCS Branch',
-                                hintText: 'Choose a Branch',
-                                border: OutlineInputBorder(),
-                              ),
-                              items: ['Kampala', 'Entebbe', 'Jinja', 'Mbarara']
-                                  .map((branch) => DropdownMenuItem(
-                                      value: branch, child: Text(branch)))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedBranch = value;
-                                });
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please select branch';
-                                }
-                                return null;
-                              },
+                              child: DropdownButtonFormField<int>(
+                            initialValue: _selectedBranch,
+                            decoration: const InputDecoration(
+                              labelText: 'URCS Branch',
+                              border: OutlineInputBorder(),
                             ),
-                          ),
+                            isExpanded: true,
+                            items: branches
+                                .map((branch) => DropdownMenuItem(
+                                      value: branch.id,
+                                      child: Text(branch.name),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedBranch = value;
+                              });
+                            },
+                            validator: (value) =>
+                                value == null ? 'Please select a branch' : null,
+                          )
+
+                              // child: DropdownButtonFormField<String>(
+                              //   initialValue: _selectedBranch,
+                              //   decoration: const InputDecoration(
+                              //     labelText: 'URCS Branch',
+                              //     hintText: 'Choose a Branch',
+                              //     border: OutlineInputBorder(),
+                              //   ),
+                              //   items: ['Kampala', 'Entebbe', 'Jinja', 'Mbarara']
+                              //       .map((branch) => DropdownMenuItem(
+                              //           value: branch, child: Text(branch)))
+                              //       .toList(),
+                              //   onChanged: (value) {
+                              //     setState(() {
+                              //       _selectedBranch = value;
+                              //     });
+                              //   },
+                              //   validator: (value) {
+                              //     if (value == null || value.isEmpty) {
+                              //       return 'Please select branch';
+                              //     }
+                              //     return null;
+                              //   },
+                              // ),
+                              ),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -696,3 +860,343 @@ class _RegistrationFormState extends State<VolunteerRegister> {
         ));
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:dio/dio.dart';
+// import 'package:hive/hive.dart';
+// import 'package:shimmer/shimmer.dart';
+
+// /// ------------------------------------------------------
+// /// MODELS
+// /// ------------------------------------------------------
+
+// class Branch {
+//   final int id;
+//   final String name;
+//   final String districts;
+//   final double? latitude;
+//   final double? longitude;
+
+//   Branch({
+//     required this.id,
+//     required this.name,
+//     required this.districts,
+//     required this.latitude,
+//     required this.longitude,
+//   });
+
+//   factory Branch.fromJson(Map<String, dynamic> json) => Branch(
+//         id: json['id'] ?? 0,
+//         name: json['name'] ?? '',
+//         districts: json['districts'] ?? '',
+//         latitude: json['latitude'] == null
+//             ? null
+//             : (json['latitude'] as num).toDouble(),
+//         longitude: json['longitude'] == null
+//             ? null
+//             : (json['longitude'] as num).toDouble(),
+//       );
+// }
+
+// class District {
+//   final int id;
+//   final String name;
+
+//   District({required this.id, required this.name});
+
+//   factory District.fromJson(Map<String, dynamic> json, int id) =>
+//       District(id: id, name: json['name'] ?? json['value'] ?? '');
+// }
+
+// class Qualification {
+//   final int id;
+//   final String name;
+
+//   Qualification({required this.id, required this.name});
+
+//   factory Qualification.fromJson(Map<String, dynamic> json) => Qualification(
+//         id: json['id'] ?? 0,
+//         name: json['name'] ?? '',
+//       );
+// }
+
+// class LanguageModel {
+//   final int id;
+//   final String name;
+
+//   LanguageModel({
+//     required this.id,
+//     required this.name,
+//   });
+
+//   factory LanguageModel.fromJson(Map<String, dynamic> json) =>
+//       LanguageModel(id: json['id'] ?? 0, name: json['name'] ?? '');
+// }
+
+// class Specialization {
+//   final int id;
+//   final String name;
+
+//   Specialization({
+//     required this.id,
+//     required this.name,
+//   });
+
+//   factory Specialization.fromJson(Map<String, dynamic> json) =>
+//       Specialization(id: json['id'] ?? 0, name: json['name'] ?? '');
+// }
+
+// /// ------------------------------------------------------
+// /// API SERVICE WITH CACHING
+// /// ------------------------------------------------------
+
+// class ApiService {
+//   final Dio dio = Dio(
+//     BaseOptions(
+//       baseUrl: "https://urcs-api.taufeeq.dev/api",
+//       connectTimeout: const Duration(seconds: 60),
+//       receiveTimeout: const Duration(seconds: 60),
+//       sendTimeout: const Duration(seconds: 60),
+//     ),
+//   );
+
+//   /// Generic fetch + cache
+//   Future<List<T>> fetchAndCache<T>({
+//     required String endpoint,
+//     required String cacheKey,
+//     required T Function(Map<String, dynamic>) map,
+//     List<dynamic> Function(Map<String, dynamic>)? extractList,
+//   }) async {
+//     final box = await Hive.openBox(cacheKey);
+
+//     // Return cached data if available
+//     if (box.isNotEmpty) {
+//       final cached = box.get('data') as List;
+//       return cached.map((e) => map(Map<String, dynamic>.from(e))).toList();
+//     }
+
+//     // Fetch from API
+//     final response = await dio.get(endpoint);
+//     final rawData = response.data['data'];
+
+//     final dataList =
+//         extractList != null ? extractList(rawData) : rawData as List;
+
+//     // Convert to Map<String, dynamic> before caching
+//     final jsonSafeData =
+//         dataList.map((e) => Map<String, dynamic>.from(e)).toList();
+
+//     // Save to Hive
+//     await box.put('data', jsonSafeData);
+
+//     return jsonSafeData.map((e) => map(e)).toList();
+//   }
+
+//   Future<List<Branch>> getBranches() => fetchAndCache(
+//         endpoint: "/vms/branches",
+//         cacheKey: "branches_cache",
+//         map: Branch.fromJson,
+//       );
+
+//   Future<List<District>> getDistricts() async {
+//     final list = await fetchAndCache<District>(
+//       endpoint: "/vms/districts",
+//       cacheKey: "districts_cache",
+//       map: (json) => District.fromJson(json, 0), // temporary ID
+//       extractList: (data) => data['choices']['districts'] as List,
+//     );
+
+//     // Assign sequential unique IDs
+//     for (int i = 0; i < list.length; i++) {
+//       list[i] = District(id: i + 1, name: list[i].name);
+//     }
+
+//     return list;
+//   }
+
+//   Future<List<Qualification>> getQualifications() => fetchAndCache(
+//         endpoint: "/vms/qualifications",
+//         cacheKey: "qualifications_cache",
+//         map: Qualification.fromJson,
+//       );
+
+//   Future<List<LanguageModel>> getLanguages() => fetchAndCache(
+//         endpoint: "/vms/languages",
+//         cacheKey: "languages_cache",
+//         map: LanguageModel.fromJson,
+//       );
+
+//   Future<List<Specialization>> getSpecializations() => fetchAndCache(
+//         endpoint: "/vms/specializations",
+//         cacheKey: "specializations_cache",
+//         map: Specialization.fromJson,
+//       );
+// }
+
+// /// ------------------------------------------------------
+// /// SHIMMER LOADER WIDGET
+// /// ------------------------------------------------------
+
+// class ShimmerDropdown extends StatelessWidget {
+//   const ShimmerDropdown({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Shimmer.fromColors(
+//       baseColor: Colors.grey.shade300,
+//       highlightColor: Colors.grey.shade100,
+//       child: Container(
+//         height: 55,
+//         margin: const EdgeInsets.symmetric(vertical: 8),
+//         decoration: BoxDecoration(
+//           color: Colors.grey,
+//           borderRadius: BorderRadius.circular(8),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+/// ------------------------------------------------------
+/// SCREEN UI
+/// ------------------------------------------------------
+
+// class VolunteerRegister extends StatefulWidget {
+//   const VolunteerRegister({super.key});
+
+//   @override
+//   State<VolunteerRegister> createState() => _VolunteerFormScreenState();
+// }
+
+// class _VolunteerFormScreenState extends State<VolunteerRegister> {
+//   final ApiService api = ApiService();
+
+//   List<Branch> branches = [];
+//   List<District> districts = [];
+//   List<Qualification> qualifications = [];
+//   List<LanguageModel> languages = [];
+//   List<Specialization> specializations = [];
+
+//   int? selectedBranchId;
+//   int? selectedDistrictId;
+//   int? selectedQualificationId;
+//   int? selectedLanguageId;
+//   int? selectedSpecializationId;
+
+//   bool loading = true;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     loadAllData();
+//   }
+
+//   Future<void> loadAllData() async {
+//     loading = true;
+//     setState(() {});
+
+//     try {
+//       branches = await api.getBranches();
+//       districts = await api.getDistricts();
+//       qualifications = await api.getQualifications();
+//       languages = await api.getLanguages();
+//       specializations = await api.getSpecializations();
+
+//       print("districts: ${districts.map((d) => d.name).toList()}");
+//     } catch (e) {
+//       print("ERROR: $e");
+//     }
+
+//     loading = false;
+//     setState(() {});
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text("Register Volunteer")),
+//       body: loading
+//           ? ListView(
+//               padding: const EdgeInsets.all(16),
+//               children: const [
+//                 ShimmerDropdown(),
+//                 ShimmerDropdown(),
+//                 ShimmerDropdown(),
+//                 ShimmerDropdown(),
+//                 ShimmerDropdown(),
+//               ],
+//             )
+//           : ListView(
+//               padding: const EdgeInsets.all(16),
+//               children: [
+//                 buildDropdown<int>(
+//                   label: "URCS Branch",
+//                   items: branches
+//                       .map((e) =>
+//                           DropdownMenuItem(value: e.id, child: Text(e.name)))
+//                       .toList(),
+//                   value: selectedBranchId,
+//                   onChanged: (v) => setState(() => selectedBranchId = v),
+//                 ),
+//                 buildDropdown<int>(
+//                   label: "District",
+//                   items: districts
+//                       .map((e) =>
+//                           DropdownMenuItem(value: e.id, child: Text(e.name)))
+//                       .toList(),
+//                   value: selectedDistrictId,
+//                   onChanged: (v) => setState(() => selectedDistrictId = v),
+//                 ),
+//                 buildDropdown<int>(
+//                   label: "Qualification",
+//                   items: qualifications
+//                       .map((e) =>
+//                           DropdownMenuItem(value: e.id, child: Text(e.name)))
+//                       .toList(),
+//                   value: selectedQualificationId,
+//                   onChanged: (v) => setState(() => selectedQualificationId = v),
+//                 ),
+//                 buildDropdown<int>(
+//                   label: "Language",
+//                   items: languages
+//                       .map((e) =>
+//                           DropdownMenuItem(value: e.id, child: Text(e.name)))
+//                       .toList(),
+//                   value: selectedLanguageId,
+//                   onChanged: (v) => setState(() => selectedLanguageId = v),
+//                 ),
+//                 buildDropdown<int>(
+//                   label: "Specialization",
+//                   items: specializations
+//                       .map((e) =>
+//                           DropdownMenuItem(value: e.id, child: Text(e.name)))
+//                       .toList(),
+//                   value: selectedSpecializationId,
+//                   onChanged: (v) =>
+//                       setState(() => selectedSpecializationId = v),
+//                 ),
+//               ],
+//             ),
+//     );
+//   }
+
+//   Widget buildDropdown<T>({
+//     required String label,
+//     required List<DropdownMenuItem<T>> items,
+//     required T? value,
+//     required Function(T?) onChanged,
+//   }) {
+//     return Padding(
+//       padding: const EdgeInsets.only(bottom: 16),
+//       child: DropdownButtonFormField<T>(
+//         value: value,
+//         decoration: InputDecoration(
+//           labelText: label,
+//           border: const OutlineInputBorder(),
+//         ),
+//         items: items,
+//         onChanged: onChanged,
+//       ),
+//     );
+//   }
+// }

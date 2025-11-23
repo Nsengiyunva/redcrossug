@@ -1,11 +1,10 @@
 // Edit Profile Screen
 import 'package:flutter/material.dart';
-import 'package:redcross/models/member_profile.dart';
 
 class EditMember extends StatefulWidget {
-  final MemberProfile profile;
+  // final MemberProfile profile;
 
-  const EditMember({super.key, required this.profile});
+  const EditMember({super.key});
 
   @override
   State<EditMember> createState() => _EditProfileScreenState();

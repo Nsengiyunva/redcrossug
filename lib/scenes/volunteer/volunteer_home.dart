@@ -97,7 +97,7 @@ class VolunteerHome extends StatelessWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const VolunteerRegister()),
+                                                VolunteerRegister()),
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(

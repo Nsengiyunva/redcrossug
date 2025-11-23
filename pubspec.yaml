@@ -61,6 +61,10 @@ dependencies:
   url_launcher: ^6.1.10
   image_picker: ^1.0.4
   video_player: ^2.10.1
+  shimmer: ^3.0.0
+  dio: ^5.9.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   
 
 dev_dependencies:

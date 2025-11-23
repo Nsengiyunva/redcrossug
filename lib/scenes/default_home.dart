@@ -217,8 +217,12 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:redcross/models/user.dart';
+import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
+import 'package:redcross/scenes/first_aid/first_aid_home.dart';
+import 'package:redcross/scenes/memberships/edit_member.dart';
+import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 class DefaultHome extends StatefulWidget {
@@ -342,11 +346,20 @@ class _HomeScreenState extends State<DefaultHome> {
             _buildServiceCard(
                 icon: Icons.medical_services_outlined,
                 label: 'First Aid',
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const FirstAidHome()),
+                  );
+                }),
             _buildServiceCard(
                 icon: Icons.local_hospital_outlined,
                 label: 'Ambulance',
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AmbulanceHome()),
+                  );
+                }),
             _buildServiceCard(
                 icon: Icons.warning_amber_rounded,
                 label: 'Disasters',
@@ -358,15 +371,20 @@ class _HomeScreenState extends State<DefaultHome> {
             _buildServiceCard(
                 icon: Icons.card_membership_outlined,
                 label: 'Memberships',
-                onPressed: () {}),
-            // _buildServiceCard(
-            //     icon: Icons.attach_money_outlined,
-            //     label: 'Donations',
-            //     onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const EditMember()),
+                  );
+                }),
             _buildServiceCard(
                 icon: Icons.calendar_view_day,
                 label: 'Volunteers',
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const VolunteerHome()),
+                  );
+                }),
           ],
         );
       },
