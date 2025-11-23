@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:redcross/models/branch.dart';
 import 'package:redcross/models/district.dart';
 import 'package:redcross/models/specialization.dart';
+import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'dart:io';
 import 'package:shimmer/shimmer.dart';
 import 'package:image_picker/image_picker.dart';
@@ -99,90 +100,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
   @override
   void initState() {
     super.initState();
-    _loadAllDropDowns();
-  }
-
-  Future<void> _loadAllDropDowns() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final token = await StorageService.getToken();
-
-    // final cachedBranches = await StorageService.getCachedData("branches");
-    // final cachedDistricts = await StorageService.getCachedData("districts");
-    // final cachedSpecs = await StorageService.getCachedData("specializations");
-    // final cachedEdu = await StorageService.getCachedData("educationLevels");
-
-    // if (cachedBranches != null &&
-    //     cachedDistricts != null &&
-    //     cachedSpecs != null &&
-    //     cachedEdu != null) {
-    //   setState(() {
-    //     branches = cachedBranches.map((e) => Branch.fromJson(e)).toList();
-    //     districts = cachedDistricts.map((e) => District.fromJson(e)).toList();
-    //     specializations =
-    //         cachedSpecs.map((e) => Specialization.fromJson(e)).toList();
-    //     isLoading = false;
-    //   });
-    //   return;
-    // }
-
-    try {
-      final responses = await Future.wait([
-        http.get(
-          Uri.parse('https://urcs-api.taufeeq.dev/api/vms/branches'),
-          headers: {"Authorization": "Bearer $token"},
-        ),
-        http.get(
-          Uri.parse('https://urcs-api.taufeeq.dev/api/vms/districts'),
-          headers: {"Authorization": "Bearer $token"},
-        ),
-        http.get(
-          Uri.parse('https://urcs-api.taufeeq.dev/api/vms/specializations'),
-          headers: {"Authorization": "Bearer $token"},
-        ),
-      ]);
-
-      final branchesParsedJson = jsonDecode(responses[0].body)['data'];
-      final districtsParsedJson = jsonDecode(responses[1].body)['data'];
-      final specsParsedJson = jsonDecode(responses[2].body)['data'];
-
-      final districtsJson = districtsParsedJson['choices']['districts'];
-      final levelsJson = districtsParsedJson['choices']['qualifications'];
-      // final languagesJson = districtsParsedJson['choices']['languages'];
-
-      var x =
-          branchesParsedJson.map<Branch>((e) => Branch.fromJson(e)).toList();
-
-      print("branches $branchesParsedJson");
-      print(x);
-
-      // setState(() {
-      //   branches =
-      //       branchesParsedJson.map<Branch>((e) => Branch.fromJson(e)).toList();
-
-      //   districts =
-      //       districtsJson.map<District>((e) => District.fromJson(e)).toList();
-
-      //   specializations = specsParsedJson
-      //       .map<Specialization>((e) => Specialization.fromJson(e))
-      //       .toList();
-      // });
-
-      // Cache for future fast loads
-      // await StorageService.cacheData(
-      //     "branches", branches.map((e) => e.toJson()).toList());
-      // await StorageService.cacheData(
-      //     "districts", districts.map((e) => e.toJson()).toList());
-      // await StorageService.cacheData(
-      //     "specializations", specializations.map((e) => e.toJson()).toList());
-
-      setState(() => isLoading = false);
-    } catch (e) {
-      setState(() => isLoading = false);
-      print("Error loading dropdowns: $e");
-    }
+    // _loadAllDropDowns();
   }
 
   Future<void> _pickQualificationFile() async {
@@ -220,28 +138,9 @@ class _RegistrationFormState extends State<VolunteerRegister> {
     }
   }
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     if (_formKeys[_currentStep].currentState!.validate()) {
-      // Process form data
-      // print('First Name: ${_firstNameController.text}');
-      // print('Surname: ${_surnameController.text}');
-      // print('Other Name: ${_otherNameController.text}');
-      // print('National ID: ${_nationalIdController.text}');
-      // print('National ID Number: ${_nationalIdNumberController.text}');
-      // print('Date of Birth: ${_dateOfBirthController.text}');
-      // print('Gender: $_selectedGender');
-      // print('Email: ${_emailController.text}');
-      // print('Phone: ${_phoneController.text}');
-      // print('Alternative Phone: ${_alternativePhoneController.text}');
-      // print('Branch: $_selectedBranch');
-      // print('District: ${_districtController.text}');
-      // print('Key Specialization: ${_keySpecializationController.text}');
-      // print('Other Skills: ${_otherSkillsController.text}');
-      // print('Primary Language: ${_primaryLanguageController.text}');
-      // print('Other Language: ${_otherLanguageController.text}');
-      // print('Education Level: $_selectedEducationLevel');
-      // print('References: ${_referencesController.text}');
-
+      setState(() => isLoading = true);
       final payload = {
         "firstname": _firstNameController.text,
         "surname": _surnameController.text,
@@ -252,7 +151,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
         "dob": _dateOfBirthController.text,
         "gender": _selectedGender,
         "district": _districtController.text,
-        "branch": _selectedBranch,
+        "branch": "Kampala",
         "specialization": _keySpecializationController.text,
         "highest_qualification": _selectedEducationLevel,
         "relevant_skills": _otherSkillsController.text,
@@ -260,11 +159,49 @@ class _RegistrationFormState extends State<VolunteerRegister> {
         "availability": "Immediate",
       };
 
-      print("payload $payload");
+      // print("payload $payload");
 
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(content: Text('Registration submitted successfully!')),
-      // );
+      final token = await StorageService.getToken();
+
+      try {
+        final response = await http.post(
+          Uri.parse('https://urcs-api.taufeeq.dev/api/volunteer'),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+            "X-Requested-With": "XMLHttpRequest"
+          },
+          body: jsonEncode(payload),
+        );
+
+        final json = jsonDecode(response.body);
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Volunteer registered successfully!'),
+                backgroundColor: Colors.green),
+          );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const VolunteerHome()),
+          );
+        } else {
+          print("here $json");
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                  'Failed to submit volunteer registration: ${response.statusCode} ${json["message"]}')));
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Error submitting volunteer registration: $e')),
+        );
+
+        print("error $e");
+      } finally {
+        setState(() => isLoading = false);
+      }
     }
   }
 
@@ -313,6 +250,34 @@ class _RegistrationFormState extends State<VolunteerRegister> {
     // print('b $branches');
     // print('s $specializations');
     // print('districts $districts');
+
+    final size = MediaQuery.of(context).size;
+
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: AppColors.redColorD,
+        body: SizedBox(
+          height: size.height,
+          child: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(color: AppColors.primaryRedColor),
+                SizedBox(height: 25),
+                Text(
+                  "Processing...",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: "Inter",
+                    color: AppColors.blackColor,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
         appBar: AppBar(

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/models/user.dart';
-import 'package:redcross/utils/api_endpoints.dart';
 import 'package:redcross/utils/storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -31,8 +30,8 @@ class LoginController {
     isLoggingIn(true);
 
     final Map<String, dynamic> payload = {
-      "phone_no": "+256773917523", //"+256${telephoneController.text}",
-      "password": "#Moon2025#" //passwordController.text
+      "phone_no": "+256${telephoneController.text}",
+      "password": passwordController.text
     };
 
     try {
