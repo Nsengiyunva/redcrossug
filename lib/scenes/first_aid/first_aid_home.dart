@@ -126,7 +126,7 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                   child: TextButton.icon(
                 icon: const Icon(Icons.chat, color: AppColors.deepGreenA),
                 label: const Text(
-                  'Talk to Red Cross Society',
+                  'Talk to the  Uganda Red Cross Society',
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.w600,
@@ -148,14 +148,14 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                 },
               )),
               const SizedBox(height: 25),
-              Center(
-                  child: TextButton(
-                onPressed: _openApp,
-                child: const Text(
-                  'Open Blended Learning App',
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              ))
+              // Center(
+              //     child: TextButton(
+              //   onPressed: _openApp,
+              //   child: const Text(
+              //     'Open Blended Learning App',
+              //     style: TextStyle(decoration: TextDecoration.underline),
+              //   ),
+              // ))
             ],
           ),
         ),

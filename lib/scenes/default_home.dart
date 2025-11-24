@@ -221,8 +221,10 @@ import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
+import 'package:redcross/scenes/home_badge.dart';
 import 'package:redcross/scenes/memberships/edit_member.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
+import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 class DefaultHome extends StatefulWidget {
@@ -289,6 +291,7 @@ class _HomeScreenState extends State<DefaultHome> {
               time ?? "",
               style: TextStyle(
                 fontSize: 16,
+                fontFamily: "Inter",
                 color: Colors.grey[600],
               ),
             ),
@@ -297,6 +300,7 @@ class _HomeScreenState extends State<DefaultHome> {
               loggedInUser?.name ?? "",
               style: const TextStyle(
                 fontSize: 28,
+                fontFamily: "Inter",
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2C2C2C),
               ),
@@ -426,6 +430,7 @@ class _HomeScreenState extends State<DefaultHome> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
+                    fontFamily: "Inter",
                     fontWeight: FontWeight.w600,
                   ),
                   textAlign: TextAlign.center,
@@ -448,6 +453,7 @@ class _HomeScreenState extends State<DefaultHome> {
               'Upcoming Events',
               style: TextStyle(
                 fontSize: 24,
+                fontFamily: "Inter",
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2C2C2C),
               ),
@@ -460,6 +466,7 @@ class _HomeScreenState extends State<DefaultHome> {
                     'See All',
                     style: TextStyle(
                       fontSize: 16,
+                      fontFamily: "Inter",
                       color: Color(0xFF2C2C2C),
                     ),
                   ),
@@ -506,7 +513,7 @@ class _HomeScreenState extends State<DefaultHome> {
       width: 280,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFE5E7),
+        color: AppColors.redColorJ,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -517,8 +524,9 @@ class _HomeScreenState extends State<DefaultHome> {
               title,
               style: const TextStyle(
                 fontSize: 20,
+                fontFamily: "Inter",
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF2C2C2C),
+                color: AppColors.blackColorY,
                 height: 1.3,
               ),
             ),
@@ -529,13 +537,13 @@ class _HomeScreenState extends State<DefaultHome> {
               color: Colors.white,
               shape: BoxShape.circle,
               border: Border.all(
-                color: const Color(0xFFE31E24),
+                color: AppColors.primaryRedColor,
                 width: 3,
               ),
             ),
             child: Icon(
               icon,
-              color: const Color(0xFFE31E24),
+              color: AppColors.primaryRedColor,
               size: 32,
             ),
           ),

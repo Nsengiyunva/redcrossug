@@ -218,6 +218,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
           Text(
             bank.name,
             style: TextStyle(
+              fontFamily: "Inter",
               fontSize: screenWidth * 0.06,
               fontWeight: FontWeight.bold,
             ),
@@ -254,6 +255,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                   'Book Appointment',
                   style: TextStyle(
                     color: Colors.white,
+                    fontFamily: "Inter",
                     fontSize: screenWidth * 0.045,
                     fontWeight: FontWeight.bold,
                   ),
@@ -285,6 +287,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                           'Call',
                           style: TextStyle(
                             color: Colors.red,
+                            fontFamily: "Inter",
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -315,6 +318,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                           'Directions',
                           style: TextStyle(
                             color: Colors.red,
+                            fontFamily: "Inter",
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -360,6 +364,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                 value,
                 style: TextStyle(
                   fontSize: screenWidth * 0.04,
+                  fontFamily: "Inter",
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -402,6 +407,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
               Text(
                 'Blood Banks',
                 style: TextStyle(
+                  fontFamily: "Inter",
                   fontSize: screenWidth * 0.09,
                   fontWeight: FontWeight.bold,
                 ),
@@ -410,6 +416,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
               Text(
                 '${bloodBanks.length} blood banks across Uganda',
                 style: TextStyle(
+                  fontFamily: "Inter",
                   fontSize: screenWidth * 0.04,
                   color: Colors.grey[600],
                 ),
@@ -451,6 +458,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                         'View My Appointments',
                         style: TextStyle(
                           color: Colors.white,
+                          fontFamily: "Inter",
                           fontSize: screenWidth * 0.04,
                           fontWeight: FontWeight.bold,
                         ),
@@ -505,6 +513,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                                 Text(
                                   'No blood banks found',
                                   style: TextStyle(
+                                    fontFamily: "Inter",
                                     fontSize: screenWidth * 0.045,
                                     color: Colors.grey[600],
                                   ),
@@ -637,6 +646,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                   Text(
                     bank.name,
                     style: TextStyle(
+                      fontFamily: "Inter",
                       fontSize: screenWidth * 0.042,
                       fontWeight: FontWeight.bold,
                     ),
@@ -654,6 +664,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                         child: Text(
                           bank.district,
                           style: TextStyle(
+                            fontFamily: "Inter",
                             fontSize: screenWidth * 0.035,
                             color: Colors.grey[600],
                           ),
@@ -673,6 +684,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                       Text(
                         bank.phone,
                         style: TextStyle(
+                          fontFamily: "Inter",
                           fontSize: screenWidth * 0.035,
                           color: Colors.grey[600],
                         ),

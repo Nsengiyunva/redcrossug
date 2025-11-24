@@ -333,11 +333,14 @@ class _AppointmentsState extends State<Appointments> {
             SizedBox(height: h * 0.015),
             Text(
               "My Appointments",
-              style: TextStyle(fontSize: w * 0.08, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: w * 0.08,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Inter"),
             ),
             Text(
               "${appointments.length} appointment${appointments.length != 1 ? 's' : ''}",
-              style: TextStyle(color: Colors.grey[600]),
+              style: TextStyle(fontFamily: "Inter", color: Colors.grey[600]),
             ),
             SizedBox(height: h * 0.02),
             SizedBox(
@@ -518,7 +521,9 @@ class _AppointmentsState extends State<Appointments> {
                   child: Text(
                     appointment.preferredBloodBank.name,
                     style: TextStyle(
-                        fontSize: w * 0.04, fontWeight: FontWeight.bold),
+                        fontFamily: "Inter",
+                        fontSize: w * 0.04,
+                        fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -533,6 +538,7 @@ class _AppointmentsState extends State<Appointments> {
                   child: Text(
                     appointment.statusLabel,
                     style: TextStyle(
+                        fontFamily: "Inter",
                         color: _getStatusColor(appointment.statusColor)),
                   ),
                 ),
@@ -547,10 +553,10 @@ class _AppointmentsState extends State<Appointments> {
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    DateFormat('MMM d, yyyy')
-                        .format(appointment.preferredDonationDate),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                      DateFormat('MMM d, yyyy')
+                          .format(appointment.preferredDonationDate),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontFamily: "Inter")),
                 ),
               ],
             ),
