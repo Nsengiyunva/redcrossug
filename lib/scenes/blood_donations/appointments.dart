@@ -556,7 +556,7 @@ class _AppointmentsState extends State<Appointments> {
                       DateFormat('MMM d, yyyy')
                           .format(appointment.preferredDonationDate),
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontFamily: "Inter")),
+                      style: const TextStyle(fontFamily: "Inter")),
                 ),
               ],
             ),

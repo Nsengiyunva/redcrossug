@@ -221,8 +221,8 @@ import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
-import 'package:redcross/scenes/home_badge.dart';
 import 'package:redcross/scenes/memberships/edit_member.dart';
+import 'package:redcross/scenes/memberships/membership_card.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
@@ -377,7 +377,7 @@ class _HomeScreenState extends State<DefaultHome> {
                 label: 'Memberships',
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const EditMember()),
+                    MaterialPageRoute(builder: (context) => MembershipCard()),
                   );
                 }),
             _buildServiceCard(
