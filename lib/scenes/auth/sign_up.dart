@@ -106,6 +106,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:redcross/scenes/auth/membership_interest.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/utils/colors.dart';
@@ -202,12 +203,22 @@ class _SignUpState extends State<SignUp> {
           SnackBar(content: Text('${result["message"]}')),
         );
 
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => SignIn()),
-          );
-        });
+        //navigations
+        if (_hasMembership) {
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => SignIn()),
+            );
+          });
+        } else {
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => MembershipInterest()),
+            );
+          });
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: ${result["message"]}')),
@@ -257,10 +268,10 @@ class _SignUpState extends State<SignUp> {
                         "Let's get to know you",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: titleFontSize,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF666666),
-                        ),
+                            fontSize: titleFontSize,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF666666),
+                            fontFamily: "Inter"),
                       ),
                     ),
                     SizedBox(height: verticalPadding),
@@ -525,6 +536,7 @@ class _SignUpState extends State<SignUp> {
             style: TextStyle(
                 fontSize: labelFontSize,
                 fontWeight: FontWeight.w500,
+                fontFamily: "Inter",
                 color: Colors.black87)),
         const SizedBox(height: 8),
         TextFormField(
