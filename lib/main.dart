@@ -21,6 +21,7 @@ import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
 import 'package:redcross/scenes/blood_donations/drive_details.dart';
+import 'package:redcross/scenes/default_home.dart';
 
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/disasters/disaster_details.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         "/home": (context) => const Home(),
+        "/main-home": (context) => const DefaultHome(),
         "/login": (context) => SignIn(),
         "/disasters": (context) => DisasterList(),
         "/blood-donations": (context) => const BloodDonationsHome(),
@@ -126,8 +128,7 @@ class MyApp extends StatelessWidget {
         "/donation-history-list": (context) => const DonationHistory(),
         "/donation-receipt": (context) => const DonationReceipt(),
       },
-      // initialRoute: isLoggedIn ? '/top-subscribe' : '/login',
-      initialRoute: '/login',
+      initialRoute: isLoggedIn ? '/main-home' : '/login',
     );
   }
 }
