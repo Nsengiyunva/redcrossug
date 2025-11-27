@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/models/incident.dart';
+import 'package:redcross/utils/colors.dart';
 
 class IncidentDetails extends StatelessWidget {
   final Incident report;
@@ -40,7 +41,7 @@ class IncidentDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
@@ -90,10 +91,10 @@ class IncidentDetails extends StatelessWidget {
                         child: Text(
                           report.severityLevel.toUpperCase(),
                           style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Inter"),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -107,10 +108,10 @@ class IncidentDetails extends StatelessWidget {
                         child: Text(
                           report.status.toUpperCase(),
                           style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Inter"),
                         ),
                       ),
                       const Spacer(),
@@ -130,10 +131,10 @@ class IncidentDetails extends StatelessWidget {
                               Text(
                                 'EMERGENCY',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Inter"),
                               ),
                             ],
                           ),
@@ -144,9 +145,9 @@ class IncidentDetails extends StatelessWidget {
                   Text(
                     report.title,
                     style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -157,9 +158,9 @@ class IncidentDetails extends StatelessWidget {
                       Text(
                         report.timeSinceReported,
                         style: TextStyle(
-                          color: Colors.grey.shade700,
-                          fontSize: 14,
-                        ),
+                            color: Colors.grey.shade700,
+                            fontSize: 14,
+                            fontFamily: "Inter"),
                       ),
                       const SizedBox(width: 16),
                       Container(
@@ -174,6 +175,7 @@ class IncidentDetails extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.grey.shade800,
                             fontSize: 12,
+                            fontFamily: "Inter",
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -193,11 +195,11 @@ class IncidentDetails extends StatelessWidget {
                   const Text(
                     'INCIDENT INFORMATION',
                     style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                      letterSpacing: 0.5,
-                    ),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        letterSpacing: 0.5,
+                        fontFamily: "Inter"),
                   ),
                   const SizedBox(height: 16),
                   _buildInfoRow('Description', report.description),
@@ -257,11 +259,11 @@ class IncidentDetails extends StatelessWidget {
                     const Text(
                       'MEDIA',
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        letterSpacing: 0.5,
-                      ),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                          letterSpacing: 0.5,
+                          fontFamily: "Inter"),
                     ),
                     const SizedBox(height: 16),
                     Wrap(
@@ -293,11 +295,11 @@ class IncidentDetails extends StatelessWidget {
                     const Text(
                       'STATUS HISTORY',
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        letterSpacing: 0.5,
-                      ),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                          letterSpacing: 0.5,
+                          fontFamily: "Inter"),
                     ),
                     const SizedBox(height: 16),
                     ...report.statusHistory.map((history) {
@@ -325,19 +327,19 @@ class IncidentDetails extends StatelessWidget {
                                   child: Text(
                                     history.statusLabel,
                                     style: TextStyle(
-                                      color: _getStatusColor(history.status),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                        color: _getStatusColor(history.status),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Inter"),
                                   ),
                                 ),
                                 const Spacer(),
                                 Text(
                                   history.timeSinceChange,
                                   style: TextStyle(
-                                    color: Colors.grey.shade600,
-                                    fontSize: 12,
-                                  ),
+                                      color: Colors.grey.shade600,
+                                      fontSize: 12,
+                                      fontFamily: "Inter"),
                                 ),
                               ],
                             ),
@@ -350,9 +352,9 @@ class IncidentDetails extends StatelessWidget {
                             Text(
                               'By: ${history.changedBy.name}',
                               style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontSize: 12,
-                              ),
+                                  color: Colors.grey.shade600,
+                                  fontSize: 12,
+                                  fontFamily: "Inter"),
                             ),
                           ],
                         ),
@@ -375,9 +377,9 @@ class IncidentDetails extends StatelessWidget {
                       child: const Text(
                         'Close',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Inter"),
                       ),
                     ),
                   ),
@@ -397,20 +399,20 @@ class IncidentDetails extends StatelessWidget {
         Text(
           label.toUpperCase(),
           style: TextStyle(
-            color: Colors.grey.shade600,
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5,
-          ),
+              color: Colors.grey.shade600,
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.5,
+              fontFamily: "Inter"),
         ),
         const SizedBox(height: 6),
         Text(
           value,
           style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            height: 1.4,
-          ),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              height: 1.4,
+              fontFamily: "Inter"),
         ),
       ],
     );

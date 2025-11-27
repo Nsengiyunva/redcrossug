@@ -820,7 +820,7 @@ class _CreateIncidentReportScreenState extends State<CreateIncidentReport> {
           MaterialPageRoute(builder: (context) => const IncidentList()),
         );
       } else {
-        print("here $json");
+        // print("here $json");
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
                 'Failed to submit report: ${response.statusCode} ${json["message"]}')));
@@ -830,22 +830,9 @@ class _CreateIncidentReportScreenState extends State<CreateIncidentReport> {
         SnackBar(content: Text('Error submitting report: $e')),
       );
 
-      print("error $e");
+      // print("error $e");
     } finally {
       setState(() => _isLoading = false);
     }
-  }
-}
-
-// Replace this with your actual list screen
-class IncidentReportsListScreen extends StatelessWidget {
-  const IncidentReportsListScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Incident Reports')),
-      body: const Center(child: Text('List of submitted incidents here')),
-    );
   }
 }

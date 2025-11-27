@@ -168,10 +168,10 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
         title: const Text(
           'Incident Reports',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Inter"),
         ),
         actions: const [
           // IconButton(
@@ -217,10 +217,10 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                   child: Text(
                     'FILTER',
                     style: TextStyle(
-                      color: showFilters ? Colors.red : Colors.grey,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
+                        color: showFilters ? Colors.red : Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        fontFamily: "Inter"),
                   ),
                 ),
               ],
@@ -408,10 +408,10 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
           Text(
             label.replaceAll('_', ' ').toUpperCase(),
             style: const TextStyle(
-              color: Colors.red,
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-            ),
+                color: Colors.red,
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                fontFamily: "Inter"),
           ),
           const SizedBox(width: 4),
           GestureDetector(
@@ -468,10 +468,10 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                   child: Text(
                     report.severityLevel.toUpperCase(),
                     style: TextStyle(
-                      color: _getSeverityColor(report.severityLevel),
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        color: _getSeverityColor(report.severityLevel),
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -507,10 +507,10 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                         Text(
                           'EMERGENCY',
                           style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.red,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Inter"),
                         ),
                       ],
                     ),
@@ -533,9 +533,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                 Text(
                   report.district,
                   style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 13,
-                  ),
+                      color: Colors.grey.shade600,
+                      fontSize: 13,
+                      fontFamily: "Inter"),
                 ),
                 const SizedBox(width: 16),
                 Icon(Icons.access_time, size: 14, color: Colors.grey.shade600),
@@ -543,9 +543,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                 Text(
                   report.timeSinceReported,
                   style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 13,
-                  ),
+                      color: Colors.grey.shade600,
+                      fontSize: 13,
+                      fontFamily: "Inter"),
                 ),
               ],
             ),
@@ -553,9 +553,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             Text(
               report.description,
               style: TextStyle(
-                color: Colors.grey.shade700,
-                fontSize: 14,
-              ),
+                  color: Colors.grey.shade700,
+                  fontSize: 14,
+                  fontFamily: "Inter"),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
