@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/utils/colors.dart';
 
 class MembershipInterest extends StatefulWidget {
   const MembershipInterest({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _UpdateMembershipScreenState extends State<MembershipInterest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -45,10 +46,10 @@ class _UpdateMembershipScreenState extends State<MembershipInterest> {
         title: const Text(
           'URCS Membership',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              fontFamily: "Inter"),
         ),
         centerTitle: true,
       ),
@@ -111,8 +112,9 @@ class BenefitPage extends StatelessWidget {
             'Membership',
             style: TextStyle(
               fontSize: 32,
+              fontFamily: "Inter",
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE53935),
+              color: AppColors.primaryRedColor,
               height: 1.2,
             ),
           ),
@@ -121,7 +123,7 @@ class BenefitPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE53935),
+              color: AppColors.primaryRedColor,
               height: 1.2,
             ),
           ),
