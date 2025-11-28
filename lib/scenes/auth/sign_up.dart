@@ -185,6 +185,8 @@ class _SignUpState extends State<SignUp> {
       'password': _passwordController.text,
     };
 
+    print("payload $payload");
+
     try {
       final response = await http.post(
         Uri.parse('https://urcs-api.taufeeq.dev/api/auth/register'),
@@ -215,16 +217,18 @@ class _SignUpState extends State<SignUp> {
           Future.delayed(const Duration(seconds: 1), () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (_) => MembershipInterest()),
+              MaterialPageRoute(builder: (_) => const MembershipInterest()),
             );
           });
         }
       } else {
+        print('error 1 $result');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: ${result["message"]}')),
         );
       }
     } catch (e) {
+      print('error 2 $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );

@@ -57,7 +57,6 @@ class SignIn extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ---------------------- Title ----------------------
                 Text(
                   "Welcome Back",
                   style: TextStyle(
@@ -83,8 +82,6 @@ class SignIn extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-
-                // ---------------------- Phone Number ----------------------
                 PhoneFormField(
                   controller: _loginController.telephoneController,
                   onCountryChanged: (code) => _selectedPhoneCode = code,
@@ -95,22 +92,16 @@ class SignIn extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 25),
-
-                // ---------------------- Password ----------------------
                 FormPassword(
                   question: 'Password',
                   textEditingController: _loginController.passwordController,
                 ),
                 const SizedBox(height: 25),
-
-                // ---------------------- Login Button ----------------------
                 RedBtn(
                   label: 'Continue',
                   onPressed: () => _loginController.loginPhoneNumber(),
                 ),
                 const SizedBox(height: 45),
-
-                // ---------------------- Keep Me Signed In + Forgot Password ----------------------
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -133,26 +124,9 @@ class SignIn extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // TextButton(
-                    //   onPressed: () {
-                    //
-                    //   },
-                    //   child: const Text(
-                    //     "Forgot Password",
-                    //     style: TextStyle(
-                    //       decoration: TextDecoration.underline,
-                    //       decorationColor: AppColors.primaryRedColor,
-                    //       fontFamily: "Inter",
-                    //       fontSize: 13,
-                    //       color: AppColors.primaryRedColor,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
                 const SizedBox(height: 30),
-
-                // ---------------------- Register ----------------------
                 Center(
                   child: Column(
                     children: [

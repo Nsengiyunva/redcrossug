@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/utils/colors.dart';
 
 class MembershipInterest extends StatefulWidget {
-  const MembershipInterest({Key? key}) : super(key: key);
+  const MembershipInterest({super.key});
 
   @override
   State<MembershipInterest> createState() => _UpdateMembershipScreenState();
@@ -41,10 +42,14 @@ class _UpdateMembershipScreenState extends State<MembershipInterest> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => SignIn()),
+            );
+          },
         ),
         title: const Text(
-          'URCS Membership',
+          'Red Cross Society Membership',
           style: TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -99,7 +104,7 @@ class _UpdateMembershipScreenState extends State<MembershipInterest> {
 class BenefitPage extends StatelessWidget {
   final BenefitItem benefit;
 
-  const BenefitPage({Key? key, required this.benefit}) : super(key: key);
+  const BenefitPage({super.key, required this.benefit});
 
   @override
   Widget build(BuildContext context) {
