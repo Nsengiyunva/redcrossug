@@ -10,7 +10,6 @@ import 'package:redcross/models/specialization.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
-import 'package:shimmer/shimmer.dart';
 
 class VolunteerRegister extends StatefulWidget {
   const VolunteerRegister({super.key});

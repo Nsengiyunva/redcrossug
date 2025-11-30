@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/models/donation.dart';
+import 'package:redcross/utils/colors.dart';
 
 class DonationDetails extends StatelessWidget {
   final Donation donation;
@@ -10,7 +11,7 @@ class DonationDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
@@ -52,7 +53,7 @@ class DonationDetails extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: AppColors.primaryRedColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

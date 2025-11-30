@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:redcross/models/appointment.dart';
+import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 class Appointments extends StatefulWidget {
@@ -71,6 +72,13 @@ class _AppointmentsState extends State<Appointments> {
       setState(() {
         isLoading = false;
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to fetch your blood donation appointments.'),
+          backgroundColor: AppColors.primaryRedColor,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
       // print("Error fetching appointments: $e");
     }
   }
@@ -309,10 +317,6 @@ class _AppointmentsState extends State<Appointments> {
     );
   }
 
-  // ------------------------
-  // MAIN UI BUILD
-  // ------------------------
-
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -402,98 +406,6 @@ class _AppointmentsState extends State<Appointments> {
       ),
     );
   }
-
-  // Widget _buildAppointmentCard(Appointment appointment, double w, double h) {
-  //   return GestureDetector(
-  //     onTap: () => _showAppointmentDetails(appointment),
-  //     child: Container(
-  //       padding: EdgeInsets.all(w * 0.04),
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.circular(16),
-  //         boxShadow: const [
-  //           BoxShadow(
-  //             color: Colors.black12,
-  //             blurRadius: 8,
-  //           )
-  //         ],
-  //       ),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Text(
-  //                 appointment.preferredBloodBank.name,
-  //                 style: TextStyle(
-  //                     fontSize: w * 0.04, fontWeight: FontWeight.bold),
-  //               ),
-  //               Container(
-  //                 padding:
-  //                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-  //                 decoration: BoxDecoration(
-  //                   color: _getStatusColor(appointment.statusColor)
-  //                       .withOpacity(0.1),
-  //                   borderRadius: BorderRadius.circular(12),
-  //                 ),
-  //                 child: Text(
-  //                   appointment.statusLabel,
-  //                   style: TextStyle(
-  //                       color: _getStatusColor(appointment.statusColor)),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           const SizedBox(height: 8),
-  //           Row(
-  //             children: [
-  //               const Icon(Icons.calendar_today, size: 16),
-  //               const SizedBox(width: 6),
-  //               Text(DateFormat('MMM d, yyyy')
-  //                   .format(appointment.preferredDonationDate)),
-  //             ],
-  //           ),
-  //           Row(
-  //             children: [
-  //               const Icon(Icons.access_time, size: 16),
-  //               const SizedBox(width: 6),
-  //               Text(appointment.timePreference),
-  //             ],
-  //           ),
-  //           Row(
-  //             children: [
-  //               const Icon(Icons.location_on, size: 16),
-  //               const SizedBox(width: 6),
-  //               Expanded(child: Text(appointment.preferredBloodBank.district)),
-  //             ],
-  //           ),
-  //           if (appointment.daysUntilAppointment > 0 &&
-  //               appointment.status.toLowerCase() == 'pending')
-  //             Container(
-  //               padding:
-  //                   const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-  //               margin: const EdgeInsets.only(top: 10),
-  //               decoration: BoxDecoration(
-  //                   color: Colors.blue[50],
-  //                   borderRadius: BorderRadius.circular(8)),
-  //               child: Row(
-  //                 children: [
-  //                   const Icon(Icons.info_outline,
-  //                       size: 16, color: Colors.blue),
-  //                   const SizedBox(width: 6),
-  //                   Text(
-  //                     "${appointment.daysUntilAppointment} day(s) remaining",
-  //                     style: const TextStyle(color: Colors.blue),
-  //                   ),
-  //                 ],
-  //               ),
-  //             )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildAppointmentCard(Appointment appointment, double w, double h) {
     return GestureDetector(

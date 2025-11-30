@@ -33,7 +33,6 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   void initState() {
     super.initState();
 
-    // Safely get arguments here
     final args = Get.arguments;
     disasterId = args['id'];
     disasterTitle = args['title'];
@@ -44,23 +43,33 @@ class _DisasterDetailsState extends State<DisasterDetails> {
   Future<void> _fetchDisasterDetails() async {
     String? token = await StorageService.getToken();
 
-    final response = await http.get(
-      Uri.parse('https://urcs-api.taufeeq.dev/api/disasters/$disasterId'),
-      headers: {
-        'Authorization': "Bearer $token",
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-    );
+    try {
+      final response = await http.get(
+        Uri.parse('https://urcs-api.taufeeq.dev/api/disasters/$disasterId'),
+        headers: {
+          'Authorization': "Bearer $token",
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+      );
 
-    if (response.statusCode == 200) {
-      setState(() {
-        disasterDetails = json.decode(response.body);
-        isLoading = false;
-      });
-    } else {
-      setState(() {
-        isLoading = false;
-      });
+      if (response.statusCode == 200) {
+        setState(() {
+          disasterDetails = json.decode(response.body);
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to fetch Disaster Details.'),
+          backgroundColor: AppColors.primaryRedColor,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
@@ -69,13 +78,28 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    // Responsive font sizes
-    final titleFont = screenWidth * 0.06; // ~6% of screen width
-    final subtitleFont = screenWidth * 0.035;
-    final smallFont = screenWidth * 0.03;
+    final bool isSmallMobile = screenWidth < 360;
+    final bool isMobile = screenWidth < 600;
+    final bool isTablet = screenWidth >= 600 && screenWidth < 1024;
+    final bool isDesktop = screenWidth >= 1024;
+
+    final double horizontalPadding =
+        isDesktop ? 40 : (isTablet ? 30 : (isSmallMobile ? 15 : 25));
+    final double verticalSpacing = isDesktop ? 25 : (isTablet ? 20 : 15);
+    final double imageHeight = isDesktop
+        ? screenHeight * 0.4
+        : (isTablet ? screenHeight * 0.35 : screenHeight * 0.3);
+
+    final double titleFont =
+        isDesktop ? 32 : (isTablet ? 28 : (isSmallMobile ? 18 : 24));
+    final double subtitleFont =
+        isDesktop ? 18 : (isTablet ? 16 : (isSmallMobile ? 13 : 14));
+    final double smallFont = isDesktop ? 14 : (isTablet ? 13 : 12);
+    final double badgeFont = isDesktop ? 14 : (isTablet ? 13 : 12);
 
     // Max content width for tablets/desktops
-    final maxContentWidth = screenWidth > 700 ? 700.0 : screenWidth;
+    final double maxContentWidth =
+        isDesktop ? 1200 : (isTablet ? 800 : screenWidth);
 
     if (isLoading) {
       return const Scaffold(
@@ -84,8 +108,17 @@ class _DisasterDetailsState extends State<DisasterDetails> {
     }
 
     if (disasterDetails == null) {
-      return const Scaffold(
-        body: Center(child: Text('No Data Found About this Disaster!')),
+      return Scaffold(
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Text(
+              'No Data Found About this Disaster!',
+              style: TextStyle(fontSize: subtitleFont),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
       );
     }
 
@@ -97,7 +130,11 @@ class _DisasterDetailsState extends State<DisasterDetails> {
 
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: AppBar(title: const Text(""), leading: const BackButton()),
+      appBar: AppBar(
+        title: const Text(""),
+        leading: const BackButton(),
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
@@ -105,12 +142,13 @@ class _DisasterDetailsState extends State<DisasterDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // --- Image with Badge ---
                 Stack(
                   children: [
                     SizedBox(
                       width: double.infinity,
-                      height: screenHeight * 0.35,
-                      child: disasterImage.length > 0
+                      height: imageHeight,
+                      child: disasterImage.isNotEmpty
                           ? Image.network(
                               'https://urcs-api.taufeeq.dev/storage/$disasterImage',
                               fit: BoxFit.cover,
@@ -133,27 +171,29 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                             ),
                     ),
                     Positioned(
-                      left: 10,
-                      top: screenHeight * 0.03,
+                      left: horizontalPadding * 0.4,
+                      top: verticalSpacing,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 4),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isSmallMobile ? 8 : 10,
+                          vertical: isSmallMobile ? 4 : 6,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.primaryRedColor,
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
                             Icon(
                               Icons.circle_rounded,
                               color: AppColors.whiteColor,
-                              size: 6,
+                              size: isSmallMobile ? 5 : 6,
                             ),
-                            SizedBox(width: 5),
+                            SizedBox(width: isSmallMobile ? 4 : 5),
                             Text(
                               'Disaster',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: badgeFont,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.whiteColor,
                               ),
@@ -165,53 +205,60 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                   ],
                 ),
 
-                const SizedBox(height: 10),
+                SizedBox(height: verticalSpacing),
 
                 // --- Disaster Name ---
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      StorageService.truncateString(
-                          disasterDetails!['name'] ?? 'Unnamed Disaster', 40),
-                      style: TextStyle(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding,
+                    vertical: verticalSpacing * 0.3,
+                  ),
+                  child: Text(
+                    StorageService.truncateString(
+                      disasterDetails!['name'] ?? 'Unnamed Disaster',
+                      isDesktop ? 80 : (isTablet ? 60 : 40),
+                    ),
+                    style: TextStyle(
                         fontSize: titleFont,
                         fontWeight: FontWeight.w700,
                         color: AppColors.blackColor,
-                      ),
-                    ),
+                        height: 1.2,
+                        fontFamily: "Inter"),
+                    maxLines: isDesktop ? 3 : 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
 
-                const SizedBox(height: 10),
+                SizedBox(height: verticalSpacing * 0.5),
 
                 // --- Disaster Summary ---
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                   child: Text(
                     disasterDetails!['summary'] ?? '',
                     style: TextStyle(
-                      fontSize: subtitleFont,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.blackColor,
-                    ),
+                        fontSize: subtitleFont,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.blackColor,
+                        height: 1.5,
+                        fontFamily: "Inter"),
                   ),
                 ),
 
-                const SizedBox(height: 10),
+                SizedBox(height: verticalSpacing),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: horizontalPadding * 0.6),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // --- Fatalities & Needed Amount ---
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        margin: const EdgeInsets.symmetric(vertical: 5),
+                        padding: EdgeInsets.symmetric(
+                            vertical: verticalSpacing * 0.3),
+                        margin: EdgeInsets.symmetric(
+                            vertical: verticalSpacing * 0.3),
                         decoration: const BoxDecoration(
                           border: Border(
                             top: BorderSide(
@@ -219,7 +266,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                           ),
                         ),
                         child: Wrap(
-                          spacing: 15,
+                          spacing: isDesktop ? 25 : (isTablet ? 20 : 15),
                           runSpacing: 8,
                           children: [
                             Text(
@@ -227,34 +274,37 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                               style: TextStyle(
                                   fontSize: subtitleFont,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.primaryRedColor),
+                                  color: AppColors.primaryRedColor,
+                                  fontFamily: "Inter"),
                             ),
                             Text(
                               "${StorageService.formatCurrency(double.parse(amountNeeded))} Needed",
                               style: TextStyle(
                                   fontSize: subtitleFont,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.primaryRedColor),
+                                  color: AppColors.primaryRedColor,
+                                  fontFamily: "Inter"),
                             ),
                           ],
                         ),
                       ),
 
-                      const SizedBox(height: 10),
-                      const TagItem(
-                          label: "Emergency Support",
-                          height: 23.35,
-                          width: 132),
-                      const SizedBox(height: 10),
+                      SizedBox(height: verticalSpacing * 0.7),
+                      TagItem(
+                        label: "Emergency Support",
+                        height: isSmallMobile ? 20 : 23.35,
+                        width: isSmallMobile ? 120 : 132,
+                      ),
+                      SizedBox(height: verticalSpacing * 0.7),
 
                       // --- Link Fields ---
                       const LinkField(label: 'Nearby Hospitals'),
-                      const SizedBox(height: 10),
+                      SizedBox(height: verticalSpacing * 0.7),
                       const LinkField(label: 'Local Shelters'),
-                      const SizedBox(height: 10),
+                      SizedBox(height: verticalSpacing * 0.7),
                       const LinkField(
                           label: 'Food & Clothing Distribution Points'),
-                      const SizedBox(height: 25),
+                      SizedBox(height: verticalSpacing * 1.5),
 
                       // --- Donation Progress ---
                       DonationProgress(
@@ -267,7 +317,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                         currency: currency,
                       ),
 
-                      const SizedBox(height: 25),
+                      SizedBox(height: verticalSpacing * 1.5),
 
                       // --- Donate Button ---
                       RedBtn(
@@ -276,17 +326,24 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                         onPressed: () {
                           showModalBottomSheet(
                             context: context,
+                            isScrollControlled: true,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(0)),
+                                  top: Radius.circular(20)),
                             ),
                             builder: (BuildContext context) {
-                              final sheetHeight = screenHeight * 0.75;
+                              final sheetHeight = isDesktop
+                                  ? screenHeight * 0.6
+                                  : (isTablet
+                                      ? screenHeight * 0.7
+                                      : screenHeight * 0.75);
 
                               return Container(
                                 width: double.infinity,
                                 height: sheetHeight,
-                                padding: const EdgeInsets.all(20),
+                                padding: EdgeInsets.all(
+                                  isDesktop ? 40 : (isTablet ? 30 : 20),
+                                ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -294,66 +351,99 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                                       child: Text(
                                         "Donation Amount",
                                         style: TextStyle(
-                                          fontSize: screenWidth * 0.045,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: isDesktop
+                                              ? 24
+                                              : (isTablet
+                                                  ? 20
+                                                  : subtitleFont * 1.3),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: "Inter",
                                           color: AppColors.blackColorG,
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 25),
+                                    SizedBox(height: verticalSpacing),
                                     Center(
-                                      child: FormTextfield(
-                                        isNumberField: false,
-                                        no_question: false,
-                                        question: "Enter Price Manually",
-                                        textEditingController: widget
-                                            .disasterController.donationAmount,
-                                        validator: (String? value) => null,
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth:
+                                              isDesktop ? 500 : double.infinity,
+                                        ),
+                                        child: FormTextfield(
+                                          isNumberField: false,
+                                          no_question: false,
+                                          question: "Enter Price Manually",
+                                          textEditingController: widget
+                                              .disasterController
+                                              .donationAmount,
+                                          validator: (String? value) => null,
+                                        ),
                                       ),
                                     ),
-                                    const SizedBox(height: 25),
+                                    SizedBox(height: verticalSpacing),
 
                                     // --- PriceTag Buttons with Wrap ---
-                                    Wrap(
-                                      spacing: 8,
-                                      runSpacing: 8,
-                                      children: List.generate(6, (index) {
-                                        final labels = [
-                                          '100K',
-                                          '250K',
-                                          '350K',
-                                          '500K',
-                                          '750K',
-                                          '1 million'
-                                        ];
-                                        final flagId = index + 1;
-                                        return PriceTag(
-                                          label: labels[index],
-                                          active: widget
-                                                  .disasterController.flagId ==
-                                              flagId,
-                                          onPressed: () {
-                                            widget.disasterController
-                                                .setAmountActive(
-                                                    flagId, labels[index]);
-                                          },
-                                        );
-                                      }),
+                                    Center(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth:
+                                              isDesktop ? 600 : double.infinity,
+                                        ),
+                                        child: Wrap(
+                                          spacing: isDesktop
+                                              ? 12
+                                              : (isTablet ? 10 : 8),
+                                          runSpacing: isDesktop
+                                              ? 12
+                                              : (isTablet ? 10 : 8),
+                                          alignment: WrapAlignment.center,
+                                          children: List.generate(6, (index) {
+                                            final labels = [
+                                              '100K',
+                                              '250K',
+                                              '350K',
+                                              '500K',
+                                              '750K',
+                                              '1 million'
+                                            ];
+                                            final flagId = index + 1;
+                                            return PriceTag(
+                                              label: labels[index],
+                                              active: widget.disasterController
+                                                      .flagId ==
+                                                  flagId,
+                                              onPressed: () {
+                                                widget.disasterController
+                                                    .setAmountActive(
+                                                        flagId, labels[index]);
+                                              },
+                                            );
+                                          }),
+                                        ),
+                                      ),
                                     ),
 
                                     const Spacer(),
 
-                                    RedBtn(
-                                      squared: true,
-                                      label: 'Continue to Payment',
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        Get.toNamed("/initiate-payment",
-                                            arguments: {
-                                              "disasterId":
-                                                  disasterDetails!['id']
-                                            });
-                                      },
+                                    Center(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth:
+                                              isDesktop ? 500 : double.infinity,
+                                        ),
+                                        child: RedBtn(
+                                          squared: true,
+                                          label: 'Continue to Payment',
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            Get.toNamed("/initiate-payment",
+                                                arguments: {
+                                                  "disasterId":
+                                                      disasterDetails!['id']
+                                                });
+                                          },
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -362,7 +452,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
                           );
                         },
                       ),
-                      const SizedBox(height: 25),
+                      SizedBox(height: verticalSpacing * 1.5),
                     ],
                   ),
                 ),

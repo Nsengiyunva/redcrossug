@@ -376,7 +376,8 @@ class _HomeScreenState extends State<DefaultHome> {
                 label: 'Memberships',
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => MembershipCard()),
+                    MaterialPageRoute(
+                        builder: (context) => const MembershipCard()),
                   );
                 }),
             _buildServiceCard(

@@ -2581,7 +2581,7 @@ class _MembershipCardState extends State<MembershipCard> {
           // District Dropdown
           Obx(() => controller.isEditing.value
               ? DropdownButtonFormField<String>(
-                  value: controller.selectedDistrict.value.isEmpty
+                  initialValue: controller.selectedDistrict.value.isEmpty
                       ? null
                       : controller.selectedDistrict.value,
                   items:
@@ -2610,7 +2610,7 @@ class _MembershipCardState extends State<MembershipCard> {
           // County Dropdown
           Obx(() => controller.isEditing.value
               ? DropdownButtonFormField<String>(
-                  value: controller.selectedCounty.value.isEmpty
+                  initialValue: controller.selectedCounty.value.isEmpty
                       ? null
                       : controller.selectedCounty.value,
                   items: controller.counties.map<DropdownMenuItem<String>>((c) {
@@ -2639,7 +2639,7 @@ class _MembershipCardState extends State<MembershipCard> {
           // Subcounty Dropdown
           Obx(() => controller.isEditing.value
               ? DropdownButtonFormField<String>(
-                  value: controller.selectedSubcounty.value.isEmpty
+                  initialValue: controller.selectedSubcounty.value.isEmpty
                       ? null
                       : controller.selectedSubcounty.value,
                   items:
@@ -2668,7 +2668,7 @@ class _MembershipCardState extends State<MembershipCard> {
           // Parish Dropdown
           Obx(() => controller.isEditing.value
               ? DropdownButtonFormField<String>(
-                  value: controller.selectedParish.value.isEmpty
+                  initialValue: controller.selectedParish.value.isEmpty
                       ? null
                       : controller.selectedParish.value,
                   items: controller.parishes.map<DropdownMenuItem<String>>((p) {
@@ -2696,7 +2696,7 @@ class _MembershipCardState extends State<MembershipCard> {
           // Village Dropdown
           Obx(() => controller.isEditing.value
               ? DropdownButtonFormField<String>(
-                  value: controller.selectedVillage.value.isEmpty
+                  initialValue: controller.selectedVillage.value.isEmpty
                       ? null
                       : controller.selectedVillage.value,
                   items: controller.villages.map<DropdownMenuItem<String>>((v) {
