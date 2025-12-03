@@ -72,21 +72,21 @@ class AmbulanceEmergency extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 30),
-                const Row(
-                  children: [
-                    Icon(
-                      Icons.check_box_outline_blank,
-                      color: AppColors.whiteColorB,
-                      size: 24.0,
-                    ),
-                    Text("By continuing, you accept our Ambulance Policy",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Inter",
-                            fontSize: 10,
-                            color: AppColors.greyColorC)),
-                  ],
-                ),
+                // const Row(
+                //   children: [
+                //     Icon(
+                //       Icons.check_box_outline_blank,
+                //       color: AppColors.whiteColorB,
+                //       size: 24.0,
+                //     ),
+                //     Text("By continuing, you accept our Ambulance Policy",
+                //         style: TextStyle(
+                //             fontWeight: FontWeight.w500,
+                //             fontFamily: "Inter",
+                //             fontSize: 10,
+                //             color: AppColors.greyColorC)),
+                //   ],
+                // ),
                 const SizedBox(height: 10),
                 RedBtn(
                     label: "Continue",

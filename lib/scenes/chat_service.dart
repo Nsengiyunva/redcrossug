@@ -9,11 +9,13 @@ class ChatService {
 
   WebSocketChannel? _channel;
   int? conversationId;
-  final int accountId = 1; // Usually 1 for hosted Chatwoot
+  final int accountId = 143638;
+  final String inboxIdentifier; // Usually 1 for hosted Chatwoot
 
   ChatService({
     required this.baseUrl,
     required this.websiteToken,
+    required this.inboxIdentifier,
   });
 
   /// Initialize: create conversation and start listening
@@ -75,6 +77,9 @@ class ChatService {
 
   /// Create conversation via website token
   Future<Map<String, dynamic>> _createConversation() async {
+    print("base url $baseUrl");
+    print("account id $accountId");
+
     final url = Uri.parse('$baseUrl/api/v1/accounts/$accountId/conversations');
 
     final response = await http.post(

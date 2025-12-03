@@ -6,11 +6,12 @@ class PictureBadge extends StatelessWidget {
   final String address;
   final String image;
 
-  const PictureBadge(
-      {super.key,
-      required this.title,
-      required this.address,
-      required this.image});
+  const PictureBadge({
+    super.key,
+    required this.title,
+    required this.address,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {

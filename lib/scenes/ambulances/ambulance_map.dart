@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:redcross/controllers/ambulance_controller.dart';
 import 'package:redcross/scenes/ambulances/ambulance_status.dart';
+import 'package:redcross/scenes/ambulances/available_ambulances.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/scenes/widgets/tag_item.dart';
 import 'package:redcross/utils/colors.dart';
@@ -213,7 +214,6 @@ class _MapScreenState extends State<AmbulanceMap> {
                                       width: 1),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  // Border when error occurs
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: const BorderSide(
                                       color: AppColors.primaryRedColor,
@@ -225,10 +225,11 @@ class _MapScreenState extends State<AmbulanceMap> {
                           RedBtn(
                               label: 'Continue',
                               onPressed: () {
-                                ambulanceController.submitCreateRequest();
-                                Navigator.of(context).push(
+                                // ambulanceController.submitCreateRequest();
+                                Navigator.push(
+                                  context,
                                   MaterialPageRoute(
-                                      builder: (context) => AmbulanceStatus()),
+                                      builder: (_) => AvailableAmbulances()),
                                 );
                               })
                         ],

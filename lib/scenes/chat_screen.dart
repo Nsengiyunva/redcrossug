@@ -194,6 +194,7 @@ class _ChatScreenState extends State<ChatScreen> {
     chatService = ChatService(
       baseUrl: 'https://app.chatwoot.com',
       websiteToken: 'tHUXNzLajC8bqMSRfmmTxiFy',
+      inboxIdentifier: "86416",
     );
 
     chatService.initWebSocket((data) {
