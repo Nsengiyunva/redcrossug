@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:redcross/models/member_profile.dart';
 import 'package:redcross/models/membership.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/widgets/dashed_line.dart';
 import 'package:redcross/utils/colors.dart';

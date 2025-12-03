@@ -565,7 +565,7 @@ import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
-import 'package:redcross/scenes/floating_chat_button.dart';
+// import 'package:redcross/scenes/floating_chat_button.dart';
 import 'package:redcross/scenes/memberships/membership_card.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/utils/colors.dart';
@@ -626,7 +626,7 @@ class _HomeScreenState extends State<DefaultHome> {
           ),
 
           // Floating Chat Button
-          const FloatingChatButton(),
+          // const FloatingChatButton(),
         ],
       ),
     );

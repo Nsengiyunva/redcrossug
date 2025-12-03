@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, library_private_types_in_public_api, use_build_context_synchronously, deprecated_member_use, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';

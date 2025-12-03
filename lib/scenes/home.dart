@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
