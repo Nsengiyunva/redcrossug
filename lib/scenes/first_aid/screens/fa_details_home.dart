@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/first_aid/screens/bleeding_cut.dart';
 import 'package:redcross/scenes/first_aid/screens/bleeding_cut_page2.dart';

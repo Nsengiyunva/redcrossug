@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/donations_controller.dart';

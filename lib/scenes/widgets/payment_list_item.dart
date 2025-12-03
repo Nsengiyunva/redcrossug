@@ -23,6 +23,8 @@
 
 //     final iconData = iconMap[icon_name] ?? Icons.error;
 
+// ignore_for_file: must_be_immutable
+
 //     return Container(
 //       height: 72,
 //       padding: const EdgeInsets.symmetric(vertical: 5),

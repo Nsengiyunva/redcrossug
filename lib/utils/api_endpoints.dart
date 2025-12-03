@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, non_constant_identifier_names
+
 class ApiEndpoints {
   static const String baseUrl = 'https://urcs-api.taufeeq.dev/api';
   static _AuthEndPoints authEndpoints = _AuthEndPoints();

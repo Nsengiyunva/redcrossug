@@ -27,6 +27,8 @@
 //     }
 //   }
 
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(

@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, deprecated_member_use, use_super_parameters
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

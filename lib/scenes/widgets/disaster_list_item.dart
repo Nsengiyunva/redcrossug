@@ -23,6 +23,8 @@
 //   Widget build(BuildContext context) {
 //     var picture = 'https://urcs-api.taufeeq.dev/api/$photo';
 
+// ignore_for_file: unused_import, deprecated_member_use
+
 //     return GestureDetector(
 //       onTap: () {
 //         Get.toNamed("/disaster-details", arguments: {'title': title, 'id': id});

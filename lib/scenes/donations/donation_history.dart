@@ -398,6 +398,8 @@
 //   final String date;
 //   final String units;
 
+// ignore_for_file: unused_import, deprecated_member_use
+
 //   DonationItem({
 //     required this.title,
 //     required this.date,

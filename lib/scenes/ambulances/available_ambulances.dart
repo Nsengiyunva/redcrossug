@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, deprecated_member_use, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/utils/colors.dart';
