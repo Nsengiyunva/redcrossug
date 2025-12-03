@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
         "/check-ambulance_status": (context) => AmbulanceStatus(),
         "/ambulance-home": (context) => AmbulanceServicesHome(),
         "/ambulance-emergency-form": (context) => AmbulanceEmergency(),
-        "/disaster-details": (context) => DisasterDetails(),
+        // "/disaster-details": (context) => DisasterDetails(title: "", id: 0),
         "/initiate-payment": (context) => Payment(),
         "/payment-successful": (context) => const AccountSuccess(
             button_label: 'Close',

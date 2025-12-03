@@ -29,10 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
-    sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+    sdk: flutter  
   cupertino_icons: ^1.0.8
   flutter_otp_text_field: ^1.2.0
   get: ^4.6.6
@@ -40,11 +37,11 @@ dependencies:
   intl_phone_number_field: ^0.2.1
   http: ^1.2.2
   font_awesome_flutter: ^10.6.0
-  intl: ^0.18.1
+  intl: ^0.20.0
+  web_socket_channel: ^2.3.0
   flutter_svg: ^2.0.9
   pin_code_fields: ^8.0.1
   google_maps_flutter: ^2.1.1
-  textfield_datepicker: ^0.2.0
   geolocator: ^13.0.2
   geocoding: ^3.0.0
   fluttertoast: ^8.2.11
@@ -81,12 +78,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/icons/app_icon.png"  # Path to your app icon (512x512 recommended)
-  # adaptive_icon_background: "#ffffff"  # (Optional) for Android adaptive icons
-  # adaptive_icon_foreground: "assets/icon/adaptive_foreground.png"
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  image_path: "assets/images/icons/app_icon.png"
 
 # The following section is specific to Flutter packages.
 flutter:

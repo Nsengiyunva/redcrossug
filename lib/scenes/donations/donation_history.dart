@@ -624,22 +624,22 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
   }) {
     return GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DonationDetails(
-                donation: Donation(
-                  id: 1,
-                  organizationName: "NITA Uganda",
-                  donorName: "Test Donor",
-                  date: DateTime.now(),
-                  donationType: "Blood",
-                  amount: 50000,
-                  paymentMode: "Cash",
-                ),
-              ),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => DonationDetails(
+          //       donation: Donation(
+          //         id: 1,
+          //         organizationName: "NITA Uganda",
+          //         donorName: "Test Donor",
+          //         date: DateTime.now(),
+          //         donationType: "Blood",
+          //         amount: 50000,
+          //         paymentMode: "Cash",
+          //       ),
+          //     ),
+          //   ),
+          // );
         },
         child: Container(
           decoration: BoxDecoration(

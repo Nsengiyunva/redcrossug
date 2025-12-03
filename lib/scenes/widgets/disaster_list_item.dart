@@ -135,6 +135,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/disasters/disaster_details.dart';
 import 'package:redcross/utils/colors.dart';
 
 class DisasterListItem extends StatelessWidget {
@@ -168,7 +169,15 @@ class DisasterListItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Get.toNamed("/disaster-details", arguments: {'title': title, 'id': id});
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DisasterDetails(
+              title: title,
+              id: id,
+            ),
+          ),
+        );
       },
       child: Container(
         constraints: const BoxConstraints(minHeight: 97), // grows if needed
