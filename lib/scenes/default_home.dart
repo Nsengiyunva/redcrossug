@@ -621,6 +621,21 @@ class _HomeScreenState extends State<DefaultHome> {
                     _buildServiceGrid(isTablet, context),
                     SizedBox(height: isTablet ? 40 : 30),
                     _buildBulletinCard(),
+                    const SizedBox(height: 16),
+                    _buildFullWidthActionButton(
+                      icon: Icons.campaign_outlined,
+                      label: 'View All Bulletins',
+                      subtitle: 'Browse all news and announcements',
+                      color: const Color(0xFFFFF3E0),
+                      iconColor: const Color(0xFFFF6F00),
+                      textColor: const Color(0xFF2C2C2C),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => const BulletinsList()),
+                        );
+                      },
+                    ),
                     const SizedBox(height: 80), // Space for floating button
                   ],
                 ),
