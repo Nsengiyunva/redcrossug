@@ -26,8 +26,16 @@ class ConversationSender {
   });
 
   factory ConversationSender.fromJson(Map<String, dynamic> json) {
+    // Helper function to ensure we get a Map
+    Map<String, dynamic> ensureMap(dynamic value) {
+      if (value == null) return {};
+      if (value is Map<String, dynamic>) return value;
+      if (value is List && value.isEmpty) return {};
+      return {};
+    }
+
     return ConversationSender(
-      additionalAttributes: json['additional_attributes'] ?? {},
+      additionalAttributes: ensureMap(json['additional_attributes']),
       availabilityStatus: json['availability_status'] ?? 'offline',
       email: json['email'] ?? '',
       id: json['id'] ?? 0,
@@ -36,8 +44,69 @@ class ConversationSender {
       blocked: json['blocked'] ?? false,
       identifier: json['identifier'],
       thumbnail: json['thumbnail'] ?? '',
-      customAttributes: json['custom_attributes'] ?? {},
+      customAttributes: ensureMap(json['custom_attributes']),
       createdAt: json['created_at'] ?? 0,
+    );
+  }
+}
+
+class ConversationAssignee {
+  final int id;
+  final String name;
+  final String email;
+  final String availabilityStatus;
+  final String role;
+  final String thumbnail;
+
+  ConversationAssignee({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.availabilityStatus,
+    required this.role,
+    required this.thumbnail,
+  });
+
+  factory ConversationAssignee.fromJson(Map<String, dynamic> json) {
+    return ConversationAssignee(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? json['available_name'] ?? '',
+      email: json['email'] ?? '',
+      availabilityStatus: json['availability_status'] ?? 'offline',
+      role: json['role'] ?? '',
+      thumbnail: json['thumbnail'] ?? '',
+    );
+  }
+}
+
+class ConversationMessage {
+  final int id;
+  final String content;
+  final int createdAt;
+  final String status;
+  final int messageType;
+  final String contentType;
+  final String processedMessageContent;
+
+  ConversationMessage({
+    required this.id,
+    required this.content,
+    required this.createdAt,
+    required this.status,
+    required this.messageType,
+    required this.contentType,
+    required this.processedMessageContent,
+  });
+
+  factory ConversationMessage.fromJson(Map<String, dynamic> json) {
+    return ConversationMessage(
+      id: json['id'] ?? 0,
+      content: json['content'] ?? '',
+      createdAt: json['created_at'] ?? 0,
+      status: json['status'] ?? '',
+      messageType: json['message_type'] ?? 0,
+      contentType: json['content_type'] ?? 'text',
+      processedMessageContent: json['processed_message_content'] ?? json['content'] ?? '',
     );
   }
 }
@@ -46,11 +115,13 @@ class ConversationMeta {
   final ConversationSender sender;
   final String channel;
   final bool hmacVerified;
+  final ConversationAssignee? assignee;
 
   ConversationMeta({
     required this.sender,
     required this.channel,
     required this.hmacVerified,
+    this.assignee,
   });
 
   factory ConversationMeta.fromJson(Map<String, dynamic> json) {
@@ -58,6 +129,9 @@ class ConversationMeta {
       sender: ConversationSender.fromJson(json['sender'] ?? {}),
       channel: json['channel'] ?? '',
       hmacVerified: json['hmac_verified'] ?? false,
+      assignee: json['assignee'] != null 
+          ? ConversationAssignee.fromJson(json['assignee']) 
+          : null,
     );
   }
 }
@@ -65,7 +139,7 @@ class ConversationMeta {
 class Conversation {
   final ConversationMeta meta;
   final int id;
-  final List<dynamic> messages;
+  final List<ConversationMessage> messages;
   final int accountId;
   final String uuid;
   final Map<String, dynamic> additionalAttributes;
@@ -120,18 +194,28 @@ class Conversation {
   });
 
   factory Conversation.fromJson(Map<String, dynamic> json) {
+    // Helper function to ensure we get a Map
+    Map<String, dynamic> ensureMap(dynamic value) {
+      if (value == null) return {};
+      if (value is Map<String, dynamic>) return value;
+      if (value is List && value.isEmpty) return {};
+      return {};
+    }
+
     return Conversation(
       meta: ConversationMeta.fromJson(json['meta'] ?? {}),
       id: json['id'] ?? 0,
-      messages: json['messages'] ?? [],
+      messages: (json['messages'] as List?)
+          ?.map((m) => ConversationMessage.fromJson(m))
+          .toList() ?? [],
       accountId: json['account_id'] ?? 0,
       uuid: json['uuid'] ?? '',
-      additionalAttributes: json['additional_attributes'] ?? {},
+      additionalAttributes: ensureMap(json['additional_attributes']),
       agentLastSeenAt: json['agent_last_seen_at'] ?? 0,
       assigneeLastSeenAt: json['assignee_last_seen_at'] ?? 0,
       canReply: json['can_reply'] ?? true,
       contactLastSeenAt: json['contact_last_seen_at'] ?? 0,
-      customAttributes: json['custom_attributes'] ?? {},
+      customAttributes: ensureMap(json['custom_attributes']),
       inboxId: json['inbox_id'] ?? 0,
       labels: json['labels'] ?? [],
       muted: json['muted'] ?? false,

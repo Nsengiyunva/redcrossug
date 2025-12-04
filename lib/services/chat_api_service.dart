@@ -29,11 +29,21 @@ class ChatApiService {
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
+        
+        // Debug: Print the response to see its structure
+        print('API Response: $jsonResponse');
+        
+        // Validate response structure
+        if (jsonResponse is! Map<String, dynamic>) {
+          throw Exception('Invalid response format: expected Map but got ${jsonResponse.runtimeType}');
+        }
+        
         return ConversationResponse.fromJson(jsonResponse);
       } else {
         throw Exception('Failed to load conversations: ${response.statusCode}');
       }
     } catch (e) {
+      print('Error in getConversations: $e');
       throw Exception('Error fetching conversations: $e');
     }
   }
@@ -76,7 +86,10 @@ class ChatApiService {
     }
   }
 
-  static Future<Map<String, dynamic>> createConversation() async {
+  static Future<Map<String, dynamic>> createConversation({
+    required String message,
+    String status = 'open',
+  }) async {
     try {
       final token = await StorageService.getToken();
       
@@ -94,6 +107,10 @@ class ChatApiService {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
+        body: json.encode({
+          'message': message,
+          'status': status,
+        }),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

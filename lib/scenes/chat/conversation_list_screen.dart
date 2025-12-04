@@ -42,6 +42,116 @@ class _ConversationListScreenState extends State<ConversationListScreen> {
     }
   }
 
+  Future<void> _showCreateConversationDialog() async {
+    final messageController = TextEditingController();
+    
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Start New Conversation',
+            style: TextStyle(
+              fontFamily: "Inter",
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Enter your initial message:',
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: messageController,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  hintText: 'Type your message here...',
+                  hintStyle: const TextStyle(fontFamily: "Inter"),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(
+                      color: AppColors.primaryRedColor,
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final message = messageController.text.trim();
+                if (message.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter a message'),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                  return;
+                }
+                
+                Navigator.pop(context);
+                
+                try {
+                  await ChatApiService.createConversation(message: message);
+                  _loadConversations();
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Conversation created successfully'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Failed to create conversation: $e'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryRedColor,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text(
+                'Start Chat',
+                style: TextStyle(fontFamily: "Inter"),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   String _formatTimestamp(int timestamp) {
     final dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
     final now = DateTime.now();
@@ -94,30 +204,7 @@ class _ConversationListScreenState extends State<ConversationListScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.add_comment, color: Colors.white),
-            onPressed: () async {
-              // Create new conversation
-              try {
-                await ChatApiService.createConversation();
-                _loadConversations();
-                if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('New conversation created'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-              } catch (e) {
-                if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Failed to create conversation: $e'),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
-              }
-            },
+            onPressed: _showCreateConversationDialog,
           ),
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.white),
@@ -228,29 +315,7 @@ class _ConversationListScreenState extends State<ConversationListScreen> {
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
-              onPressed: () async {
-                try {
-                  await ChatApiService.createConversation();
-                  _loadConversations();
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('New conversation created'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to create conversation: $e'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                }
-              },
+              onPressed: _showCreateConversationDialog,
               icon: const Icon(Icons.add),
               label: const Text('Start Conversation'),
               style: ElevatedButton.styleFrom(
@@ -378,6 +443,21 @@ class _ConversationListScreenState extends State<ConversationListScreen> {
                 ],
               ),
               const SizedBox(height: 12),
+              // Last message preview
+              if (conversation.messages.isNotEmpty) ...[
+                Text(
+                  conversation.messages.last.processedMessageContent,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+              // Metadata row
               Row(
                 children: [
                   Container(
@@ -415,16 +495,71 @@ class _ConversationListScreenState extends State<ConversationListScreen> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'ID: ${conversation.id}',
-                      style: TextStyle(
-                        fontFamily: "Inter",
-                        fontSize: 12,
-                        color: Colors.grey[500],
+                  // Assignee info
+                  if (conversation.meta.assignee != null) ...[
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 12,
+                            color: Colors.blue[700],
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            conversation.meta.assignee!.name.split(' ').first,
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 10,
+                              color: Colors.blue[700],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 8),
+                  ],
+                  // Message count
+                  if (conversation.messages.isNotEmpty)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.chat_bubble_outline,
+                            size: 11,
+                            color: Colors.grey[600],
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            '${conversation.messages.length}',
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 10,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const Spacer(),
                   if (conversation.canReply)
                     Icon(
                       Icons.reply,
