@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:redcross/scenes/chat/chat_webview.dart';
+import 'package:redcross/utils/colors.dart';
+
+class FloatingChatButton extends StatelessWidget {
+  const FloatingChatButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      right: 16,
+      bottom: 16,
+      child: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ChatWebView(),
+            ),
+          );
+        },
+        backgroundColor: AppColors.primaryRedColor,
+        elevation: 6,
+        child: const Icon(
+          Icons.chat_bubble,
+          color: Colors.white,
+          size: 28,
+        ),
+      ),
+    );
+  }
+}
