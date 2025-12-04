@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:redcross/models/conversation.dart';
+import 'package:redcross/scenes/chat/chat_screen.dart';
 import 'package:redcross/services/chat_api_service.dart';
 import 'package:redcross/utils/colors.dart';
 
@@ -352,11 +355,10 @@ class _ConversationListScreenState extends State<ConversationListScreen> {
       ),
       child: InkWell(
         onTap: () {
-          // Navigate to conversation detail screen
-          // TODO: Implement conversation detail screen
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Conversation detail screen - Coming soon'),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatScreen(conversation: conversation),
             ),
           );
         },

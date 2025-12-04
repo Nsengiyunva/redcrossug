@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:redcross/models/conversation.dart';
+import 'package:redcross/models/message.dart';
 import 'package:redcross/utils/api_endpoints.dart';
 import 'package:redcross/utils/storage_service.dart';
 
@@ -123,7 +126,7 @@ class ChatApiService {
     }
   }
 
-  static Future<List<dynamic>> getMessages(int conversationId) async {
+  static Future<MessagesResponse> getMessages(int conversationId) async {
     try {
       final token = await StorageService.getToken();
       
@@ -147,7 +150,7 @@ class ChatApiService {
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
-        return jsonResponse['data'] ?? [];
+        return MessagesResponse.fromJson(jsonResponse);
       } else {
         throw Exception('Failed to load messages: ${response.statusCode}');
       }
