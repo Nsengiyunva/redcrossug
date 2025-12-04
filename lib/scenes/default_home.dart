@@ -565,7 +565,6 @@ import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
-import 'package:redcross/scenes/chat/floating_chat_button.dart';
 import 'package:redcross/scenes/memberships/membership_card.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/utils/colors.dart';
@@ -600,34 +599,25 @@ class _HomeScreenState extends State<DefaultHome> {
     final isTablet = size.width > 600;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isTablet ? 32.0 : 20.0,
-                  vertical: 16.0,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildHeader(),
-                    SizedBox(height: isTablet ? 40 : 30),
-                    _buildServiceGrid(isTablet, context),
-                    SizedBox(height: isTablet ? 40 : 30),
-                    _buildUpcomingEvents(isTablet),
-                    const SizedBox(
-                        height: 80), // Give space for floating button
-                  ],
-                ),
-              ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isTablet ? 32.0 : 20.0,
+              vertical: 16.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                SizedBox(height: isTablet ? 40 : 30),
+                _buildServiceGrid(isTablet, context),
+                SizedBox(height: isTablet ? 40 : 30),
+                _buildUpcomingEvents(isTablet),
+              ],
             ),
           ),
-
-          // Floating Chat Button
-          const FloatingChatButton(),
-        ],
+        ),
       ),
     );
   }
