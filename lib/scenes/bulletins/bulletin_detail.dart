@@ -21,6 +21,8 @@ class _BulletinDetailState extends State<BulletinDetail> {
   final DateFormat dateFormat = DateFormat('EEEE, MMMM dd, yyyy');
   final DateFormat timeFormat = DateFormat('h:mm a');
 
+  double _webViewHeight = 400.0;
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +33,28 @@ class _BulletinDetailState extends State<BulletinDetail> {
     _webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.white)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (String url) {
+            _updateWebViewHeight();
+          },
+        ),
+      )
       ..loadHtmlString(_buildHtmlContent());
+  }
+
+  Future<void> _updateWebViewHeight() async {
+    try {
+      final height = await _webViewController.runJavaScriptReturningResult(
+        'document.documentElement.scrollHeight',
+      );
+      final heightValue = double.tryParse(height.toString()) ?? 400.0;
+      setState(() {
+        _webViewHeight = heightValue + 20; // Add some padding
+      });
+    } catch (e) {
+      print('Error getting web view height: $e');
+    }
   }
 
   String _buildHtmlContent() {
@@ -164,7 +187,7 @@ class _BulletinDetailState extends State<BulletinDetail> {
                   ),
                   const SizedBox(height: 16),
                   SizedBox(
-                    height: 600,
+                    height: _webViewHeight,
                     child: WebViewWidget(controller: _webViewController),
                   ),
                   if (widget.bulletin.tags != null &&
@@ -189,14 +212,45 @@ class _BulletinDetailState extends State<BulletinDetail> {
       width: double.infinity,
       height: 250,
       fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
         return Container(
           height: 250,
           color: Colors.grey[200],
-          child: Icon(
-            Icons.image_not_supported,
-            size: 64,
-            color: Colors.grey[400],
+          child: Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+              color: AppColors.primaryRedColor,
+            ),
+          ),
+        );
+      },
+      errorBuilder: (context, error, stackTrace) {
+        print('Error loading image: $error');
+        return Container(
+          height: 250,
+          color: Colors.grey[200],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.image_not_supported,
+                size: 64,
+                color: Colors.grey[400],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Image could not be loaded',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 14,
+                  fontFamily: "Inter",
+                ),
+              ),
+            ],
           ),
         );
       },
