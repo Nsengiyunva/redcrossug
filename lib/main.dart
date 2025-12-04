@@ -16,6 +16,7 @@ import 'package:redcross/scenes/auth/otp_verify.dart';
 import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/scenes/auth/sign_up.dart';
+import 'package:redcross/scenes/blood_donations/blood_donation_faq_screen.dart';
 import 'package:redcross/scenes/blood_donations/blood_donation_history.dart';
 import 'package:redcross/scenes/blood_donations/blood_donation_history_details.dart';
 import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
@@ -91,6 +92,7 @@ class MyApp extends StatelessWidget {
             // payload: {},
             ),
         "/blood-donation-eligibility": (context) => const BloodEligibility(),
+        "/blood-donation-faqs": (context) => const BloodDonationFaqScreen(),
         "/ambulance-request-form": (context) => AmbulanceForm(),
         "/ambulance-success-request": (context) => const AmbulanceSuccess(),
         "/account-creation-success": (context) => const AccountSuccess(
