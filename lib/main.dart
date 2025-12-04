@@ -130,7 +130,7 @@ class MyApp extends StatelessWidget {
         "/donation-history-list": (context) => const DonationHistory(),
         "/donation-receipt": (context) => const DonationReceipt(),
       },
-      initialRoute: isLoggedIn ? '/main-home' : '/login',
+      initialRoute: isLoggedIn ? '/home' : '/login',
     );
   }
 }
