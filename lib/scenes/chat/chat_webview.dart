@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:redcross/utils/api_endpoints.dart';
+import 'package:redcross/services/chat_service.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -14,81 +11,39 @@ class ChatWebView extends StatefulWidget {
 }
 
 class _ChatWebViewState extends State<ChatWebView> {
-  late final WebViewController _controller;
+  final ChatService _chatService = ChatService();
   bool _isLoading = true;
   String? _errorMessage;
-  String? _chatwootBaseUrl;
-  String? _websiteToken;
 
   @override
   void initState() {
     super.initState();
-    _loadChatwootConfig();
+    _initializeChat();
   }
 
-  Future<void> _loadChatwootConfig() async {
-    try {
-      final response = await http.get(
-        Uri.parse('${ApiEndpoints.baseUrl}/${ApiEndpoints.authEndpoints.config_chatwoot}'),
-      );
+  Future<void> _initializeChat() async {
+    if (_chatService.isInitialized) {
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+    try {
+      await _chatService.initialize();
+      if (mounted) {
         setState(() {
-          _chatwootBaseUrl = data['data']['base_url'];
-          _websiteToken = data['data']['website_token'];
-        });
-        _initializeWebView();
-      } else {
-        setState(() {
-          _errorMessage = 'Failed to load chat configuration';
           _isLoading = false;
         });
       }
     } catch (e) {
-      setState(() {
-        _errorMessage = 'Error loading chat: ${e.toString()}';
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _errorMessage = 'Error loading chat: ${e.toString()}';
+          _isLoading = false;
+        });
+      }
     }
-  }
-
-  void _initializeWebView() {
-    if (_chatwootBaseUrl == null || _websiteToken == null) return;
-
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.white)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            if (progress == 100) {
-              setState(() {
-                _isLoading = false;
-              });
-            }
-          },
-          onPageStarted: (String url) {
-            setState(() {
-              _isLoading = true;
-            });
-          },
-          onPageFinished: (String url) {
-            setState(() {
-              _isLoading = false;
-            });
-          },
-          onWebResourceError: (WebResourceError error) {
-            debugPrint('WebView error: ${error.description}');
-          },
-        ),
-      )
-      ..setOnConsoleMessage((JavaScriptConsoleMessage message) {
-        debugPrint('JS Console [${message.level.name}]: ${message.message}');
-      })
-      ..loadRequest(
-        Uri.parse('$_chatwootBaseUrl/widget?website_token=$_websiteToken'),
-      );
   }
 
 
@@ -131,7 +86,7 @@ class _ChatWebViewState extends State<ChatWebView> {
                     _errorMessage = null;
                     _isLoading = true;
                   });
-                  _loadChatwootConfig();
+                  _initializeChat();
                 },
                 child: const Text('Retry'),
               ),
@@ -141,7 +96,7 @@ class _ChatWebViewState extends State<ChatWebView> {
       );
     }
 
-    if (_chatwootBaseUrl == null || _websiteToken == null) {
+    if (!_chatService.isInitialized || _chatService.controller == null) {
       return Scaffold(
         backgroundColor: AppColors.bgColor,
         appBar: AppBar(
@@ -185,14 +140,14 @@ class _ChatWebViewState extends State<ChatWebView> {
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.white),
             onPressed: () {
-              _controller.reload();
+              _chatService.controller?.reload();
             },
           ),
         ],
       ),
       body: Stack(
         children: [
-          WebViewWidget(controller: _controller),
+          WebViewWidget(controller: _chatService.controller!),
           if (_isLoading)
             Container(
               color: Colors.white,
