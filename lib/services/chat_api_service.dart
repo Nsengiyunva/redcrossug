@@ -54,6 +54,8 @@ class ChatApiService {
   static Future<Map<String, dynamic>> sendMessage({
     required int conversationId,
     required String message,
+    String messageType = 'outgoing',
+    String contentType = 'text',
   }) async {
     try {
       final token = await StorageService.getToken();
@@ -76,6 +78,8 @@ class ChatApiService {
         },
         body: json.encode({
           'content': message,
+          'message_type': messageType,
+          'content_type': contentType,
         }),
       );
 
