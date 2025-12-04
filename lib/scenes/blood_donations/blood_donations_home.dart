@@ -173,6 +173,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/blood_donations/blood_banks_list.dart';
+import 'package:redcross/scenes/blood_donations/blood_donation_faq_screen.dart';
 import 'package:redcross/scenes/blood_donations/blood_drive_requests_list.dart';
 import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
@@ -303,6 +304,32 @@ class BloodDonationHome extends StatelessWidget {
                           );
                         },
                       ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: screenHeight * 0.02),
+
+                // FAQ and Info row
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildSecondaryButton(
+                        context,
+                        'FAQs',
+                        Icons.help_outline,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const BloodDonationFaqScreen()),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(width: screenWidth * 0.03),
+                    Expanded(
+                      child: Container(), // Placeholder for symmetry
                     ),
                   ],
                 ),
