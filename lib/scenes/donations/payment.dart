@@ -1,148 +1,82 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:redcross/controllers/disasters_list_controller.dart';
-// import 'package:redcross/scenes/widgets/payment_list_item.dart';
-// import 'package:redcross/scenes/widgets/payment_summary_item.dart';
-// import 'package:redcross/scenes/widgets/red_btn.dart';
-// import 'package:redcross/scenes/widgets/text_box_area.dart';
-// import 'package:redcross/utils/colors.dart';
-
-// class Payment extends StatelessWidget {
-//   Payment({super.key});
-
-//   final DisastersListController disasterController =
-//       Get.put(DisastersListController());
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var data = Get.arguments;
-
-//     return Scaffold(
-//       backgroundColor: AppColors.bgColor,
-//       appBar: AppBar(
-//           title: const Text(""),
-//           leading: const BackButton() // Back button added here
-//           ),
-//       body: Obx(() {
-//         if (disasterController.isDonating.value) {
-//           return const Center(
-//             child: Column(
-//               children: [CircularProgressIndicator(), Text("Processing...")],
-//             ),
-//           );
-//         }
-
-//         return SingleChildScrollView(
-//           child: Container(
-//               padding:
-//                   const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   const Center(
-//                     child: Text(
-//                       "Payment",
-//                       style: TextStyle(
-//                           fontSize: 16,
-//                           fontFamily: "Inter",
-//                           fontWeight: FontWeight.w500,
-//                           color: AppColors.blackColorG),
-//                     ),
-//                   ),
-//                   const SizedBox(height: 10),
-//                   const Text("Select Payment Method",
-//                       style: TextStyle(
-//                           fontSize: 12,
-//                           fontFamily: "Inter",
-//                           fontWeight: FontWeight.w500,
-//                           color: AppColors.blackColorG)),
-//                   const SizedBox(height: 10),
-//                   // PaymentListItem(
-//                   //   outline: true,
-//                   //   text_label: 'Credit Card',
-//                   //   icon_name: 'credit_card_rounded',
-//                   // ),
-//                   PaymentListItem(
-//                     outline: true,
-//                     text_label: 'Mobile Money',
-//                     icon_name: 'phone_iphone_rounded',
-//                   ),
-//                   const SizedBox(height: 15),
-//                   const PaymentSummaryItem(
-//                       text_label: "Service Fee", price_label: "UGX 0"),
-//                   const SizedBox(height: 10),
-//                   const PaymentSummaryItem(
-//                       text_label: "Donation Amount",
-//                       price_label: "UGX 250,000"),
-//                   const SizedBox(height: 25),
-//                   const PaymentSummaryItem(
-//                       text_label: "Total", price_label: "UGX 250,000"),
-//                   const SizedBox(height: 30),
-//                   const Text("Messages and Support",
-//                       style: TextStyle(
-//                           fontSize: 12,
-//                           fontFamily: "Inter",
-//                           fontWeight: FontWeight.w500,
-//                           color: AppColors.blackColorG)),
-//                   const SizedBox(height: 5),
-//                   const TextBoxArea(),
-//                   const SizedBox(height: 5),
-//                   const Row(
-//                     children: [
-//                       Icon(Icons.check_box_outline_blank,
-//                           color: AppColors.greyColorG, size: 20.0),
-//                       Padding(
-//                         padding: EdgeInsets.symmetric(horizontal: 5),
-//                         child: Text("Hide your name",
-//                             style: TextStyle(
-//                                 fontWeight: FontWeight.w400,
-//                                 fontFamily: "Inter",
-//                                 fontSize: 12,
-//                                 color: AppColors.greyColorG)),
-//                       ),
-//                     ],
-//                   ),
-//                   const SizedBox(height: 5),
-//                   RedBtn(
-//                     squared: true,
-//                     label: "Confirm Donation",
-//                     onPressed: () {
-//                       // Get.toNamed("/payment-successful");
-//                       disasterController
-//                           .makePayment(data['disasterId'].toString());
-//                     },
-//                   )
-//                 ],
-//               )),
-//         );
-//       }),
-//     );
-//   }
-// }
-
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, library_private_types_in_public_api
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:redcross/models/user.dart';
+import 'package:redcross/scenes/default_home.dart';
+import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/storage_service.dart';
 
 class Payment extends StatefulWidget {
+  final int amount;
+  final int disasterId;
+
+  const Payment({super.key, required this.amount, required this.disasterId});
+
   @override
   _DonationPaymentScreenState createState() => _DonationPaymentScreenState();
 }
 
 class _DonationPaymentScreenState extends State<Payment> {
-  String selectedPaymentMethod = 'credit_card';
+  String selectedPaymentMethod = 'mobile_money';
   bool hideYourName = false;
   final TextEditingController messageController = TextEditingController();
 
-  final double serviceFee = 300;
+  final double serviceFee = 0;
   final double donationAmount = 450000;
+
+  String? phoneNumber;
+  String? mobileProvider;
+  bool isSubmitting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserDetails();
+  }
+
+  Future<void> fetchUserDetails() async {
+    final User? user = await StorageService.getUser();
+    if (user == null) return;
+
+    final String? phone = user.phone_no; // use property, not []
+
+    if (phone != null && phone.isNotEmpty) {
+      String provider = getMobileProvider(phone);
+
+      setState(() {
+        phoneNumber = phone;
+        mobileProvider = provider;
+        isSubmitting = true;
+      });
+    }
+  }
+
+  String getMobileProvider(String phone) {
+    // Normalize phone number: remove spaces and +256 prefix if present
+    String normalized = phone.replaceAll(' ', '');
+    if (normalized.startsWith('+256')) {
+      normalized = '0' + normalized.substring(4);
+    }
+
+    if (normalized.startsWith('077') ||
+        normalized.startsWith('074') ||
+        normalized.startsWith('078') ||
+        normalized.startsWith('076')) {
+      return 'MTN';
+    } else if (normalized.startsWith('075') || normalized.startsWith('070')) {
+      return 'Airtel';
+    } else {
+      return 'Unknown';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.whiteColor,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
@@ -151,10 +85,10 @@ class _DonationPaymentScreenState extends State<Payment> {
         title: Text(
           'Payment',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              fontFamily: "Inter"),
         ),
         centerTitle: true,
       ),
@@ -167,17 +101,17 @@ class _DonationPaymentScreenState extends State<Payment> {
               Text(
                 'Select payment method',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                    fontFamily: "Inter"),
               ),
               SizedBox(height: 16),
-              _buildPaymentMethodCard(
-                icon: Icons.credit_card,
-                title: 'Credit Card',
-                value: 'credit_card',
-              ),
+              // _buildPaymentMethodCard(
+              //   icon: Icons.credit_card,
+              //   title: 'Credit Card',
+              //   value: 'credit_card',
+              // ),
               SizedBox(height: 12),
               _buildPaymentMethodCard(
                 icon: Icons.phone_android,
@@ -194,25 +128,34 @@ class _DonationPaymentScreenState extends State<Payment> {
                 ),
               ),
               SizedBox(height: 16),
-              _buildSummaryRow('Service fee', serviceFee),
+              _buildSummaryRow(
+                  false, "${phoneNumber}", 'Mobile Number', serviceFee),
               SizedBox(height: 12),
-              _buildSummaryRow('Donation amounts', donationAmount),
+              _buildSummaryRow(
+                  false, "${mobileProvider}", 'Mobile Provider', serviceFee),
+              SizedBox(height: 12),
+              _buildSummaryRow(true, "", 'Service fee', serviceFee),
+              SizedBox(height: 12),
+              _buildSummaryRow(
+                  true, "", 'Donation amounts', widget.amount.toDouble()),
               SizedBox(height: 16),
               Divider(color: Colors.grey[300], thickness: 1),
               SizedBox(height: 16),
               _buildSummaryRow(
+                true,
+                "",
                 'Total',
-                serviceFee + donationAmount,
+                serviceFee + widget.amount.toDouble(),
                 isTotal: true,
               ),
               SizedBox(height: 32),
               Text(
                 'Messages and support',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                    fontFamily: "Inter"),
               ),
               SizedBox(height: 16),
               Container(
@@ -227,9 +170,9 @@ class _DonationPaymentScreenState extends State<Payment> {
                   decoration: InputDecoration(
                     hintText: 'Write your messages...',
                     hintStyle: TextStyle(
-                      color: Colors.grey[400],
-                      fontSize: 14,
-                    ),
+                        color: Colors.grey[400],
+                        fontSize: 14,
+                        fontFamily: "Inter"),
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(16),
                   ),
@@ -259,9 +202,9 @@ class _DonationPaymentScreenState extends State<Payment> {
                   Text(
                     'Hide your name',
                     style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[700],
-                    ),
+                        fontSize: 14,
+                        color: Colors.grey[700],
+                        fontFamily: "Inter"),
                   ),
                 ],
               ),
@@ -269,26 +212,35 @@ class _DonationPaymentScreenState extends State<Payment> {
               SizedBox(
                 width: double.infinity,
                 height: 56,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _confirmDonation();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFF0000),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: Text(
-                    'Confirm Donation',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                child: isSubmitting
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.whiteColor,
+                        ),
+                      )
+                    : ElevatedButton(
+                        onPressed: () {
+                          _confirmDonation();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryRedColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Confirm Payment Donation',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Inter"),
+                        ),
+                      ),
               ),
               SizedBox(height: 20),
             ],
@@ -317,7 +269,7 @@ class _DonationPaymentScreenState extends State<Payment> {
           color: isSelected ? Color(0xFFFFE5E5) : Colors.grey[50],
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Color(0xFFFF0000) : Colors.grey[200]!,
+            color: isSelected ? AppColors.primaryRedColor : Colors.grey[200]!,
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -332,7 +284,7 @@ class _DonationPaymentScreenState extends State<Payment> {
               ),
               child: Icon(
                 icon,
-                color: Color(0xFFFF0000),
+                color: AppColors.primaryRedColor,
                 size: 20,
               ),
             ),
@@ -341,10 +293,10 @@ class _DonationPaymentScreenState extends State<Payment> {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                    fontFamily: "Inter"),
               ),
             ),
             Container(
@@ -353,7 +305,9 @@ class _DonationPaymentScreenState extends State<Payment> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? Color(0xFFFF0000) : Colors.grey[400]!,
+                  color: isSelected
+                      ? AppColors.primaryRedColor
+                      : Colors.grey[400]!,
                   width: 2,
                 ),
               ),
@@ -364,7 +318,7 @@ class _DonationPaymentScreenState extends State<Payment> {
                         height: 10,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFFFF0000),
+                          color: AppColors.primaryRedColor,
                         ),
                       ),
                     )
@@ -376,7 +330,9 @@ class _DonationPaymentScreenState extends State<Payment> {
     );
   }
 
-  Widget _buildSummaryRow(String label, double amount, {bool isTotal = false}) {
+  Widget _buildSummaryRow(
+      bool isCurrency, String? value, String label, double amount,
+      {bool isTotal = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -384,89 +340,107 @@ class _DonationPaymentScreenState extends State<Payment> {
           label,
           style: TextStyle(
             fontSize: isTotal ? 16 : 14,
+            fontFamily: "Inter",
             fontWeight: isTotal ? FontWeight.w600 : FontWeight.w400,
             color: isTotal ? Colors.black87 : Colors.grey[600],
           ),
         ),
-        Text(
-          'UGX ${amount.toStringAsFixed(0).replaceAllMapped(
-                RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                (Match m) => '${m[1]},',
-              )}',
-          style: TextStyle(
-            fontSize: isTotal ? 16 : 14,
-            fontWeight: isTotal ? FontWeight.w600 : FontWeight.w500,
-            color: Colors.black87,
-          ),
-        ),
+        isCurrency
+            ? Text(
+                'UGX ${amount.toStringAsFixed(0).replaceAllMapped(
+                      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                      (Match m) => '${m[1]},',
+                    )}',
+                style: TextStyle(
+                  fontSize: isTotal ? 16 : 14,
+                  fontFamily: "Inter",
+                  fontWeight: isTotal ? FontWeight.w600 : FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              )
+            : Text("$value"),
       ],
     );
   }
 
-  void _confirmDonation() {
-    // Show confirmation dialog
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Column(
-          children: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Color(0xFFFFE5E5),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.check_circle,
-                color: Color(0xFFFF0000),
-                size: 40,
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Donation Confirmed!',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        content: Text(
-          'Thank you for your generous donation of UGX ${(serviceFee + donationAmount).toStringAsFixed(0)}',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.grey[600],
+  String normalizePhone(String phone) {
+    String cleaned = phone.replaceAll(' ', '');
+
+    if (cleaned.startsWith('+')) {
+      cleaned = cleaned.substring(1); // remove +
+    }
+
+    return "${cleaned}";
+  }
+
+  Future<void> _confirmDonation() async {
+    if (phoneNumber == null || mobileProvider == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Phone number or Network Provider is missing.")),
+      );
+      return;
+    }
+
+    final payload = {
+      "amount": widget.amount.toInt(),
+      "phone_no": "${normalizePhone('$phoneNumber')}", // force string
+      "mobile_network": "$mobileProvider", // force string
+    };
+
+    int donate_id = widget.disasterId;
+    final token = await StorageService.getToken();
+
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://urcs-api.taufeeq.dev/api/disasters/${donate_id}/donate'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${token}',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: jsonEncode(payload),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+
+        // Show the response message in a SnackBar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['message'] ?? "Donation successful"),
+            backgroundColor: Colors.green[800],
+            behavior: SnackBarBehavior.floating,
           ),
-        ),
-        actions: [
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFF0000),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Text(
-                'Done',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DefaultHome(),
           ),
-        ],
-      ),
-    );
+        );
+      } else {
+        final data = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['message'] ?? "Donation failed"),
+            backgroundColor: AppColors.primaryRedColor,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    } catch (e) {
+      // print("error - $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("An error occurred: $e"),
+          backgroundColor: AppColors.blackColor,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   @override

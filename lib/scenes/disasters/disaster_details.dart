@@ -466,10 +466,12 @@
 //     );
 //   }
 // }
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:redcross/controllers/disasters_list_controller.dart';
+import 'package:redcross/scenes/donations/payment.dart';
 import 'package:redcross/scenes/widgets/donation_progress.dart';
 // import 'package:redcross/scenes/widgets/form_textfield.dart';
 import 'package:redcross/scenes/widgets/link_field.dart';
@@ -699,7 +701,6 @@ class _DisasterDetailsState extends State<DisasterDetails> {
 
                 SizedBox(height: verticalSpacing * 0.5),
 
-                // --- Disaster Summary ---
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                   child: Text(
@@ -835,6 +836,7 @@ class _DisasterDetailsState extends State<DisasterDetails> {
           isDesktop: isDesktop,
           isTablet: isTablet,
           isSmallMobile: isSmallMobile,
+          disasterId: disasterDetails!['id'],
         );
       },
     );
@@ -850,6 +852,7 @@ class DonationAmountBottomSheet extends StatefulWidget {
   final bool isDesktop;
   final bool isTablet;
   final bool isSmallMobile;
+  final int disasterId;
 
   const DonationAmountBottomSheet({
     Key? key,
@@ -860,6 +863,7 @@ class DonationAmountBottomSheet extends StatefulWidget {
     required this.isDesktop,
     required this.isTablet,
     required this.isSmallMobile,
+    required this.disasterId,
   }) : super(key: key);
 
   @override
@@ -869,6 +873,7 @@ class DonationAmountBottomSheet extends StatefulWidget {
 
 class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
   int? selectedAmountIndex;
+  final amountController = TextEditingController();
 
   final Map<String, int> amountValues = {
     '100K': 100000,
@@ -940,7 +945,7 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                       border: Border.all(color: Colors.grey[200]!),
                     ),
                     child: TextField(
-                      controller: widget.disasterController.donationAmount,
+                      controller: amountController,
                       keyboardType: TextInputType.number,
                       style: TextStyle(
                         fontSize: widget.isDesktop ? 16 : 14,
@@ -959,7 +964,6 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          print("value $value");
                           selectedAmountIndex = null;
                           // widget.disasterController.flagId = 0;
                         });
@@ -1017,7 +1021,7 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
                                   color: isSelected
-                                      ? Color(0xFFFF0000)
+                                      ? AppColors.primaryRedColor
                                       : Colors.grey[300]!,
                                   width: isSelected ? 2 : 1,
                                 ),
@@ -1033,7 +1037,7 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                                         ? FontWeight.w600
                                         : FontWeight.w500,
                                     color: isSelected
-                                        ? Color(0xFFFF0000)
+                                        ? AppColors.primaryRedColor
                                         : Colors.black87,
                                     fontFamily: "Inter",
                                   ),
@@ -1063,13 +1067,48 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                         height: widget.isDesktop ? 56 : 52,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Navigator.of(context).pop();
-                            // Get.toNamed("/initiate-payment", arguments: {
-                            //   "disasterId": widget.disasterDetails!['id']
-                            // });
+                            // final amount = amountController.text.trim();
+
+                            final text = amountController.text.trim();
+
+                            if (text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content:
+                                        Text("Please enter an amount in UGX.")),
+                              );
+                              return;
+                            }
+
+                            final amount = int.tryParse(text);
+
+                            if (amount == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Invalid number.")),
+                              );
+                              return;
+                            }
+
+                            if (amount < 5000) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text(
+                                        "Minimum amount to be donated is 5,000 UGX")),
+                              );
+                              return;
+                            }
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => Payment(
+                                    amount: amount,
+                                    disasterId: widget.disasterId),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFFF0000),
+                            backgroundColor: AppColors.primaryRedColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -1078,7 +1117,7 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                           child: Text(
                             'Continue to Payment',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.whiteColor,
                               fontSize: widget.isDesktop ? 17 : 16,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Inter",

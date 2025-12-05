@@ -1,11 +1,6 @@
-// Edit Profile Screen
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 
 class EditMember extends StatefulWidget {
-  // final MemberProfile profile;
-
   const EditMember({super.key});
 
   @override
@@ -22,9 +17,6 @@ class _EditProfileScreenState extends State<EditMember> {
   @override
   void initState() {
     super.initState();
-    // _subcountyController = TextEditingController(text: widget.profile.memberSubcounty);
-    // _parishController = TextEditingController(text: widget.profile.memberParish);
-    // _villageController = TextEditingController(text: widget.profile.memberVillage);
   }
 
   @override

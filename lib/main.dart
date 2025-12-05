@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
         "/ambulance-home": (context) => AmbulanceServicesHome(),
         "/ambulance-emergency-form": (context) => AmbulanceEmergency(),
         // "/disaster-details": (context) => DisasterDetails(title: "", id: 0),
-        "/initiate-payment": (context) => Payment(),
+        // "/initiate-payment": (context) => Payment(),
         "/payment-successful": (context) => const AccountSuccess(
             button_label: 'Close',
             title: 'Thank you',
