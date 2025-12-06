@@ -35,7 +35,6 @@ class _FirstAidHomeState extends State<FirstAidHome> {
           Uri.parse('whatsapp://send?phone=$phone&text=$encodedMsg');
       final waMeUri = Uri.parse('https://wa.me/$phone?text=$encodedMsg');
 
-      // Delay a tiny bit to ensure platform channel ready
       await Future.delayed(const Duration(milliseconds: 100));
 
       if (await canLaunchUrl(whatsappUri)) {
@@ -51,7 +50,8 @@ class _FirstAidHomeState extends State<FirstAidHome> {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              content: Text('Could not open WhatsApp. Is it installed?')),
+              content: Text(
+                  'Could not open WhatsApp. It appears not be installed. Install the app  and try again.')),
         );
       }
     } catch (e) {
