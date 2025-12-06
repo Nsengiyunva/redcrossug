@@ -8,28 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:588488279273:android:654303377c1bc34ab75c78",
+        "mobilesdk_app_id": "1:588488279273:android:b3f949d1553b451ab75c78",
         "android_client_info": {
-          "package_name": "com.example.redcross"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBPiczWNNEIIcyyWho0OGSyU8x5y070w6k"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:588488279273:android:e8906bc0e4c28b3cb75c78",
-        "android_client_info": {
-          "package_name": "com.example.redcrossug"
+          "package_name": "com.urcs.redcross"
         }
       },
       "oauth_client": [],

@@ -1,4 +1,4 @@
-package com.example.redcross
+package com.urcs.redcross
 
 import io.flutter.embedding.android.FlutterActivity
 
