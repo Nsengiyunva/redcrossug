@@ -55,15 +55,16 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                   decoration: InputDecoration(
                     hintText: 'Search FAQs...',
                     prefixIcon: const Icon(Icons.search),
-                    suffixIcon: Obx(() => controller.searchQuery.value.isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              searchController.clear();
-                              controller.clearFilters();
-                            },
-                          )
-                        : const SizedBox.shrink()),
+                    suffixIcon:
+                        Obx(() => controller.searchQuery.value.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  searchController.clear();
+                                  controller.clearFilters();
+                                },
+                              )
+                            : const SizedBox.shrink()),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: Colors.grey.shade300),
@@ -99,7 +100,8 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                             padding: const EdgeInsets.only(right: 8),
                             child: FilterChip(
                               label: const Text('All'),
-                              selected: controller.selectedCategory.value == null,
+                              selected:
+                                  controller.selectedCategory.value == null,
                               onSelected: (selected) {
                                 if (selected) {
                                   controller.filterByCategory(null);
@@ -120,7 +122,8 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                           // Category Chips
                           ...controller.categories.map((category) {
                             final isSelected =
-                                controller.selectedCategory.value == category.key;
+                                controller.selectedCategory.value ==
+                                    category.key;
                             return Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: FilterChip(
@@ -132,13 +135,16 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                                 },
                                 selectedColor: AppColors.primaryRedColor,
                                 labelStyle: TextStyle(
-                                  color: isSelected ? Colors.white : Colors.black87,
-                                  fontWeight:
-                                      isSelected ? FontWeight.bold : FontWeight.normal,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.black87,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
                                 ),
                               ),
                             );
-                          }).toList(),
+                          }),
                         ],
                       ),
                     )),
@@ -318,9 +324,7 @@ class FaqAccordionItem extends StatelessWidget {
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isExpanded
-              ? AppColors.primaryRedColor
-              : Colors.grey.shade200,
+          color: isExpanded ? AppColors.primaryRedColor : Colors.grey.shade200,
           width: isExpanded ? 2 : 1,
         ),
         boxShadow: [

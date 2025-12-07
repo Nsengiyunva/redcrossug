@@ -1287,7 +1287,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                       ),
                       const SizedBox(height: 16),
                       DropdownButtonFormField<int>(
-                        value: _selectedBranch,
+                        initialValue: _selectedBranch,
                         decoration: _buildInputDecoration('URCS Branch'),
                         style: const TextStyle(
                           fontFamily: "Inter",
@@ -1307,7 +1307,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                       ),
                       const SizedBox(height: 16),
                       DropdownButtonFormField<String>(
-                        value: _selectedDistrict,
+                        initialValue: _selectedDistrict,
                         decoration: _buildInputDecoration('District'),
                         style: const TextStyle(
                           fontFamily: "Inter",
@@ -1348,7 +1348,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<int>(
-                        value: _selectedSpecializationId,
+                        initialValue: _selectedSpecializationId,
                         decoration: _buildInputDecoration('Key Specialization'),
                         style: const TextStyle(
                           fontFamily: "Inter",
@@ -1414,7 +1414,7 @@ class _RegistrationFormState extends State<VolunteerRegister> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: _selectedEducationLevel,
+                        initialValue: _selectedEducationLevel,
                         decoration:
                             _buildInputDecoration('Highest Education Level'),
                         style: const TextStyle(

@@ -330,7 +330,6 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:redcross/scenes/disasters/disaster_details.dart';
 import 'package:redcross/utils/colors.dart';
 

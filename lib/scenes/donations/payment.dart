@@ -39,7 +39,7 @@ class _DonationPaymentScreenState extends State<Payment> {
     final User? user = await StorageService.getUser();
     if (user == null) return;
 
-    final String? phone = user.phone_no; // use property, not []
+    final String phone = user.phone_no; // use property, not []
 
     if (phone != null && phone.isNotEmpty) {
       String provider = getMobileProvider(phone);
@@ -56,7 +56,7 @@ class _DonationPaymentScreenState extends State<Payment> {
     // Normalize phone number: remove spaces and +256 prefix if present
     String normalized = phone.replaceAll(' ', '');
     if (normalized.startsWith('+256')) {
-      normalized = '0' + normalized.substring(4);
+      normalized = '0${normalized.substring(4)}';
     }
 
     if (normalized.startsWith('077') ||
@@ -129,10 +129,10 @@ class _DonationPaymentScreenState extends State<Payment> {
               ),
               SizedBox(height: 16),
               _buildSummaryRow(
-                  false, "${phoneNumber}", 'Mobile Number', serviceFee),
+                  false, "$phoneNumber", 'Mobile Number', serviceFee),
               SizedBox(height: 12),
               _buildSummaryRow(
-                  false, "${mobileProvider}", 'Mobile Provider', serviceFee),
+                  false, "$mobileProvider", 'Mobile Provider', serviceFee),
               SizedBox(height: 12),
               _buildSummaryRow(true, "", 'Service fee', serviceFee),
               SizedBox(height: 12),
@@ -370,7 +370,7 @@ class _DonationPaymentScreenState extends State<Payment> {
       cleaned = cleaned.substring(1); // remove +
     }
 
-    return "${cleaned}";
+    return cleaned;
   }
 
   Future<void> _confirmDonation() async {
@@ -384,7 +384,7 @@ class _DonationPaymentScreenState extends State<Payment> {
 
     final payload = {
       "amount": widget.amount.toInt(),
-      "phone_no": "${normalizePhone('$phoneNumber')}", // force string
+      "phone_no": normalizePhone('$phoneNumber'), // force string
       "mobile_network": "$mobileProvider", // force string
     };
 
@@ -394,11 +394,11 @@ class _DonationPaymentScreenState extends State<Payment> {
     try {
       final response = await http.post(
         Uri.parse(
-            'https://urcs-api.taufeeq.dev/api/disasters/${donate_id}/donate'),
+            'https://urcs-api.taufeeq.dev/api/disasters/$donate_id/donate'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer ${token}',
+          'Authorization': 'Bearer $token',
           'X-Requested-With': 'XMLHttpRequest'
         },
         body: jsonEncode(payload),

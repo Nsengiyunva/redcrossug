@@ -193,7 +193,7 @@ class AvailableAmbulances extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryRedColor?.withOpacity(0.1),
+                      color: AppColors.primaryRedColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
