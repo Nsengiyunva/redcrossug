@@ -1376,9 +1376,10 @@ class MembershipController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+
         profile.value = MemberProfile.fromJson(data['profile']);
 
-        if (data['active_membership'] != null) {
+        if (data['profile']['membership_id'] != null) {
           activeMembership.value =
               ActiveMembership.fromJson(data['active_membership']);
         }
@@ -1781,47 +1782,47 @@ class _MembershipCardState extends State<MembershipCard> {
                   color: const Color(0xFF00BCD4),
                 ),
                 const SizedBox(height: 32),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Navigate to membership registration
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE31E24),
-                      padding:
-                          EdgeInsets.symmetric(vertical: isTablet ? 20 : 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 5,
-                    ),
-                    child: Text(
-                      'Become a Member Today',
-                      style: TextStyle(
-                        fontSize: isTablet ? 18 : 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: TextButton(
-                    onPressed: () {
-                      // Learn more action
-                    },
-                    child: const Text(
-                      'Learn More About Membership',
-                      style: TextStyle(
-                        color: Color(0xFFE31E24),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       // Navigate to membership registration
+                //     },
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor: const Color(0xFFE31E24),
+                //       padding:
+                //           EdgeInsets.symmetric(vertical: isTablet ? 20 : 16),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(12),
+                //       ),
+                //       elevation: 5,
+                //     ),
+                //     child: Text(
+                //       'Become a Member Today',
+                //       style: TextStyle(
+                //         fontSize: isTablet ? 18 : 16,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.white,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+                // Center(
+                //   child: TextButton(
+                //     onPressed: () {
+                //       // Learn more action
+                //     },
+                //     child: const Text(
+                //       'Learn More About Membership',
+                //       style: TextStyle(
+                //         color: Color(0xFFE31E24),
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -2314,14 +2315,14 @@ class _MembershipCardState extends State<MembershipCard> {
           ),
           const SizedBox(height: 20),
           Obx(() => controller.isEditing.value
-              ? _buildEditableField('Email', controller.emailController)
+              ? _buildInfoRow('Email', profile.email, false)
               : _buildInfoRow('Email', profile.email, false)),
           Obx(() => controller.isEditing.value
-              ? _buildEditableField('Phone', controller.phoneController)
+              ? _buildInfoRow('Phone', profile.phone, false)
               : _buildInfoRow('Phone', profile.phone, false)),
           Obx(() => controller.isEditing.value
-              ? _buildEditableField(
-                  'Alternative Phone', controller.alternativePhoneController)
+              ? _buildInfoRow(
+                  'Alternative Phone', profile.alternativePhone, false)
               : _buildInfoRow(
                   'Alternative Phone', profile.alternativePhone, false)),
           const Divider(height: 30),

@@ -1,4 +1,55 @@
-// ignore_for_file: non_constant_identifier_names
+// import 'package:flutter/material.dart';
+// import 'package:redcross/utils/colors.dart';
+
+// class HomeBadge extends StatelessWidget {
+//   final String title;
+//   final String icon_name;
+
+//   const HomeBadge({super.key, required this.title, required this.icon_name});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final iconMap = <String, IconData>{
+//       'blood_icon': Icons.bloodtype_rounded,
+//       'gala': Icons.safety_check,
+//     };
+
+//     final iconData = iconMap[icon_name] ?? Icons.error;
+
+//     return Container(
+//         width: 172,
+//         height: 95,
+//         alignment: Alignment.center,
+//         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2),
+//         margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+//         decoration: BoxDecoration(
+//           color: const Color(0xFFFFE5E5),
+//           borderRadius: BorderRadius.circular(25),
+//         ),
+//         child: Padding(
+//           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               SizedBox(
+//                 width: 78,
+//                 child: Text(title,
+//                     style: const TextStyle(
+//                         fontSize: 12.36,
+//                         fontWeight: FontWeight.w600,
+//                         fontFamily: "Manrope",
+//                         color: AppColors.blackColor)),
+//               ),
+//               Icon(
+//                 iconData,
+//                 color: AppColors.primaryRedColor,
+//                 size: 64.48,
+//               ),
+//             ],
+//           ),
+//         ));
+//   }
+// }
 
 import 'package:flutter/material.dart';
 import 'package:redcross/utils/colors.dart';
@@ -7,10 +58,16 @@ class HomeBadge extends StatelessWidget {
   final String title;
   final String icon_name;
 
-  const HomeBadge({super.key, required this.title, required this.icon_name});
+  const HomeBadge({
+    super.key,
+    required this.title,
+    required this.icon_name,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     final iconMap = <String, IconData>{
       'blood_icon': Icons.bloodtype_rounded,
       'gala': Icons.safety_check,
@@ -19,36 +76,43 @@ class HomeBadge extends StatelessWidget {
     final iconData = iconMap[icon_name] ?? Icons.error;
 
     return Container(
-        width: 172,
-        height: 95,
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2),
-        margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
-        decoration: BoxDecoration(
-          color: const Color(0xFFFFE5E5),
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 78,
-                child: Text(title,
-                    style: const TextStyle(
-                        fontSize: 12.36,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Manrope",
-                        color: AppColors.blackColor)),
+      // REMOVE FIXED WIDTH → FULLY FLEXIBLE
+      constraints: const BoxConstraints(minHeight: 95),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFE5E5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          /// TEXT (expand to available space)
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 12.36,
+                fontWeight: FontWeight.w600,
+                fontFamily: "Manrope",
+                color: AppColors.blackColor,
               ),
-              Icon(
-                iconData,
-                color: AppColors.primaryRedColor,
-                size: 64.48,
-              ),
-            ],
+            ),
           ),
-        ));
+
+          const SizedBox(width: 8),
+
+          /// ICON (shrinks on small screens)
+          Icon(
+            iconData,
+            color: AppColors.primaryRedColor,
+            size: screenWidth * 0.12, // ~48px on normal phone
+          ),
+        ],
+      ),
+    );
   }
 }

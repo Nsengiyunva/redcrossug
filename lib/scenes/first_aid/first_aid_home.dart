@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously, unused_element, deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
 import 'package:redcross/scenes/widgets/icon_card.dart';
@@ -51,7 +49,7 @@ class _FirstAidHomeState extends State<FirstAidHome> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text(
-                  'Could not open WhatsApp. It appears not be installed. Install the app  and try again.')),
+                  'Could not open WhatsApp. It appears not be installed. Install the app and try again.')),
         );
       }
     } catch (e) {
@@ -72,93 +70,294 @@ class _FirstAidHomeState extends State<FirstAidHome> {
         debugPrint("App not installed on Android");
       }
     }
-    // else if (Platform.isIOS) {
-    //   final Uri iosUri = Uri.parse(iosUrlScheme);
-    //   if (!await launchUrl(iosUri)) {
-    //     debugPrint("App not installed on iOS");
-    //   }
-    // }
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isSmallScreen = size.width < 360;
+    final padding = size.width * 0.05;
+
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         title: const Text(""),
         leading: const BackButton(),
+        elevation: 0,
+        backgroundColor: AppColors.bgColor,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(vertical: 30.0),
-          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "First Aid",
-                style: TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 26.33,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 30),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconCard(icon_name: 'add', label: "First Aid Guide"),
-                  IconCard(icon_name: 'hospital', label: "Request Training"),
-                ],
-              ),
-              const SizedBox(height: 20),
-              RedBtn(
-                label: 'Call for Emergency Services',
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const FirstAidEmergencies(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          openWhatsApp(
+            phone: "256760588189",
+            message: "Hey, Hello Uganda Red Cross Society",
+          );
+        },
+        backgroundColor: const Color(0xFF25D366), // WhatsApp green
+        icon: const Icon(Icons.chat_bubble, color: Colors.white),
+        label: const Text(
+          'Chat with Us',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: 15,
+          ),
+        ),
+        elevation: 4,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              vertical: size.height * 0.03,
+              horizontal: padding,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header Section with Icon
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.red.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        Icons.medical_services,
+                        color: Colors.red.shade700,
+                        size: isSmallScreen ? 28 : 32,
+                      ),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: 30),
-              Center(
-                  child: TextButton.icon(
-                icon: const Icon(Icons.chat, color: AppColors.deepGreenA),
-                label: const Text(
-                  'Talk to the  Uganda Red Cross Society',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontWeight: FontWeight.w600,
+                    const SizedBox(width: 15),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "First Aid",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: isSmallScreen ? 24 : 28,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "Emergency care at your fingertips",
+                            style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: isSmallScreen ? 13 : 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: size.height * 0.04),
+
+                // Info Card
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.red.shade50,
+                        Colors.red.shade100.withOpacity(0.5),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.red.shade200,
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        color: Colors.red.shade700,
+                        size: 24,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          "Quick access to life-saving information and emergency services",
+                          style: TextStyle(
+                            fontSize: isSmallScreen ? 13 : 14,
+                            color: Colors.red.shade900,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                style: TextButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  backgroundColor: Colors.green.withOpacity(0.1),
-                  shape: RoundedRectangleBorder(
+
+                SizedBox(height: size.height * 0.03),
+
+                // Action Cards
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final cardWidth = (constraints.maxWidth - 16) / 2;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: cardWidth,
+                          child: const IconCard(
+                            icon_name: 'add',
+                            label: "First Aid Guide",
+                          ),
+                        ),
+                        SizedBox(
+                          width: cardWidth,
+                          child: const IconCard(
+                            icon_name: 'hospital',
+                            label: "Request Training",
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+
+                SizedBox(height: size.height * 0.025),
+
+                // Emergency Button with enhanced styling
+                Container(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.red.withOpacity(0.3),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: RedBtn(
+                    label: 'Call for Emergency Services',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const FirstAidEmergencies(),
+                        ),
+                      );
+                    },
                   ),
                 ),
-                onPressed: () {
-                  openWhatsApp(
-                    phone: "256760588189",
-                    message: "Hey, Hello Uganda Red Cross Society",
-                  );
-                },
-              )),
-              const SizedBox(height: 25),
-              // Center(
-              //     child: TextButton(
-              //   onPressed: _openApp,
-              //   child: const Text(
-              //     'Open Blended Learning App',
-              //     style: TextStyle(decoration: TextDecoration.underline),
-              //   ),
-              // ))
-            ],
+
+                SizedBox(height: size.height * 0.03),
+
+                // Help Section
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.support_agent,
+                            color: Colors.green.shade700,
+                            size: 24,
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            "Need Help?",
+                            style: TextStyle(
+                              fontSize: isSmallScreen ? 16 : 18,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        "Our team is available 24/7 to assist you with any emergency or questions.",
+                        style: TextStyle(
+                          fontSize: isSmallScreen ? 13 : 14,
+                          color: Colors.black54,
+                          height: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      InkWell(
+                        onTap: () {
+                          openWhatsApp(
+                            phone: "256760588189",
+                            message: "Hey, Hello Uganda Red Cross Society",
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade50,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.green.shade200,
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.message,
+                                color: Colors.green.shade700,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 10),
+                              Flexible(
+                                child: Text(
+                                  'Message Uganda Red Cross Society',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.green.shade700,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: isSmallScreen ? 13 : 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: size.height * 0.03),
+
+                // Bottom spacing for FAB
+                const SizedBox(height: 80),
+              ],
+            ),
           ),
         ),
       ),
