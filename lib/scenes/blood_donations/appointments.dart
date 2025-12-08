@@ -148,9 +148,9 @@ class _AppointmentsState extends State<Appointments> {
                   child: Text(
                     'Appointment Details',
                     style: TextStyle(
-                      fontSize: screenWidth * 0.06,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: screenWidth * 0.06,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                     overflow: TextOverflow.ellipsis, // prevents overflow
                   ),
                 ),
@@ -171,6 +171,7 @@ class _AppointmentsState extends State<Appointments> {
                     style: TextStyle(
                       color: _getStatusColor(appointment.statusColor),
                       fontWeight: FontWeight.bold,
+                      fontFamily: "Inter",
                       fontSize: screenWidth * 0.035, // responsive font size
                     ),
                   ),
@@ -197,11 +198,13 @@ class _AppointmentsState extends State<Appointments> {
                       children: [
                         Text(
                           appointment.preferredBloodBank.name,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontFamily: "Inter", fontWeight: FontWeight.bold),
                         ),
                         Text(
                           appointment.preferredBloodBank.district,
-                          style: TextStyle(color: Colors.grey[600]),
+                          style: TextStyle(
+                              fontFamily: "Inter", color: Colors.grey[600]),
                         ),
                       ],
                     ),
@@ -251,7 +254,9 @@ class _AppointmentsState extends State<Appointments> {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Center(
-                  child: Text("Close", style: TextStyle(color: Colors.white)),
+                  child: Text("Close",
+                      style:
+                          TextStyle(fontFamily: "Inter", color: Colors.white)),
                 ),
               ),
             ),
@@ -267,13 +272,16 @@ class _AppointmentsState extends State<Appointments> {
     showDialog(
       context: context,
       builder: (c) => AlertDialog(
-        title: const Text("Cancel Appointment"),
-        content:
-            const Text("Are you sure you want to cancel this appointment?"),
+        title: const Text("Cancel Appointment",
+            style: TextStyle(fontFamily: "Inter")),
+        content: const Text(
+          "Are you sure you want to cancel this appointment?",
+          style: TextStyle(fontFamily: "Inter"),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Keep"),
+            child: const Text("Keep", style: TextStyle(fontFamily: "Inter")),
           ),
           TextButton(
             onPressed: () {
@@ -281,11 +289,15 @@ class _AppointmentsState extends State<Appointments> {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text("Appointment cancelled"),
+                  content: Text(
+                    "Appointment cancelled",
+                    style: TextStyle(fontFamily: "Inter"),
+                  ),
                 ),
               );
             },
-            child: const Text("Cancel", style: TextStyle(color: Colors.red)),
+            child: const Text("Cancel",
+                style: TextStyle(fontFamily: "Inter", color: Colors.red)),
           ),
         ],
       ),
@@ -310,8 +322,12 @@ class _AppointmentsState extends State<Appointments> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: TextStyle(color: Colors.grey[600])),
-              Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
+              Text(label,
+                  style:
+                      TextStyle(fontFamily: "Inter", color: Colors.grey[600])),
+              Text(value,
+                  style: const TextStyle(
+                      fontFamily: "Inter", fontWeight: FontWeight.w600)),
             ],
           ),
         ),
@@ -370,7 +386,10 @@ class _AppointmentsState extends State<Appointments> {
                     )
                   : filteredAppointments.isEmpty
                       ? const Center(
-                          child: Text("No appointments found"),
+                          child: Text(
+                            "No appointments found",
+                            style: TextStyle(fontFamily: "Inter"),
+                          ),
                         )
                       : ListView.builder(
                           itemCount: filteredAppointments.length,
@@ -396,9 +415,10 @@ class _AppointmentsState extends State<Appointments> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            color: selected ? Colors.red : Colors.white,
+            color: selected ? AppColors.primaryRedColor : Colors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: selected ? Colors.red : Colors.grey),
+            border: Border.all(
+                color: selected ? AppColors.primaryRedColor : Colors.grey),
           ),
           child: Text(
             label,

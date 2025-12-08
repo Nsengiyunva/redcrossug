@@ -235,10 +235,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
               alignment:
                   showFilters ? Alignment.centerRight : Alignment.centerLeft,
               child: Container(
-                width: 100,
-                height: 2,
-                color: Colors.red,
-              ),
+                  width: 100, height: 2, color: AppColors.primaryRedColor),
             ),
           ),
 
@@ -353,7 +350,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
             context,
@@ -363,7 +360,14 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
           );
         },
         backgroundColor: AppColors.primaryRedColor,
-        child: const Icon(Icons.add, color: AppColors.whiteColor),
+        icon: const Icon(Icons.add, color: AppColors.whiteColor),
+        label: const Text(
+          "New Report",
+          style: TextStyle(
+              color: AppColors.whiteColor,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Inter"),
+        ),
       ),
     );
   }
@@ -383,7 +387,10 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           isExpanded: true,
-          hint: Text(label),
+          hint: Text(
+            label,
+            style: TextStyle(fontFamily: "Inter"),
+          ),
           value: value,
           items: options.map((String option) {
             return DropdownMenuItem<String>(
@@ -410,7 +417,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
           Text(
             label.replaceAll('_', ' ').toUpperCase(),
             style: const TextStyle(
-                color: Colors.red,
+                color: AppColors.primaryRedColor,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Inter"),
@@ -420,7 +427,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             onTap: onRemove,
             child: const Icon(
               Icons.cancel,
-              color: Colors.red,
+              color: AppColors.primaryRedColor,
               size: 18,
             ),
           ),
@@ -504,12 +511,13 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
                     ),
                     child: const Row(
                       children: [
-                        Icon(Icons.warning, color: Colors.red, size: 12),
+                        Icon(Icons.warning,
+                            color: AppColors.primaryRedColor, size: 12),
                         SizedBox(width: 4),
                         Text(
                           'EMERGENCY',
                           style: TextStyle(
-                              color: Colors.red,
+                              color: AppColors.primaryRedColor,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                               fontFamily: "Inter"),
@@ -523,9 +531,9 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
             Text(
               report.title,
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  fontFamily: "Inter"),
             ),
             const SizedBox(height: 8),
             Row(

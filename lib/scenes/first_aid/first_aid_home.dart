@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/scenes/first_aid/first_aid_emergencies.dart';
+import 'package:redcross/scenes/first_aid/training/training_home.dart';
 import 'package:redcross/scenes/widgets/icon_card.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
@@ -69,6 +70,16 @@ class _FirstAidHomeState extends State<FirstAidHome> {
       if (!await launchUrl(androidUri)) {
         debugPrint("App not installed on Android");
       }
+    }
+  }
+
+  Future<void> callEmergencyNumber(String phoneNumber) async {
+    final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    } else {
+      throw 'Could not launch $phoneNumber';
     }
   }
 
@@ -214,16 +225,33 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                       children: [
                         SizedBox(
                           width: cardWidth,
-                          child: const IconCard(
+                          child: IconCard(
                             icon_name: 'add',
                             label: "First Aid Guide",
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const FirstAidEmergencies(),
+                                ),
+                              );
+                              // Get.to(SomePage());  // if using GetX
+                            },
                           ),
                         ),
                         SizedBox(
                           width: cardWidth,
-                          child: const IconCard(
+                          child: IconCard(
                             icon_name: 'hospital',
                             label: "Request Training",
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const TrainingHome(),
+                                ),
+                              );
+                              // Get.to(SomePage());  // if using GetX
+                            },
                           ),
                         ),
                       ],
@@ -248,11 +276,7 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                   child: RedBtn(
                     label: 'Call for Emergency Services',
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const FirstAidEmergencies(),
-                        ),
-                      );
+                      callEmergencyNumber("+256760588189");
                     },
                   ),
                 ),

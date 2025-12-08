@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:redcross/models/blood_drive_request.dart';
 import 'package:redcross/scenes/blood_donations/blood_drive_details.dart';
 import 'package:redcross/scenes/blood_donations/created_blood_drive_request_screen.dart';
+import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 class BloodDriveRequestsList extends StatefulWidget {
@@ -144,17 +145,17 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
               Text(
                 'Blood Drive Requests',
                 style: TextStyle(
-                  fontSize: screenWidth * 0.09,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: screenWidth * 0.09,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Inter"),
               ),
               SizedBox(height: screenHeight * 0.01),
               Text(
                 '${requests.length} active requests',
                 style: TextStyle(
-                  fontSize: screenWidth * 0.04,
-                  color: Colors.grey[600],
-                ),
+                    fontSize: screenWidth * 0.04,
+                    color: Colors.grey[600],
+                    fontFamily: "Inter"),
               ),
               SizedBox(height: screenHeight * 0.025),
 
@@ -180,9 +181,9 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                                 Text(
                                   'No blood drive requests',
                                   style: TextStyle(
-                                    fontSize: screenWidth * 0.045,
-                                    color: Colors.grey[600],
-                                  ),
+                                      fontSize: screenWidth * 0.045,
+                                      color: Colors.grey[600],
+                                      fontFamily: "Inter"),
                                 ),
                               ],
                             ),
@@ -207,14 +208,14 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _navigateToCreateRequest,
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.primaryRedColor,
         icon: const Icon(Icons.add, color: Colors.white),
         label: const Text(
           'New Request',
           style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+              color: AppColors.whiteColor,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Inter"),
         ),
       ),
     );
@@ -247,9 +248,9 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   child: Text(
                     request.organizationName,
                     style: TextStyle(
-                      fontSize: screenWidth * 0.045,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                   ),
                 ),
                 Container(
@@ -264,10 +265,10 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   child: Text(
                     request.status.toUpperCase(),
                     style: TextStyle(
-                      fontSize: screenWidth * 0.03,
-                      color: _getStatusColor(request.status),
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: screenWidth * 0.03,
+                        color: _getStatusColor(request.status),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                   ),
                 ),
               ],
@@ -306,9 +307,9 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                 Text(
                   DateFormat('MMM dd, yyyy').format(request.requestedDate),
                   style: TextStyle(
-                    fontSize: screenWidth * 0.035,
-                    color: Colors.grey[600],
-                  ),
+                      fontSize: screenWidth * 0.035,
+                      color: Colors.grey[600],
+                      fontFamily: "Inter"),
                 ),
                 SizedBox(width: screenWidth * 0.04),
                 Icon(
@@ -320,9 +321,9 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                 Text(
                   '${request.expectedDonors} expected donors',
                   style: TextStyle(
-                    fontSize: screenWidth * 0.035,
-                    color: Colors.grey[600],
-                  ),
+                      fontSize: screenWidth * 0.035,
+                      color: Colors.grey[600],
+                      fontFamily: "Inter"),
                 ),
               ],
             ),
@@ -339,9 +340,9 @@ class _BloodDriveRequestsListScreenState extends State<BloodDriveRequestsList> {
                   child: Text(
                     '${request.contactPerson} • ${request.contactNumber}',
                     style: TextStyle(
-                      fontSize: screenWidth * 0.035,
-                      color: Colors.grey[600],
-                    ),
+                        fontSize: screenWidth * 0.035,
+                        color: Colors.grey[600],
+                        fontFamily: "Inter"),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

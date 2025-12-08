@@ -41,7 +41,7 @@ class _DonationPaymentScreenState extends State<Payment> {
 
     final String phone = user.phone_no; // use property, not []
 
-    if (phone != null && phone.isNotEmpty) {
+    if (phone.isNotEmpty) {
       String provider = getMobileProvider(phone);
 
       setState(() {

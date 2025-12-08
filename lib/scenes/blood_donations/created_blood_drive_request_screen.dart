@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 // ==================== CREATE BLOOD DRIVE REQUEST SCREEN ====================
@@ -129,7 +130,8 @@ class _CreateBloodDriveRequestScreenState
       if (_requestedDate == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Please select a requested date'),
+            content: Text('Please select a requested date',
+                style: TextStyle(fontFamily: "Inter")),
             backgroundColor: Colors.orange,
             behavior: SnackBarBehavior.floating,
           ),
@@ -183,7 +185,10 @@ class _CreateBloodDriveRequestScreenState
           // Success
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Blood drive request submitted successfully!'),
+              content: Text(
+                'Blood drive request submitted successfully!',
+                style: TextStyle(fontFamily: "Inter"),
+              ),
               backgroundColor: Colors.green,
               behavior: SnackBarBehavior.floating,
             ),
@@ -199,7 +204,9 @@ class _CreateBloodDriveRequestScreenState
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                  'Failed to submit request. Status: ${response.statusCode}'),
+                'Failed to submit request. Status: ${response.statusCode}',
+                style: TextStyle(fontFamily: "Inter"),
+              ),
               backgroundColor: Colors.red,
               behavior: SnackBarBehavior.floating,
             ),
@@ -253,17 +260,17 @@ class _CreateBloodDriveRequestScreenState
                   Text(
                     'Request Blood Drive',
                     style: TextStyle(
-                      fontSize: screenWidth * 0.09,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: screenWidth * 0.09,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                   ),
                   SizedBox(height: screenHeight * 0.01),
                   Text(
                     'Organize a blood donation campaign',
                     style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      color: Colors.grey[600],
-                    ),
+                        fontSize: screenWidth * 0.04,
+                        color: Colors.grey[600],
+                        fontFamily: "Inter"),
                   ),
                   SizedBox(height: screenHeight * 0.03),
 
@@ -501,17 +508,17 @@ class _CreateBloodDriveRequestScreenState
                         vertical: screenHeight * 0.02,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(16),
+                        color: AppColors.primaryRedColor,
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                         child: Text(
                           'Submit Request',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: screenWidth * 0.045,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.white,
+                              fontSize: screenWidth * 0.045,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Inter"),
                         ),
                       ),
                     ),
@@ -530,10 +537,10 @@ class _CreateBloodDriveRequestScreenState
     return Text(
       label,
       style: TextStyle(
-        fontSize: screenWidth * 0.04,
-        fontWeight: FontWeight.w600,
-        color: Colors.grey[800],
-      ),
+          fontSize: screenWidth * 0.04,
+          fontWeight: FontWeight.w600,
+          color: Colors.grey[800],
+          fontFamily: "Inter"),
     );
   }
 
@@ -557,8 +564,8 @@ class _CreateBloodDriveRequestScreenState
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey[400]),
-        prefixIcon: Icon(icon, color: Colors.red),
+        hintStyle: TextStyle(fontFamily: "Inter", color: Colors.grey[400]),
+        prefixIcon: Icon(icon, color: AppColors.primaryRedColor),
         contentPadding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.04,
           vertical: MediaQuery.of(context).size.height * 0.02,
@@ -573,11 +580,11 @@ class _CreateBloodDriveRequestScreenState
     return CheckboxListTile(
       title: Text(
         label,
-        style: TextStyle(fontSize: screenWidth * 0.04),
+        style: TextStyle(fontFamily: "Inter", fontSize: screenWidth * 0.04),
       ),
       value: value,
       onChanged: onChanged,
-      activeColor: Colors.red,
+      activeColor: AppColors.primaryRedColor,
       contentPadding: EdgeInsets.zero,
       controlAffinity: ListTileControlAffinity.leading,
     );

@@ -180,6 +180,7 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
+                            fontFamily: "Inter",
                             color: Colors.grey.shade600,
                           ),
                         ),
@@ -218,9 +219,9 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                               : 'No FAQs available',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey.shade600,
-                          ),
+                              fontSize: 16,
+                              color: Colors.grey.shade600,
+                              fontFamily: "Inter"),
                         ),
                         if (controller.searchQuery.value.isNotEmpty) ...[
                           const SizedBox(height: 16),
@@ -229,7 +230,10 @@ class _BloodDonationFaqScreenState extends State<BloodDonationFaqScreen> {
                               searchController.clear();
                               controller.clearFilters();
                             },
-                            child: const Text('Clear Search'),
+                            child: const Text(
+                              'Clear Search',
+                              style: TextStyle(fontFamily: "Inter"),
+                            ),
                           ),
                         ],
                       ],
@@ -354,7 +358,7 @@ class FaqAccordionItem extends StatelessWidget {
                     ),
                     child: Text(
                       _getCategoryIcon(faq.category),
-                      style: const TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20, fontFamily: "Inter"),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -386,6 +390,7 @@ class FaqAccordionItem extends StatelessWidget {
                                 'Relevance: ${(faq.relevanceScore! * 100).toStringAsFixed(0)}%',
                                 style: TextStyle(
                                   fontSize: 12,
+                                  fontFamily: "Inter",
                                   color: Colors.grey.shade600,
                                 ),
                               ),

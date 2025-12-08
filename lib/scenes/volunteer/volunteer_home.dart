@@ -454,7 +454,7 @@ class VolunteerHome extends StatelessWidget {
 
                 screenWidth > 400
                     ? Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: HomeBadge(
                               title: 'Annual Red Cross Gala & Fundraiser',
@@ -515,7 +515,7 @@ class VolunteerHome extends StatelessWidget {
 
                 screenWidth > 400
                     ? Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: PictureBadge(
                               title: 'Volunteer Assessment',

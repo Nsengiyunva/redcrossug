@@ -409,7 +409,9 @@
 import 'package:flutter/material.dart';
 import 'package:redcross/models/donation.dart';
 import 'package:redcross/models/donation_item.dart';
+import 'package:redcross/scenes/default_home.dart';
 import 'package:redcross/scenes/donations/donation_details.dart';
+import 'package:redcross/utils/colors.dart';
 
 class DonationHistory extends StatelessWidget {
   const DonationHistory({super.key});
@@ -456,21 +458,28 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
     final isTablet = size.width > 600;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.whiteColor,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.grey, size: 20),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DefaultHome(),
+              ),
+            )
+          },
         ),
         title: const Text(
           'Back',
           style: TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+              color: Colors.grey,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              fontFamily: "Inter"),
         ),
         titleSpacing: 0,
       ),
@@ -489,10 +498,10 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
                   const Text(
                     'Donation History',
                     style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2C2C2C),
-                    ),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2C2C2C),
+                        fontFamily: "Inter"),
                   ),
                   const SizedBox(height: 32),
                   _buildTabs(),
@@ -540,6 +549,7 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
                 'ALL DONATIONS',
                 style: TextStyle(
                   fontSize: 16,
+                  fontFamily: "Inter",
                   fontWeight: FontWeight.w600,
                   color: _selectedIndex == 0
                       ? const Color(0xFFE31E24)
@@ -575,6 +585,7 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
                 'FILTER',
                 style: TextStyle(
                   fontSize: 16,
+                  fontFamily: "Inter",
                   fontWeight: FontWeight.w600,
                   color: _selectedIndex == 1
                       ? const Color(0xFFE31E24)
@@ -678,18 +689,18 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
                       Text(
                         donation.title,
                         style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF2C2C2C),
-                        ),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF2C2C2C),
+                            fontFamily: "Inter"),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         donation.date,
                         style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                            fontFamily: "Inter"),
                       ),
                     ],
                   ),
@@ -700,18 +711,18 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
                     Text(
                       donation.units,
                       style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C2C2C),
-                      ),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF2C2C2C),
+                          fontFamily: "Inter"),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       'Units',
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[600],
-                      ),
+                          fontSize: 14,
+                          color: Colors.grey[600],
+                          fontFamily: "Inter"),
                     ),
                   ],
                 ),
@@ -827,6 +838,7 @@ class _DonationHistoryScreenState extends State<DonationHistoryScreen> {
           text,
           style: TextStyle(
             fontSize: 16,
+            fontFamily: "Inter",
             fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
             color: isActive
                 ? Colors.white

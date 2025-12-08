@@ -6,6 +6,7 @@ import 'package:redcross/scenes/blood_donations/blood_eligibility.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_list.dart';
 import 'package:redcross/scenes/blood_donations/donation_register.dart';
 import 'package:redcross/scenes/donations/donation_history.dart';
+import 'package:redcross/utils/colors.dart';
 
 class BloodDonationsHome extends StatelessWidget {
   const BloodDonationsHome({super.key});
@@ -312,10 +313,10 @@ class BloodDonationHome extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.red,
-                fontSize: screenWidth * 0.038,
-                fontWeight: FontWeight.bold,
-              ),
+                  color: Colors.red,
+                  fontSize: screenWidth * 0.038,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Inter"),
             ),
           ],
         ),
@@ -363,25 +364,25 @@ class BloodDonationHome extends StatelessWidget {
                 Text(
                   'Rotary Nakawa Blood\nDonation Drive',
                   style: TextStyle(
-                    fontSize: screenWidth * 0.045,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: screenWidth * 0.045,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Inter"),
                 ),
                 SizedBox(height: screenHeight * 0.005),
                 Text(
                   'Old Industrial Park, Nakawa Plot 11',
                   style: TextStyle(
-                    fontSize: screenWidth * 0.035,
-                    color: Colors.grey[600],
-                  ),
+                      fontSize: screenWidth * 0.035,
+                      color: Colors.grey[600],
+                      fontFamily: "Inter"),
                 ),
                 SizedBox(height: screenHeight * 0.005),
                 Text(
                   '⏰ Tuesday 23rd December 2024 | 10AM- 5PM',
                   style: TextStyle(
-                    fontSize: screenWidth * 0.032,
-                    color: Colors.red,
-                  ),
+                      fontSize: screenWidth * 0.032,
+                      color: AppColors.primaryRedColor,
+                      fontFamily: "Inter"),
                 ),
               ],
             ),
@@ -431,9 +432,9 @@ class BloodDonationHome extends StatelessWidget {
                 Text(
                   'NITA-U Staff Donation',
                   style: TextStyle(
-                    fontSize: screenWidth * 0.042,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: screenWidth * 0.042,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Inter"),
                 ),
                 SizedBox(height: screenHeight * 0.005),
                 Text(

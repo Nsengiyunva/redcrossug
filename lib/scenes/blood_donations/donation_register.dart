@@ -191,14 +191,17 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                         ? "You're already registered"
                         : "Register as a Donor",
                     style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Inter"),
                   ),
 
                   Text(
                     _isDonor ? "Your donor details" : "Fill the form below",
-                    style: TextStyle(fontSize: 15, color: Colors.grey[600]),
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: "Inter",
+                        color: Colors.grey[600]),
                   ),
 
                   const SizedBox(height: 30),
@@ -309,6 +312,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                                   ? "Select date"
                                   : "${_lastDonationDate!.day}/${_lastDonationDate!.month}/${_lastDonationDate!.year}",
                               style: TextStyle(
+                                fontFamily: "Inter",
                                 color: _isDonor ? Colors.grey : Colors.black,
                               ),
                             ),
@@ -334,10 +338,10 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                         child: Text(
                           _isDonor ? "Already Registered" : "Register as Donor",
                           style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Inter"),
                         ),
                       ),
                     ),
@@ -367,9 +371,9 @@ class _RegisterDonorFormState extends State<DonationRegister> {
 
   TextStyle titleStyle() {
     return TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: Colors.grey[800],
-    );
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Colors.grey[800],
+        fontFamily: "Inter");
   }
 }

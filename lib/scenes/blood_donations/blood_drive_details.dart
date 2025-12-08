@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:redcross/models/blood_drive_request.dart';
+import 'package:redcross/utils/colors.dart';
 
 class BloodDriveDetails extends StatelessWidget {
   final BloodDriveRequest request;
@@ -51,9 +52,9 @@ class BloodDriveDetails extends StatelessWidget {
                 Text(
                   'Request Details',
                   style: TextStyle(
-                    fontSize: screenWidth * 0.09,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: screenWidth * 0.09,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Inter"),
                 ),
                 SizedBox(height: screenHeight * 0.01),
                 Row(
@@ -70,10 +71,10 @@ class BloodDriveDetails extends StatelessWidget {
                       child: Text(
                         request.status.toUpperCase(),
                         style: TextStyle(
-                          fontSize: screenWidth * 0.035,
-                          color: _getStatusColor(request.status),
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontSize: screenWidth * 0.035,
+                            color: _getStatusColor(request.status),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Inter"),
                       ),
                     ),
                   ],
@@ -320,65 +321,65 @@ class BloodDriveDetails extends StatelessWidget {
                 if (request.status.toLowerCase() == 'pending')
                   Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Handle edit action
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Edit functionality coming soon'),
-                              backgroundColor: Colors.blue,
-                              behavior: SnackBarBehavior.floating,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                            vertical: screenHeight * 0.02,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Edit Request',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: screenWidth * 0.045,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: screenHeight * 0.015),
-                      GestureDetector(
-                        onTap: () {
-                          // Handle cancel action
-                          _showCancelDialog(context);
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                            vertical: screenHeight * 0.02,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.red[50],
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Cancel Request',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: screenWidth * 0.045,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     // Handle edit action
+                      //     ScaffoldMessenger.of(context).showSnackBar(
+                      //       const SnackBar(
+                      //         content: Text('Edit functionality coming soon'),
+                      //         backgroundColor: Colors.blue,
+                      //         behavior: SnackBarBehavior.floating,
+                      //       ),
+                      //     );
+                      //   },
+                      //   child: Container(
+                      //     width: double.infinity,
+                      //     padding: EdgeInsets.symmetric(
+                      //       vertical: screenHeight * 0.02,
+                      //     ),
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.blue,
+                      //       borderRadius: BorderRadius.circular(16),
+                      //     ),
+                      //     child: Center(
+                      //       child: Text(
+                      //         'Edit Request',
+                      //         style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontSize: screenWidth * 0.045,
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: screenHeight * 0.015),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     // Handle cancel action
+                      //     _showCancelDialog(context);
+                      //   },
+                      //   child: Container(
+                      //     width: double.infinity,
+                      //     padding: EdgeInsets.symmetric(
+                      //       vertical: screenHeight * 0.02,
+                      //     ),
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.red[50],
+                      //       borderRadius: BorderRadius.circular(16),
+                      //     ),
+                      //     child: Center(
+                      //       child: Text(
+                      //         'Cancel Request',
+                      //         style: TextStyle(
+                      //           color: Colors.red,
+                      //           fontSize: screenWidth * 0.045,
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 SizedBox(height: screenHeight * 0.03),
@@ -417,9 +418,9 @@ class BloodDriveDetails extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: screenWidth * 0.045,
-              fontWeight: FontWeight.bold,
-            ),
+                fontSize: screenWidth * 0.045,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Inter"),
           ),
           SizedBox(height: screenHeight * 0.015),
           ...children,
@@ -448,7 +449,7 @@ class BloodDriveDetails extends StatelessWidget {
               color: Colors.red[50],
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: Colors.red, size: 18),
+            child: Icon(icon, color: AppColors.primaryRedColor, size: 18),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -458,17 +459,17 @@ class BloodDriveDetails extends StatelessWidget {
                 Text(
                   label,
                   style: TextStyle(
-                    fontSize: screenWidth * 0.033,
-                    color: Colors.grey[600],
-                  ),
+                      fontSize: screenWidth * 0.033,
+                      color: Colors.grey[600],
+                      fontFamily: "Inter"),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   value,
                   style: TextStyle(
-                    fontSize: screenWidth * 0.038,
-                    fontWeight: FontWeight.w500,
-                  ),
+                      fontSize: screenWidth * 0.038,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Inter"),
                 ),
               ],
             ),
@@ -492,16 +493,16 @@ class BloodDriveDetails extends StatelessWidget {
         children: [
           Icon(
             available ? Icons.check_circle : Icons.cancel,
-            color: available ? Colors.green : Colors.red,
+            color: available ? Colors.green : AppColors.primaryRedColor,
             size: screenWidth * 0.05,
           ),
           const SizedBox(width: 12),
           Text(
             facility,
             style: TextStyle(
-              fontSize: screenWidth * 0.038,
-              color: Colors.grey[800],
-            ),
+                fontSize: screenWidth * 0.038,
+                color: Colors.grey[800],
+                fontFamily: "Inter"),
           ),
         ],
       ),
@@ -520,7 +521,9 @@ class BloodDriveDetails extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                  'Are you sure you want to cancel this blood drive request?'),
+                'Are you sure you want to cancel this blood drive request?',
+                style: TextStyle(fontFamily: "Inter"),
+              ),
               const SizedBox(height: 16),
               TextField(
                 controller: reasonController,
@@ -537,14 +540,20 @@ class BloodDriveDetails extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: const Text('No, Keep It'),
+              child: const Text(
+                'No, Keep It',
+                style: TextStyle(fontFamily: "Inter"),
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(dialogContext);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Request cancelled successfully'),
+                    content: Text(
+                      'Request cancelled successfully',
+                      style: TextStyle(fontFamily: "Inter"),
+                    ),
                     backgroundColor: Colors.orange,
                     behavior: SnackBarBehavior.floating,
                   ),
@@ -553,7 +562,8 @@ class BloodDriveDetails extends StatelessWidget {
               },
               child: const Text(
                 'Yes, Cancel',
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(
+                    fontFamily: "Inter", color: AppColors.primaryRedColor),
               ),
             ),
           ],
