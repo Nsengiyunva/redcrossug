@@ -208,7 +208,7 @@ class _DonationPaymentScreenState extends State<Payment> {
                   ),
                 ],
               ),
-              SizedBox(height: 32),
+              SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 height: 56,
