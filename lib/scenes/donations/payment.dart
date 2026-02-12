@@ -235,7 +235,7 @@ class _DonationPaymentScreenState extends State<Payment> {
                         child: Text(
                           'Confirm Payment Donation',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.whiteColor,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Inter"),
