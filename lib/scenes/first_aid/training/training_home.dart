@@ -16,8 +16,7 @@ class TrainingHome extends StatelessWidget {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Could not open the Play Store link.')),
+          const SnackBar(content: Text('Could not open the Play Store link.')),
         );
       }
     } catch (e) {
@@ -66,7 +65,7 @@ class TrainingHome extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-          title: const Text("Request Training",
+          title: const Text("First Aid",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
@@ -155,27 +154,6 @@ class TrainingHome extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
-                    '🌐 Website: Scan the QR code or get direct links at '
-                    'redcrossug.org',
-                    style: TextStyle(
-                      fontFamily: "Inter",
-                      fontSize: 14,
-                      height: 1.5,
-                      color: AppColors.blackColorC,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const Text(
-                    'Download our App \'First Aid in Africa\' today!',
-                    style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: AppColors.blackColorC,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
                   RedBtn(
                     label: 'Download First Aid in Africa',
                     onPressed: () => _openFirstAidInAfrica(context),
