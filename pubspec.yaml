@@ -67,7 +67,7 @@ dependencies:
   
 dependency_overrides:
   webview_flutter_wkwebview: 3.9.4
-  firebase_auth: 5.4.2
+  # firebase_auth: 5.4.2
 
 dev_dependencies:
   flutter_test:

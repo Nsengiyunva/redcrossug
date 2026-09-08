@@ -276,7 +276,7 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                   child: RedBtn(
                     label: 'Call for Emergency Services',
                     onPressed: () {
-                      callEmergencyNumber("+256760588189");
+                      callEmergencyNumber("+256800211088");
                     },
                   ),
                 ),
