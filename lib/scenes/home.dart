@@ -27,7 +27,6 @@ class _BottomNavigationBarExampleState extends State<Home> {
 
   void _onTap(int index) {
     if (_currentIndex == index) {
-      // Pop to root if user taps the same tab again
       _navigatorKeys[index].currentState?.popUntil((r) => r.isFirst);
     } else {
       setState(() {
