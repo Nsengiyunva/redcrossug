@@ -1239,7 +1239,6 @@ import 'package:get/get.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
 
 class MembershipController extends GetxController {
   var isLoading = false.obs;
@@ -1626,27 +1625,6 @@ class _MembershipCardState extends State<MembershipCard> {
     super.dispose();
   }
 
-  Future<void> _openMemberRegistrationUrl(BuildContext context) async {
-    final Uri uri = Uri.parse('https://vms.redcrossug.org/member/register/');
-    try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content:
-                  Text('Could not open the membership registration page.')),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1804,155 +1782,47 @@ class _MembershipCardState extends State<MembershipCard> {
                   color: const Color(0xFF00BCD4),
                 ),
                 const SizedBox(height: 32),
-
-                /// --------------------------------------------------
-                /// BECOME A URCS MEMBER
-                /// --------------------------------------------------
-                Text(
-                  'Become a URCS Member',
-                  style: TextStyle(
-                    fontSize: isTablet ? 28 : 24,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFFE31E24),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'Be part of the Red Cross family.',
-                  style: TextStyle(
-                    fontSize: isTablet ? 17 : 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Membership of the Uganda Red Cross Society gives you an '
-                  'opportunity to formally belong to the Society and '
-                  'contribute to its humanitarian mission.',
-                  style: TextStyle(
-                    fontSize: isTablet ? 16 : 14,
-                    color: Colors.grey[700],
-                    height: 1.6,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'As a member, you can participate in URCS activities, '
-                  'connect with other members, contribute your ideas and '
-                  'skills, and support humanitarian action in your '
-                  'community and across Uganda.',
-                  style: TextStyle(
-                    fontSize: isTablet ? 16 : 14,
-                    color: Colors.grey[700],
-                    height: 1.6,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE31E24).withOpacity(0.06),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: const Color(0xFFE31E24).withOpacity(0.2),
-                    ),
-                  ),
-                  child: Text(
-                    'Membership is about belonging, participation and '
-                    'contributing to the strength of the Society.',
-                    style: TextStyle(
-                      fontSize: isTablet ? 16 : 14,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFFB01519),
-                      height: 1.5,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 32),
-
-                /// --------------------------------------------------
-                /// CALL TO ACTION
-                /// --------------------------------------------------
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(isTablet ? 28 : 22),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFE31E24), Color(0xFFB01519)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFFE31E24).withOpacity(0.3),
-                        blurRadius: 14,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Ready to join?',
-                        style: TextStyle(
-                          fontSize: isTablet ? 22 : 19,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Register as a URCS member and become part of the '
-                        'Red Cross family.',
-                        style: TextStyle(
-                          fontSize: isTablet ? 16 : 14,
-                          color: Colors.white.withOpacity(0.9),
-                          height: 1.5,
-                        ),
-                      ),
-                      const SizedBox(height: 18),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () =>
-                              _openMemberRegistrationUrl(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical: isTablet ? 20 : 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            elevation: 0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.how_to_reg,
-                                color: Color(0xFFE31E24),
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                'Register as a Member',
-                                style: TextStyle(
-                                  fontSize: isTablet ? 18 : 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xFFE31E24),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       // Navigate to membership registration
+                //     },
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor: const Color(0xFFE31E24),
+                //       padding:
+                //           EdgeInsets.symmetric(vertical: isTablet ? 20 : 16),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(12),
+                //       ),
+                //       elevation: 5,
+                //     ),
+                //     child: Text(
+                //       'Become a Member Today',
+                //       style: TextStyle(
+                //         fontSize: isTablet ? 18 : 16,
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.white,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+                // Center(
+                //   child: TextButton(
+                //     onPressed: () {
+                //       // Learn more action
+                //     },
+                //     child: const Text(
+                //       'Learn More About Membership',
+                //       style: TextStyle(
+                //         color: Color(0xFFE31E24),
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
