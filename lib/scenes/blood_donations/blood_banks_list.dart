@@ -426,49 +426,49 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
               SizedBox(height: screenHeight * 0.025),
 
               // View Appointments Button
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const Appointments()),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.04,
-                    vertical: screenHeight * 0.018,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.red.withOpacity(0.3),
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.event_note,
-                          color: Colors.white, size: 20),
-                      const SizedBox(width: 8),
-                      Text(
-                        'View My Appointments',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Inter",
-                          fontSize: screenWidth * 0.04,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (_) => const Appointments()),
+              //     );
+              //   },
+              //   child: Container(
+              //     padding: EdgeInsets.symmetric(
+              //       horizontal: screenWidth * 0.04,
+              //       vertical: screenHeight * 0.018,
+              //     ),
+              //     decoration: BoxDecoration(
+              //       color: Colors.red,
+              //       borderRadius: BorderRadius.circular(16),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: Colors.red.withOpacity(0.3),
+              //           spreadRadius: 1,
+              //           blurRadius: 8,
+              //           offset: const Offset(0, 3),
+              //         ),
+              //       ],
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         const Icon(Icons.event_note,
+              //             color: Colors.white, size: 20),
+              //         const SizedBox(width: 8),
+              //         Text(
+              //           'View My Appointments',
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontFamily: "Inter",
+              //             fontSize: screenWidth * 0.04,
+              //             fontWeight: FontWeight.bold,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: screenHeight * 0.025),
 
               // Search Bar

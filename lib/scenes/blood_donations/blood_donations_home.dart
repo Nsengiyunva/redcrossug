@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redcross/scenes/blood_donations/appointments.dart';
 import 'package:redcross/scenes/blood_donations/blood_banks_list.dart';
 import 'package:redcross/scenes/blood_donations/blood_donation_faq_screen.dart';
 import 'package:redcross/scenes/blood_donations/blood_drive_requests_list.dart';
@@ -157,8 +158,19 @@ class BloodDonationHome extends StatelessWidget {
                     ),
                     SizedBox(width: screenWidth * 0.03),
                     Expanded(
-                      child: Container(), // Placeholder for symmetry
-                    ),
+                      child: _buildSecondaryButton(
+                        context,
+                        'My Appointments',
+                        Icons.help_outline,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Appointments()),
+                          );
+                        },
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(height: screenHeight * 0.03),
