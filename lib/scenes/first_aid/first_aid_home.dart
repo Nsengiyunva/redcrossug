@@ -97,25 +97,9 @@ class _FirstAidHomeState extends State<FirstAidHome> {
         elevation: 0,
         backgroundColor: AppColors.bgColor,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          openWhatsApp(
-            phone: "256760588189",
-            message: "Hey, Hello Uganda Red Cross Society",
-          );
-        },
-        backgroundColor: const Color(0xFF25D366), // WhatsApp green
-        icon: const Icon(Icons.chat_bubble, color: Colors.white),
-        label: const Text(
-          'Chat with Us',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
-          ),
-        ),
-        elevation: 4,
-      ),
+      // WhatsApp "Chat with Us" FAB hidden for now — openWhatsApp() is
+      // still used by the "Message Uganda Red Cross Society" button
+      // further down the page, so that flow is untouched.
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -174,7 +158,9 @@ class _FirstAidHomeState extends State<FirstAidHome> {
 
                 SizedBox(height: size.height * 0.04),
 
-                // Info Card
+                // Info Card — now summarizes why First Aid training
+                // matters (from the provided wording doc) instead of the
+                // generic "quick access" blurb.
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -193,6 +179,7 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                     ),
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
                         Icons.info_outline,
@@ -202,11 +189,17 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          "Quick access to life-saving information and emergency services",
+                          "First Aid training empowers you to respond "
+                          "quickly, safely, and decisively when it "
+                          "matters most — bridging the gap until "
+                          "professional help arrives. Contact the Uganda "
+                          "Red Cross Society today to get certified by "
+                          "the nation's premier instructors.",
                           style: TextStyle(
                             fontSize: isSmallScreen ? 13 : 14,
                             color: Colors.red.shade900,
                             fontWeight: FontWeight.w500,
+                            height: 1.5,
                           ),
                         ),
                       ),
@@ -377,9 +370,6 @@ class _FirstAidHomeState extends State<FirstAidHome> {
                 ),
 
                 SizedBox(height: size.height * 0.03),
-
-                // Bottom spacing for FAB
-                const SizedBox(height: 80),
               ],
             ),
           ),

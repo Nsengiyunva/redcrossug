@@ -73,263 +73,271 @@ class VolunteerHome extends StatelessWidget {
         elevation: 0,
         backgroundColor: AppColors.bgColor,
       ),
+      // The CTA is pinned outside the scroll area (see body below) so it
+      // is always visible without scrolling, regardless of screen height
+      // or how long the reasons list grows.
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(
-              vertical: size.height * 0.02,
-              horizontal: padding,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// --------------------------------------------------
-                /// HEADER
-                /// --------------------------------------------------
-                Row(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(
+                  padding,
+                  size.height * 0.02,
+                  padding,
+                  12,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    /// ----------------------------------------------
+                    /// HEADER
+                    /// ----------------------------------------------
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade50,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.volunteer_activism,
+                            color: Colors.red.shade700,
+                            size: isSmallScreen ? 28 : 32,
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Volunteers",
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: isSmallScreen ? 22 : 25,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                "Serve. Support. Make a difference.",
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontSize: isSmallScreen ? 12 : 13,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: size.height * 0.02),
+
+                    /// ----------------------------------------------
+                    /// INTRO
+                    /// ----------------------------------------------
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: Colors.red.shade50,
-                        borderRadius: BorderRadius.circular(12),
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.red.shade50,
+                            Colors.red.shade100.withOpacity(0.5),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: Colors.red.shade200,
+                          width: 1,
+                        ),
                       ),
-                      child: Icon(
-                        Icons.volunteer_activism,
-                        color: Colors.red.shade700,
-                        size: isSmallScreen ? 28 : 32,
+                      child: Text(
+                        "URCS volunteers serve voluntarily and in "
+                        "accordance with the Fundamental Principles of "
+                        "the International Red Cross and Red Crescent "
+                        "Movement, supporting communities and branches "
+                        "across the country.",
+                        style: TextStyle(
+                          fontSize: isSmallScreen ? 12.5 : 13.5,
+                          color: Colors.red.shade900,
+                          fontWeight: FontWeight.w500,
+                          height: 1.45,
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 15),
-                    Expanded(
+                    SizedBox(height: size.height * 0.022),
+
+                    /// ----------------------------------------------
+                    /// WHY VOLUNTEER
+                    /// ----------------------------------------------
+                    Text(
+                      "Why volunteer with URCS?",
+                      style: TextStyle(
+                        fontFamily: "Inter",
+                        fontSize: isSmallScreen ? 15 : 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.012),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 10,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Volunteers",
-                            style: TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: isSmallScreen ? 24 : 28,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black87,
+                          for (int i = 0; i < _reasons.length; i++) ...[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 6,
+                                horizontal: 8,
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red.shade50,
+                                      borderRadius: BorderRadius.circular(9),
+                                    ),
+                                    child: Icon(
+                                      _reasons[i].icon,
+                                      color: Colors.red.shade700,
+                                      size: isSmallScreen ? 16 : 18,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      _reasons[i].text,
+                                      style: TextStyle(
+                                        fontSize: isSmallScreen ? 12 : 13,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.w500,
+                                        height: 1.3,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            "Serve. Support. Make a difference.",
-                            style: TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: isSmallScreen ? 13 : 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black54,
-                            ),
-                          ),
+                            if (i != _reasons.length - 1)
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                color: Colors.grey.shade100,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
+                          ],
                         ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: size.height * 0.035),
-
-                /// --------------------------------------------------
-                /// INTRO
-                /// --------------------------------------------------
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.red.shade50,
-                        Colors.red.shade100.withOpacity(0.5),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: Colors.red.shade200,
-                      width: 1,
-                    ),
-                  ),
-                  child: Text(
-                    "URCS volunteers serve voluntarily and in accordance "
-                    "with the Fundamental Principles of the International "
-                    "Red Cross and Red Crescent Movement. Volunteers may "
-                    "support activities in their communities, branches and "
-                    "across the country, depending on their interests, "
-                    "skills and the needs of the Society.",
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 13 : 14,
-                      color: Colors.red.shade900,
-                      fontWeight: FontWeight.w500,
-                      height: 1.6,
-                    ),
-                  ),
-                ),
-                SizedBox(height: size.height * 0.035),
-
-                /// --------------------------------------------------
-                /// WHY VOLUNTEER
-                /// --------------------------------------------------
-                Text(
-                  "Why volunteer with URCS?",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: isSmallScreen ? 17 : 19,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(height: size.height * 0.018),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      for (int i = 0; i < _reasons.length; i++) ...[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 10,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.red.shade50,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Icon(
-                                  _reasons[i].icon,
-                                  color: Colors.red.shade700,
-                                  size: isSmallScreen ? 18 : 20,
-                                ),
-                              ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Text(
-                                  _reasons[i].text,
-                                  style: TextStyle(
-                                    fontSize: isSmallScreen ? 13 : 14,
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.4,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        if (i != _reasons.length - 1)
-                          Divider(
-                            height: 1,
-                            thickness: 1,
-                            color: Colors.grey.shade100,
-                            indent: 10,
-                            endIndent: 10,
-                          ),
-                      ],
-                    ],
-                  ),
-                ),
-                SizedBox(height: size.height * 0.035),
-
-                /// --------------------------------------------------
-                /// CALL TO ACTION
-                /// --------------------------------------------------
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryRedColor,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primaryRedColor.withOpacity(0.3),
-                        blurRadius: 14,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Ready to make a difference?",
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: isSmallScreen ? 17 : 19,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.whiteColor,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "Register as a URCS volunteer and join a community "
-                        "of people committed to helping others.",
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 13 : 14,
-                          color: AppColors.whiteColor.withOpacity(0.9),
-                          height: 1.5,
-                        ),
-                      ),
-                      const SizedBox(height: 18),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () => _openVmsLogin(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.whiteColor,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            elevation: 0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.how_to_reg,
-                                color: AppColors.primaryRedColor,
-                                size: isSmallScreen ? 18 : 20,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                "Register as a Volunteer",
-                                style: TextStyle(
-                                  fontFamily: "Inter",
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: isSmallScreen ? 14 : 15,
-                                  color: AppColors.primaryRedColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: size.height * 0.03),
-              ],
+              ),
             ),
-          ),
+
+            /// ------------------------------------------------------
+            /// CALL TO ACTION — pinned, not part of the scroll area.
+            /// ------------------------------------------------------
+            Padding(
+              padding: EdgeInsets.fromLTRB(padding, 0, padding, 12),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryRedColor,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primaryRedColor.withOpacity(0.3),
+                      blurRadius: 14,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Ready to make a difference?",
+                      style: TextStyle(
+                        fontFamily: "Inter",
+                        fontSize: isSmallScreen ? 15 : 17,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "Register or Login as a URCS volunteer and join a "
+                      "community of people committed to helping others.",
+                      style: TextStyle(
+                        fontSize: isSmallScreen ? 12 : 13,
+                        color: AppColors.whiteColor.withOpacity(0.9),
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => _openVmsLogin(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.whiteColor,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.how_to_reg,
+                              color: AppColors.primaryRedColor,
+                              size: isSmallScreen ? 16 : 18,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              "Register or Login as a Volunteer",
+                              style: TextStyle(
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.w700,
+                                fontSize: isSmallScreen ? 12.5 : 13.5,
+                                color: AppColors.primaryRedColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

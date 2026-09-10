@@ -5,7 +5,7 @@ class MembershipCard extends StatelessWidget {
   const MembershipCard({super.key});
 
   static const String _memberRegistrationUrl =
-      'https://vms.redcrossug.org/member/register/';
+      'https://vms.redcrossug.org/login/';
 
   Future<void> _openMemberRegistrationUrl(BuildContext context) async {
     final Uri uri = Uri.parse(_memberRegistrationUrl);
@@ -84,7 +84,7 @@ class MembershipCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Become a URCS Member",
+                            "Register or Login as a URCS Member",
                             style: TextStyle(
                               fontFamily: "Inter",
                               fontSize: isSmallScreen ? 22 : 26,
@@ -150,7 +150,7 @@ class MembershipCard extends StatelessWidget {
                     'contributing to the strength of the Society.',
                     style: TextStyle(
                       fontSize: isSmallScreen ? 13 : 14,
-                      fontStyle: FontStyle.italic,
+                      // fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFFB01519),
                       height: 1.5,
@@ -184,7 +184,7 @@ class MembershipCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ready to join?",
+                        "Ready to make a difference?",
                         style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: isSmallScreen ? 17 : 19,
@@ -194,7 +194,7 @@ class MembershipCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "Register as a URCS member and become part of the "
+                        "Register or Login as a URCS member and become part of the "
                         "Red Cross family.",
                         style: TextStyle(
                           fontSize: isSmallScreen ? 13 : 14,
@@ -225,7 +225,7 @@ class MembershipCard extends StatelessWidget {
                               ),
                               const SizedBox(width: 10),
                               Text(
-                                "Register as a Member",
+                                "Register or Login as a Member",
                                 style: TextStyle(
                                   fontFamily: "Inter",
                                   fontWeight: FontWeight.w700,

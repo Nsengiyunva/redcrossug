@@ -163,7 +163,7 @@ class TrainingHome extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: "Inter",
                             fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.italic,
+                            // fontStyle: FontStyle.italic,
                             fontSize: 16.5,
                             height: 1.25,
                             color: Colors.white,

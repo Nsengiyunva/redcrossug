@@ -3,7 +3,6 @@ import 'package:redcross/models/user.dart';
 import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:redcross/scenes/bulletins/bulletins_list.dart';
-import 'package:redcross/scenes/chat/floating_chat_button.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
 import 'package:redcross/scenes/memberships/membership_card.dart';
@@ -68,43 +67,38 @@ class _HomeScreenState extends State<DefaultHome> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F8FB),
-      body: Stack(
-        children: [
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(
-                horizontalPadding,
-                16.0,
-                horizontalPadding,
-                90.0, // clears the floating chat button
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(),
-                  const SizedBox(height: 20),
-                  _buildAboutUsBanner(context),
-                  const SizedBox(height: 26),
-                  const Text(
-                    'Our Services',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E1E1E),
-                      letterSpacing: -0.2,
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  _buildServiceGrid(context, isTablet),
-                  const SizedBox(height: 18),
-                  _buildQuickActionButtons(context),
-                ],
-              ),
-            ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            horizontalPadding,
+            16.0,
+            horizontalPadding,
+            24.0,
           ),
-          const FloatingChatButton(),
-        ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(),
+              const SizedBox(height: 20),
+              _buildAboutUsBanner(context),
+              const SizedBox(height: 26),
+              const Text(
+                'Our Services',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E1E1E),
+                  letterSpacing: -0.2,
+                ),
+              ),
+              const SizedBox(height: 14),
+              _buildServiceGrid(context, isTablet),
+              const SizedBox(height: 18),
+              _buildQuickActionButtons(context),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -208,73 +202,92 @@ class _HomeScreenState extends State<DefaultHome> {
     );
   }
 
-  /// Promo-style banner (mirrors the "Setup Wallet" banner in the
-  /// reference design) that links out to redcrossug.org.
+  /// Promo banner: URCS emblem on the left, "About URCS" button on the
+  /// right — the descriptive paragraph that used to fill this card has
+  /// been removed per request, so the banner is now a compact logo +
+  /// CTA row instead of a text block.
+  ///
+  /// NOTE: this expects the logo at assets/images/urcs_logo.png,
+  /// declared in pubspec.yaml (see the flutter: assets: section). If the
+  /// asset hasn't been added yet, errorBuilder falls back to a plain
+  /// cross icon so the screen doesn't crash in the meantime.
+  static const String _logoAssetPath = 'assets/images/urcs_logo.png';
+
   Widget _buildAboutUsBanner(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-      decoration: BoxDecoration(
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(22),
+      child: InkWell(
+        onTap: () => _openAboutUsUrl(context),
         borderRadius: BorderRadius.circular(22),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF2C3E50), Color(0xFF16212C)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        splashColor: Colors.white.withOpacity(0.15),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            gradient: const LinearGradient(
+              colors: [Color(0xFFED1C24), Color(0xFFB0121A)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFFED1C24).withOpacity(0.30),
+                blurRadius: 18,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  _logoAssetPath,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.add,
+                    color: Color(0xFFED1C24),
+                    size: 28,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              const Expanded(
+                child: Text(
+                  'About URCS',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const Icon(
+                Icons.chevron_right_rounded,
+                color: Colors.white,
+                size: 22,
+              ),
+            ],
+          ),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF2C3E50).withOpacity(0.30),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Learn about the work URCS does\nfor communities across Uganda',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15.5,
-              fontFamily: "Inter",
-              fontWeight: FontWeight.w600,
-              height: 1.35,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.centerRight,
-            child: ElevatedButton(
-              onPressed: () => _openAboutUsUrl(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFF2C3E50),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                elevation: 0,
-              ),
-              child: const Text(
-                'About URCS',
-                style: TextStyle(
-                  fontFamily: "Inter",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
 
-  /// 3-column grid of white, icon-badge service cards — styled after the
-  /// reference screenshot: white rounded cards, a soft-tinted icon badge
-  /// up top, a bold left-aligned label below, and an optional "NEW" tag.
+  /// 3-column grid of red-shade, icon-badge service cards. Every card now
+  /// shares the same Red Cross red (from the logo) instead of the earlier
+  /// rainbow of per-service accent colors, and icon + label are centered
+  /// instead of left-aligned.
   ///
   /// Bulletins and Give Feedback have been pulled out of this grid — see
   /// [_buildQuickActionButtons] — so this now only holds the six core
@@ -284,7 +297,6 @@ class _HomeScreenState extends State<DefaultHome> {
       _ServiceItem(
         icon: Icons.water_drop_rounded,
         label: 'Blood Donation',
-        accentColor: const Color(0xFFE31E24),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BloodDonationsHome()),
         ),
@@ -292,7 +304,6 @@ class _HomeScreenState extends State<DefaultHome> {
       _ServiceItem(
         icon: Icons.medical_services_rounded,
         label: 'First Aid',
-        accentColor: const Color(0xFFFF7043),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const FirstAidHome()),
         ),
@@ -300,7 +311,6 @@ class _HomeScreenState extends State<DefaultHome> {
       _ServiceItem(
         icon: Icons.local_hospital_rounded,
         label: 'Ambulance',
-        accentColor: const Color(0xFF2C7BE5),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => AmbulanceHome()),
         ),
@@ -308,7 +318,6 @@ class _HomeScreenState extends State<DefaultHome> {
       _ServiceItem(
         icon: Icons.warning_rounded,
         label: 'Disasters',
-        accentColor: const Color(0xFFFFA000),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => DisasterList()),
         ),
@@ -316,7 +325,6 @@ class _HomeScreenState extends State<DefaultHome> {
       _ServiceItem(
         icon: Icons.card_membership_rounded,
         label: 'Membership',
-        accentColor: const Color(0xFF7C4DFF),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const MembershipCard()),
         ),
@@ -324,7 +332,6 @@ class _HomeScreenState extends State<DefaultHome> {
       _ServiceItem(
         icon: Icons.volunteer_activism_rounded,
         label: 'Volunteers',
-        accentColor: const Color(0xFF00BFA5),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const VolunteerHome()),
         ),
@@ -347,87 +354,77 @@ class _HomeScreenState extends State<DefaultHome> {
     );
   }
 
+  // Logo red (Uganda Red Cross Society emblem) softened into a gradient
+  // with a deeper maroon, instead of one flat saturated red block — gives
+  // the cards depth without losing the brand color.
+  static const Color _urcsRed = Color(0xFFED1C24);
+  static const Color _urcsRedSoft = Color(0xFFF25C62);
+  static const Color _urcsRedDeep = Color(0xFF8E1116);
+
   Widget _buildServiceCard(_ServiceItem item) {
     return Material(
-      color: Colors.white,
+      color: Colors.transparent,
       borderRadius: BorderRadius.circular(20),
       child: InkWell(
         onTap: item.onPressed,
         borderRadius: BorderRadius.circular(20),
-        splashColor: item.accentColor.withOpacity(0.12),
+        splashColor: Colors.white.withOpacity(0.15),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
+            gradient: const LinearGradient(
+              colors: [_urcsRedSoft, _urcsRedDeep],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: _urcsRedDeep.withOpacity(0.30),
                 blurRadius: 14,
                 offset: const Offset(0, 6),
               ),
             ],
           ),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: item.accentColor.withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      alignment: Alignment.center,
-                      child: Icon(item.icon, color: item.accentColor, size: 24),
-                    ),
-                    const Spacer(),
-                    Text(
-                      item.label,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF1E1E1E),
-                        height: 1.2,
-                        letterSpacing: -0.1,
-                      ),
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(item.icon, color: Colors.white, size: 24),
                 ),
-              ),
-              if (item.isNew)
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF00BFA5),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(14),
+                const SizedBox(height: 10),
+                Text(
+                  item.label,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                    height: 1.25,
+                    letterSpacing: 0.1,
+                    shadows: [
+                      Shadow(
+                        color: Color(0x40000000),
+                        blurRadius: 4,
+                        offset: Offset(0, 1),
                       ),
-                    ),
-                    child: const Text(
-                      'NEW',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 9,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 0.4,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -574,6 +571,8 @@ class _HomeScreenState extends State<DefaultHome> {
 class _ServiceItem {
   final IconData icon;
   final String label;
+  // Only used by the Bulletins/Give Feedback long buttons now — the 6
+  // grid cards above all share the uniform _urcsRed styling instead.
   final Color accentColor;
   final bool isNew;
   final VoidCallback onPressed;
@@ -581,7 +580,7 @@ class _ServiceItem {
   _ServiceItem({
     required this.icon,
     required this.label,
-    required this.accentColor,
+    this.accentColor = _HomeScreenState._urcsRed,
     this.isNew = false,
     required this.onPressed,
   });

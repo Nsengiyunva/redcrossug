@@ -46,6 +46,13 @@ class _AppointmentsState extends State<Appointments> {
         },
       );
 
+      // Always log what actually came back, so a failure shows the real
+      // status code and body in the debug console instead of only a
+      // generic snackbar.
+      debugPrint(
+          'GET /blood-donation/appointments -> ${response.statusCode}: '
+          '${response.body}');
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body)['data'];
 
@@ -60,28 +67,49 @@ class _AppointmentsState extends State<Appointments> {
         setState(() {
           isLoading = false;
         });
+
+        // Distinguish "you need to sign in again" from other server
+        // errors instead of lumping every non-200 response under one
+        // misleading "Network error" message.
+        String message;
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          message = 'Your session has expired. Please sign in again.';
+        } else {
+          String? serverMessage;
+          try {
+            final decoded = jsonDecode(response.body);
+            if (decoded is Map && decoded['message'] is String) {
+              serverMessage = decoded['message'] as String;
+            }
+          } catch (_) {
+            // Response body wasn't JSON — fall back to the status code.
+          }
+          message = serverMessage ??
+              'Couldn\'t load your appointments (error ${response.statusCode}). '
+                  'Please try again.';
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Network error, please try again.'),
+          SnackBar(
+            content: Text(message),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
           ),
         );
-        // print(
-        //     "Failed to fetch appointments. Status: ${response.statusCode}, Body: ${response.body}");
       }
     } catch (e) {
       setState(() {
         isLoading = false;
       });
+      debugPrint('Error fetching appointments: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to fetch your blood donation appointments.'),
+        SnackBar(
+          content: Text('Failed to fetch your blood donation appointments. '
+              '($e)'),
           backgroundColor: AppColors.primaryRedColor,
           behavior: SnackBarBehavior.floating,
         ),
       );
-      // print("Error fetching appointments: $e");
     }
   }
 
