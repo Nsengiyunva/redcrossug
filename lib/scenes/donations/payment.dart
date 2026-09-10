@@ -47,7 +47,6 @@ class _DonationPaymentScreenState extends State<Payment> {
       setState(() {
         phoneNumber = phone;
         mobileProvider = provider;
-        isSubmitting = true;
       });
     }
   }
@@ -212,27 +211,31 @@ class _DonationPaymentScreenState extends State<Payment> {
               SizedBox(
                 width: double.infinity,
                 height: 56,
-                child: isSubmitting
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: AppColors.whiteColor,
-                        ),
-                      )
-                    : ElevatedButton(
-                        onPressed: () {
+                child: ElevatedButton(
+                  onPressed: isSubmitting
+                      ? null
+                      : () {
                           _confirmDonation();
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryRedColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryRedColor,
+                    disabledBackgroundColor:
+                        AppColors.primaryRedColor.withOpacity(0.7),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: isSubmitting
+                      ? const SizedBox(
+                          width: 22,
+                          height: 22,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: AppColors.whiteColor,
                           ),
-                          elevation: 0,
-                        ),
-                        child: Text(
+                        )
+                      : Text(
                           'Confirm Payment Donation',
                           style: TextStyle(
                               color: AppColors.whiteColor,
@@ -240,7 +243,7 @@ class _DonationPaymentScreenState extends State<Payment> {
                               fontWeight: FontWeight.w600,
                               fontFamily: "Inter"),
                         ),
-                      ),
+                ),
               ),
               SizedBox(height: 20),
             ],
@@ -364,13 +367,11 @@ class _DonationPaymentScreenState extends State<Payment> {
   }
 
   String normalizePhone(String phone) {
-    String cleaned = phone.replaceAll(' ', '');
-
-    if (cleaned.startsWith('+')) {
-      cleaned = cleaned.substring(1); // remove +
-    }
-
-    return cleaned;
+    // Every other screen that sends phone_no to this API (sign_up.dart,
+    // donation_register.dart) sends it WITH the leading '+', e.g.
+    // "+256703019014". Stripping it here made this endpoint's payload
+    // inconsistent with the format the backend actually validates against.
+    return phone.replaceAll(' ', '');
   }
 
   Future<void> _confirmDonation() async {
@@ -382,10 +383,19 @@ class _DonationPaymentScreenState extends State<Payment> {
       return;
     }
 
+    // Flip to the spinner right away, before any awaits, so it appears
+    // the instant the button is tapped rather than after the token fetch.
+    setState(() {
+      isSubmitting = true;
+    });
+
     final payload = {
       "amount": widget.amount.toInt(),
       "phone_no": normalizePhone('$phoneNumber'), // force string
-      "mobile_network": "$mobileProvider", // force string
+      // Backend validates mobile_network against an all-caps enum
+      // ("MTN", "AIRTEL") — uppercase here without touching the
+      // nicely-cased value shown in the payment summary above.
+      "mobile_network": mobileProvider!.toUpperCase(),
     };
 
     int donate_id = widget.disasterId;
@@ -405,12 +415,17 @@ class _DonationPaymentScreenState extends State<Payment> {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = jsonDecode(response.body);
+        Map<String, dynamic>? data;
+        try {
+          data = jsonDecode(response.body);
+        } catch (_) {}
+
+        if (!mounted) return;
 
         // Show the response message in a SnackBar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(data['message'] ?? "Donation successful"),
+            content: Text(data?['message'] ?? "Donation successful"),
             backgroundColor: Colors.green[800],
             behavior: SnackBarBehavior.floating,
           ),
@@ -422,10 +437,28 @@ class _DonationPaymentScreenState extends State<Payment> {
           ),
         );
       } else {
-        final data = jsonDecode(response.body);
+        Map<String, dynamic>? data;
+        try {
+          data = jsonDecode(response.body);
+        } catch (_) {}
+
+        if (!mounted) return;
+
+        // Laravel-style validation responses put the useful detail in
+        // `errors: { field: [messages] }` — the top-level `message` alone
+        // (e.g. "Validation failed") doesn't say which field or why.
+        String errorText = data?['message'] ?? "Donation failed";
+        final errors = data?['errors'];
+        if (errors is Map && errors.isNotEmpty) {
+          final firstField = errors.values.first;
+          if (firstField is List && firstField.isNotEmpty) {
+            errorText = firstField.first.toString();
+          }
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(data['message'] ?? "Donation failed"),
+            content: Text(errorText),
             backgroundColor: AppColors.primaryRedColor,
             behavior: SnackBarBehavior.floating,
           ),
@@ -433,6 +466,7 @@ class _DonationPaymentScreenState extends State<Payment> {
       }
     } catch (e) {
       // print("error - $e");
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("An error occurred: $e"),
@@ -440,6 +474,12 @@ class _DonationPaymentScreenState extends State<Payment> {
           behavior: SnackBarBehavior.floating,
         ),
       );
+    } finally {
+      if (mounted) {
+        setState(() {
+          isSubmitting = false;
+        });
+      }
     }
   }
 

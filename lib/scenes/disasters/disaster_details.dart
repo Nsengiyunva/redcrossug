@@ -997,20 +997,18 @@ class _DonationAmountBottomSheetState extends State<DonationAmountBottomSheet> {
                         itemCount: amounts.length,
                         itemBuilder: (context, index) {
                           String amount = amounts[index];
-                          int flagId = index + 1;
-                          bool isSelected =
-                              widget.disasterController.flagId == flagId;
+                          bool isSelected = selectedAmountIndex == index;
 
                           return GestureDetector(
                             onTap: () {
                               setState(() {
                                 selectedAmountIndex = index;
-                                // widget.disasterController.flagId = flagId;
 
-                                // Populate text field with formatted number
+                                // Populate the visible text field with the
+                                // picked amount (amountController is what
+                                // the TextField above is actually bound to).
                                 int numericValue = amountValues[amount]!;
-                                widget.disasterController.donationAmount.text =
-                                    numericValue.toString();
+                                amountController.text = numericValue.toString();
                               });
                             },
                             child: Container(
