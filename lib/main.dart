@@ -50,6 +50,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:redcross/utils/colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,6 +75,51 @@ class MyApp extends StatelessWidget {
       // title: 'Red Cross Uganda',
       // navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
       debugShowCheckedModeBanner: false,
+      // Global theme: every Text widget that doesn't explicitly set its
+      // own fontFamily now falls back to "Inter" instead of the platform
+      // default (Roboto/San Francisco), which was the main source of
+      // mismatched fonts between screens. Explicit `fontFamily: "..."`
+      // overrides in individual widgets still win, so nothing else
+      // changes unless a screen was relying on the (unset) default.
+      theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: "Inter",
+        scaffoldBackgroundColor: AppColors.bgColor,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primaryRedColor,
+          primary: AppColors.primaryRedColor,
+        ),
+        textTheme: ThemeData.light().textTheme.apply(fontFamily: "Inter"),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.bgColor,
+          elevation: 0,
+          surfaceTintColor: Colors.transparent,
+          titleTextStyle: TextStyle(
+            fontFamily: "Inter",
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: AppColors.blackColor,
+          ),
+          iconTheme: IconThemeData(color: AppColors.blackColor),
+        ),
+      ),
+      // Clamps the device's OS-level accessibility text scaling so a
+      // phone set to a very large system font size can't blow up card
+      // layouts across the app — one change instead of guarding every
+      // screen individually. Screens are still free to respect normal
+      // (unclamped) scaling for body copy if they choose to opt out.
+      builder: (context, child) {
+        final mediaQuery = MediaQuery.of(context);
+        return MediaQuery(
+          data: mediaQuery.copyWith(
+            textScaler: mediaQuery.textScaler.clamp(
+              minScaleFactor: 0.9,
+              maxScaleFactor: 1.2,
+            ),
+          ),
+          child: child!,
+        );
+      },
       routes: {
         "/home": (context) => const Home(),
         "/main-home": (context) => const DefaultHome(),

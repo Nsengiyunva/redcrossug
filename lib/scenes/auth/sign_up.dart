@@ -111,6 +111,7 @@ import 'package:http/http.dart' as http;
 import 'package:redcross/scenes/auth/membership_interest.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
 import 'package:redcross/scenes/widgets/phone_number_field.dart';
+import 'package:redcross/scenes/widgets/nationality_field.dart';
 import 'package:redcross/utils/colors.dart';
 
 class SignUp extends StatefulWidget {
@@ -393,7 +394,7 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 24),
 
                     // Nationality
-                    _buildTextField(
+                    NationalityField(
                         controller: _nationalityController,
                         label: 'Nationality',
                         labelFontSize: labelFontSize,
