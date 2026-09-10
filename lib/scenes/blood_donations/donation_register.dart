@@ -3,6 +3,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:redcross/scenes/widgets/phone_number_field.dart';
+import 'package:redcross/utils/countries.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 class DonationRegister extends StatefulWidget {
@@ -17,6 +19,8 @@ class _RegisterDonorFormState extends State<DonationRegister> {
   final _serialNoController = TextEditingController();
   final _phoneNoController = TextEditingController();
   final _locationController = TextEditingController();
+
+  String _selectedPhoneCode = "256";
 
   String? _selectedBloodType;
   DateTime? _lastDonationDate;
@@ -71,7 +75,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
             _selectedBloodType = donor['blood_type'];
             _serialNoController.text = donor['serial_no'] ?? '';
             _locationController.text = donor['location'] ?? '';
-            _phoneNoController.text = donor['phone_no'] ?? '';
+            _applyPhonePrefill(donor['phone_no'] ?? '');
             _lastDonationDate =
                 DateTime.tryParse(donor['last_donation_date'] ?? '');
             _isDonor = true;
@@ -83,6 +87,28 @@ class _RegisterDonorFormState extends State<DonationRegister> {
     } catch (e) {
       print("Error checking donor: $e");
     }
+  }
+
+  // Splits a stored phone number like "+256701234567" into a dial code
+  // (matched against the known country list, longest code first so e.g.
+  // "1876" for Jamaica isn't shadowed by the shorter "1") and the local
+  // digits, so the picker preselects the right country instead of always
+  // defaulting to Uganda for numbers that used a different code.
+  void _applyPhonePrefill(String rawPhone) {
+    final digits = rawPhone.replaceAll(RegExp(r'[^0-9]'), '');
+    if (digits.isEmpty) return;
+
+    final codes = kCountries.map((c) => c.dialCode).toSet().toList()
+      ..sort((a, b) => b.length.compareTo(a.length));
+
+    for (final code in codes) {
+      if (digits.startsWith(code) && digits.length > code.length) {
+        _selectedPhoneCode = code;
+        _phoneNoController.text = digits.substring(code.length);
+        return;
+      }
+    }
+    _phoneNoController.text = digits;
   }
 
   // ===================== DATE PICKER ======================
@@ -112,7 +138,7 @@ class _RegisterDonorFormState extends State<DonationRegister> {
       "blood_type": _selectedBloodType,
       "serial_no": _serialNoController.text,
       "location": _locationController.text,
-      "phone_no": _phoneNoController.text,
+      "phone_no": "+$_selectedPhoneCode${_phoneNoController.text.trim()}",
       "last_donation_date": _lastDonationDate?.toIso8601String().split('T')[0],
     };
 
@@ -250,19 +276,23 @@ class _RegisterDonorFormState extends State<DonationRegister> {
                   // =================== PHONE ===================
                   Text("Phone Number", style: titleStyle()),
                   const SizedBox(height: 6),
-                  TextFormField(
-                    controller: _phoneNoController,
-                    readOnly: _isDonor,
-                    keyboardType: TextInputType.phone,
-                    decoration: inputStyle().copyWith(
-                      prefixIcon: const Icon(Icons.phone, color: Colors.red),
+                  AbsorbPointer(
+                    absorbing: _isDonor,
+                    child: PhoneFormField(
+                      controller: _phoneNoController,
+                      initialIso2:
+                          findCountryByDialCode(_selectedPhoneCode).iso2,
+                      onCountryChanged: (code) => _selectedPhoneCode = code,
+                      fillColor: Colors.white,
+                      borderColor: Colors.transparent,
+                      borderRadius: 16,
+                      validator: (value) {
+                        if (!_isDonor && (value == null || value.isEmpty)) {
+                          return "Enter phone number";
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (!_isDonor && (value == null || value.isEmpty)) {
-                        return "Enter phone number";
-                      }
-                      return null;
-                    },
                   ),
 
                   const SizedBox(height: 20),

@@ -10,9 +10,17 @@ class MembershipCard extends StatelessWidget {
   Future<void> _openMemberRegistrationUrl(BuildContext context) async {
     final Uri uri = Uri.parse(_memberRegistrationUrl);
     try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else if (context.mounted) {
+      // Go straight to launchUrl instead of gating on canLaunchUrl — on
+      // Android 11+ (API 30+) canLaunchUrl reports false for a valid
+      // https:// link unless the app also declares a <queries> block in
+      // AndroidManifest.xml, which caused the "could not open" message
+      // even though the link itself was fine (see default_home.dart's
+      // About URCS button for the same fix).
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content:
@@ -198,8 +206,7 @@ class MembershipCard extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () =>
-                              _openMemberRegistrationUrl(context),
+                          onPressed: () => _openMemberRegistrationUrl(context),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),

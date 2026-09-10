@@ -34,9 +34,16 @@ class VolunteerHome extends StatelessWidget {
   Future<void> _openVmsLogin(BuildContext context) async {
     final Uri uri = Uri.parse(_vmsLoginUrl);
     try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else if (context.mounted) {
+      // Go straight to launchUrl instead of gating on canLaunchUrl — on
+      // Android 11+ (API 30+) canLaunchUrl reports false for a valid
+      // https:// link unless the app also declares a <queries> block in
+      // AndroidManifest.xml, which caused the "could not open" message
+      // even though the link itself was fine.
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text('Could not open the volunteer registration '

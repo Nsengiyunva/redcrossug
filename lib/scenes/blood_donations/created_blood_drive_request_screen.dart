@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/utils/colors.dart';
+import 'package:redcross/utils/countries.dart';
 import 'package:redcross/utils/storage_service.dart';
 
 // ==================== CREATE BLOOD DRIVE REQUEST SCREEN ====================
@@ -29,6 +31,8 @@ class _CreateBloodDriveRequestScreenState
   final _contactNumberController = TextEditingController();
   final _contactEmailController = TextEditingController();
   final _additionalNotesController = TextEditingController();
+
+  String _selectedContactPhoneCode = "256";
 
   DateTime? _requestedDate;
   bool _hasTents = false;
@@ -145,7 +149,8 @@ class _CreateBloodDriveRequestScreenState
         'district': _districtController.text,
         'location': _locationController.text,
         'contact_person': _contactPersonController.text,
-        'contact_number': _contactNumberController.text,
+        'contact_number':
+            '+$_selectedContactPhoneCode${_contactNumberController.text.trim()}',
         'contact_email': _contactEmailController.text,
         'has_tents': _hasTents,
         'has_public_address': _hasPublicAddress,
@@ -362,11 +367,16 @@ class _CreateBloodDriveRequestScreenState
                   // Contact Number
                   _buildLabel('Contact Number', screenWidth),
                   SizedBox(height: screenHeight * 0.01),
-                  _buildTextField(
+                  PhoneFormField(
                     controller: _contactNumberController,
-                    hintText: 'e.g., +256700123456',
-                    icon: Icons.phone,
-                    keyboardType: TextInputType.phone,
+                    initialIso2: findCountryByDialCode(
+                            _selectedContactPhoneCode)
+                        .iso2,
+                    onCountryChanged: (code) =>
+                        _selectedContactPhoneCode = code,
+                    fillColor: Colors.white,
+                    borderColor: Colors.transparent,
+                    borderRadius: 16,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter contact number';

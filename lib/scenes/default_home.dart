@@ -36,9 +36,17 @@ class _HomeScreenState extends State<DefaultHome> {
   Future<void> _openAboutUsUrl(BuildContext context) async {
     final Uri uri = Uri.parse('https://redcrossug.org/');
     try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else if (context.mounted) {
+      // Go straight to launchUrl instead of gating on canLaunchUrl.
+      // On Android 11+ (API 30+), canLaunchUrl reports false for a
+      // perfectly valid https:// link unless the app also declares a
+      // <queries> block in AndroidManifest.xml — which was missing here,
+      // so every tap fell into the "Could not open" branch even though
+      // the link itself was fine. launchUrl doesn't need that check.
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Could not open redcrossug.org.')),
         );
@@ -443,7 +451,7 @@ class _HomeScreenState extends State<DefaultHome> {
         icon: Icons.feedback_rounded,
         label: 'Give Feedback',
         accentColor: const Color(0xFF26A69A),
-        onPressed: () => _openFeedbackSheet(context),
+        onPressed: () => _openFeedbackUrl(context),
       ),
     ];
 
@@ -537,143 +545,29 @@ class _HomeScreenState extends State<DefaultHome> {
     );
   }
 
-  Future<void> _openFeedbackSheet(BuildContext context) async {
-    final feedbackController = TextEditingController();
+  static const String _feedbackFormUrl = 'https://ee.ifrc.org/x/Nxc7RtB9';
 
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (sheetContext) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(sheetContext).viewInsets.bottom,
-          ),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-            ),
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 18),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF26A69A).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.feedback_outlined,
-                          color: Color(0xFF00695C)),
-                    ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Text(
-                        'Give Feedback',
-                        style: TextStyle(
-                          fontFamily: "Inter",
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF2C2C2C),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => Navigator.of(sheetContext).pop(),
-                      icon: const Icon(Icons.close, color: Colors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Your feedback helps us improve the app.',
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 13,
-                    color: Colors.grey[600],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: feedbackController,
-                  minLines: 4,
-                  maxLines: 6,
-                  textInputAction: TextInputAction.newline,
-                  style: const TextStyle(fontFamily: "Inter", fontSize: 14),
-                  decoration: InputDecoration(
-                    hintText: 'Type your feedback here...',
-                    hintStyle: TextStyle(color: Colors.grey[400]),
-                    filled: true,
-                    fillColor: const Color(0xFFF7F8FB),
-                    contentPadding: const EdgeInsets.all(14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      borderSide: const BorderSide(
-                          color: Color(0xFF00695C), width: 1.5),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 18),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final text = feedbackController.text.trim();
-                      Navigator.of(sheetContext).pop();
-                      if (text.isNotEmpty && context.mounted) {
-                        // TODO: send `text` to your feedback API here.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Thank you for your feedback!')),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00695C),
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: const Text(
-                      'Submit Feedback',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+  Future<void> _openFeedbackUrl(BuildContext context) async {
+    final Uri uri = Uri.parse(_feedbackFormUrl);
+    try {
+      // Direct launchUrl call (no canLaunchUrl gate) — see the fix
+      // applied to the About URCS / membership / volunteer links.
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!launched && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not open the feedback form.')),
         );
-      },
-    );
-
-    feedbackController.dispose();
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    }
   }
 }
 
