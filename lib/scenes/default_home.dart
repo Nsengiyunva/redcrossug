@@ -7,6 +7,7 @@ import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
 import 'package:redcross/scenes/memberships/membership_card.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
+import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -284,10 +285,9 @@ class _HomeScreenState extends State<DefaultHome> {
     );
   }
 
-  /// 3-column grid of red-shade, icon-badge service cards. Every card now
-  /// shares the same Red Cross red (from the logo) instead of the earlier
-  /// rainbow of per-service accent colors, and icon + label are centered
-  /// instead of left-aligned.
+  /// 3-column grid of plain white, icon-badge service cards — each with a
+  /// light-red icon badge and a dark label, back to the original card
+  /// style instead of the red-gradient tiles used briefly before.
   ///
   /// Bulletins and Give Feedback have been pulled out of this grid — see
   /// [_buildQuickActionButtons] — so this now only holds the six core
@@ -354,12 +354,9 @@ class _HomeScreenState extends State<DefaultHome> {
     );
   }
 
-  // Logo red (Uganda Red Cross Society emblem) softened into a gradient
-  // with a deeper maroon, instead of one flat saturated red block — gives
-  // the cards depth without losing the brand color.
+  // Logo red (Uganda Red Cross Society emblem) — used as the icon-badge
+  // accent color on the plain white service cards below.
   static const Color _urcsRed = Color(0xFFED1C24);
-  static const Color _urcsRedSoft = Color(0xFFF25C62);
-  static const Color _urcsRedDeep = Color(0xFF8E1116);
 
   Widget _buildServiceCard(_ServiceItem item) {
     return Material(
@@ -368,20 +365,17 @@ class _HomeScreenState extends State<DefaultHome> {
       child: InkWell(
         onTap: item.onPressed,
         borderRadius: BorderRadius.circular(20),
-        splashColor: Colors.white.withOpacity(0.15),
+        splashColor: AppColors.primaryRedColor.withOpacity(0.08),
         child: Container(
           decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
-              colors: [_urcsRedSoft, _urcsRedDeep],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            border: Border.all(color: Colors.grey[200]!),
             boxShadow: [
               BoxShadow(
-                color: _urcsRedDeep.withOpacity(0.30),
-                blurRadius: 14,
-                offset: const Offset(0, 6),
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -395,11 +389,15 @@ class _HomeScreenState extends State<DefaultHome> {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: const Color(0xFFFFE5E5),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   alignment: Alignment.center,
-                  child: Icon(item.icon, color: Colors.white, size: 24),
+                  child: Icon(
+                    item.icon,
+                    color: AppColors.primaryRedColor,
+                    size: 24,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Text(
@@ -410,17 +408,10 @@ class _HomeScreenState extends State<DefaultHome> {
                   style: const TextStyle(
                     fontSize: 14,
                     fontFamily: "Inter",
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.blackColorB,
                     height: 1.25,
                     letterSpacing: 0.1,
-                    shadows: [
-                      Shadow(
-                        color: Color(0x40000000),
-                        blurRadius: 4,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
                   ),
                 ),
               ],
