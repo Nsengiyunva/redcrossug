@@ -12,6 +12,7 @@ import 'package:redcross/scenes/ambulances/ambulance_status.dart';
 import 'package:redcross/scenes/ambulances/ambulance_success.dart';
 
 import 'package:redcross/scenes/auth/account_success.dart';
+import 'package:redcross/scenes/auth/forgot_password.dart';
 import 'package:redcross/scenes/auth/otp_verify.dart';
 import 'package:redcross/scenes/auth/profile.dart';
 import 'package:redcross/scenes/auth/sign_in.dart';
@@ -158,6 +159,10 @@ class MyApp extends StatelessWidget {
             changeColor: true,
             payment: true),
         "/register-account": (context) => const SignUp(),
+        "/forgot-password": (context) => const ForgotPassword(),
+        // "/reset-password" isn't registered here — ResetPassword requires
+        // an `email` argument, same reason "/disaster-details" is commented
+        // out above. It's pushed directly from ForgotPassword instead.
         "/splash-screen": (context) => const SplashScreen(),
         "/enter-otp": (context) => OtpVerify(),
         "/first-aid-home": (context) => const FirstAidHome(),

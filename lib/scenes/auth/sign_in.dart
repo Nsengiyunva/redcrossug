@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/login_controller.dart';
+import 'package:redcross/scenes/auth/forgot_password.dart';
 import 'package:redcross/scenes/widgets/form_password.dart';
 import 'package:redcross/scenes/widgets/phone_number_field.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
@@ -107,10 +108,10 @@ class SignIn extends StatelessWidget {
                       onPressed: () => _loginController.loginPhoneNumber(),
                     ),
                     const SizedBox(height: 45),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
+                        const Row(
                           children: [
                             Icon(
                               Icons.check_box_rounded,
@@ -128,6 +129,28 @@ class SignIn extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const ForgotPassword()),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: const Size(0, 0),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: const Text(
+                            "Forgot password?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Inter",
+                              fontSize: 13,
+                              color: AppColors.primaryRedColor,
+                            ),
+                          ),
                         ),
                       ],
                     ),
