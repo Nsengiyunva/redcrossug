@@ -6,3 +6,14 @@ Content-Type: application/json
     "title": "Heleynah!",
     "body": "Jolene."
 }
+
+
+### Forgot password
+POST https://urcs-api.taufeeq.dev/api/auth/forgot-password
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Authorization: Basic xxxx
+
+{
+    "email": "xxx"
+}
