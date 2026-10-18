@@ -6,15 +6,16 @@ class Country {
   final String iso2; // ISO 3166-1 alpha-2, e.g. "UG"
   final String dialCode; // without the leading '+', e.g. "256"
 
-  const Country({required this.name, required this.iso2, required this.dialCode});
+  const Country(
+      {required this.name, required this.iso2, required this.dialCode});
 
   /// Flag emoji derived from the ISO code's two letters using the
   /// Unicode "regional indicator symbol" trick — no image assets or
   /// network requests needed, and it's always in sync with [iso2].
   String get flag {
-    final base = 0x1F1E6; // regional indicator symbol letter A
-    final chars = iso2.toUpperCase().codeUnits
-        .map((c) => base + (c - 'A'.codeUnitAt(0)));
+    const base = 0x1F1E6; // regional indicator symbol letter A
+    final chars =
+        iso2.toUpperCase().codeUnits.map((c) => base + (c - 'A'.codeUnitAt(0)));
     return String.fromCharCodes(chars);
   }
 
@@ -175,7 +176,8 @@ const List<Country> kCountries = [
   Country(name: 'Rwanda', iso2: 'RW', dialCode: '250'),
   Country(name: 'Saint Kitts and Nevis', iso2: 'KN', dialCode: '1869'),
   Country(name: 'Saint Lucia', iso2: 'LC', dialCode: '1758'),
-  Country(name: 'Saint Vincent and the Grenadines', iso2: 'VC', dialCode: '1784'),
+  Country(
+      name: 'Saint Vincent and the Grenadines', iso2: 'VC', dialCode: '1784'),
   Country(name: 'Samoa', iso2: 'WS', dialCode: '685'),
   Country(name: 'San Marino', iso2: 'SM', dialCode: '378'),
   Country(name: 'Sao Tome and Principe', iso2: 'ST', dialCode: '239'),

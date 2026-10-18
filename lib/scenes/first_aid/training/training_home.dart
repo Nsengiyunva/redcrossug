@@ -128,7 +128,10 @@ class TrainingHome extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 gradient: LinearGradient(
-                  colors: [AppColors.primaryRedColor, AppColors.redColorA],
+                  colors: const [
+                    AppColors.primaryRedColor,
+                    AppColors.redColorA
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -267,7 +270,7 @@ class TrainingHome extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 13),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
+                            colors: const [
                               AppColors.primaryRedColor,
                               AppColors.redColorA,
                             ],

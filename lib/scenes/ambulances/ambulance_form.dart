@@ -8,6 +8,8 @@ import 'dart:convert';
 import 'package:redcross/utils/storage_service.dart';
 
 class AmbulanceForm extends StatefulWidget {
+  const AmbulanceForm({super.key});
+
   @override
   _CommercialAmbulanceScreenState createState() =>
       _CommercialAmbulanceScreenState();
