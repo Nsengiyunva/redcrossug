@@ -19,5 +19,6 @@ class _AuthEndPoints {
   final String causes = 'causes';
   final String config_chatwoot = 'config/chatwoot';
   final String bulletins = 'bulletins';
+  final String branches = 'branches';
   // final String blood_donations = 'campaigns';
 }

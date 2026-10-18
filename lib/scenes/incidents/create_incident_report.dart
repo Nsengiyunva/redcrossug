@@ -93,7 +93,7 @@
 //           onPressed: () => Navigator.pop(context),
 //         ),
 //         title: const Text(
-//           'Report Incident',
+//           'Report Disaster',
 //           style: TextStyle(
 //             color: Colors.black,
 //             fontSize: 20,
@@ -663,7 +663,7 @@ class _CreateIncidentReportScreenState extends State<CreateIncidentReport> {
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
-          'Report Incident',
+          'Report Disaster',
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,

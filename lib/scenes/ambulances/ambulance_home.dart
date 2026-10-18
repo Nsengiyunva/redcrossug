@@ -6,9 +6,11 @@ import 'package:redcross/scenes/ambulances/ambulance_emergency.dart';
 import 'package:redcross/scenes/ambulances/ambulance_form.dart';
 import 'package:redcross/scenes/ambulances/ambulance_list.dart';
 import 'package:redcross/scenes/ambulances/available_ambulances.dart';
+import 'package:redcross/scenes/widgets/contact_sheet.dart';
 import 'package:redcross/scenes/widgets/red_btn.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
+import 'package:redcross/utils/urcs_contacts.dart';
 
 class AmbulanceHome extends StatelessWidget {
   AmbulanceHome({super.key});
@@ -93,12 +95,24 @@ class AmbulanceHome extends StatelessWidget {
                     font: 14,
                     iconned: true,
                     icon_name: "alert",
-                    onPressed: () {
-                      Navigator.push(
+                    // Shows the Commercial Ambulance Team contact; the
+                    // online request form is still one tap away inside it.
+                    onPressed: () => showContactSheet(
+                      context,
+                      icon: Icons.local_hospital_rounded,
+                      title: UrcsContacts.commercialAmbulanceTeamName,
+                      subtitle:
+                          'Book a paid ambulance for transfers, events and '
+                          'standby cover.',
+                      numberLabel: 'Commercial Ambulance Team',
+                      numberDisplay: UrcsContacts.commercialAmbulanceDisplay,
+                      numberDial: UrcsContacts.commercialAmbulanceDial,
+                      secondaryLabel: 'Request online instead',
+                      onSecondary: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => AmbulanceForm()),
-                      );
-                    },
+                      ),
+                    ),
                   ),
 
                   const SizedBox(height: 12),
@@ -111,12 +125,25 @@ class AmbulanceHome extends StatelessWidget {
                     font: 14,
                     iconned: true,
                     icon_name: "alert",
-                    onPressed: () {
-                      Navigator.push(
+                    // Shows the Road Traffic Toll-Free Line; the online
+                    // emergency form is still reachable from the sheet.
+                    onPressed: () => showContactSheet(
+                      context,
+                      icon: Icons.car_crash_rounded,
+                      title: 'Emergency Response',
+                      subtitle:
+                          'Road traffic crash or emergency? Call the free '
+                          'line for an ambulance.',
+                      numberLabel: 'Road Traffic Toll-Free Line',
+                      numberDisplay: UrcsContacts.roadTrafficTollFreeDisplay,
+                      numberDial: UrcsContacts.roadTrafficTollFreeDial,
+                      badge: 'FREE',
+                      secondaryLabel: 'Report emergency online',
+                      onSecondary: () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => AmbulanceEmergency()),
-                      );
-                    },
+                      ),
+                    ),
                   ),
 
                   const SizedBox(height: 20),

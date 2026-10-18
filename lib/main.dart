@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:redcross/scenes/branches/branch_locator.dart';
 import 'package:redcross/scenes/ambulances/ambulance_emergency.dart';
 import 'package:redcross/scenes/ambulances/ambulance_form.dart';
 import 'package:redcross/scenes/ambulances/ambulance_map.dart';
@@ -178,6 +179,7 @@ class MyApp extends StatelessWidget {
         "/account-profile": (context) => const Profile(),
         "/top-subscribe": (context) => const TopSubscription(),
         "/home-donations": (context) => const HomeDonations(),
+        "/branch-locator": (context) => const BranchLocator(),
         "/donations-categories": (context) => const DonationCategories(),
         "/donation-category-details": (context) => DriveDetails(),
         "/donation-history-list": (context) => const DonationHistory(),

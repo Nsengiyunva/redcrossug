@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:redcross/models/user.dart';
 import 'package:redcross/scenes/ambulances/ambulance_home.dart';
 import 'package:redcross/scenes/blood_donations/blood_donations_home.dart';
+import 'package:redcross/scenes/branches/branch_locator.dart';
 import 'package:redcross/scenes/bulletins/bulletins_list.dart';
 import 'package:redcross/scenes/disasters/disaster_list.dart';
 import 'package:redcross/scenes/first_aid/first_aid_home.dart';
@@ -9,6 +11,8 @@ import 'package:redcross/scenes/memberships/membership_card.dart';
 import 'package:redcross/scenes/volunteer/volunteer_home.dart';
 import 'package:redcross/utils/colors.dart';
 import 'package:redcross/utils/storage_service.dart';
+import 'package:redcross/utils/urcs_branches.dart';
+import 'package:redcross/utils/urcs_contacts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DefaultHome extends StatefulWidget {
@@ -82,6 +86,8 @@ class _HomeScreenState extends State<DefaultHome> {
               _buildHeader(),
               const SizedBox(height: 20),
               _buildAboutUsBanner(context),
+              const SizedBox(height: 12),
+              _buildDonateButton(context),
               const SizedBox(height: 26),
               const Text(
                 'Our Services',
@@ -97,6 +103,8 @@ class _HomeScreenState extends State<DefaultHome> {
               _buildServiceGrid(context, isTablet),
               const SizedBox(height: 18),
               _buildQuickActionButtons(context),
+              const SizedBox(height: 26),
+              _buildBranchMapSection(context),
             ],
           ),
         ),
@@ -530,6 +538,237 @@ class _HomeScreenState extends State<DefaultHome> {
           ),
         ),
       ),
+    );
+  }
+
+  // ── Donate ───────────────────────────────────────────────────────────────
+
+  /// Landing-page Donate CTA. Until [UrcsContacts.donationUrl] is set it
+  /// shows a "coming soon" sheet; once set, it opens the URCS website
+  /// donation page externally.
+  Widget _buildDonateButton(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton.icon(
+        onPressed: () => _onDonate(context),
+        style: OutlinedButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: _urcsRed,
+          side: const BorderSide(color: _urcsRed, width: 1.4),
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        icon: const Icon(Icons.favorite_rounded, size: 20),
+        label: const Text(
+          'Donate',
+          style: TextStyle(
+            fontFamily: "Inter",
+            fontWeight: FontWeight.w800,
+            fontSize: 16,
+            letterSpacing: 0.2,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onDonate(BuildContext context) async {
+    const url = UrcsContacts.donationUrl;
+    if (url != null) {
+      try {
+        final ok = await launchUrl(Uri.parse(url),
+            mode: LaunchMode.externalApplication);
+        if (ok || !context.mounted) return;
+      } catch (_) {}
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not open the donation page.')),
+        );
+      }
+      return;
+    }
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (sheet) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFE5E5),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.favorite_rounded,
+                    color: _urcsRed, size: 28),
+              ),
+              const SizedBox(height: 14),
+              const Text(
+                'Online donations coming soon',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'You\'ll soon be able to support URCS directly from the app '
+                'through our website. Thank you for wanting to help!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 13.5,
+                  height: 1.4,
+                  color: Colors.grey[700],
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: () => Navigator.of(sheet).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ── Branch Locator map section ───────────────────────────────────────────
+
+  /// Static (non-interactive) map preview of all URCS branches; tapping
+  /// anywhere opens the full [BranchLocator] to find/select the nearest.
+  Widget _buildBranchMapSection(BuildContext context) {
+    void open() => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const BranchLocator()),
+        );
+
+    final markers = UrcsBranches.seed
+        .where((b) => b.hasLocation)
+        .map((b) => Marker(
+              markerId: MarkerId('home_branch_${b.id}'),
+              position: LatLng(b.latitude!, b.longitude!),
+              consumeTapEvents: true,
+              onTap: open,
+            ))
+        .toSet();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Expanded(
+              child: Text(
+                'URCS Branches',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E1E1E),
+                  letterSpacing: -0.2,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: open,
+              child: const Text(
+                'View all',
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w600,
+                  color: _urcsRed,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: SizedBox(
+            height: 190,
+            child: Stack(
+              children: [
+                GoogleMap(
+                  liteModeEnabled: true, // Android static bitmap; cheap.
+                  initialCameraPosition: const CameraPosition(
+                    target: LatLng(1.3733, 32.2903),
+                    zoom: 5.6,
+                  ),
+                  markers: markers,
+                  zoomControlsEnabled: false,
+                  mapToolbarEnabled: false,
+                  myLocationButtonEnabled: false,
+                  scrollGesturesEnabled: false,
+                  zoomGesturesEnabled: false,
+                  rotateGesturesEnabled: false,
+                  tiltGesturesEnabled: false,
+                ),
+                // Tap-catcher above the platform view.
+                Positioned.fill(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(onTap: open),
+                  ),
+                ),
+                Positioned(
+                  left: 12,
+                  right: 12,
+                  bottom: 12,
+                  child: IgnorePointer(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.12),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.near_me_rounded,
+                              color: _urcsRed, size: 20),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Find your nearest branch',
+                              style: TextStyle(
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          Icon(Icons.chevron_right_rounded,
+                              color: Colors.grey),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 

@@ -362,7 +362,7 @@ class _IncidentReportsListScreenState extends State<IncidentList> {
         backgroundColor: AppColors.primaryRedColor,
         icon: const Icon(Icons.add, color: AppColors.whiteColor),
         label: const Text(
-          "New Report",
+          "Report Disaster",
           style: TextStyle(
               color: AppColors.whiteColor,
               fontWeight: FontWeight.bold,
