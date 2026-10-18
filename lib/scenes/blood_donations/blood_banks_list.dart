@@ -8,6 +8,8 @@ import 'package:redcross/models/blood_bank.dart';
 
 import 'package:redcross/scenes/blood_donations/appointments.dart';
 import 'package:redcross/scenes/blood_donations/book_appointment.dart';
+import 'package:redcross/scenes/widgets/contact_sheet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BloodBanksList extends StatefulWidget {
   const BloodBanksList({super.key});
@@ -179,6 +181,55 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
     );
   }
 
+  // ── Call & Directions ────────────────────────────────────────────────────
+
+  /// "+256-476-420607" → "+256476420607" so the dialer gets a clean number.
+  String _dialable(String phone) => phone.replaceAll(RegExp(r'[^\d+]'), '');
+
+  bool _hasPhone(BloodBank bank) => _dialable(bank.phone).length >= 7;
+
+  void _callBank(BloodBank bank) {
+    if (!_hasPhone(bank)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('No phone number listed for ${bank.name}.')),
+      );
+      return;
+    }
+    dialNumber(context, _dialable(bank.phone));
+  }
+
+  /// Opens turn-by-turn directions from the user's current location to the
+  /// blood bank. Google Maps app if installed (Android/iOS), otherwise the
+  /// browser; falls back to Apple Maps on iOS if Google can't be opened.
+  Future<void> _openDirections(BloodBank bank) async {
+    final lat = bank.latitude;
+    final lng = bank.longitude;
+    if (lat == 0 && lng == 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('No location saved for ${bank.name}.')),
+      );
+      return;
+    }
+    final google = Uri.parse(
+      'https://www.google.com/maps/dir/?api=1'
+      '&destination=$lat,$lng&travelmode=driving',
+    );
+    final apple = Uri.parse('https://maps.apple.com/?daddr=$lat,$lng&dirflg=d');
+    try {
+      if (await launchUrl(google, mode: LaunchMode.externalApplication)) {
+        return;
+      }
+      if (await launchUrl(apple, mode: LaunchMode.externalApplication)) {
+        return;
+      }
+    } catch (_) {}
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not open Maps for directions.')),
+      );
+    }
+  }
+
   void _showBookAppointmentForm(BloodBank bank) {
     Navigator.pop(context); // Close the details sheet
     Navigator.push(
@@ -270,9 +321,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    // Open phone dialer
-                  },
+                  onTap: () => _callBank(bank),
                   child: Container(
                     padding:
                         EdgeInsets.symmetric(vertical: screenHeight * 0.018),
@@ -301,9 +350,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
               SizedBox(width: screenWidth * 0.03),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    // Open map with coordinates
-                  },
+                  onTap: () => _openDirections(bank),
                   child: Container(
                     padding:
                         EdgeInsets.symmetric(vertical: screenHeight * 0.018),
@@ -314,7 +361,7 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.map, color: Colors.red, size: 20),
+                        Icon(Icons.directions, color: Colors.red, size: 20),
                         SizedBox(width: 8),
                         Text(
                           'Directions',
@@ -696,12 +743,46 @@ class _BloodBanksScreenState extends State<BloodBanksList> {
                 ],
               ),
             ),
-            Icon(
-              Icons.chevron_right,
-              color: Colors.grey[400],
-              size: screenWidth * 0.06,
+            // Quick actions — call / navigate without opening the sheet.
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _quickAction(
+                  icon: Icons.phone,
+                  tooltip: 'Call ${bank.name}',
+                  onTap: () => _callBank(bank),
+                ),
+                const SizedBox(height: 8),
+                _quickAction(
+                  icon: Icons.directions,
+                  tooltip: 'Directions to ${bank.name}',
+                  onTap: () => _openDirections(bank),
+                ),
+              ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _quickAction({
+    required IconData icon,
+    required String tooltip,
+    required VoidCallback onTap,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: Colors.red[50],
+        shape: const CircleBorder(),
+        child: InkWell(
+          customBorder: const CircleBorder(),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(9),
+            child: Icon(icon, color: Colors.red, size: 20),
+          ),
         ),
       ),
     );

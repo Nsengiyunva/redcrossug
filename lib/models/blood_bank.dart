@@ -27,11 +27,13 @@ class BloodBank {
       name: json['name'],
       district: json['district'],
       address: json['address'],
-      phone: json['phone'],
+      phone: json['phone'] ?? '',
       email: json['email'],
       affiliatedHospital: json['affiliated_hospital'],
-      latitude: double.parse(json['latitude']),
-      longitude: double.parse(json['longitude']),
+      // API sends coordinates as strings ("3.01944400"); accept numbers or
+      // null too so a single bad record can't crash the list.
+      latitude: double.tryParse('${json['latitude'] ?? ''}') ?? 0,
+      longitude: double.tryParse('${json['longitude'] ?? ''}') ?? 0,
     );
   }
 }
