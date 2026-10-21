@@ -37,7 +37,7 @@ class DonationCampaignDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var options = displayColor(campaign["status"]);
+    var options = displayColor((campaign["status"] ?? "").toString());
 
     return Scaffold(
         backgroundColor: AppColors.bgColor,
@@ -97,7 +97,7 @@ class DonationCampaignDetails extends StatelessWidget {
                             color: options["color"],
                             borderRadius: BorderRadius.circular(6)),
                         child: Center(
-                            child: Text(campaign["status"].toUpperCase(),
+                            child: Text((campaign["status"] ?? "").toString().toUpperCase(),
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: "Inter",

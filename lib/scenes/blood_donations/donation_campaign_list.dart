@@ -1,132 +1,36 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:redcross/controllers/donations_controller.dart';
-// import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
-// import 'package:redcross/scenes/widgets/back_button_text.dart';
-// import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
-// import 'package:redcross/scenes/widgets/heading_tab.dart';
-// import 'package:redcross/utils/colors.dart';
-
-// class DonationCampaignList extends StatelessWidget {
-//   DonationCampaignList({super.key});
-
-//   final DonationsController donationsController =
-//       Get.put(DonationsController());
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         backgroundColor: AppColors.bgColor,
-//         appBar: AppBar(
-//           title: const BackButtonText(),
-//         ),
-//         body: Obx(() {
-//           final selected = donationsController.selectedTab.value;
-
-//           if (donationsController.isLoading.value) {
-//             return const Center(
-//               child: CircularProgressIndicator(),
-//             );
-//           }
-
-//           if (donationsController.campaign_list.isEmpty) {
-//             return const Center(
-//                 child: Center(
-//                     child: Text('No Blood Donation Campaigns were found.')));
-//           }
-
-//           return SingleChildScrollView(
-//               child: Container(
-//             width: double.infinity,
-//             margin: const EdgeInsets.symmetric(vertical: 20.0),
-//             padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
-//             child: Column(
-//               children: [
-//                 SizedBox(
-//                   height: 25,
-//                   child: Row(
-//                     crossAxisAlignment: CrossAxisAlignment.center,
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Padding(
-//                           padding: const EdgeInsets.only(left: 10),
-//                           child: HeadingTab(
-//                               title: 'Upcoming',
-//                               active: true,
-//                               onPressed: () {
-//                                 donationsController.setTab('ongoing');
-//                               })),
-//                       Padding(
-//                           padding: const EdgeInsets.only(left: 2),
-//                           child: HeadingTab(
-//                               title: 'Active',
-//                               active: false,
-//                               onPressed: () {
-//                                 donationsController.setTab('active');
-//                               })),
-//                       Padding(
-//                           padding: const EdgeInsets.only(right: 10),
-//                           child: HeadingTab(
-//                               title: 'Completed',
-//                               active: false,
-//                               onPressed: () {
-//                                 donationsController.setTab('completed');
-//                               })),
-//                     ],
-//                   ),
-//                 ),
-//                 const SizedBox(height: 10),
-//                 ListView.builder(
-//                   shrinkWrap: true, // ensures list takes only needed height
-//                   physics:
-//                       const NeverScrollableScrollPhysics(), // disables inner scrolling
-//                   itemCount: donationsController.campaign_list.length,
-//                   itemBuilder: (context, index) {
-//                     var item = donationsController.campaign_list[index];
-//                     var location = item["locations"][0];
-
-//                     return Column(
-//                       children: [
-//                         const SizedBox(height: 15),
-//                         BloodDonationListItem(
-//                             name: item["name"],
-//                             location:
-//                                 '${location["region"]} ${location["district"]} ${location["location"]}',
-//                             date: '${item["start_date"]}',
-//                             time: '10AM-6PM',
-//                             onPressed: () {
-//                               Navigator.of(context).push(
-//                                 MaterialPageRoute(
-//                                     builder: (context) =>
-//                                         DonationCampaignDetails(
-//                                           campaign: item,
-//                                         )),
-//                               );
-//                             })
-//                       ],
-//                     );
-//                   },
-//                 )
-//               ],
-//             ),
-//           ));
-//         }));
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:redcross/controllers/donations_controller.dart';
 import 'package:redcross/scenes/blood_donations/donation_campaign_details.dart';
 import 'package:redcross/scenes/widgets/back_button_text.dart';
 import 'package:redcross/scenes/widgets/blood_donation_list_item.dart';
-import 'package:redcross/scenes/widgets/heading_tab.dart';
 import 'package:redcross/utils/colors.dart';
 
-class DonationCampaignList extends StatelessWidget {
-  DonationCampaignList({super.key});
+class DonationCampaignList extends StatefulWidget {
+  const DonationCampaignList({super.key});
 
-  final DonationsController donationsController =
-      Get.put(DonationsController());
+  @override
+  State<DonationCampaignList> createState() => _DonationCampaignListState();
+}
+
+class _DonationCampaignListState extends State<DonationCampaignList> {
+  // Get.put returns the existing instance if one was already created
+  // elsewhere (e.g. by DonationCategories), in which case onInit will not run
+  // again, so we explicitly make sure the campaigns are loaded.
+  final DonationsController c = Get.put(DonationsController());
+
+  static const _tabs = <List<String>>[
+    [CampaignTab.upcoming, 'Upcoming'],
+    [CampaignTab.active, 'Active'],
+    [CampaignTab.completed, 'Completed'],
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => c.ensureCampaignsLoaded());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,90 +39,223 @@ class DonationCampaignList extends StatelessWidget {
       appBar: AppBar(
         title: const BackButtonText(),
         backgroundColor: AppColors.bgColor,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
+        titleSpacing: 0,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 4, 16, 12),
+            child: Text(
+              'Donation Campaigns',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: AppColors.blackColorX,
+              ),
+            ),
+          ),
+          // Segmented tabs with counts
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Obx(() {
-              final selected = donationsController.selectedTab.value;
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HeadingTab(
-                    title: 'Upcoming',
-                    active: selected == 'ongoing',
-                    onPressed: () => donationsController.setTab('ongoing'),
-                  ),
-                  HeadingTab(
-                    title: 'Active',
-                    active: selected == 'active',
-                    onPressed: () => donationsController.setTab('active'),
-                  ),
-                  HeadingTab(
-                    title: 'Completed',
-                    active: selected == 'completed',
-                    onPressed: () => donationsController.setTab('completed'),
-                  ),
-                ],
+              final selected = c.selectedTab.value;
+              // touch the list so counts rebuild when data arrives
+              c.campaign_list.length;
+              return Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFECEFF4),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: _tabs.map((t) {
+                    final active = selected == t[0];
+                    final count = c.countFor(t[0]);
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () => c.setTab(t[0]),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          padding: const EdgeInsets.symmetric(vertical: 9),
+                          decoration: BoxDecoration(
+                            color: active ? Colors.white : Colors.transparent,
+                            borderRadius: BorderRadius.circular(9),
+                            boxShadow: active
+                                ? [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.06),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 1),
+                                    )
+                                  ]
+                                : null,
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            count > 0 ? '${t[1]} ($count)' : t[1],
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 13,
+                              fontWeight:
+                                  active ? FontWeight.w600 : FontWeight.w500,
+                              color: active
+                                  ? AppColors.primaryRedColor
+                                  : AppColors.greyColorB,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
               );
             }),
           ),
-
-          // ✅ Scrollable campaign list below
+          const SizedBox(height: 8),
           Expanded(
             child: Obx(() {
-              if (donationsController.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
-              }
+              final loading = c.isLoading.value;
+              final error = c.campaignError.value;
+              final items = c.campaignsFor(c.selectedTab.value);
 
-              // Apply filter based on selected tab/status
-              final filteredList =
-                  donationsController.campaign_list.where((item) {
-                final selected = donationsController.selectedTab.value;
-                final status = (item["status"] ?? '').toLowerCase();
-                return status == selected.toLowerCase();
-              }).toList();
-
-              if (filteredList.isEmpty) {
+              if (loading && c.campaign_list.isEmpty) {
                 return const Center(
-                  child: Text('No Blood Donation Campaigns were found.'),
+                  child: CircularProgressIndicator(
+                      color: AppColors.primaryRedColor),
                 );
               }
 
-              return ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                itemCount: filteredList.length,
-                itemBuilder: (context, index) {
-                  var item = filteredList[index];
-                  var location = item["locations"][0];
+              if (error.isNotEmpty && c.campaign_list.isEmpty) {
+                return _EmptyState(
+                  icon: Icons.cloud_off_rounded,
+                  title: 'Couldn\'t load campaigns',
+                  message: error,
+                  onRetry: c.fetchCampaignList,
+                );
+              }
 
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: BloodDonationListItem(
-                      name: item["name"],
-                      location:
-                          '${location["region"]} ${location["district"]} ${location["location"]}',
-                      date: '${item["start_date"]}',
-                      time: '10AM-6PM',
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                DonationCampaignDetails(campaign: item),
+              return RefreshIndicator(
+                color: AppColors.primaryRedColor,
+                onRefresh: c.fetchCampaignList,
+                child: items.isEmpty
+                    ? ListView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.55,
+                            child: _EmptyState(
+                              icon: Icons.event_busy_rounded,
+                              title: 'No campaigns here yet',
+                              message: c.campaign_list.isEmpty
+                                  ? 'There are no blood donation campaigns at the moment. Pull down to refresh.'
+                                  : 'Nothing in this tab. Check the other tabs.',
+                            ),
                           ),
-                        );
-                      },
-                    ),
-                  );
-                },
+                        ],
+                      )
+                    : ListView.separated(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                        itemCount: items.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          return BloodDonationListItem.fromCampaign(
+                            item,
+                            onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    DonationCampaignDetails(campaign: item),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
               );
             }),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String message;
+  final Future<void> Function()? onRetry;
+
+  const _EmptyState({
+    required this.icon,
+    required this.title,
+    required this.message,
+    this.onRetry,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 64,
+              height: 64,
+              decoration: const BoxDecoration(
+                color: AppColors.redColorD,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, size: 30, color: AppColors.primaryRedColor),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: AppColors.blackColorX,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 13,
+                height: 1.4,
+                color: AppColors.greyColorB,
+              ),
+            ),
+            if (onRetry != null) ...[
+              const SizedBox(height: 16),
+              OutlinedButton.icon(
+                onPressed: onRetry,
+                icon: const Icon(Icons.refresh_rounded, size: 18),
+                label: const Text('Try again'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.primaryRedColor,
+                  side: const BorderSide(color: AppColors.primaryRedColor),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  textStyle: const TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
