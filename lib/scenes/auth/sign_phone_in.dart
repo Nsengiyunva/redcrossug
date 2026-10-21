@@ -47,9 +47,6 @@ class _SignInPhoneState extends State<SignPhoneIn> {
               label: "Continue",
               onPressed: () {
                 widget._phoneController.submitForm();
-                // Get.toNamed( "/enter-otp", arguments: {
-                //   "phone_number":  widget._phoneController.newPhoneNumber.text
-                // } );
               },
             ),
           )

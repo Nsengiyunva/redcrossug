@@ -9,11 +9,19 @@ Content-Type: application/json
 
 
 ### Forgot password
-POST https://urcs-api.taufeeq.dev/api/auth/forgot-password
+GET https://urcs-api.taufeeq.dev/api/blood-donation/campaigns
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
-Authorization: Basic xxxx
+Authorization: Bearer 610|b6RxCJjNUxttcBvPIK3Oi2fnL04NvWGc0pQqR49x62969116
+
+
+### Forgot password
+POST https://urcs-api.taufeeq.dev/api/auth/login
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
 
 {
-    "email": "xxx"
+    "phone_no": "+256773444968",
+    "password": "popeye@2020N"
 }
+

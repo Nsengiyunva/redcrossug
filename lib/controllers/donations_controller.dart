@@ -68,16 +68,35 @@ class DonationsController extends GetxController {
   // ---------------------------------------------------------------------
 
   static const _upcomingStatuses = {
-    'upcoming', 'ongoing', 'scheduled', 'pending', 'planned', 'published',
+    'upcoming',
+    'ongoing',
+    'scheduled',
+    'pending',
+    'planned',
+    'published',
     'approved',
   };
   static const _activeStatuses = {
-    'active', 'in_progress', 'in-progress', 'inprogress', 'running', 'open',
-    'live', 'started',
+    'active',
+    'in_progress',
+    'in-progress',
+    'inprogress',
+    'running',
+    'open',
+    'live',
+    'started',
   };
   static const _completedStatuses = {
-    'completed', 'complete', 'closed', 'ended', 'finished', 'past', 'done',
-    'cancelled', 'canceled', 'expired',
+    'completed',
+    'complete',
+    'closed',
+    'ended',
+    'finished',
+    'past',
+    'done',
+    'cancelled',
+    'canceled',
+    'expired',
   };
 
   static DateTime? _date(dynamic v) =>
@@ -109,14 +128,13 @@ class DonationsController extends GetxController {
   /// Campaigns worth showing on the Blood home screen: upcoming and active
   /// first, soonest first.
   List<Map<String, dynamic>> get featuredCampaigns {
-    final list = campaign_list
-        .where((c) => tabFor(c) != CampaignTab.completed)
-        .toList()
-      ..sort((a, b) {
-        final da = _date(a['start_date']) ?? DateTime(2100);
-        final db = _date(b['start_date']) ?? DateTime(2100);
-        return da.compareTo(db);
-      });
+    final list =
+        campaign_list.where((c) => tabFor(c) != CampaignTab.completed).toList()
+          ..sort((a, b) {
+            final da = _date(a['start_date']) ?? DateTime(2100);
+            final db = _date(b['start_date']) ?? DateTime(2100);
+            return da.compareTo(db);
+          });
     return list;
   }
 
@@ -157,6 +175,7 @@ class DonationsController extends GetxController {
 
     try {
       final token = await StorageService.getToken();
+
       final uri = Uri.parse('${ApiEndpoints.baseUrl}/blood-donation/campaigns');
 
       final response = await http.get(uri, headers: {

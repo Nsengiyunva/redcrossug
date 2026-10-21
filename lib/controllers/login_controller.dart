@@ -55,7 +55,8 @@ class LoginController {
         // back to the generic error dialog below instead of crashing.
       }
 
-      final bool isSuccess = response.statusCode >= 200 && response.statusCode < 300;
+      final bool isSuccess =
+          response.statusCode >= 200 && response.statusCode < 300;
 
       if (isSuccess) {
         User user = User(
@@ -95,8 +96,7 @@ class LoginController {
           icon: Icons.person_search_rounded,
           accentColor: AppColors.primaryRedColor,
           title: "We couldn't find that account",
-          message:
-              "This phone number isn't registered with Red Cross Uganda "
+          message: "This phone number isn't registered with Red Cross Uganda "
               "yet. Double-check the number, or create a new account to "
               "get started.",
           primaryLabel: 'Create an account',
@@ -138,8 +138,7 @@ class LoginController {
         icon: Icons.wifi_off_rounded,
         accentColor: AppColors.primaryRedColor,
         title: 'Connection error',
-        message:
-            "We couldn't reach the server. Check your internet connection "
+        message: "We couldn't reach the server. Check your internet connection "
             "and try again.",
         primaryLabel: 'Try again',
       );
